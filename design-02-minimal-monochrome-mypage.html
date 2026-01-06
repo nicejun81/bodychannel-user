@@ -20,7 +20,7 @@
 
         body {
             font-family: 'Poppins', -apple-system, sans-serif;
-            background: var(--white);
+            background: var(--white);ㅊ
             color: var(--black);
             min-height: 100vh;
             padding-bottom: 100px;
@@ -173,7 +173,7 @@
             color: var(--gray-600);
         }
 
-        /* My Tickets Section */
+        /* Section Title */
         .section-title {
             font-family: 'Poppins', sans-serif;
             font-size: 16px;
@@ -181,119 +181,6 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 16px;
-        }
-
-        .tickets-list {
-            display: flex;
-            flex-direction: row;
-            gap: 12px;
-            margin-bottom: 32px;
-            overflow-x: auto;
-            padding-bottom: 8px;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            animation: slideUp 0.2s ease-out 0.1s backwards;
-        }
-
-        .tickets-list::-webkit-scrollbar {
-            height: 4px;
-        }
-
-        .tickets-list::-webkit-scrollbar-track {
-            background: var(--gray-100);
-            border-radius: 2px;
-        }
-
-        .tickets-list::-webkit-scrollbar-thumb {
-            background: var(--gray-300);
-            border-radius: 2px;
-        }
-
-        .ticket-card {
-            min-width: 260px;
-            flex-shrink: 0;
-            scroll-snap-align: start;
-            border: 1px solid var(--gray-200);
-            border-radius: 16px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            background: linear-gradient(135deg, var(--gray-100) 0%, var(--white) 100%);
-        }
-
-        .ticket-info h4 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .ticket-info p {
-            font-size: 13px;
-            color: var(--gray-400);
-        }
-
-        .ticket-status {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 12px;
-            border-top: 1px solid var(--gray-200);
-        }
-
-        .ticket-remaining {
-            font-family: 'Poppins', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .ticket-expires {
-            font-size: 12px;
-            color: var(--gray-400);
-        }
-
-        .no-tickets {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--gray-400);
-            border: 1px dashed var(--gray-200);
-            border-radius: 16px;
-        }
-
-        .no-tickets-icon {
-            margin-bottom: 12px;
-        }
-
-        .no-tickets-icon svg {
-            width: 40px;
-            height: 40px;
-            stroke: var(--gray-300);
-            stroke-width: 1.5;
-            fill: none;
-        }
-
-        .no-tickets p {
-            font-size: 14px;
-            margin-bottom: 16px;
-        }
-
-        .browse-btn {
-            background: var(--black);
-            color: var(--white);
-            border: none;
-            padding: 12px 24px;
-            font-size: 14px;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .browse-btn:hover {
-            background: var(--primary);
         }
 
         /* Menu List */
@@ -479,31 +366,6 @@
             <div class="stat-card">
                 <div class="stat-value">3</div>
                 <div class="stat-label">쿠폰</div>
-            </div>
-        </div>
-
-        <!-- My Tickets -->
-        <h3 class="section-title">보유 이용권</h3>
-        <div class="tickets-list">
-            <div class="ticket-card">
-                <div class="ticket-info">
-                    <h4>PT 20회 패키지</h4>
-                    <p>피트니스 센터 강남점</p>
-                </div>
-                <div class="ticket-status">
-                    <div class="ticket-remaining">12회</div>
-                    <div class="ticket-expires">2025.03.15 만료</div>
-                </div>
-            </div>
-            <div class="ticket-card">
-                <div class="ticket-info">
-                    <h4>3개월 멤버십</h4>
-                    <p>피트니스 센터 강남점</p>
-                </div>
-                <div class="ticket-status">
-                    <div class="ticket-remaining">67일</div>
-                    <div class="ticket-expires">2025.02.28 만료</div>
-                </div>
             </div>
         </div>
 

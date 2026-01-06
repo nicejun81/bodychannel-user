@@ -178,58 +178,6 @@
             font-size: 12px;
         }
 
-        /* Quick Actions */
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-bottom: 32px;
-            animation: slideUp 0.2s ease-out 0.05s backwards;
-        }
-
-        .quick-action {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            padding: 20px 12px;
-            background: var(--gray-100);
-            border-radius: 16px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            color: var(--black);
-        }
-
-        .quick-action:hover {
-            background: var(--gray-200);
-            transform: translateY(-2px);
-        }
-
-        .quick-action-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--white);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .quick-action-icon svg {
-            width: 24px;
-            height: 24px;
-            stroke: var(--primary);
-            stroke-width: 1.5;
-            fill: none;
-        }
-
-        .quick-action-label {
-            font-size: 13px;
-            font-weight: 600;
-            text-align: center;
-        }
-
         /* Section Header */
         .section-header {
             display: flex;
@@ -266,94 +214,102 @@
             fill: none;
         }
 
-        /* My Tickets Preview */
-        .tickets-section {
+        /* QR Entry Section */
+        .qr-section {
             margin-bottom: 32px;
             animation: slideUp 0.2s ease-out 0.1s backwards;
         }
 
-        .ticket-preview {
-            background: linear-gradient(135deg, var(--primary) 0%, #ff8c5a 100%);
+        .qr-entry-card {
+            background: linear-gradient(135deg, var(--black) 0%, #2a2a2a 100%);
             border-radius: 16px;
             padding: 24px;
-            color: var(--white);
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .ticket-preview-info h4 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .ticket-preview-info p {
-            font-size: 13px;
-            opacity: 0.9;
-        }
-
-        .ticket-preview-count {
-            text-align: right;
-        }
-
-        .ticket-preview-count .count {
-            font-family: 'Poppins', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-        }
-
-        .ticket-preview-count .label {
-            font-size: 12px;
-            opacity: 0.9;
-        }
-
-        .no-ticket {
-            background: var(--gray-100);
-            border-radius: 16px;
-            padding: 32px 24px;
-            text-align: center;
-        }
-
-        .no-ticket-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--white);
+        .qr-entry-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: var(--primary);
             border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .qr-entry-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .qr-code-box {
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 16px;
+            flex-shrink: 0;
+            padding: 8px;
         }
 
-        .no-ticket-icon svg {
-            width: 28px;
-            height: 28px;
-            stroke: var(--gray-400);
-            stroke-width: 1.5;
-            fill: none;
+        .qr-code-box svg {
+            width: 100%;
+            height: 100%;
         }
 
-        .no-ticket p {
+        .qr-entry-info {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .qr-entry-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .qr-entry-info p {
+            font-size: 13px;
             color: var(--gray-400);
-            font-size: 14px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
-        .no-ticket-btn {
-            background: var(--black);
+        .qr-entry-btn {
+            background: var(--primary);
             color: var(--white);
             border: none;
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-size: 14px;
+            padding: 10px 16px;
+            font-size: 13px;
             font-weight: 600;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.2s ease;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .no-ticket-btn:hover {
-            background: var(--primary);
+        .qr-entry-btn:hover {
+            background: #ff8c5a;
+        }
+
+        .qr-entry-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
         }
 
         /* Popular Products */
@@ -576,6 +532,139 @@
             letter-spacing: 1px;
             font-weight: 500;
         }
+
+        /* QR Modal */
+        .qr-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .qr-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .qr-modal {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 32px;
+            width: 90%;
+            max-width: 360px;
+            text-align: center;
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .qr-modal-overlay.active .qr-modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .qr-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .qr-modal-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .qr-modal-close {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: var(--gray-100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .qr-modal-close:hover {
+            background: var(--gray-200);
+        }
+
+        .qr-modal-close svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--black);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .qr-modal-code {
+            width: 240px;
+            height: 240px;
+            background: var(--white);
+            border: 3px solid var(--black);
+            border-radius: 16px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .qr-modal-code svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .qr-modal-info {
+            margin-bottom: 20px;
+        }
+
+        .qr-modal-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .qr-modal-info p {
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+
+        .qr-modal-timer {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gray-100);
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--gray-600);
+        }
+
+        .qr-modal-timer svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--primary);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .qr-modal-timer span {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--primary);
+        }
     </style>
 </head>
 <body>
@@ -608,51 +697,44 @@
             </div>
         </div>
 
-        <!-- Quick Actions -->
-        <div class="quick-actions">
-            <a href="design-02-minimal-monochrome-purchase.html" class="quick-action">
-                <div class="quick-action-icon">
-                    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                </div>
-                <span class="quick-action-label">구매</span>
-            </a>
-            <a href="design-02-minimal-monochrome-reservation.html" class="quick-action">
-                <div class="quick-action-icon">
-                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                </div>
-                <span class="quick-action-label">예약</span>
-            </a>
-            <a href="design-02-minimal-monochrome-activity.html" class="quick-action">
-                <div class="quick-action-icon">
-                    <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                </div>
-                <span class="quick-action-label">활동</span>
-            </a>
-            <a href="design-02-minimal-monochrome-mypage.html" class="quick-action">
-                <div class="quick-action-icon">
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
-                </div>
-                <span class="quick-action-label">마이</span>
-            </a>
-        </div>
-
-        <!-- My Tickets Preview -->
-        <div class="tickets-section">
+        <!-- QR Entry Section -->
+        <div class="qr-section">
             <div class="section-header">
-                <h2 class="section-title">내 이용권</h2>
-                <a href="design-02-minimal-monochrome-mypage.html" class="section-more">
-                    전체보기
-                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-                </a>
+                <h2 class="section-title">QR 입장</h2>
             </div>
-            <div class="ticket-preview">
-                <div class="ticket-preview-info">
-                    <h4>PT 20회 패키지</h4>
-                    <p>피트니스 센터 강남점</p>
+            <div class="qr-entry-card" onclick="openQrModal()">
+                <div class="qr-code-box">
+                    <svg viewBox="0 0 100 100">
+                        <rect x="10" y="10" width="25" height="25" fill="#0a0a0a"/>
+                        <rect x="15" y="15" width="15" height="15" fill="#fff"/>
+                        <rect x="18" y="18" width="9" height="9" fill="#0a0a0a"/>
+                        <rect x="65" y="10" width="25" height="25" fill="#0a0a0a"/>
+                        <rect x="70" y="15" width="15" height="15" fill="#fff"/>
+                        <rect x="73" y="18" width="9" height="9" fill="#0a0a0a"/>
+                        <rect x="10" y="65" width="25" height="25" fill="#0a0a0a"/>
+                        <rect x="15" y="70" width="15" height="15" fill="#fff"/>
+                        <rect x="18" y="73" width="9" height="9" fill="#0a0a0a"/>
+                        <rect x="40" y="10" width="5" height="5" fill="#0a0a0a"/>
+                        <rect x="50" y="10" width="5" height="5" fill="#0a0a0a"/>
+                        <rect x="40" y="20" width="5" height="5" fill="#0a0a0a"/>
+                        <rect x="45" y="25" width="5" height="5" fill="#0a0a0a"/>
+                        <rect x="40" y="40" width="5" height="5" fill="#0a0a0a"/>
+                        <rect x="45" y="45" width="5" height="5" fill="#0a0a0a"/>
+                        <rect x="50" y="40" width="5" height="5" fill="#0a0a0a"/>
+                        <rect x="65" y="65" width="5" height="5" fill="#0a0a0a"/>
+                        <rect x="75" y="70" width="5" height="5" fill="#0a0a0a"/>
+                        <rect x="70" y="75" width="5" height="5" fill="#0a0a0a"/>
+                        <rect x="80" y="80" width="5" height="5" fill="#0a0a0a"/>
+                        <rect x="85" y="85" width="5" height="5" fill="#0a0a0a"/>
+                    </svg>
                 </div>
-                <div class="ticket-preview-count">
-                    <div class="count">12</div>
-                    <div class="label">회 남음</div>
+                <div class="qr-entry-info">
+                    <h4>피트니스 센터 강남점</h4>
+                    <p>QR 코드를 스캔하여 입장하세요</p>
+                    <button class="qr-entry-btn">
+                        <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                        크게 보기
+                    </button>
                 </div>
             </div>
         </div>
@@ -769,5 +851,112 @@
             <span class="nav-label">마이</span>
         </a>
     </nav>
+
+    <!-- QR Modal -->
+    <div class="qr-modal-overlay" id="qrModal" onclick="closeQrModal(event)">
+        <div class="qr-modal" onclick="event.stopPropagation()">
+            <div class="qr-modal-header">
+                <h3 class="qr-modal-title">QR 입장</h3>
+                <button class="qr-modal-close" onclick="closeQrModal()">
+                    <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="qr-modal-code">
+                <svg viewBox="0 0 100 100">
+                    <rect x="10" y="10" width="25" height="25" fill="#0a0a0a"/>
+                    <rect x="15" y="15" width="15" height="15" fill="#fff"/>
+                    <rect x="18" y="18" width="9" height="9" fill="#0a0a0a"/>
+                    <rect x="65" y="10" width="25" height="25" fill="#0a0a0a"/>
+                    <rect x="70" y="15" width="15" height="15" fill="#fff"/>
+                    <rect x="73" y="18" width="9" height="9" fill="#0a0a0a"/>
+                    <rect x="10" y="65" width="25" height="25" fill="#0a0a0a"/>
+                    <rect x="15" y="70" width="15" height="15" fill="#fff"/>
+                    <rect x="18" y="73" width="9" height="9" fill="#0a0a0a"/>
+                    <rect x="40" y="10" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="50" y="10" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="40" y="20" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="45" y="25" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="55" y="20" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="10" y="40" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="20" y="45" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="25" y="40" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="10" y="50" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="15" y="55" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="40" y="40" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="45" y="45" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="50" y="40" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="55" y="45" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="40" y="50" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="50" y="55" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="65" y="40" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="75" y="45" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="85" y="40" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="70" y="50" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="80" y="55" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="40" y="65" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="50" y="70" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="45" y="75" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="55" y="80" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="40" y="85" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="65" y="65" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="75" y="70" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="70" y="75" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="80" y="80" width="5" height="5" fill="#0a0a0a"/>
+                    <rect x="85" y="85" width="5" height="5" fill="#0a0a0a"/>
+                </svg>
+            </div>
+            <div class="qr-modal-info">
+                <h4>피트니스 센터 강남점</h4>
+                <p>입구 스캐너에 QR 코드를 보여주세요</p>
+            </div>
+            <div class="qr-modal-timer">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                유효시간 <span id="qrTimer">05:00</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let timerInterval;
+        let timeLeft = 300;
+
+        function openQrModal() {
+            document.getElementById('qrModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            timeLeft = 300;
+            updateTimerDisplay();
+            startTimer();
+        }
+
+        function closeQrModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById('qrModal').classList.remove('active');
+            document.body.style.overflow = '';
+            clearInterval(timerInterval);
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    closeQrModal();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('qrTimer').textContent =
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeQrModal();
+        });
+    </script>
 </body>
 </html>
