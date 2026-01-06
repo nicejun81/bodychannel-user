@@ -329,6 +329,179 @@
             letter-spacing: 1px;
             font-weight: 500;
         }
+
+        /* My Memberships */
+        .memberships-section {
+            margin-bottom: 32px;
+            animation: slideUp 0.2s ease-out 0.1s backwards;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .section-more {
+            font-size: 13px;
+            color: var(--gray-400);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .section-more:hover {
+            color: var(--primary);
+        }
+
+        .section-more svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .memberships-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 4px 0 8px 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .memberships-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .membership-card {
+            min-width: 260px;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            border-radius: 16px;
+            padding: 18px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .membership-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .membership-card.active {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .membership-card.expiring {
+            background: var(--white);
+            border: 2px solid var(--primary);
+            color: var(--black);
+        }
+
+        .membership-card.expired {
+            background: var(--gray-100);
+            color: var(--gray-600);
+        }
+
+        .membership-card.paused {
+            background: var(--white);
+            border: 2px solid var(--gray-400);
+            color: var(--black);
+        }
+
+        .membership-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .membership-status {
+            display: inline-block;
+            padding: 4px 10px;
+            font-size: 10px;
+            font-weight: 700;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .membership-card.active .membership-status {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .membership-card.expiring .membership-status {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .membership-card.expired .membership-status {
+            background: var(--gray-400);
+            color: var(--white);
+        }
+
+        .membership-card.paused .membership-status {
+            background: var(--gray-600);
+            color: var(--white);
+        }
+
+        .membership-name {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .membership-gym {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-bottom: 14px;
+        }
+
+        .membership-info {
+            display: flex;
+            gap: 16px;
+        }
+
+        .membership-info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .membership-info-label {
+            font-size: 10px;
+            opacity: 0.7;
+            margin-bottom: 2px;
+        }
+
+        .membership-info-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .membership-card.expired .membership-info-value {
+            color: var(--gray-600);
+        }
+
+        .membership-card.expiring .membership-gym,
+        .membership-card.paused .membership-gym {
+            opacity: 1;
+            color: var(--gray-400);
+        }
+
+        .membership-card.expiring .membership-info-label,
+        .membership-card.paused .membership-info-label {
+            opacity: 1;
+            color: var(--gray-400);
+        }
     </style>
 </head>
 <body>
@@ -366,6 +539,83 @@
             <div class="stat-card">
                 <div class="stat-value">3</div>
                 <div class="stat-label">쿠폰</div>
+            </div>
+        </div>
+
+        <!-- My Memberships -->
+        <div class="memberships-section">
+            <div class="section-header">
+                <h3 class="section-title">내 이용권</h3>
+            </div>
+            <div class="memberships-scroll">
+                <!-- 이용중 -->
+                <div class="membership-card active">
+                    <div class="membership-header">
+                        <span class="membership-status">이용중</span>
+                    </div>
+                    <div class="membership-name">3개월 멤버십</div>
+                    <div class="membership-gym">피트니스 센터 강남점</div>
+                    <div class="membership-info">
+                        <div class="membership-info-item">
+                            <span class="membership-info-label">잔여일</span>
+                            <span class="membership-info-value">67일</span>
+                        </div>
+                        <div class="membership-info-item">
+                            <span class="membership-info-label">유효기간</span>
+                            <span class="membership-info-value">2025.03.15</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 만료임박 -->
+                <div class="membership-card expiring">
+                    <div class="membership-header">
+                        <span class="membership-status">만료임박</span>
+                    </div>
+                    <div class="membership-name">PT 20회 패키지</div>
+                    <div class="membership-gym">피트니스 센터 강남점</div>
+                    <div class="membership-info">
+                        <div class="membership-info-item">
+                            <span class="membership-info-label">잔여횟수</span>
+                            <span class="membership-info-value">3회</span>
+                        </div>
+                        <div class="membership-info-item">
+                            <span class="membership-info-label">유효기간</span>
+                            <span class="membership-info-value">2025.01.20</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 일시정지 -->
+                <div class="membership-card paused">
+                    <div class="membership-header">
+                        <span class="membership-status">일시정지</span>
+                    </div>
+                    <div class="membership-name">GX 무제한 이용권</div>
+                    <div class="membership-gym">피트니스 센터 강남점</div>
+                    <div class="membership-info">
+                        <div class="membership-info-item">
+                            <span class="membership-info-label">정지기간</span>
+                            <span class="membership-info-value">14일</span>
+                        </div>
+                        <div class="membership-info-item">
+                            <span class="membership-info-label">재개일</span>
+                            <span class="membership-info-value">2025.01.20</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 만료됨 -->
+                <div class="membership-card expired">
+                    <div class="membership-header">
+                        <span class="membership-status">만료됨</span>
+                    </div>
+                    <div class="membership-name">1개월 멤버십</div>
+                    <div class="membership-gym">피트니스 센터 강남점</div>
+                    <div class="membership-info">
+                        <div class="membership-info-item">
+                            <span class="membership-info-label">만료일</span>
+                            <span class="membership-info-value">2024.12.01</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
