@@ -323,13 +323,89 @@
             fill: none;
         }
 
-        /* QR Entry Section */
-        .qr-entry-section {
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* QR Entry Button */
+        .qr-entry-btn {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 50%, #ffd93d 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 5s ease infinite;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .qr-entry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.4);
+        }
+
+        .qr-entry-btn:active {
+            transform: scale(0.98);
+        }
+
+        .qr-entry-btn-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.25);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .qr-entry-btn-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--white);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .qr-entry-btn-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .qr-entry-btn-title {
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .qr-entry-btn-desc {
+            color: rgba(255,255,255,0.8);
+            font-size: 12px;
+        }
+
+        .qr-entry-btn-arrow {
+            width: 20px;
+            height: 20px;
+            stroke: var(--white);
+            stroke-width: 2;
+            fill: none;
+            flex-shrink: 0;
+        }
+
+        /* Center Section */
+        .center-section {
             margin-bottom: 24px;
             animation: slideUp 0.2s ease-out 0.1s backwards;
         }
 
-        .qr-entry-section .section-header {
+        .center-section .section-header {
             margin-bottom: 12px;
         }
 
@@ -350,37 +426,20 @@
             min-width: 200px;
             flex-shrink: 0;
             scroll-snap-align: start;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            background-size: 200% 200%;
-            animation: gradientShift 5s ease infinite;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
             border-radius: 16px;
-            padding: 18px;
+            padding: 14px;
             cursor: pointer;
             transition: all 0.2s ease;
             position: relative;
             overflow: hidden;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .gym-card::before {
-            content: '';
-            position: absolute;
-            top: -30%;
-            right: -20%;
-            width: 100px;
-            height: 100px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 50%;
-        }
-
         .gym-card:hover {
+            border-color: var(--black);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .gym-card:active {
@@ -388,7 +447,7 @@
         }
 
         .gym-card-name {
-            color: var(--white);
+            color: var(--black);
             font-size: 14px;
             font-weight: 700;
             margin-bottom: 4px;
@@ -397,7 +456,7 @@
         }
 
         .gym-card-address {
-            color: rgba(255,255,255,0.7);
+            color: var(--gray-400);
             font-size: 11px;
             position: relative;
             z-index: 1;
@@ -410,6 +469,29 @@
             object-fit: cover;
             margin-bottom: 12px;
             background: rgba(255,255,255,0.1);
+        }
+
+        .gym-card-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: var(--white);
+            color: var(--black);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gym-card-btn svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--black);
+            stroke-width: 2;
+            fill: none;
         }
 
         /* My Memberships */
@@ -1003,28 +1085,40 @@
             </div>
         </div>
 
-        <!-- QR Entry Section -->
-        <div class="qr-entry-section">
+        <!-- QR Entry Button -->
+        <div class="qr-entry-btn" onclick="openQrModal()">
+            <div class="qr-entry-btn-icon">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="14" width="3" height="3"/><rect x="14" y="18" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/></svg>
+            </div>
+            <div class="qr-entry-btn-text">
+                <span class="qr-entry-btn-title">QR 코드로 입장하기</span>
+                <span class="qr-entry-btn-desc">입구 스캐너에 QR 코드를 태그해주세요</span>
+            </div>
+            <svg class="qr-entry-btn-arrow" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+
+        <!-- Center Introduction Section -->
+        <div class="center-section">
             <div class="section-header">
-                <h2 class="section-title">QR 코드로 입장하기</h2>
+                <h2 class="section-title">센터 소개</h2>
             </div>
             <div class="gym-scroll">
-                <div class="gym-card" onclick="openQrModal()">
+                <div class="gym-card">
                     <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=200&fit=crop" alt="강남점" class="gym-card-image">
                     <div class="gym-card-name">피트니스 센터 강남점</div>
                     <div class="gym-card-address">서울 강남구 테헤란로 123</div>
                 </div>
-                <div class="gym-card" onclick="openQrModal()">
+                <div class="gym-card">
                     <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&h=200&fit=crop" alt="서초점" class="gym-card-image">
                     <div class="gym-card-name">피트니스 센터 서초점</div>
                     <div class="gym-card-address">서울 서초구 서초대로 456</div>
                 </div>
-                <div class="gym-card" onclick="openQrModal()">
+                <div class="gym-card">
                     <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=200&fit=crop" alt="역삼점" class="gym-card-image">
                     <div class="gym-card-name">피트니스 센터 역삼점</div>
                     <div class="gym-card-address">서울 강남구 역삼로 789</div>
                 </div>
-                <div class="gym-card" onclick="openQrModal()">
+                <div class="gym-card">
                     <img src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1?w=400&h=200&fit=crop" alt="판교점" class="gym-card-image">
                     <div class="gym-card-name">피트니스 센터 판교점</div>
                     <div class="gym-card-address">경기 성남시 분당구 판교로 321</div>
