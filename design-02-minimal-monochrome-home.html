@@ -323,26 +323,42 @@
             fill: none;
         }
 
-        /* QR Entry Button */
-        .qr-entry-btn {
+        /* QR Entry Section */
+        .qr-entry-section {
+            margin-bottom: 24px;
+            animation: slideUp 0.2s ease-out 0.1s backwards;
+        }
+
+        .qr-entry-section .section-header {
+            margin-bottom: 12px;
+        }
+
+        .gym-scroll {
             display: flex;
-            align-items: center;
-            justify-content: center;
             gap: 12px;
-            width: 100%;
-            padding: 18px 24px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #ff6b6b 100%);
+            overflow-x: auto;
+            padding: 4px 0 8px 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .gym-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gym-card {
+            min-width: 200px;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             background-size: 200% 200%;
-            color: var(--white);
-            border: none;
-            border-radius: 14px;
-            font-size: 15px;
-            font-weight: 600;
+            animation: gradientShift 5s ease infinite;
+            border-radius: 16px;
+            padding: 18px;
             cursor: pointer;
             transition: all 0.2s ease;
-            margin-bottom: 24px;
-            animation: slideUp 0.2s ease-out 0.1s backwards, gradientShift 5s ease infinite;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
         @keyframes gradientShift {
@@ -351,21 +367,49 @@
             100% { background-position: 0% 50%; }
         }
 
-        .qr-entry-btn:hover {
+        .gym-card::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+        }
+
+        .gym-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
 
-        .qr-entry-btn:active {
+        .gym-card:active {
             transform: scale(0.98);
         }
 
-        .qr-entry-btn svg {
-            width: 22px;
-            height: 22px;
-            stroke: currentColor;
-            stroke-width: 1.5;
-            fill: none;
+        .gym-card-name {
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gym-card-address {
+            color: rgba(255,255,255,0.7);
+            font-size: 11px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gym-card-image {
+            width: 100%;
+            height: 100px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-bottom: 12px;
+            background: rgba(255,255,255,0.1);
         }
 
         /* My Memberships */
@@ -518,18 +562,18 @@
             color: var(--gray-400);
         }
 
-        /* News/Event Section */
-        .news-section {
+        /* Trainer Section */
+        .trainer-section {
             animation: slideUp 0.2s ease-out 0.2s backwards;
         }
 
-        .news-list {
+        .trainer-list {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .news-item {
+        .trainer-item {
             display: flex;
             gap: 16px;
             padding: 16px;
@@ -539,37 +583,28 @@
             transition: all 0.2s ease;
         }
 
-        .news-item:hover {
+        .trainer-item:hover {
             background: var(--gray-200);
         }
 
-        .news-image {
+        .trainer-photo {
             width: 72px;
             height: 72px;
-            background: var(--gray-200);
-            border-radius: 10px;
+            border-radius: 50%;
             flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            object-fit: cover;
+            border: 3px solid var(--white);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .news-image svg {
-            width: 28px;
-            height: 28px;
-            stroke: var(--gray-400);
-            stroke-width: 1.5;
-            fill: none;
-        }
-
-        .news-content {
+        .trainer-content {
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-        .news-tag {
+        .trainer-specialty {
             display: inline-block;
             font-size: 11px;
             font-weight: 600;
@@ -579,16 +614,36 @@
             margin-bottom: 4px;
         }
 
-        .news-title {
-            font-size: 14px;
-            font-weight: 600;
+        .trainer-name {
+            font-size: 15px;
+            font-weight: 700;
             margin-bottom: 4px;
             line-height: 1.4;
         }
 
-        .news-date {
+        .trainer-info {
             font-size: 12px;
             color: var(--gray-400);
+        }
+
+        .trainer-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .trainer-rating svg {
+            width: 14px;
+            height: 14px;
+            fill: #FFD700;
+            stroke: none;
+        }
+
+        .trainer-rating span {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--black);
         }
 
         /* Bottom Navigation */
@@ -948,40 +1003,79 @@
             </div>
         </div>
 
-        <!-- QR Entry Button -->
-        <button class="qr-entry-btn" onclick="openQrModal()">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="14" width="3" height="3"/><rect x="14" y="18" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/></svg>
-            QR 코드로 입장하기
-        </button>
-
-        <!-- News/Event Section -->
-        <div class="news-section">
+        <!-- QR Entry Section -->
+        <div class="qr-entry-section">
             <div class="section-header">
-                <h2 class="section-title">소식</h2>
+                <h2 class="section-title">QR 코드로 입장하기</h2>
+            </div>
+            <div class="gym-scroll">
+                <div class="gym-card" onclick="openQrModal()">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=200&fit=crop" alt="강남점" class="gym-card-image">
+                    <div class="gym-card-name">피트니스 센터 강남점</div>
+                    <div class="gym-card-address">서울 강남구 테헤란로 123</div>
+                </div>
+                <div class="gym-card" onclick="openQrModal()">
+                    <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&h=200&fit=crop" alt="서초점" class="gym-card-image">
+                    <div class="gym-card-name">피트니스 센터 서초점</div>
+                    <div class="gym-card-address">서울 서초구 서초대로 456</div>
+                </div>
+                <div class="gym-card" onclick="openQrModal()">
+                    <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=200&fit=crop" alt="역삼점" class="gym-card-image">
+                    <div class="gym-card-name">피트니스 센터 역삼점</div>
+                    <div class="gym-card-address">서울 강남구 역삼로 789</div>
+                </div>
+                <div class="gym-card" onclick="openQrModal()">
+                    <img src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1?w=400&h=200&fit=crop" alt="판교점" class="gym-card-image">
+                    <div class="gym-card-name">피트니스 센터 판교점</div>
+                    <div class="gym-card-address">경기 성남시 분당구 판교로 321</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trainer Section -->
+        <div class="trainer-section">
+            <div class="section-header">
+                <h2 class="section-title">트레이너</h2>
                 <a href="#" class="section-more">
                     전체보기
                     <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
                 </a>
             </div>
-            <div class="news-list">
-                <div class="news-item">
-                    <div class="news-image">
-                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-tag">EVENT</span>
-                        <h4 class="news-title">신규 회원 20% 할인 이벤트</h4>
-                        <span class="news-date">2024.12.20</span>
+            <div class="trainer-list">
+                <div class="trainer-item">
+                    <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face" alt="김민수 트레이너" class="trainer-photo">
+                    <div class="trainer-content">
+                        <span class="trainer-specialty">PT 전문</span>
+                        <h4 class="trainer-name">김민수 트레이너</h4>
+                        <span class="trainer-info">피트니스 센터 강남점 · 경력 8년</span>
+                        <div class="trainer-rating">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <span>4.9</span>
+                        </div>
                     </div>
                 </div>
-                <div class="news-item">
-                    <div class="news-image">
-                        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <div class="trainer-item">
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop&crop=face" alt="박지영 트레이너" class="trainer-photo">
+                    <div class="trainer-content">
+                        <span class="trainer-specialty">다이어트</span>
+                        <h4 class="trainer-name">박지영 트레이너</h4>
+                        <span class="trainer-info">피트니스 센터 서초점 · 경력 5년</span>
+                        <div class="trainer-rating">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <span>4.8</span>
+                        </div>
                     </div>
-                    <div class="news-content">
-                        <span class="news-tag">NOTICE</span>
-                        <h4 class="news-title">연말 휴무 안내</h4>
-                        <span class="news-date">2024.12.18</span>
+                </div>
+                <div class="trainer-item">
+                    <img src="https://images.unsplash.com/photo-1597347316205-36f6c451902a?w=200&h=200&fit=crop&crop=face" alt="이준혁 트레이너" class="trainer-photo">
+                    <div class="trainer-content">
+                        <span class="trainer-specialty">근력 강화</span>
+                        <h4 class="trainer-name">이준혁 트레이너</h4>
+                        <span class="trainer-info">피트니스 센터 역삼점 · 경력 6년</span>
+                        <div class="trainer-rating">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <span>4.7</span>
+                        </div>
                     </div>
                 </div>
             </div>
