@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BODYCHANNEL - 구매하기</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-400: #a3a3a3;
+            --gray-600: #525252;
+            --primary: #FF6B35;
+            --success: #22c55e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', -apple-system, sans-serif;
+            background: var(--gray-100);
+            color: var(--black);
+            min-height: 100vh;
+            padding-bottom: 120px;
+            animation: pageEnter 0.2s ease-out;
+        }
+
+        @keyframes pageEnter {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        .header {
+            padding: 24px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--gray-200);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: var(--white);
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--gray-100);
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--black);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .header-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .header-spacer {
+            width: 40px;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 20px;
+        }
+
+        /* Section Card */
+        .section-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            animation: slideUp 0.2s ease-out backwards;
+        }
+
+        .section-card:nth-child(1) { animation-delay: 0.05s; }
+        .section-card:nth-child(2) { animation-delay: 0.1s; }
+        .section-card:nth-child(3) { animation-delay: 0.15s; }
+        .section-card:nth-child(4) { animation-delay: 0.2s; }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray-600);
+            margin-bottom: 16px;
+        }
+
+        /* Product Info */
+        .product-info {
+            display: flex;
+            gap: 16px;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            background: var(--gray-100);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .product-image svg {
+            width: 36px;
+            height: 36px;
+            stroke: var(--gray-400);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .product-name {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .product-gym {
+            font-size: 13px;
+            color: var(--gray-400);
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Quantity Selector */
+        .quantity-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            margin-top: 16px;
+            border-top: 1px solid var(--gray-100);
+        }
+
+        .quantity-label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .qty-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .qty-btn:hover {
+            background: var(--gray-100);
+            border-color: var(--black);
+        }
+
+        .qty-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--black);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .qty-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        /* User Info */
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: var(--gray-600);
+        }
+
+        .info-value {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .info-value.editable {
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .payment-option:hover {
+            border-color: var(--black);
+        }
+
+        .payment-option.selected {
+            border-color: var(--primary);
+            background: rgba(255, 107, 53, 0.05);
+        }
+
+        .payment-option input {
+            display: none;
+        }
+
+        .payment-radio {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--gray-200);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .payment-option.selected .payment-radio {
+            border-color: var(--primary);
+        }
+
+        .payment-radio::after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .payment-option.selected .payment-radio::after {
+            opacity: 1;
+        }
+
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gray-100);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .payment-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--black);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .payment-icon.kakao {
+            background: #FEE500;
+        }
+
+        .payment-icon.naver {
+            background: #03C75A;
+        }
+
+        .payment-icon.naver svg {
+            stroke: white;
+        }
+
+        .payment-name {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* Coupon & Points */
+        .discount-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .discount-row:last-child {
+            border-bottom: none;
+        }
+
+        .discount-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .discount-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gray-100);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .discount-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--black);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .discount-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .discount-label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .discount-sub {
+            font-size: 12px;
+            color: var(--gray-400);
+        }
+
+        .discount-btn {
+            padding: 10px 16px;
+            background: var(--gray-100);
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .discount-btn:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .discount-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Price Summary */
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+        }
+
+        .price-label {
+            font-size: 14px;
+            color: var(--gray-600);
+        }
+
+        .price-value {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .price-value.discount {
+            color: var(--primary);
+        }
+
+        .price-divider {
+            height: 1px;
+            background: var(--gray-200);
+            margin: 8px 0;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+        }
+
+        .total-label {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .total-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Agreement */
+        .agreement {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 0;
+        }
+
+        .agreement input {
+            display: none;
+        }
+
+        .agreement-checkbox {
+            width: 22px;
+            height: 22px;
+            border: 1px solid var(--gray-200);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .agreement input:checked + .agreement-checkbox {
+            background: var(--black);
+            border-color: var(--black);
+        }
+
+        .agreement-checkbox svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--white);
+            stroke-width: 2;
+            fill: none;
+            opacity: 0;
+        }
+
+        .agreement input:checked + .agreement-checkbox svg {
+            opacity: 1;
+        }
+
+        .agreement-text {
+            font-size: 13px;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+
+        .agreement-text a {
+            color: var(--black);
+            text-decoration: underline;
+        }
+
+        /* Bottom Fixed */
+        .bottom-fixed {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+            padding: 20px 28px 32px;
+            z-index: 100;
+        }
+
+        .bottom-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .bottom-price-label {
+            font-size: 14px;
+            color: var(--gray-600);
+        }
+
+        .bottom-price-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .pay-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .pay-btn:hover {
+            background: var(--primary);
+        }
+
+        .pay-btn:disabled {
+            background: var(--gray-200);
+            color: var(--gray-400);
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <div class="header-title">구매하기</div>
+        <div class="header-spacer"></div>
+    </header>
+
+    <main class="main-content">
+        <!-- Product Info -->
+        <div class="section-card">
+            <div class="section-title">상품 정보</div>
+            <div class="product-info">
+                <div class="product-image">
+                    <svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M6.5 17.5h11M4 10h2.5v4H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zM17.5 10H20a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2.5v-4zM6.5 8v8M17.5 8v8M9 10v4M15 10v4"/></svg>
+                </div>
+                <div class="product-details">
+                    <div class="product-name" id="productName">PT 20회 패키지</div>
+                    <div class="product-gym" id="productGym">피트니스 센터 강남점</div>
+                    <div class="product-price" id="productPrice">990,000원</div>
+                </div>
+            </div>
+            <div class="quantity-row">
+                <span class="quantity-label">수량</span>
+                <div class="quantity-selector">
+                    <button class="qty-btn" onclick="changeQty(-1)">
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg>
+                    </button>
+                    <span class="qty-value" id="qtyValue">1</span>
+                    <button class="qty-btn" onclick="changeQty(1)">
+                        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Info -->
+        <div class="section-card">
+            <div class="section-title">구매자 정보</div>
+            <div class="info-row">
+                <span class="info-label">이름</span>
+                <span class="info-value">김피트</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">연락처</span>
+                <span class="info-value">010-1234-5678</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">이메일</span>
+                <span class="info-value">fitkim@email.com</span>
+            </div>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="section-card">
+            <div class="section-title">결제 수단</div>
+            <div class="payment-methods">
+                <label class="payment-option selected" onclick="selectPayment(this)">
+                    <input type="radio" name="payment" checked>
+                    <div class="payment-radio"></div>
+                    <div class="payment-icon kakao">
+                        <svg viewBox="0 0 24 24" fill="#000000" stroke="none"><path d="M12 3C6.48 3 2 6.58 2 11c0 2.83 1.86 5.31 4.64 6.7-.15.54-.97 3.48-1 3.63 0 .1.04.2.13.26.09.05.2.05.29 0 .38-.23 4.42-2.9 4.94-3.24.33.03.66.05 1 .05 5.52 0 10-3.58 10-8s-4.48-8-10-8z"/></svg>
+                    </div>
+                    <span class="payment-name">카카오페이</span>
+                </label>
+                <label class="payment-option" onclick="selectPayment(this)">
+                    <input type="radio" name="payment">
+                    <div class="payment-radio"></div>
+                    <div class="payment-icon naver">
+                        <svg viewBox="0 0 24 24" fill="#ffffff" stroke="none"><path d="M16.273 12.845L7.376 3H3v18h4.727V11.155L16.624 21H21V3h-4.727z"/></svg>
+                    </div>
+                    <span class="payment-name">네이버페이</span>
+                </label>
+                <label class="payment-option" onclick="selectPayment(this)">
+                    <input type="radio" name="payment">
+                    <div class="payment-radio"></div>
+                    <div class="payment-icon">
+                        <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                    </div>
+                    <span class="payment-name">신용/체크카드</span>
+                </label>
+                <label class="payment-option" onclick="selectPayment(this)">
+                    <input type="radio" name="payment">
+                    <div class="payment-radio"></div>
+                    <div class="payment-icon">
+                        <svg viewBox="0 0 24 24"><path d="M21 4H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/><path d="M1 10h22"/></svg>
+                    </div>
+                    <span class="payment-name">계좌이체</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Coupon & Points -->
+        <div class="section-card">
+            <div class="section-title">할인</div>
+            <div class="discount-row">
+                <div class="discount-left">
+                    <div class="discount-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><path d="M12 12V4"/><path d="M4 8h16a2 2 0 0 1 2 2v2H2v-2a2 2 0 0 1 2-2z"/><path d="M12 4a2 2 0 1 0-4 0c0 1.1.9 2 2 2h2"/><path d="M12 4a2 2 0 1 1 4 0c0 1.1-.9 2-2 2h-2"/></svg>
+                    </div>
+                    <div class="discount-info">
+                        <span class="discount-label">쿠폰</span>
+                        <span class="discount-sub">사용 가능 3장</span>
+                    </div>
+                </div>
+                <button class="discount-btn" onclick="applyCoupon()">쿠폰 선택</button>
+            </div>
+            <div class="discount-row">
+                <div class="discount-left">
+                    <div class="discount-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    </div>
+                    <div class="discount-info">
+                        <span class="discount-label">포인트</span>
+                        <span class="discount-sub">보유 2,500P</span>
+                    </div>
+                </div>
+                <span class="discount-value" id="pointUsed">-0P</span>
+            </div>
+            <div class="discount-row">
+                <div class="discount-left">
+                    <div class="discount-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <div class="discount-info">
+                        <span class="discount-label">캐시</span>
+                        <span class="discount-sub">보유 15,000원</span>
+                    </div>
+                </div>
+                <span class="discount-value" id="cashUsed">-0원</span>
+            </div>
+        </div>
+
+        <!-- Price Summary -->
+        <div class="section-card">
+            <div class="section-title">결제 금액</div>
+            <div class="price-row">
+                <span class="price-label">상품 금액</span>
+                <span class="price-value" id="itemPrice">990,000원</span>
+            </div>
+            <div class="price-row">
+                <span class="price-label">할인 금액</span>
+                <span class="price-value discount" id="discountPrice">-0원</span>
+            </div>
+            <div class="price-divider"></div>
+            <div class="total-row">
+                <span class="total-label">총 결제 금액</span>
+                <span class="total-value" id="totalPrice">990,000원</span>
+            </div>
+        </div>
+
+        <!-- Agreement -->
+        <div class="section-card">
+            <label class="agreement">
+                <input type="checkbox" id="agreeAll" onchange="toggleAgree()">
+                <div class="agreement-checkbox">
+                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <span class="agreement-text">
+                    주문 내용을 확인하였으며, <a href="#">이용약관</a> 및 <a href="#">결제 진행</a>에 동의합니다.
+                </span>
+            </label>
+        </div>
+    </main>
+
+    <!-- Bottom Fixed -->
+    <div class="bottom-fixed">
+        <div class="bottom-price">
+            <span class="bottom-price-label">총 결제 금액</span>
+            <span class="bottom-price-value" id="bottomTotalPrice">990,000원</span>
+        </div>
+        <button class="pay-btn" id="payBtn" onclick="processPayment()" disabled>결제하기</button>
+    </div>
+
+    <script>
+        let quantity = 1;
+        let unitPrice = 990000;
+
+        function changeQty(delta) {
+            quantity = Math.max(1, quantity + delta);
+            document.getElementById('qtyValue').textContent = quantity;
+            updatePrice();
+        }
+
+        function updatePrice() {
+            const total = unitPrice * quantity;
+            const formatted = total.toLocaleString() + '원';
+            document.getElementById('itemPrice').textContent = formatted;
+            document.getElementById('totalPrice').textContent = formatted;
+            document.getElementById('bottomTotalPrice').textContent = formatted;
+        }
+
+        function selectPayment(element) {
+            document.querySelectorAll('.payment-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            element.querySelector('input').checked = true;
+        }
+
+        function applyCoupon() {
+            alert('쿠폰 선택 팝업이 열립니다.');
+        }
+
+        function toggleAgree() {
+            const agreed = document.getElementById('agreeAll').checked;
+            document.getElementById('payBtn').disabled = !agreed;
+        }
+
+        function processPayment() {
+            if (confirm('결제를 진행하시겠습니까?')) {
+                const name = document.getElementById('productName').textContent;
+                const price = document.getElementById('totalPrice').textContent;
+                const gym = document.getElementById('productGym').textContent;
+                const method = document.querySelector('.payment-option.selected .payment-name').textContent;
+
+                const url = `design-02-minimal-monochrome-complete.html?name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}&gym=${encodeURIComponent(gym)}&method=${encodeURIComponent(method)}`;
+                window.location.href = url;
+            }
+        }
+
+        // URL 파라미터로 상품 정보 받기
+        const urlParams = new URLSearchParams(window.location.search);
+        const productName = urlParams.get('name');
+        const productPrice = urlParams.get('price');
+        const productGym = urlParams.get('gym');
+
+        if (productName) {
+            document.getElementById('productName').textContent = productName;
+        }
+        if (productPrice) {
+            unitPrice = parseInt(productPrice.replace(/[^0-9]/g, ''));
+            document.getElementById('productPrice').textContent = productPrice;
+            updatePrice();
+        }
+        if (productGym) {
+            document.getElementById('productGym').textContent = productGym;
+        }
+    </script>
+</body>
+</html>

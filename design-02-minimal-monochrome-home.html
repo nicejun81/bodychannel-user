@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BODYCHANNEL - 홈</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-400: #a3a3a3;
+            --gray-600: #525252;
+            --primary: #FF6B35;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', -apple-system, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            min-height: 100vh;
+            padding-bottom: 100px;
+            animation: pageEnter 0.2s ease-out;
+        }
+
+        @keyframes pageEnter {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Header */
+        .header {
+            padding: 24px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-symbol {
+            flex-shrink: 0;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .header-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--gray-200);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: var(--white);
+            transition: all 0.2s ease;
+        }
+
+        .header-btn:hover {
+            background: var(--gray-100);
+        }
+
+        .header-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--black);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .notification-badge {
+            position: relative;
+        }
+
+        .notification-badge::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 2px solid var(--white);
+        }
+
+        /* Main Content */
+        .main-content { padding: 24px 28px; }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--black) 0%, #2a2a2a 100%);
+            border-radius: 20px;
+            padding: 32px 28px;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 0.2s ease-out backwards;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .hero-greeting {
+            color: var(--gray-400);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .hero-title {
+            color: var(--white);
+            font-family: 'Poppins', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .hero-title span {
+            color: var(--primary);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 24px;
+        }
+
+        .hero-stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-stat-value {
+            color: var(--white);
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .hero-stat-label {
+            color: var(--gray-400);
+            font-size: 12px;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 32px;
+            animation: slideUp 0.2s ease-out 0.05s backwards;
+        }
+
+        .quick-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px 12px;
+            background: var(--gray-100);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: var(--black);
+        }
+
+        .quick-action:hover {
+            background: var(--gray-200);
+            transform: translateY(-2px);
+        }
+
+        .quick-action-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quick-action-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .quick-action-label {
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .section-more {
+            font-size: 13px;
+            color: var(--gray-400);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .section-more:hover {
+            color: var(--primary);
+        }
+
+        .section-more svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        /* My Tickets Preview */
+        .tickets-section {
+            margin-bottom: 32px;
+            animation: slideUp 0.2s ease-out 0.1s backwards;
+        }
+
+        .ticket-preview {
+            background: linear-gradient(135deg, var(--primary) 0%, #ff8c5a 100%);
+            border-radius: 16px;
+            padding: 24px;
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ticket-preview-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .ticket-preview-info p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .ticket-preview-count {
+            text-align: right;
+        }
+
+        .ticket-preview-count .count {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .ticket-preview-count .label {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .no-ticket {
+            background: var(--gray-100);
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .no-ticket-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .no-ticket-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--gray-400);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .no-ticket p {
+            color: var(--gray-400);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .no-ticket-btn {
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .no-ticket-btn:hover {
+            background: var(--primary);
+        }
+
+        /* Popular Products */
+        .products-section {
+            margin-bottom: 32px;
+            animation: slideUp 0.2s ease-out 0.15s backwards;
+        }
+
+        .products-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .products-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .products-scroll::-webkit-scrollbar-track {
+            background: var(--gray-100);
+            border-radius: 2px;
+        }
+
+        .products-scroll::-webkit-scrollbar-thumb {
+            background: var(--gray-300);
+            border-radius: 2px;
+        }
+
+        .product-card {
+            min-width: 200px;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .product-card:hover {
+            border-color: var(--black);
+            transform: translateY(-2px);
+        }
+
+        .product-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 4px 10px;
+            font-size: 10px;
+            font-weight: 700;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .product-name {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .product-gym {
+            font-size: 12px;
+            color: var(--gray-400);
+            margin-bottom: 12px;
+        }
+
+        .product-price {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        .product-original-price {
+            font-size: 12px;
+            color: var(--gray-400);
+            text-decoration: line-through;
+            margin-left: 6px;
+        }
+
+        /* News/Event Section */
+        .news-section {
+            animation: slideUp 0.2s ease-out 0.2s backwards;
+        }
+
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .news-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: var(--gray-100);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .news-item:hover {
+            background: var(--gray-200);
+        }
+
+        .news-image {
+            width: 72px;
+            height: 72px;
+            background: var(--gray-200);
+            border-radius: 10px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .news-image svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--gray-400);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .news-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .news-tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .news-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+
+        .news-date {
+            font-size: 12px;
+            color: var(--gray-400);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-around;
+            padding: 16px 0 28px;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            color: var(--gray-400);
+            transition: color 0.2s ease;
+        }
+
+        .nav-item.active { color: var(--primary); }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item:hover .nav-icon svg {
+            stroke: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .nav-item.active .nav-icon svg {
+            fill: currentColor;
+            stroke-width: 0;
+        }
+
+        .nav-item.active:hover .nav-icon svg {
+            transform: scale(1.1);
+        }
+
+        .nav-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="symbol.png" alt="logo" class="logo-symbol" width="32" height="32">
+            <span>BODYCHANNEL</span>
+        </div>
+        <div class="header-actions">
+            <button class="header-btn notification-badge">
+                <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Hero Banner -->
+        <div class="hero-banner">
+            <p class="hero-greeting">안녕하세요, 김피트님!</p>
+            <h1 class="hero-title">오늘도 <span>건강한 하루</span><br>시작해볼까요?</h1>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-value">12</span>
+                    <span class="hero-stat-label">남은 PT 횟수</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-value">67</span>
+                    <span class="hero-stat-label">멤버십 잔여일</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <a href="design-02-minimal-monochrome-purchase.html" class="quick-action">
+                <div class="quick-action-icon">
+                    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                </div>
+                <span class="quick-action-label">구매</span>
+            </a>
+            <a href="design-02-minimal-monochrome-reservation.html" class="quick-action">
+                <div class="quick-action-icon">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                </div>
+                <span class="quick-action-label">예약</span>
+            </a>
+            <a href="#" class="quick-action">
+                <div class="quick-action-icon">
+                    <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <span class="quick-action-label">활동</span>
+            </a>
+            <a href="design-02-minimal-monochrome-mypage.html" class="quick-action">
+                <div class="quick-action-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+                </div>
+                <span class="quick-action-label">마이</span>
+            </a>
+        </div>
+
+        <!-- My Tickets Preview -->
+        <div class="tickets-section">
+            <div class="section-header">
+                <h2 class="section-title">내 이용권</h2>
+                <a href="design-02-minimal-monochrome-mypage.html" class="section-more">
+                    전체보기
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </a>
+            </div>
+            <div class="ticket-preview">
+                <div class="ticket-preview-info">
+                    <h4>PT 20회 패키지</h4>
+                    <p>피트니스 센터 강남점</p>
+                </div>
+                <div class="ticket-preview-count">
+                    <div class="count">12</div>
+                    <div class="label">회 남음</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popular Products -->
+        <div class="products-section">
+            <div class="section-header">
+                <h2 class="section-title">인기 상품</h2>
+                <a href="design-02-minimal-monochrome-purchase.html" class="section-more">
+                    전체보기
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </a>
+            </div>
+            <div class="products-scroll">
+                <div class="product-card" onclick="location.href='design-02-minimal-monochrome-purchase.html'">
+                    <span class="product-badge">BEST</span>
+                    <div class="product-name">PT 20회 패키지</div>
+                    <div class="product-gym">피트니스 센터 강남점</div>
+                    <div class="product-price">
+                        990,000원
+                        <span class="product-original-price">1,200,000원</span>
+                    </div>
+                </div>
+                <div class="product-card" onclick="location.href='design-02-minimal-monochrome-purchase.html'">
+                    <span class="product-badge">SALE</span>
+                    <div class="product-name">GX 무제한 이용권</div>
+                    <div class="product-gym">피트니스 센터 강남점</div>
+                    <div class="product-price">
+                        99,000원
+                        <span class="product-original-price">150,000원</span>
+                    </div>
+                </div>
+                <div class="product-card" onclick="location.href='design-02-minimal-monochrome-purchase.html'">
+                    <span class="product-badge">40% OFF</span>
+                    <div class="product-name">3개월 멤버십</div>
+                    <div class="product-gym">피트니스 센터 강남점</div>
+                    <div class="product-price">
+                        270,000원
+                        <span class="product-original-price">450,000원</span>
+                    </div>
+                </div>
+                <div class="product-card" onclick="location.href='design-02-minimal-monochrome-purchase.html'">
+                    <span class="product-badge">NEW</span>
+                    <div class="product-name">1일 이용권</div>
+                    <div class="product-gym">피트니스 센터 강남점</div>
+                    <div class="product-price">15,000원</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- News/Event Section -->
+        <div class="news-section">
+            <div class="section-header">
+                <h2 class="section-title">소식</h2>
+                <a href="#" class="section-more">
+                    전체보기
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </a>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-image">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-tag">EVENT</span>
+                        <h4 class="news-title">신규 회원 20% 할인 이벤트</h4>
+                        <span class="news-date">2024.12.20</span>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-image">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-tag">NOTICE</span>
+                        <h4 class="news-title">연말 휴무 안내</h4>
+                        <span class="news-date">2024.12.18</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="design-02-minimal-monochrome-home.html" class="nav-item active">
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </span>
+            <span class="nav-label">홈</span>
+        </a>
+        <a href="design-02-minimal-monochrome-purchase.html" class="nav-item">
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </span>
+            <span class="nav-label">구매</span>
+        </a>
+        <a href="design-02-minimal-monochrome-reservation.html" class="nav-item">
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </span>
+            <span class="nav-label">예약</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </span>
+            <span class="nav-label">활동</span>
+        </a>
+        <a href="design-02-minimal-monochrome-mypage.html" class="nav-item">
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+            </span>
+            <span class="nav-label">마이</span>
+        </a>
+    </nav>
+</body>
+</html>
