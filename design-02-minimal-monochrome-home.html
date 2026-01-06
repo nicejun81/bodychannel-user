@@ -17,6 +17,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { overflow-x: hidden; }
 
         body {
             font-family: 'Poppins', -apple-system, sans-serif;
@@ -25,6 +26,7 @@
             min-height: 100vh;
             padding-bottom: 100px;
             animation: pageEnter 0.2s ease-out;
+            overflow-x: hidden;
         }
 
         @keyframes pageEnter {
@@ -112,28 +114,65 @@
         }
 
         /* Main Content */
-        .main-content { padding: 24px 28px; }
-
-        /* Hero Banner */
-        .hero-banner {
-            background: linear-gradient(135deg, var(--black) 0%, #2a2a2a 100%);
-            border-radius: 20px;
-            padding: 32px 28px;
-            margin-bottom: 32px;
-            position: relative;
-            overflow: hidden;
-            animation: slideUp 0.2s ease-out backwards;
+        .main-content {
+            padding: 24px 28px;
+            overflow-x: hidden;
         }
 
-        .hero-banner::before {
+        /* Hero Slider */
+        .hero-slider {
+            position: relative;
+            margin-bottom: 24px;
+            border-radius: 20px;
+            overflow: hidden;
+            animation: slideUp 0.2s ease-out backwards;
+            touch-action: pan-y pinch-zoom;
+        }
+
+        .hero-track {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .hero-slide {
+            min-width: 100%;
+            background: linear-gradient(135deg, var(--black) 0%, #2a2a2a 100%);
+            padding: 28px 24px 44px;
+            position: relative;
+            overflow: hidden;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-slide::before {
             content: '';
             position: absolute;
             top: -50%;
             right: -20%;
-            width: 300px;
-            height: 300px;
+            width: 250px;
+            height: 250px;
             background: var(--primary);
             border-radius: 50%;
+            opacity: 0.15;
+        }
+
+        .hero-slide.slide-event {
+            background: linear-gradient(135deg, #2a2a2a 0%, #404040 100%);
+        }
+
+        .hero-slide.slide-event::before {
+            background: var(--white);
+            opacity: 0.1;
+        }
+
+        .hero-slide.slide-promo {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
+        }
+
+        .hero-slide.slide-promo::before {
+            background: var(--white);
             opacity: 0.1;
         }
 
@@ -141,6 +180,12 @@
             color: var(--gray-400);
             font-size: 14px;
             margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-slide.slide-event .hero-greeting {
+            color: rgba(255,255,255,0.8);
         }
 
         .hero-title {
@@ -150,15 +195,27 @@
             font-weight: 700;
             line-height: 1.3;
             margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-title span {
             color: var(--primary);
         }
 
+        .hero-slide.slide-event .hero-title span {
+            color: var(--primary);
+        }
+
+        .hero-slide.slide-promo .hero-title span {
+            color: var(--primary);
+        }
+
         .hero-stats {
             display: flex;
             gap: 24px;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-stat {
@@ -176,6 +233,58 @@
         .hero-stat-label {
             color: var(--gray-400);
             font-size: 12px;
+        }
+
+        .hero-slide.slide-event .hero-stat-label {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--white);
+            color: var(--black);
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            position: relative;
+            z-index: 1;
+            transition: all 0.2s ease;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .hero-indicators {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        .hero-indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hero-indicator:hover {
+            background: rgba(255,255,255,0.7);
+        }
+
+        .hero-indicator.active {
+            width: 20px;
+            border-radius: 3px;
+            background: var(--white);
         }
 
         /* Section Header */
@@ -214,111 +323,58 @@
             fill: none;
         }
 
-        /* QR Entry Section */
-        .qr-section {
-            margin-bottom: 32px;
-            animation: slideUp 0.2s ease-out 0.1s backwards;
-        }
-
-        .qr-entry-card {
-            background: linear-gradient(135deg, var(--black) 0%, #2a2a2a 100%);
-            border-radius: 16px;
-            padding: 24px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .qr-entry-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 200px;
-            height: 200px;
-            background: var(--primary);
-            border-radius: 50%;
-            opacity: 0.1;
-        }
-
-        .qr-entry-card:hover {
-            transform: translateY(-2px);
-        }
-
-        .qr-code-box {
-            width: 80px;
-            height: 80px;
-            background: var(--white);
-            border-radius: 12px;
+        /* QR Entry Button */
+        .qr-entry-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            padding: 8px;
-        }
-
-        .qr-code-box svg {
+            gap: 12px;
             width: 100%;
-            height: 100%;
-        }
-
-        .qr-entry-info {
-            flex: 1;
-            position: relative;
-            z-index: 1;
-        }
-
-        .qr-entry-info h4 {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--white);
-            margin-bottom: 4px;
-        }
-
-        .qr-entry-info p {
-            font-size: 13px;
-            color: var(--gray-400);
-            margin-bottom: 12px;
-        }
-
-        .qr-entry-btn {
-            background: var(--primary);
+            padding: 18px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #ff6b6b 100%);
+            background-size: 200% 200%;
             color: var(--white);
             border: none;
-            padding: 10px 16px;
-            font-size: 13px;
+            border-radius: 14px;
+            font-size: 15px;
             font-weight: 600;
-            border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+            margin-bottom: 24px;
+            animation: slideUp 0.2s ease-out 0.1s backwards, gradientShift 5s ease infinite;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .qr-entry-btn:hover {
-            background: #ff8c5a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .qr-entry-btn:active {
+            transform: scale(0.98);
         }
 
         .qr-entry-btn svg {
-            width: 16px;
-            height: 16px;
+            width: 22px;
+            height: 22px;
             stroke: currentColor;
-            stroke-width: 2;
+            stroke-width: 1.5;
             fill: none;
         }
 
-        /* Popular Products */
-        .products-section {
+        /* My Memberships */
+        .memberships-section {
             margin-bottom: 32px;
             animation: slideUp 0.2s ease-out 0.15s backwards;
         }
 
-        .products-scroll {
+        .memberships-scroll {
             display: flex;
             gap: 12px;
             overflow-x: auto;
@@ -327,73 +383,139 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        .products-scroll::-webkit-scrollbar {
-            height: 4px;
+        .memberships-scroll::-webkit-scrollbar {
+            display: none;
         }
 
-        .products-scroll::-webkit-scrollbar-track {
-            background: var(--gray-100);
-            border-radius: 2px;
-        }
-
-        .products-scroll::-webkit-scrollbar-thumb {
-            background: var(--gray-300);
-            border-radius: 2px;
-        }
-
-        .product-card {
-            min-width: 200px;
+        .membership-card {
+            min-width: 260px;
             flex-shrink: 0;
             scroll-snap-align: start;
-            border: 1px solid var(--gray-200);
             border-radius: 16px;
-            padding: 16px;
+            padding: 18px;
             cursor: pointer;
             transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .product-card:hover {
-            border-color: var(--black);
+        .membership-card:hover {
             transform: translateY(-2px);
         }
 
-        .product-badge {
-            display: inline-block;
-            background: var(--primary);
+        .membership-card.active {
+            background: var(--black);
             color: var(--white);
+        }
+
+        .membership-card.expiring {
+            background: var(--white);
+            border: 2px solid var(--primary);
+            color: var(--black);
+        }
+
+        .membership-card.expired {
+            background: var(--gray-100);
+            color: var(--gray-600);
+        }
+
+        .membership-card.paused {
+            background: var(--white);
+            border: 2px solid var(--gray-400);
+            color: var(--black);
+        }
+
+        .membership-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .membership-status {
+            display: inline-block;
             padding: 4px 10px;
             font-size: 10px;
             font-weight: 700;
             border-radius: 6px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 12px;
         }
 
-        .product-name {
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 4px;
+        .membership-card.active .membership-status {
+            background: var(--primary);
+            color: var(--white);
         }
 
-        .product-gym {
-            font-size: 12px;
-            color: var(--gray-400);
-            margin-bottom: 12px;
+        .membership-card.expiring .membership-status {
+            background: var(--primary);
+            color: var(--white);
         }
 
-        .product-price {
-            font-family: 'Poppins', sans-serif;
+        .membership-card.expired .membership-status {
+            background: var(--gray-400);
+            color: var(--white);
+        }
+
+        .membership-card.paused .membership-status {
+            background: var(--gray-600);
+            color: var(--white);
+        }
+
+        .membership-name {
             font-size: 16px;
             font-weight: 700;
-            color: var(--black);
+            margin-bottom: 4px;
+            position: relative;
+            z-index: 1;
         }
 
-        .product-original-price {
+        .membership-gym {
             font-size: 12px;
+            opacity: 0.7;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .membership-info {
+            display: flex;
+            gap: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .membership-info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .membership-info-label {
+            font-size: 10px;
+            opacity: 0.7;
+            margin-bottom: 2px;
+        }
+
+        .membership-info-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .membership-card.expired .membership-info-value {
+            color: var(--gray-600);
+        }
+
+        .membership-card.expiring .membership-gym,
+        .membership-card.paused .membership-gym {
+            opacity: 1;
             color: var(--gray-400);
-            text-decoration: line-through;
-            margin-left: 6px;
+        }
+
+        .membership-card.expiring .membership-info-label,
+        .membership-card.paused .membership-info-label {
+            opacity: 1;
+            color: var(--gray-400);
         }
 
         /* News/Event Section */
@@ -665,6 +787,88 @@
             font-weight: 600;
             color: var(--primary);
         }
+
+        /* Event Banners */
+        .event-banners {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            overflow-y: visible;
+            padding: 4px 0 8px 0;
+            margin-left: -4px;
+            margin-right: -4px;
+            padding-left: 4px;
+            padding-right: 4px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            animation: slideUp 0.2s ease-out 0.05s backwards;
+        }
+
+        .event-banners::-webkit-scrollbar {
+            display: none;
+        }
+
+        .event-banner {
+            min-width: calc(33.333% - 8px);
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            padding: 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-banner.referral,
+        .event-banner.review,
+        .event-banner.ambassador {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+        }
+
+        .event-banner:hover {
+            border-color: var(--black);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .event-banner:active {
+            transform: scale(0.98);
+        }
+
+        .event-banner-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--gray-100);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .event-banner-icon svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--black);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .event-banner-title {
+            color: var(--black);
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .event-banner-desc {
+            color: var(--gray-400);
+            font-size: 9px;
+            margin-top: 3px;
+        }
     </style>
 </head>
 <body>
@@ -681,109 +885,74 @@
     </header>
 
     <main class="main-content">
-        <!-- Hero Banner -->
-        <div class="hero-banner">
-            <p class="hero-greeting">안녕하세요, 김피트님!</p>
-            <h1 class="hero-title">오늘도 <span>건강한 하루</span><br>시작해볼까요?</h1>
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <span class="hero-stat-value">12</span>
-                    <span class="hero-stat-label">남은 PT 횟수</span>
+        <!-- Hero Slider -->
+        <div class="hero-slider">
+            <div class="hero-track" id="heroTrack">
+                <!-- Slide 1: 인사 -->
+                <div class="hero-slide">
+                    <p class="hero-greeting">안녕하세요, 김피트님!</p>
+                    <h1 class="hero-title">오늘도 <span>건강한 하루</span><br>시작해볼까요?</h1>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-value">12</span>
+                            <span class="hero-stat-label">남은 PT 횟수</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-value">67</span>
+                            <span class="hero-stat-label">멤버십 잔여일</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-value">67</span>
-                    <span class="hero-stat-label">멤버십 잔여일</span>
+                <!-- Slide 2: 이벤트 -->
+                <div class="hero-slide slide-event">
+                    <p class="hero-greeting">EVENT</p>
+                    <h1 class="hero-title">신규 회원 <span>20% 할인</span><br>이벤트 진행중!</h1>
+                    <a href="#" class="hero-cta">자세히 보기</a>
                 </div>
+                <!-- Slide 3: 프로모션 -->
+                <div class="hero-slide slide-promo">
+                    <p class="hero-greeting">SPECIAL OFFER</p>
+                    <h1 class="hero-title">PT 패키지 <span>최대 40%</span><br>할인 혜택</h1>
+                    <a href="design-02-minimal-monochrome-purchase.html" class="hero-cta">구매하기</a>
+                </div>
+            </div>
+            <div class="hero-indicators">
+                <div class="hero-indicator active" onclick="goToSlide(0)"></div>
+                <div class="hero-indicator" onclick="goToSlide(1)"></div>
+                <div class="hero-indicator" onclick="goToSlide(2)"></div>
             </div>
         </div>
 
-        <!-- QR Entry Section -->
-        <div class="qr-section">
-            <div class="section-header">
-                <h2 class="section-title">QR 입장</h2>
+        <!-- Event Banners -->
+        <div class="event-banners">
+            <div class="event-banner referral">
+                <div class="event-banner-icon">
+                    <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div class="event-banner-title">친구 소개 이벤트</div>
+                <div class="event-banner-desc">친구 1명당 1만원 적립</div>
             </div>
-            <div class="qr-entry-card" onclick="openQrModal()">
-                <div class="qr-code-box">
-                    <svg viewBox="0 0 100 100">
-                        <rect x="10" y="10" width="25" height="25" fill="#0a0a0a"/>
-                        <rect x="15" y="15" width="15" height="15" fill="#fff"/>
-                        <rect x="18" y="18" width="9" height="9" fill="#0a0a0a"/>
-                        <rect x="65" y="10" width="25" height="25" fill="#0a0a0a"/>
-                        <rect x="70" y="15" width="15" height="15" fill="#fff"/>
-                        <rect x="73" y="18" width="9" height="9" fill="#0a0a0a"/>
-                        <rect x="10" y="65" width="25" height="25" fill="#0a0a0a"/>
-                        <rect x="15" y="70" width="15" height="15" fill="#fff"/>
-                        <rect x="18" y="73" width="9" height="9" fill="#0a0a0a"/>
-                        <rect x="40" y="10" width="5" height="5" fill="#0a0a0a"/>
-                        <rect x="50" y="10" width="5" height="5" fill="#0a0a0a"/>
-                        <rect x="40" y="20" width="5" height="5" fill="#0a0a0a"/>
-                        <rect x="45" y="25" width="5" height="5" fill="#0a0a0a"/>
-                        <rect x="40" y="40" width="5" height="5" fill="#0a0a0a"/>
-                        <rect x="45" y="45" width="5" height="5" fill="#0a0a0a"/>
-                        <rect x="50" y="40" width="5" height="5" fill="#0a0a0a"/>
-                        <rect x="65" y="65" width="5" height="5" fill="#0a0a0a"/>
-                        <rect x="75" y="70" width="5" height="5" fill="#0a0a0a"/>
-                        <rect x="70" y="75" width="5" height="5" fill="#0a0a0a"/>
-                        <rect x="80" y="80" width="5" height="5" fill="#0a0a0a"/>
-                        <rect x="85" y="85" width="5" height="5" fill="#0a0a0a"/>
-                    </svg>
+            <div class="event-banner review">
+                <div class="event-banner-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 </div>
-                <div class="qr-entry-info">
-                    <h4>피트니스 센터 강남점</h4>
-                    <p>QR 코드를 스캔하여 입장하세요</p>
-                    <button class="qr-entry-btn">
-                        <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                        크게 보기
-                    </button>
+                <div class="event-banner-title">리뷰 작성 이벤트</div>
+                <div class="event-banner-desc">베스트 리뷰 5만원 지급</div>
+            </div>
+            <div class="event-banner ambassador">
+                <div class="event-banner-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 15l-8.5 5 3.25-9.5L0 5h10L12 0l2 5h10l-6.75 5.5 3.25 9.5z"/></svg>
                 </div>
+                <div class="event-banner-title">앰버서더 지원</div>
+                <div class="event-banner-desc">특별 혜택 제공</div>
             </div>
         </div>
 
-        <!-- Popular Products -->
-        <div class="products-section">
-            <div class="section-header">
-                <h2 class="section-title">인기 상품</h2>
-                <a href="design-02-minimal-monochrome-purchase.html" class="section-more">
-                    전체보기
-                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-                </a>
-            </div>
-            <div class="products-scroll">
-                <div class="product-card" onclick="location.href='design-02-minimal-monochrome-purchase.html'">
-                    <span class="product-badge">BEST</span>
-                    <div class="product-name">PT 20회 패키지</div>
-                    <div class="product-gym">피트니스 센터 강남점</div>
-                    <div class="product-price">
-                        990,000원
-                        <span class="product-original-price">1,200,000원</span>
-                    </div>
-                </div>
-                <div class="product-card" onclick="location.href='design-02-minimal-monochrome-purchase.html'">
-                    <span class="product-badge">SALE</span>
-                    <div class="product-name">GX 무제한 이용권</div>
-                    <div class="product-gym">피트니스 센터 강남점</div>
-                    <div class="product-price">
-                        99,000원
-                        <span class="product-original-price">150,000원</span>
-                    </div>
-                </div>
-                <div class="product-card" onclick="location.href='design-02-minimal-monochrome-purchase.html'">
-                    <span class="product-badge">40% OFF</span>
-                    <div class="product-name">3개월 멤버십</div>
-                    <div class="product-gym">피트니스 센터 강남점</div>
-                    <div class="product-price">
-                        270,000원
-                        <span class="product-original-price">450,000원</span>
-                    </div>
-                </div>
-                <div class="product-card" onclick="location.href='design-02-minimal-monochrome-purchase.html'">
-                    <span class="product-badge">NEW</span>
-                    <div class="product-name">1일 이용권</div>
-                    <div class="product-gym">피트니스 센터 강남점</div>
-                    <div class="product-price">15,000원</div>
-                </div>
-            </div>
-        </div>
+        <!-- QR Entry Button -->
+        <button class="qr-entry-btn" onclick="openQrModal()">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="14" width="3" height="3"/><rect x="14" y="18" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/></svg>
+            QR 코드로 입장하기
+        </button>
 
         <!-- News/Event Section -->
         <div class="news-section">
@@ -907,7 +1076,7 @@
             </div>
             <div class="qr-modal-info">
                 <h4>피트니스 센터 강남점</h4>
-                <p>입구 스캐너에 QR 코드를 보여주세요</p>
+                <p>입구 스캐너에 QR 코드를 태그해주세요</p>
             </div>
             <div class="qr-modal-timer">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -918,12 +1087,12 @@
 
     <script>
         let timerInterval;
-        let timeLeft = 300;
+        let timeLeft = 10;
 
         function openQrModal() {
             document.getElementById('qrModal').classList.add('active');
             document.body.style.overflow = 'hidden';
-            timeLeft = 300;
+            timeLeft = 10;
             updateTimerDisplay();
             startTimer();
         }
@@ -957,6 +1126,76 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeQrModal();
         });
+
+        // Hero Slider
+        let currentSlide = 0;
+        const totalSlides = 3;
+        const heroTrack = document.getElementById('heroTrack');
+        const indicators = document.querySelectorAll('.hero-indicator');
+        let autoSlideInterval;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function goToSlide(index) {
+            currentSlide = index;
+            heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+            updateIndicators();
+            resetAutoSlide();
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            goToSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            goToSlide(currentSlide);
+        }
+
+        function updateIndicators() {
+            indicators.forEach((ind, i) => {
+                ind.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(nextSlide, 5000);
+        }
+
+        // Touch events for swipe
+        let isSwiping = false;
+
+        heroTrack.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            isSwiping = false;
+        }, { passive: true });
+
+        heroTrack.addEventListener('touchmove', (e) => {
+            const diff = Math.abs(e.touches[0].clientX - touchStartX);
+            if (diff > 10) {
+                isSwiping = true;
+            }
+        }, { passive: true });
+
+        heroTrack.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].clientX;
+            if (isSwiping) {
+                handleSwipe();
+            }
+        });
+
+        function handleSwipe() {
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) nextSlide();
+                else prevSlide();
+            }
+        }
+
+        // Start auto slide
+        resetAutoSlide();
     </script>
 </body>
 </html>
