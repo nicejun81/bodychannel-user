@@ -281,6 +281,73 @@
         .day.saturday { color: #3b82f6; }
         .day.sunday.selected, .day.saturday.selected { color: var(--white); }
 
+        .day.has-confirmed {
+            position: relative;
+        }
+
+        .day.has-confirmed::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            width: 4px;
+            height: 4px;
+            background: var(--success);
+            border-radius: 50%;
+        }
+
+        .day.has-pending {
+            position: relative;
+        }
+
+        .day.has-pending::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .day.has-confirmed.has-pending::after {
+            width: 10px;
+            height: 4px;
+            border-radius: 2px;
+            background: linear-gradient(to right, var(--success) 50%, var(--primary) 50%);
+        }
+
+        /* Calendar Legend */
+        .calendar-legend {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--gray-600);
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.confirmed {
+            background: var(--success);
+        }
+
+        .legend-dot.pending {
+            background: var(--primary);
+        }
+
         /* Time Slots */
         .time-section {
             animation: slideUp 0.2s ease-out 0.2s backwards;
@@ -888,6 +955,48 @@
 
         <!-- My Reservations Section -->
         <div class="reservations-section" id="myReservations">
+            <!-- My Reservations Calendar -->
+            <div class="section calendar-section">
+                <h2 class="section-title">예약 현황</h2>
+                <div class="calendar">
+                    <div class="calendar-header">
+                        <div class="calendar-nav">
+                            <button class="calendar-nav-btn" onclick="prevMonthMy()">
+                                <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+                            </button>
+                            <button class="calendar-nav-btn" onclick="nextMonthMy()">
+                                <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                            </button>
+                        </div>
+                        <div class="calendar-month" id="calendarMonthMy">2024년 12월</div>
+                    </div>
+                    <div class="calendar-weekdays">
+                        <div class="weekday">일</div>
+                        <div class="weekday">월</div>
+                        <div class="weekday">화</div>
+                        <div class="weekday">수</div>
+                        <div class="weekday">목</div>
+                        <div class="weekday">금</div>
+                        <div class="weekday">토</div>
+                    </div>
+                    <div class="calendar-days" id="calendarDaysMy"></div>
+                </div>
+                <div class="calendar-legend">
+                    <div class="legend-item">
+                        <span class="legend-dot confirmed"></span>
+                        <span>확정</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot pending"></span>
+                        <span>대기중</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">예약 목록</h2>
+            </div>
+
             <div class="reservation-card">
                 <div class="reservation-header">
                     <div class="reservation-date">12월 26일 (목)</div>
@@ -979,9 +1088,17 @@
     <script>
         let currentYear = 2024;
         let currentMonth = 11; // December (0-indexed)
+        let currentYearMy = 2024;
+        let currentMonthMy = 11; // December (0-indexed)
         let selectedDate = null;
         let selectedTime = null;
         let selectedTrainer = null;
+
+        // 예약 데이터 (데모용)
+        const myReservations = [
+            { day: 26, month: 11, year: 2024, status: 'confirmed' },
+            { day: 28, month: 11, year: 2024, status: 'pending' }
+        ];
 
         // Initialize calendar
         function renderCalendar() {
@@ -1040,6 +1157,68 @@
                 currentYear++;
             }
             renderCalendar();
+        }
+
+        // My Reservations Calendar
+        function renderCalendarMy() {
+            const monthNames = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+            document.getElementById('calendarMonthMy').textContent = `${currentYearMy}년 ${monthNames[currentMonthMy]}`;
+
+            const firstDay = new Date(currentYearMy, currentMonthMy, 1).getDay();
+            const daysInMonth = new Date(currentYearMy, currentMonthMy + 1, 0).getDate();
+            const today = new Date();
+
+            let daysHtml = '';
+
+            // Empty cells before first day
+            for (let i = 0; i < firstDay; i++) {
+                daysHtml += '<div class="day disabled"></div>';
+            }
+
+            // Days of month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(currentYearMy, currentMonthMy, day);
+                const dayOfWeek = date.getDay();
+                const isToday = date.toDateString() === today.toDateString();
+
+                let classes = ['day'];
+                if (dayOfWeek === 0) classes.push('sunday');
+                if (dayOfWeek === 6) classes.push('saturday');
+                if (isToday) classes.push('today');
+
+                // Check for reservations
+                const confirmedRes = myReservations.find(r =>
+                    r.day === day && r.month === currentMonthMy && r.year === currentYearMy && r.status === 'confirmed'
+                );
+                const pendingRes = myReservations.find(r =>
+                    r.day === day && r.month === currentMonthMy && r.year === currentYearMy && r.status === 'pending'
+                );
+
+                if (confirmedRes) classes.push('has-confirmed');
+                if (pendingRes) classes.push('has-pending');
+
+                daysHtml += `<div class="${classes.join(' ')}">${day}</div>`;
+            }
+
+            document.getElementById('calendarDaysMy').innerHTML = daysHtml;
+        }
+
+        function prevMonthMy() {
+            currentMonthMy--;
+            if (currentMonthMy < 0) {
+                currentMonthMy = 11;
+                currentYearMy--;
+            }
+            renderCalendarMy();
+        }
+
+        function nextMonthMy() {
+            currentMonthMy++;
+            if (currentMonthMy > 11) {
+                currentMonthMy = 0;
+                currentYearMy++;
+            }
+            renderCalendarMy();
         }
 
         function selectDate(day) {
@@ -1138,6 +1317,7 @@
 
         // Initialize
         renderCalendar();
+        renderCalendarMy();
     </script>
 </body>
 </html>
