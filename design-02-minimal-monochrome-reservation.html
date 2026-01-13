@@ -47,18 +47,21 @@
             border-bottom: 1px solid var(--gray-200);
         }
 
-        .logo {
+        .location-selector {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
+            gap: 4px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
         }
 
-        .logo-symbol {
-            flex-shrink: 0;
+        .location-selector svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--black);
+            stroke-width: 2;
+            fill: none;
         }
 
         .header-btn {
@@ -789,9 +792,9 @@
 </head>
 <body>
     <header class="header">
-        <div class="logo">
-            <img src="symbol.png" alt="logo" class="logo-symbol" width="32" height="32">
-            <span>BODYCHANNEL</span>
+        <div class="location-selector">
+            <span>강남구 역삼동</span>
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <button class="header-btn">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>

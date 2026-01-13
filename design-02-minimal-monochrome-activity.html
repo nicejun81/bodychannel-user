@@ -63,21 +63,21 @@
             -webkit-user-select: none;
         }
 
-        .logo {
+        .location-selector {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
+            gap: 4px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
         }
 
-        .logo-symbol {
-            flex-shrink: 0;
-            -webkit-user-drag: none;
-            user-drag: none;
-            pointer-events: none;
+        .location-selector svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--black);
+            stroke-width: 2;
+            fill: none;
         }
 
         .header-actions {
@@ -775,9 +775,9 @@
 </head>
 <body>
     <header class="header">
-        <div class="logo">
-            <img src="symbol.png" alt="logo" class="logo-symbol" width="32" height="32">
-            <span>BODYCHANNEL</span>
+        <div class="location-selector">
+            <span>강남구 역삼동</span>
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="header-actions">
             <button class="header-btn">
