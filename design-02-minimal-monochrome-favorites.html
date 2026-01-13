@@ -450,7 +450,7 @@
             border-top: 1px solid var(--gray-200);
             display: flex;
             justify-content: space-around;
-            padding: 12px 0 24px;
+            padding: 16px 0 28px;
             z-index: 100;
         }
 
@@ -458,7 +458,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             text-decoration: none;
             color: var(--gray-400);
             transition: color 0.2s ease;
@@ -480,6 +480,12 @@
             stroke: currentColor;
             stroke-width: 1.5;
             fill: none;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item:hover .nav-icon svg {
+            stroke: var(--primary);
+            transform: scale(1.1);
         }
 
         .nav-item.active .nav-icon svg {
@@ -487,8 +493,14 @@
             stroke-width: 0;
         }
 
+        .nav-item.active:hover .nav-icon svg {
+            transform: scale(1.1);
+        }
+
         .nav-label {
-            font-size: 10px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             font-weight: 500;
         }
 
