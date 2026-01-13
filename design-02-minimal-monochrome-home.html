@@ -62,14 +62,14 @@
             display: flex;
             align-items: center;
             gap: 4px;
-            font-size: 16px;
+            font-size: 20px;
             font-weight: 600;
             cursor: pointer;
         }
 
         .location-selector svg {
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             stroke: var(--black);
             stroke-width: 2;
             fill: none;
@@ -1045,60 +1045,61 @@
         }
 
         /* 컬러 아이콘 스타일 */
-        .event-banner.gym .event-banner-icon {
+        .event-banner.favorites .event-banner-icon {
             background: linear-gradient(135deg, #FF6B35 0%, #ff8f6a 100%);
         }
-        .event-banner.gym .event-banner-icon svg {
-            stroke: white;
-        }
-
-        .event-banner.trainer .event-banner-icon {
-            background: linear-gradient(135deg, #4F46E5 0%, #7c75f0 100%);
-        }
-        .event-banner.trainer .event-banner-icon svg {
-            stroke: white;
-        }
-
-        .event-banner.pt .event-banner-icon {
-            background: linear-gradient(135deg, #10B981 0%, #4ade9f 100%);
-        }
-        .event-banner.pt .event-banner-icon svg {
-            stroke: white;
-        }
-
-        .event-banner.group .event-banner-icon {
-            background: linear-gradient(135deg, #F59E0B 0%, #fbbf24 100%);
-        }
-        .event-banner.group .event-banner-icon svg {
-            stroke: white;
-        }
-
-        .event-banner.event .event-banner-icon {
-            background: linear-gradient(135deg, #EF4444 0%, #f87171 100%);
-        }
-        .event-banner.event .event-banner-icon svg {
-            stroke: white;
-        }
-
-        .event-banner.coupon .event-banner-icon {
-            background: linear-gradient(135deg, #EC4899 0%, #f472b6 100%);
-        }
-        .event-banner.coupon .event-banner-icon svg {
-            stroke: white;
-        }
-
-        .event-banner.review .event-banner-icon {
-            background: linear-gradient(135deg, #8B5CF6 0%, #a78bfa 100%);
-        }
-        .event-banner.review .event-banner-icon svg {
+        .event-banner.favorites .event-banner-icon svg {
             stroke: white;
             fill: white;
         }
 
+        .event-banner.store .event-banner-icon {
+            background: linear-gradient(135deg, #4F46E5 0%, #7c75f0 100%);
+        }
+        .event-banner.store .event-banner-icon svg {
+            stroke: white;
+        }
+
+        .event-banner.shop .event-banner-icon {
+            background: linear-gradient(135deg, #10B981 0%, #4ade9f 100%);
+        }
+        .event-banner.shop .event-banner-icon svg {
+            stroke: white;
+        }
+
+        .event-banner.story .event-banner-icon {
+            background: linear-gradient(135deg, #F59E0B 0%, #fbbf24 100%);
+        }
+        .event-banner.story .event-banner-icon svg {
+            stroke: white;
+        }
+
         .event-banner.friend .event-banner-icon {
-            background: linear-gradient(135deg, #06B6D4 0%, #22d3ee 100%);
+            background: linear-gradient(135deg, #EF4444 0%, #f87171 100%);
         }
         .event-banner.friend .event-banner-icon svg {
+            stroke: white;
+        }
+
+        .event-banner.review-event .event-banner-icon {
+            background: linear-gradient(135deg, #EC4899 0%, #f472b6 100%);
+        }
+        .event-banner.review-event .event-banner-icon svg {
+            stroke: white;
+            fill: white;
+        }
+
+        .event-banner.ambassador .event-banner-icon {
+            background: linear-gradient(135deg, #8B5CF6 0%, #a78bfa 100%);
+        }
+        .event-banner.ambassador .event-banner-icon svg {
+            stroke: white;
+        }
+
+        .event-banner.meetup .event-banner-icon {
+            background: linear-gradient(135deg, #06B6D4 0%, #22d3ee 100%);
+        }
+        .event-banner.meetup .event-banner-icon svg {
             stroke: white;
         }
 
@@ -1316,56 +1317,56 @@
             </div>
         </div>
 
-        <!-- Event Banners - 여기어때 스타일 4x2 그리드 -->
+        <!-- Event Banners - 4x2 그리드 -->
         <div class="event-banners">
-            <div class="event-banner gym">
+            <a href="design-02-minimal-monochrome-favorites.html" class="event-banner favorites">
                 <div class="event-banner-icon">
-                    <svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M6.5 17.5h11M4 10h2.5v4H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zM17.5 10H20a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2.5v-4zM6.5 8v8M17.5 8v8"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                 </div>
-                <div class="event-banner-title">헬스장</div>
-            </div>
-            <div class="event-banner trainer">
+                <div class="event-banner-title">내 찜 목록</div>
+            </a>
+            <a href="design-02-minimal-monochrome-membership.html" class="event-banner store">
                 <div class="event-banner-icon">
-                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                 </div>
-                <div class="event-banner-title">트레이너</div>
-            </div>
-            <div class="event-banner pt">
+                <div class="event-banner-title">매장구매</div>
+            </a>
+            <a href="design-02-minimal-monochrome-purchase.html" class="event-banner shop">
                 <div class="event-banner-icon">
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"/><path d="M12 22V8M8 22h8"/><path d="m7 11 5 3 5-3"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                 </div>
-                <div class="event-banner-title">PT</div>
-            </div>
-            <div class="event-banner group">
+                <div class="event-banner-title">쇼핑몰</div>
+            </a>
+            <a href="design-02-minimal-monochrome-activity.html" class="event-banner story">
                 <div class="event-banner-icon">
-                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                 </div>
-                <div class="event-banner-title">GX</div>
-            </div>
-            <div class="event-banner event">
-                <div class="event-banner-icon">
-                    <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                </div>
-                <div class="event-banner-title">이벤트</div>
-            </div>
-            <div class="event-banner coupon">
-                <div class="event-banner-icon">
-                    <svg viewBox="0 0 24 24"><path d="M21 5H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z"/><path d="M12 8v8M8 12h8"/></svg>
-                </div>
-                <div class="event-banner-title">쿠폰</div>
-            </div>
-            <div class="event-banner review">
-                <div class="event-banner-icon">
-                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                </div>
-                <div class="event-banner-title">리뷰</div>
-            </div>
+                <div class="event-banner-title">스토리</div>
+            </a>
             <div class="event-banner friend">
                 <div class="event-banner-icon">
                     <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
                 </div>
-                <div class="event-banner-title">친구초대</div>
+                <div class="event-banner-title">친구소개</div>
             </div>
+            <div class="event-banner review-event">
+                <div class="event-banner-icon">
+                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div class="event-banner-title">리뷰 이벤트</div>
+            </div>
+            <div class="event-banner ambassador">
+                <div class="event-banner-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+                </div>
+                <div class="event-banner-title">엠버서더 지원</div>
+            </div>
+            <a href="design-02-minimal-monochrome-activity.html#meetup" class="event-banner meetup">
+                <div class="event-banner-icon">
+                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div class="event-banner-title">모임</div>
+            </a>
         </div>
 
         <!-- QR Entry Button -->

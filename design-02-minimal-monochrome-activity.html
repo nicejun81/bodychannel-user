@@ -789,7 +789,7 @@
     <main class="main-content">
         <!-- Tabs -->
         <div class="tabs">
-            <button class="tab active" onclick="switchTab('social')">소셜</button>
+            <button class="tab active" onclick="switchTab('social')">스토리</button>
             <button class="tab" onclick="switchTab('meetup')">모임</button>
         </div>
 
@@ -1227,6 +1227,24 @@
 
         // Hide FAB initially (social tab is active)
         document.getElementById('fab').style.display = 'none';
+
+        // Handle hash-based tab switching
+        function handleHashTab() {
+            const hash = window.location.hash;
+            if (hash === '#meetup') {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.tab')[1].classList.add('active');
+                document.getElementById('meetupTab').classList.add('active');
+                document.getElementById('fab').style.display = 'flex';
+            }
+        }
+
+        // Run on page load
+        handleHashTab();
+
+        // Also handle hash changes
+        window.addEventListener('hashchange', handleHashTab);
     </script>
 </body>
 </html>
