@@ -622,6 +622,282 @@
             stroke-width: 2;
             fill: none;
         }
+
+        /* Schedule View */
+        .schedule-view {
+            display: none;
+        }
+
+        .schedule-view.active {
+            display: block;
+        }
+
+        .trainer-list-view {
+            display: block;
+        }
+
+        .trainer-list-view.hidden {
+            display: none;
+        }
+
+        /* Date Selector */
+        .date-selector {
+            display: flex;
+            gap: 8px;
+            padding: 16px 20px;
+            overflow-x: auto;
+            border-bottom: 1px solid var(--gray-100);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .date-selector::-webkit-scrollbar {
+            display: none;
+        }
+
+        .date-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 52px;
+            padding: 10px 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .date-item:hover {
+            background: var(--gray-100);
+        }
+
+        .date-item.active {
+            background: var(--primary);
+        }
+
+        .date-item.active .date-day,
+        .date-item.active .date-num {
+            color: var(--white);
+        }
+
+        .date-day {
+            font-size: 12px;
+            color: var(--gray-400);
+            margin-bottom: 4px;
+        }
+
+        .date-num {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        /* Schedule Grid */
+        .schedule-container {
+            display: flex;
+            padding-bottom: 100px;
+        }
+
+        .time-column {
+            flex-shrink: 0;
+            width: 60px;
+            border-right: 1px solid var(--gray-100);
+        }
+
+        .time-slot {
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 12px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .time-slot-time {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        .time-slot-status {
+            font-size: 10px;
+            color: var(--gray-400);
+            margin-top: 2px;
+        }
+
+        .time-slot.now {
+            position: relative;
+        }
+
+        .time-slot.now::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 3px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 0 2px 2px 0;
+        }
+
+        .time-slot.now .time-slot-time {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Trainer Column */
+        .trainer-column {
+            flex: 1;
+            overflow-x: auto;
+        }
+
+        .trainer-row {
+            height: 120px;
+            display: flex;
+            gap: 12px;
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--gray-100);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .trainer-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        .schedule-trainer-card {
+            flex-shrink: 0;
+            display: flex;
+            gap: 12px;
+            padding: 10px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 240px;
+        }
+
+        .schedule-trainer-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.15);
+        }
+
+        .schedule-trainer-photo {
+            width: 70px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: var(--gray-200);
+        }
+
+        .schedule-trainer-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .schedule-trainer-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .schedule-trainer-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 2px;
+        }
+
+        .schedule-trainer-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: var(--gray-600);
+            margin-bottom: auto;
+        }
+
+        .schedule-trainer-rating svg {
+            width: 12px;
+            height: 12px;
+            fill: var(--warning);
+        }
+
+        .schedule-book-btn {
+            padding: 8px 16px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            align-self: flex-end;
+            transition: all 0.2s ease;
+        }
+
+        .schedule-book-btn:hover {
+            background: var(--black);
+        }
+
+        .schedule-book-btn.booked {
+            background: var(--gray-200);
+            color: var(--gray-400);
+            cursor: not-allowed;
+        }
+
+        .empty-slot {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-300);
+            font-size: 13px;
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Gym Info Bar */
+        .gym-info-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            background: var(--gray-100);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .gym-info-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .gym-info-left svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--primary);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .gym-info-distance {
+            font-size: 12px;
+            color: var(--gray-400);
+        }
+
+        .priority-badge {
+            padding: 6px 12px;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 6px;
+        }
     </style>
 </head>
 <body>
@@ -654,7 +930,7 @@
     </div>
 
     <!-- My Lesson Banner -->
-    <div class="my-lesson-banner" onclick="viewMyLesson(1)">
+    <div class="my-lesson-banner" id="myLessonBanner" onclick="viewMyLesson(1)">
         <div class="banner-left">
             <span class="banner-status">이용중</span>
             <span class="banner-trainer">김민수 선생님 PT</span>
@@ -665,6 +941,39 @@
         </div>
     </div>
 
+    <!-- Schedule View (바레톤, 히트35, 짐그라운드) -->
+    <div class="schedule-view" id="scheduleView">
+        <!-- Date Selector -->
+        <div class="date-selector" id="dateSelector">
+            <!-- Generated by JavaScript -->
+        </div>
+
+        <!-- Gym Info Bar -->
+        <div class="gym-info-bar">
+            <div class="gym-info-left">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                바디채널 강남점
+                <span class="gym-info-distance">| 거리 0m</span>
+            </div>
+            <span class="priority-badge">회원권 우선</span>
+        </div>
+
+        <!-- Schedule Grid -->
+        <div class="schedule-container">
+            <!-- Time Column -->
+            <div class="time-column" id="timeColumn">
+                <!-- Generated by JavaScript -->
+            </div>
+
+            <!-- Trainer Column -->
+            <div class="trainer-column" id="trainerColumn">
+                <!-- Generated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Trainer List View (기존 목록 뷰 - PT) -->
+    <div class="trainer-list-view" id="trainerListView">
     <!-- Trainer List -->
     <div class="trainer-list">
         <!-- Trainer 1 -->
@@ -910,6 +1219,7 @@
             </div>
         </div>
     </div>
+    </div><!-- End of trainer-list-view -->
 
     <!-- Map Button -->
     <div class="map-button" onclick="openMap()">
@@ -1013,12 +1323,152 @@
             }
         });
 
+        // Schedule View Data
+        const scheduleTrainers = [
+            { id: 1, name: '김민수', rating: 4.9, reviews: 128, photo: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop' },
+            { id: 2, name: '정서연', rating: 4.8, reviews: 85, photo: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop' },
+            { id: 3, name: '한동훈', rating: 4.9, reviews: 56, photo: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop' },
+            { id: 4, name: '윤미래', rating: 4.7, reviews: 42, photo: 'https://images.unsplash.com/photo-1597347316205-36f6c451902a?w=200&h=200&fit=crop' },
+            { id: 5, name: '이수진', rating: 4.8, reviews: 95, photo: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop' },
+        ];
+
+        const timeSlots = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
+
+        // Generate schedule data (random for demo)
+        function generateScheduleData() {
+            const data = {};
+            timeSlots.forEach(time => {
+                const numTrainers = Math.floor(Math.random() * 3) + 1;
+                const shuffled = [...scheduleTrainers].sort(() => 0.5 - Math.random());
+                data[time] = shuffled.slice(0, numTrainers).map(t => ({
+                    ...t,
+                    booked: Math.random() > 0.7
+                }));
+            });
+            return data;
+        }
+
+        let scheduleData = generateScheduleData();
+        let selectedDate = 0;
+
+        // Initialize Date Selector
+        function initDateSelector() {
+            const container = document.getElementById('dateSelector');
+            const days = ['일', '월', '화', '수', '목', '금', '토'];
+            const today = new Date();
+            let html = '';
+
+            for (let i = 0; i < 14; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + i);
+                const dayName = i === 0 ? '오늘' : i === 1 ? '내일' : days[date.getDay()];
+                const dateNum = date.getDate();
+                const isActive = i === selectedDate ? 'active' : '';
+
+                html += `
+                    <div class="date-item ${isActive}" onclick="selectDate(${i})">
+                        <span class="date-day">${dayName}</span>
+                        <span class="date-num">${dateNum}</span>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function selectDate(index) {
+            selectedDate = index;
+            scheduleData = generateScheduleData(); // Regenerate data for new date
+            initDateSelector();
+            renderSchedule();
+        }
+
+        // Render Time Column
+        function renderTimeColumn() {
+            const container = document.getElementById('timeColumn');
+            const currentHour = new Date().getHours();
+            let html = '';
+
+            timeSlots.forEach(time => {
+                const hour = parseInt(time.split(':')[0]);
+                const isPast = hour < currentHour;
+                const isNow = hour === currentHour;
+                const statusText = isPast ? '종료' : '';
+
+                html += `
+                    <div class="time-slot ${isNow ? 'now' : ''}">
+                        <span class="time-slot-time">${time}</span>
+                        ${statusText ? `<span class="time-slot-status">${statusText}</span>` : ''}
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Render Trainer Column
+        function renderTrainerColumn() {
+            const container = document.getElementById('trainerColumn');
+            const currentHour = new Date().getHours();
+            let html = '';
+
+            timeSlots.forEach(time => {
+                const hour = parseInt(time.split(':')[0]);
+                const isPast = hour < currentHour && selectedDate === 0;
+                const trainers = scheduleData[time] || [];
+
+                html += '<div class="trainer-row">';
+
+                if (trainers.length === 0 || isPast) {
+                    html += '<div class="empty-slot">예약 가능한 트레이너가 없습니다</div>';
+                } else {
+                    trainers.forEach(trainer => {
+                        html += `
+                            <div class="schedule-trainer-card" onclick="viewTrainer(${trainer.id})">
+                                <div class="schedule-trainer-photo">
+                                    <img src="${trainer.photo}" alt="${trainer.name}">
+                                </div>
+                                <div class="schedule-trainer-info">
+                                    <span class="schedule-trainer-name">${trainer.name} 선생님</span>
+                                    <div class="schedule-trainer-rating">
+                                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                        ${trainer.rating} (${trainer.reviews})
+                                    </div>
+                                    <button class="schedule-book-btn ${trainer.booked ? 'booked' : ''}" onclick="event.stopPropagation(); ${trainer.booked ? '' : `bookLesson(${trainer.id}, '${time}')`}">
+                                        ${trainer.booked ? '예약완료' : '약속잡기'}
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+
+                html += '</div>';
+            });
+
+            container.innerHTML = html;
+        }
+
+        function renderSchedule() {
+            renderTimeColumn();
+            renderTrainerColumn();
+        }
+
+        function bookLesson(trainerId, time) {
+            const trainer = scheduleTrainers.find(t => t.id === trainerId);
+            alert(`${trainer.name} 선생님 ${time} 레슨을 예약합니다.`);
+        }
+
+        // Tab switching
         function toggleFilter(btn) {
+            const filterText = btn.textContent.trim();
+
             // 필터 버튼은 별도 동작
-            if (btn.textContent.trim() === '필터') {
+            if (filterText === '필터') {
                 btn.classList.toggle('active');
                 return;
             }
+
             // 카테고리 버튼은 단일 선택
             const tabs = document.querySelectorAll('.filter-tab');
             tabs.forEach(tab => {
@@ -1027,6 +1477,25 @@
                 }
             });
             btn.classList.add('active');
+
+            // Switch views based on selected tab
+            const scheduleView = document.getElementById('scheduleView');
+            const trainerListView = document.getElementById('trainerListView');
+            const mapButton = document.querySelector('.map-button');
+
+            // 바레톤, 히트35, 짐그라운드는 스케줄 뷰 표시
+            if (['바레톤', '히트35', '짐그라운드'].includes(filterText)) {
+                scheduleView.classList.add('active');
+                trainerListView.classList.add('hidden');
+                mapButton.style.display = 'none';
+                scheduleData = generateScheduleData(); // Refresh data
+                renderSchedule();
+            } else {
+                // PT는 기존 목록 뷰 표시
+                scheduleView.classList.remove('active');
+                trainerListView.classList.remove('hidden');
+                mapButton.style.display = 'flex';
+            }
         }
 
         function viewTrainer(id) {
@@ -1045,6 +1514,13 @@
         function viewMyLesson(id) {
             alert('내 레슨권 상세 페이지로 이동합니다.');
         }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initDateSelector();
+            renderSchedule();
+            // PT가 기본 선택이므로 지도 버튼 표시
+        });
     </script>
 </body>
 </html>
