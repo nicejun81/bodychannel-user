@@ -1430,6 +1430,166 @@
             stroke-width: 2;
             fill: none;
         }
+
+        /* Map Modal View Toggle */
+        .map-view-toggle {
+            display: flex;
+            gap: 8px;
+            margin: 0 20px 16px;
+        }
+
+        .map-view-toggle-btn {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid var(--gray-200);
+            background: var(--white);
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .map-view-toggle-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--gray-400);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .map-view-toggle-btn.active {
+            background: var(--black);
+            border-color: var(--black);
+            color: var(--white);
+        }
+
+        .map-view-toggle-btn.active svg {
+            stroke: var(--white);
+        }
+
+        .map-view-toggle-btn:hover:not(.active) {
+            border-color: var(--gray-400);
+        }
+
+        /* Store List View */
+        .store-list-view {
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            padding: 0 20px 16px;
+            height: 400px;
+            overflow-y: auto;
+        }
+
+        .store-list-view.active {
+            display: flex;
+        }
+
+        .map-container {
+            width: calc(100% - 40px);
+            height: 400px;
+            margin: 0 20px 16px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--gray-100);
+        }
+
+        .map-container.hidden {
+            display: none;
+        }
+
+        .store-card {
+            display: flex;
+            gap: 14px;
+            padding: 16px;
+            background: var(--gray-100);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .store-card:hover {
+            background: var(--gray-200);
+        }
+
+        .store-card.selected {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .store-card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .store-card.selected .store-card-icon {
+            background: var(--primary);
+        }
+
+        .store-card-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--black);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .store-card.selected .store-card-icon svg {
+            stroke: var(--white);
+        }
+
+        .store-card-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .store-card-name {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .store-card-address {
+            font-size: 12px;
+            color: var(--gray-400);
+            margin-bottom: 6px;
+        }
+
+        .store-card.selected .store-card-address {
+            color: var(--gray-200);
+        }
+
+        .store-card-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: var(--gray-600);
+        }
+
+        .store-card.selected .store-card-info {
+            color: var(--gray-200);
+        }
+
+        .store-card-distance {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .store-card.selected .store-card-distance {
+            color: var(--primary);
+        }
     </style>
 </head>
 <body>
@@ -1858,16 +2018,83 @@
         <div class="map-modal-content">
             <div class="map-modal-handle"></div>
             <div class="map-modal-header">
-                <h3>지역 선택</h3>
+                <h3>지점 선택</h3>
                 <button class="map-close-btn" onclick="closeMapModal()">
                     <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
                 </button>
             </div>
             <div class="map-search">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                <input type="text" placeholder="지역, 주소 검색">
+                <input type="text" placeholder="지점명, 주소 검색">
             </div>
-            <div class="map-container">
+            <!-- View Toggle -->
+            <div class="map-view-toggle">
+                <button class="map-view-toggle-btn active" onclick="switchStoreView('list')">
+                    <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                    리스트
+                </button>
+                <button class="map-view-toggle-btn" onclick="switchStoreView('map')">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    지도
+                </button>
+            </div>
+            <!-- Store List View -->
+            <div class="store-list-view active" id="storeListView">
+                <div class="store-card selected" onclick="selectStore(this, '바디채널 강남점')">
+                    <div class="store-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <div class="store-card-content">
+                        <div class="store-card-name">바디채널 강남점</div>
+                        <div class="store-card-address">서울 강남구 테헤란로 123</div>
+                        <div class="store-card-info">
+                            <span class="store-card-distance">0.3km</span>
+                            <span>영업중 · 22:00 마감</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="store-card" onclick="selectStore(this, '바디채널 서초점')">
+                    <div class="store-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <div class="store-card-content">
+                        <div class="store-card-name">바디채널 서초점</div>
+                        <div class="store-card-address">서울 서초구 서초대로 456</div>
+                        <div class="store-card-info">
+                            <span class="store-card-distance">1.2km</span>
+                            <span>영업중 · 22:00 마감</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="store-card" onclick="selectStore(this, '바디채널 역삼점')">
+                    <div class="store-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <div class="store-card-content">
+                        <div class="store-card-name">바디채널 역삼점</div>
+                        <div class="store-card-address">서울 강남구 역삼로 789</div>
+                        <div class="store-card-info">
+                            <span class="store-card-distance">1.8km</span>
+                            <span>영업중 · 23:00 마감</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="store-card" onclick="selectStore(this, '바디채널 판교점')">
+                    <div class="store-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <div class="store-card-content">
+                        <div class="store-card-name">바디채널 판교점</div>
+                        <div class="store-card-address">경기 성남시 분당구 판교로 321</div>
+                        <div class="store-card-info">
+                            <span class="store-card-distance">8.5km</span>
+                            <span>영업중 · 22:00 마감</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Map View -->
+            <div class="map-container hidden" id="mapContainerView">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25512.098978957498!2d127.02758827431642!3d37.49795899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a61219a43%3A0x3ed8bf8fb80ae22!2z6rCV64Ko6rWs!5e0!3m2!1sko!2skr!4v1699000000000!5m2!1sko!2skr"
                     allowfullscreen=""
@@ -1939,14 +2166,40 @@
         function getCurrentLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    document.querySelector('.location-selector span').textContent = '현재 위치';
-                    closeMapModal();
+                    alert('현재 위치를 기준으로 가까운 지점을 찾습니다.');
                 }, function() {
                     alert('위치 정보를 가져올 수 없습니다.');
                 });
             } else {
                 alert('이 브라우저에서는 위치 서비스를 지원하지 않습니다.');
             }
+        }
+
+        // Switch between list and map view
+        function switchStoreView(view) {
+            const listView = document.getElementById('storeListView');
+            const mapView = document.getElementById('mapContainerView');
+            const toggleBtns = document.querySelectorAll('.map-view-toggle-btn');
+
+            toggleBtns.forEach(btn => btn.classList.remove('active'));
+
+            if (view === 'list') {
+                listView.classList.add('active');
+                mapView.classList.add('hidden');
+                toggleBtns[0].classList.add('active');
+            } else {
+                listView.classList.remove('active');
+                mapView.classList.remove('hidden');
+                toggleBtns[1].classList.add('active');
+            }
+        }
+
+        // Select a store
+        function selectStore(el, storeName) {
+            document.querySelectorAll('.store-card').forEach(card => card.classList.remove('selected'));
+            el.classList.add('selected');
+            document.querySelector('.location-selector span').textContent = storeName;
+            setTimeout(() => closeMapModal(), 300);
         }
 
         mapModal.addEventListener('click', function(e) {
