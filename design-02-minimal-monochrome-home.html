@@ -106,11 +106,11 @@
             overflow-x: hidden;
         }
 
-        /* Hero Slider */
+        /* Hero Slider - 컴팩트 사이즈 */
         .hero-slider {
             position: relative;
             margin-bottom: 24px;
-            border-radius: 20px;
+            border-radius: 12px;
             overflow: hidden;
             animation: slideUp 0.2s ease-out backwards;
             touch-action: pan-y pinch-zoom;
@@ -124,10 +124,10 @@
         .hero-slide {
             min-width: 100%;
             background: linear-gradient(135deg, var(--black) 0%, #2a2a2a 100%);
-            padding: 28px 24px 44px;
+            padding: 16px 20px 28px;
             position: relative;
             overflow: hidden;
-            min-height: 200px;
+            min-height: 100px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -138,8 +138,8 @@
             position: absolute;
             top: -50%;
             right: -20%;
-            width: 250px;
-            height: 250px;
+            width: 150px;
+            height: 150px;
             background: var(--primary);
             border-radius: 50%;
             opacity: 0.15;
@@ -165,8 +165,8 @@
 
         .hero-greeting {
             color: var(--gray-400);
-            font-size: 14px;
-            margin-bottom: 8px;
+            font-size: 11px;
+            margin-bottom: 4px;
             position: relative;
             z-index: 1;
         }
@@ -178,10 +178,10 @@
         .hero-title {
             color: var(--white);
             font-family: 'Poppins', sans-serif;
-            font-size: 26px;
+            font-size: 15px;
             font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 20px;
+            line-height: 1.4;
+            margin-bottom: 0;
             position: relative;
             z-index: 1;
         }
@@ -199,10 +199,7 @@
         }
 
         .hero-stats {
-            display: flex;
-            gap: 24px;
-            position: relative;
-            z-index: 1;
+            display: none;
         }
 
         .hero-stat {
@@ -227,17 +224,7 @@
         }
 
         .hero-cta {
-            display: inline-block;
-            background: var(--white);
-            color: var(--black);
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-            position: relative;
-            z-index: 1;
-            transition: all 0.2s ease;
+            display: none;
         }
 
         .hero-cta:hover {
@@ -247,17 +234,17 @@
 
         .hero-indicators {
             position: absolute;
-            bottom: 16px;
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 6px;
+            gap: 4px;
             z-index: 10;
         }
 
         .hero-indicator {
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
             background: rgba(255,255,255,0.4);
             cursor: pointer;
@@ -269,7 +256,7 @@
         }
 
         .hero-indicator.active {
-            width: 20px;
+            width: 16px;
             border-radius: 3px;
             background: var(--white);
         }
@@ -998,14 +985,22 @@
             color: var(--primary);
         }
 
+        /* Category Card Container - 여기어때 스타일 */
+        .category-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            padding: 20px 12px 16px;
+            margin-bottom: 24px;
+            animation: slideUp 0.2s ease-out 0.05s backwards;
+        }
+
         /* Event Banners - 여기어때 스타일 */
         .event-banners {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 8px 4px;
-            margin-bottom: 24px;
             padding: 0;
-            animation: slideUp 0.2s ease-out 0.05s backwards;
         }
 
         .event-banner {
@@ -1113,6 +1108,171 @@
 
         .event-banner-desc {
             display: none;
+        }
+
+        /* Recent View Section - 최근 본 상품 */
+        .recent-view-section {
+            margin-bottom: 24px;
+            animation: slideUp 0.2s ease-out 0.08s backwards;
+        }
+
+        .recent-view-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 4px 0 8px 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .recent-view-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .recent-view-card {
+            min-width: 140px;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .recent-view-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .recent-view-card:active {
+            transform: scale(0.98);
+        }
+
+        .recent-view-image {
+            width: 100%;
+            height: 100px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-bottom: 10px;
+            background: var(--gray-100);
+        }
+
+        .recent-view-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .recent-view-desc {
+            font-size: 11px;
+            color: var(--gray-400);
+        }
+
+        /* Promo Banner - 하단 프로모션 배너 */
+        .promo-banner {
+            background: linear-gradient(135deg, #FF6B35 0%, #ff8f6a 100%);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            animation: slideUp 0.2s ease-out 0.12s backwards;
+        }
+
+        .promo-banner:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
+        }
+
+        .promo-banner-content {
+            flex: 1;
+        }
+
+        .promo-banner-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .promo-banner-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.4;
+        }
+
+        .promo-banner-arrow {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .promo-banner-arrow svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--white);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Quick Tabs - 쿠폰, 한정특가, 이벤트 탭 */
+        .quick-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 24px;
+            animation: slideUp 0.2s ease-out 0.1s backwards;
+        }
+
+        .quick-tab {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 14px 12px;
+            background: var(--gray-100);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-tab:hover {
+            background: var(--gray-200);
+        }
+
+        .quick-tab:active {
+            transform: scale(0.98);
+        }
+
+        .quick-tab-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .quick-tab-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--black);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .quick-tab-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--black);
         }
 
         /* Map Modal */
@@ -1282,56 +1442,118 @@
     </header>
 
     <main class="main-content">
-        <!-- Event Banners - 4x2 그리드 -->
-        <div class="event-banners">
-            <a href="design-02-minimal-monochrome-favorites.html" class="event-banner favorites">
-                <div class="event-banner-icon">
-                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <!-- Category Card - 여기어때 스타일 카드 -->
+        <div class="category-card">
+            <div class="event-banners">
+                <a href="design-02-minimal-monochrome-favorites.html" class="event-banner favorites">
+                    <div class="event-banner-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    </div>
+                    <div class="event-banner-title">내 찜 목록</div>
+                </a>
+                <a href="design-02-minimal-monochrome-membership.html" class="event-banner store">
+                    <div class="event-banner-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <div class="event-banner-title">매장구매</div>
+                </a>
+                <a href="design-02-minimal-monochrome-purchase.html" class="event-banner shop">
+                    <div class="event-banner-icon">
+                        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    </div>
+                    <div class="event-banner-title">쇼핑몰</div>
+                </a>
+                <a href="design-02-minimal-monochrome-activity.html" class="event-banner story">
+                    <div class="event-banner-icon">
+                        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                    </div>
+                    <div class="event-banner-title">스토리</div>
+                </a>
+                <div class="event-banner friend">
+                    <div class="event-banner-icon">
+                        <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+                    </div>
+                    <div class="event-banner-title">친구소개</div>
                 </div>
-                <div class="event-banner-title">내 찜 목록</div>
-            </a>
-            <a href="design-02-minimal-monochrome-membership.html" class="event-banner store">
-                <div class="event-banner-icon">
-                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <div class="event-banner review-event">
+                    <div class="event-banner-icon">
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <div class="event-banner-title">리뷰 이벤트</div>
                 </div>
-                <div class="event-banner-title">매장구매</div>
-            </a>
-            <a href="design-02-minimal-monochrome-purchase.html" class="event-banner shop">
-                <div class="event-banner-icon">
-                    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                <div class="event-banner ambassador">
+                    <div class="event-banner-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+                    </div>
+                    <div class="event-banner-title">엠버서더 지원</div>
                 </div>
-                <div class="event-banner-title">쇼핑몰</div>
-            </a>
-            <a href="design-02-minimal-monochrome-activity.html" class="event-banner story">
-                <div class="event-banner-icon">
-                    <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                </div>
-                <div class="event-banner-title">스토리</div>
-            </a>
-            <div class="event-banner friend">
-                <div class="event-banner-icon">
-                    <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
-                </div>
-                <div class="event-banner-title">친구소개</div>
+                <a href="design-02-minimal-monochrome-activity.html#meetup" class="event-banner meetup">
+                    <div class="event-banner-icon">
+                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <div class="event-banner-title">모임</div>
+                </a>
             </div>
-            <div class="event-banner review-event">
-                <div class="event-banner-icon">
-                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                </div>
-                <div class="event-banner-title">리뷰 이벤트</div>
+        </div>
+
+        <!-- Quick Tabs - 쿠폰, 한정특가, 이벤트 -->
+        <div class="quick-tabs">
+            <div class="quick-tab">
+                <span class="quick-tab-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 5H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                </span>
+                <span class="quick-tab-label">쿠폰</span>
             </div>
-            <div class="event-banner ambassador">
-                <div class="event-banner-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
-                </div>
-                <div class="event-banner-title">엠버서더 지원</div>
+            <div class="quick-tab">
+                <span class="quick-tab-icon">
+                    <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </span>
+                <span class="quick-tab-label">한정특가</span>
             </div>
-            <a href="design-02-minimal-monochrome-activity.html#meetup" class="event-banner meetup">
-                <div class="event-banner-icon">
-                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <div class="quick-tab">
+                <span class="quick-tab-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </span>
+                <span class="quick-tab-label">이벤트</span>
+            </div>
+        </div>
+
+        <!-- Recent View Section - 최근 본 상품 -->
+        <div class="recent-view-section">
+            <div class="section-header">
+                <h2 class="section-title">최근 본 상품</h2>
+                <a href="#" class="section-more">
+                    전체보기
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </a>
+            </div>
+            <div class="recent-view-scroll">
+                <div class="recent-view-card">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=300&h=200&fit=crop" alt="PT 10회권" class="recent-view-image">
+                    <div class="recent-view-name">PT 10회권</div>
+                    <div class="recent-view-desc">바디채널 강남점</div>
                 </div>
-                <div class="event-banner-title">모임</div>
-            </a>
+                <div class="recent-view-card">
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=300&h=200&fit=crop" alt="바레톤 클래스" class="recent-view-image">
+                    <div class="recent-view-name">바레톤 클래스</div>
+                    <div class="recent-view-desc">주 3회 / 1개월</div>
+                </div>
+                <div class="recent-view-card">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=300&h=200&fit=crop" alt="필라테스 무제한" class="recent-view-image">
+                    <div class="recent-view-name">필라테스 무제한</div>
+                    <div class="recent-view-desc">3개월 이용권</div>
+                </div>
+                <div class="recent-view-card">
+                    <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=300&h=200&fit=crop" alt="헬스 1개월" class="recent-view-image">
+                    <div class="recent-view-name">헬스 1개월</div>
+                    <div class="recent-view-desc">바디채널 서초점</div>
+                </div>
+                <div class="recent-view-card">
+                    <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=300&h=200&fit=crop" alt="짐그라운드" class="recent-view-image">
+                    <div class="recent-view-name">짐그라운드</div>
+                    <div class="recent-view-desc">주 2회 / 2개월</div>
+                </div>
+            </div>
         </div>
 
         <!-- Hero Slider -->
