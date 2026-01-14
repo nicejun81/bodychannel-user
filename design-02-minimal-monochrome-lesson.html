@@ -138,6 +138,19 @@
             stroke: var(--white);
         }
 
+        /* My Lesson Banners Container */
+        .my-lesson-banners {
+            display: flex;
+            gap: 12px;
+            padding: 16px 20px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .my-lesson-banners::-webkit-scrollbar {
+            display: none;
+        }
+
         /* My Lesson Banner */
         .my-lesson-banner {
             display: flex;
@@ -146,14 +159,36 @@
             padding: 14px 16px;
             background: var(--black);
             border-radius: 12px;
-            margin: 16px 20px;
             cursor: pointer;
             transition: all 0.2s ease;
+            min-width: 280px;
+            flex-shrink: 0;
         }
 
         .my-lesson-banner:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .my-lesson-banner.secondary {
+            background: var(--gray-600);
+        }
+
+        .my-lesson-banner.waiting {
+            background: var(--white);
+            border: 2px solid var(--gray-300);
+        }
+
+        .my-lesson-banner.waiting .banner-trainer {
+            color: var(--black);
+        }
+
+        .my-lesson-banner.waiting .banner-remain {
+            color: var(--gray-600);
+        }
+
+        .banner-status.waiting {
+            background: var(--gray-400);
         }
 
         .banner-left {
@@ -378,39 +413,6 @@
         .price-unit {
             font-size: 13px;
             color: var(--gray-600);
-        }
-
-        /* Map Button */
-        .map-button {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 20px;
-            background: var(--white);
-            border: 1px solid var(--gray-200);
-            border-radius: 24px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-            z-index: 40;
-            transition: all 0.2s;
-        }
-
-        .map-button:hover {
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-        }
-
-        .map-button svg {
-            width: 18px;
-            height: 18px;
-            stroke: var(--primary);
-            stroke-width: 1.5;
-            fill: none;
         }
 
         /* Bottom Navigation */
@@ -934,15 +936,47 @@
         <button class="filter-tab" onclick="toggleFilter(this)">PT</button>
     </div>
 
-    <!-- My Lesson Banner -->
-    <div class="my-lesson-banner" id="myLessonBanner" onclick="viewMyLesson(1)">
-        <div class="banner-left">
-            <span class="banner-status">이용중</span>
-            <span class="banner-trainer">김민수 선생님 PT</span>
+    <!-- My Lesson Banners -->
+    <div class="my-lesson-banners">
+        <div class="my-lesson-banner" onclick="viewMyLesson(1)">
+            <div class="banner-left">
+                <span class="banner-status">이용중</span>
+                <span class="banner-trainer">김민수 선생님 PT</span>
+            </div>
+            <div class="banner-right">
+                <span class="banner-remain">7회 남음</span>
+                <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
         </div>
-        <div class="banner-right">
-            <span class="banner-remain">7회 남음</span>
-            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        <div class="my-lesson-banner secondary" onclick="viewMyLesson(2)">
+            <div class="banner-left">
+                <span class="banner-status">이용중</span>
+                <span class="banner-trainer">바레톤 10회</span>
+            </div>
+            <div class="banner-right">
+                <span class="banner-remain">3회 남음</span>
+                <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+        </div>
+        <div class="my-lesson-banner secondary" onclick="viewMyLesson(3)">
+            <div class="banner-left">
+                <span class="banner-status">이용중</span>
+                <span class="banner-trainer">히트35 무제한</span>
+            </div>
+            <div class="banner-right">
+                <span class="banner-remain">D-23</span>
+                <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+        </div>
+        <div class="my-lesson-banner waiting" onclick="viewMyLesson(4)">
+            <div class="banner-left">
+                <span class="banner-status waiting">시작전</span>
+                <span class="banner-trainer">정서연 선생님 PT</span>
+            </div>
+            <div class="banner-right">
+                <span class="banner-remain">10회권</span>
+                <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
         </div>
     </div>
 
@@ -1225,12 +1259,6 @@
     </div>
     </div><!-- End of trainer-list-view -->
 
-    <!-- Map Button -->
-    <div class="map-button" onclick="openMap()">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        지도보기
-    </div>
-
     <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <a href="design-02-minimal-monochrome-home.html" class="nav-item">
@@ -1354,7 +1382,24 @@
 
         let scheduleData = generateScheduleData();
         let selectedDate = 0;
-        let selectedTime = '10:00'; // 기본 선택 시간
+
+        // 현재 시간 기준으로 기본 선택 시간 설정
+        function getDefaultTime() {
+            const now = new Date();
+            const currentHour = now.getHours();
+
+            // 현재 시간 이후의 가장 가까운 시간대 찾기
+            for (let i = 0; i < timeSlots.length; i++) {
+                const slotHour = parseInt(timeSlots[i].split(':')[0]);
+                if (slotHour >= currentHour) {
+                    return timeSlots[i];
+                }
+            }
+            // 모든 시간이 지났으면 첫 번째 시간 반환
+            return timeSlots[0];
+        }
+
+        let selectedTime = getDefaultTime();
 
         // Initialize Date Selector
         function initDateSelector() {
@@ -1487,20 +1532,16 @@
             // Switch views based on selected tab
             const scheduleView = document.getElementById('scheduleView');
             const trainerListView = document.getElementById('trainerListView');
-            const mapButton = document.querySelector('.map-button');
-
             // 바레톤, 히트35, 짐그라운드는 스케줄 뷰 표시
             if (['바레톤', '히트35', '짐그라운드'].includes(filterText)) {
                 scheduleView.classList.add('active');
                 trainerListView.classList.add('hidden');
-                mapButton.style.display = 'none';
                 scheduleData = generateScheduleData(); // Refresh data
                 renderSchedule();
             } else {
                 // PT는 기존 목록 뷰 표시
                 scheduleView.classList.remove('active');
                 trainerListView.classList.remove('hidden');
-                mapButton.style.display = 'flex';
             }
         }
 
@@ -1525,8 +1566,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             initDateSelector();
             renderSchedule();
-            // 바레톤이 기본 선택이므로 지도 버튼 숨김
-            document.querySelector('.map-button').style.display = 'none';
         });
     </script>
 </body>

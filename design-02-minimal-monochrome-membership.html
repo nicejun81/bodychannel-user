@@ -224,6 +224,19 @@
             stroke: var(--white);
         }
 
+        /* My Membership Banners Container */
+        .my-membership-banners {
+            display: flex;
+            gap: 12px;
+            padding: 0 0 20px 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .my-membership-banners::-webkit-scrollbar {
+            display: none;
+        }
+
         /* My Membership Banner */
         .my-membership-banner {
             display: flex;
@@ -232,14 +245,36 @@
             padding: 14px 16px;
             background: var(--black);
             border-radius: 12px;
-            margin-bottom: 20px;
             cursor: pointer;
             transition: all 0.2s ease;
+            min-width: 280px;
+            flex-shrink: 0;
         }
 
         .my-membership-banner:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .my-membership-banner.secondary {
+            background: var(--gray-600);
+        }
+
+        .my-membership-banner.waiting {
+            background: var(--white);
+            border: 2px solid var(--gray-300);
+        }
+
+        .my-membership-banner.waiting .banner-gym {
+            color: var(--black);
+        }
+
+        .my-membership-banner.waiting .banner-days {
+            color: var(--gray-600);
+        }
+
+        .banner-status.waiting {
+            background: var(--gray-400);
         }
 
         .banner-left {
@@ -1492,38 +1527,6 @@
             fill: none;
         }
 
-        /* Map Button */
-        .map-button {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 20px;
-            background: var(--white);
-            border: 1px solid var(--gray-200);
-            border-radius: 24px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-            z-index: 40;
-            transition: all 0.2s;
-        }
-
-        .map-button:hover {
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-        }
-
-        .map-button svg {
-            width: 18px;
-            height: 18px;
-            stroke: var(--primary);
-            stroke-width: 1.5;
-            fill: none;
-        }
     </style>
 </head>
 <body>
@@ -1565,15 +1568,47 @@
 
     <main class="main-content">
 
-        <!-- My Active Membership Banner (간단한 배너) -->
-        <div class="my-membership-banner" onclick="viewMyMembership()">
-            <div class="banner-left">
-                <span class="banner-status">이용중</span>
-                <span class="banner-gym">바디채널 강남점</span>
+        <!-- My Active Membership Banners -->
+        <div class="my-membership-banners">
+            <div class="my-membership-banner" onclick="viewMyMembership(1)">
+                <div class="banner-left">
+                    <span class="banner-status">이용중</span>
+                    <span class="banner-gym">바디채널 강남점</span>
+                </div>
+                <div class="banner-right">
+                    <span class="banner-days">67일 남음</span>
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
             </div>
-            <div class="banner-right">
-                <span class="banner-days">67일 남음</span>
-                <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+            <div class="my-membership-banner secondary" onclick="viewMyMembership(2)">
+                <div class="banner-left">
+                    <span class="banner-status">이용중</span>
+                    <span class="banner-gym">바디채널 역삼점</span>
+                </div>
+                <div class="banner-right">
+                    <span class="banner-days">23일 남음</span>
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+            </div>
+            <div class="my-membership-banner secondary" onclick="viewMyMembership(3)">
+                <div class="banner-left">
+                    <span class="banner-status">일시정지</span>
+                    <span class="banner-gym">바디채널 서초점</span>
+                </div>
+                <div class="banner-right">
+                    <span class="banner-days">45일 남음</span>
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+            </div>
+            <div class="my-membership-banner waiting" onclick="viewMyMembership(4)">
+                <div class="banner-left">
+                    <span class="banner-status waiting">시작전</span>
+                    <span class="banner-gym">바디채널 판교점</span>
+                </div>
+                <div class="banner-right">
+                    <span class="banner-days">30일권</span>
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
             </div>
         </div>
 
@@ -1741,12 +1776,6 @@
         </div>
     </main>
 
-    <!-- Map Button -->
-    <div class="map-button" onclick="openMap()">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        지도보기
-    </div>
-
     <nav class="bottom-nav">
         <a href="design-02-minimal-monochrome-home.html" class="nav-item">
             <span class="nav-icon">
@@ -1853,8 +1882,8 @@
             alert('헬스장 상세 페이지로 이동합니다. (ID: ' + gymId + ')');
         }
 
-        function viewMyMembership() {
-            alert('내 회원권 상세 페이지로 이동합니다.');
+        function viewMyMembership(id) {
+            alert('내 회원권 상세 페이지로 이동합니다. (ID: ' + id + ')');
         }
 
         function openMap() {
