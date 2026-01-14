@@ -696,84 +696,82 @@
             padding-bottom: 100px;
         }
 
-        .time-column {
+        /* Time List (Left) */
+        .time-list {
             flex-shrink: 0;
-            width: 60px;
+            width: 65px;
             border-right: 1px solid var(--gray-100);
         }
 
-        .time-slot {
-            height: 120px;
+        .time-item {
+            padding: 16px 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 12px;
+            cursor: pointer;
             border-bottom: 1px solid var(--gray-100);
+            transition: all 0.2s ease;
         }
 
-        .time-slot-time {
+        .time-item:hover {
+            background: var(--gray-100);
+        }
+
+        .time-item.active {
+            background: var(--primary-light);
+            position: relative;
+        }
+
+        .time-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary);
+        }
+
+        .time-item-time {
             font-size: 14px;
             font-weight: 600;
             color: var(--black);
         }
 
-        .time-slot-status {
+        .time-item.active .time-item-time {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .time-item.past .time-item-time {
+            color: var(--gray-400);
+        }
+
+        .time-item-status {
             font-size: 10px;
             color: var(--gray-400);
             margin-top: 2px;
         }
 
-        .time-slot.now {
-            position: relative;
-        }
-
-        .time-slot.now::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 12px;
-            width: 3px;
-            height: 24px;
-            background: var(--primary);
-            border-radius: 0 2px 2px 0;
-        }
-
-        .time-slot.now .time-slot-time {
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        /* Trainer Column */
-        .trainer-column {
+        /* Trainer List (Right) */
+        .trainer-list-panel {
             flex: 1;
-            overflow-x: auto;
-        }
-
-        .trainer-row {
-            height: 120px;
             display: flex;
+            flex-direction: column;
             gap: 12px;
-            padding: 10px 16px;
-            border-bottom: 1px solid var(--gray-100);
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .trainer-row::-webkit-scrollbar {
-            display: none;
+            padding: 16px;
+            overflow-y: auto;
         }
 
         .schedule-trainer-card {
-            flex-shrink: 0;
             display: flex;
             gap: 12px;
-            padding: 10px;
+            padding: 12px;
             background: var(--white);
             border: 1px solid var(--gray-200);
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
-            min-width: 240px;
         }
 
         .schedule-trainer-card:hover {
@@ -782,8 +780,8 @@
         }
 
         .schedule-trainer-photo {
-            width: 70px;
-            height: 80px;
+            width: 80px;
+            height: 90px;
             border-radius: 8px;
             overflow: hidden;
             flex-shrink: 0;
@@ -804,10 +802,10 @@
         }
 
         .schedule-trainer-name {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
             color: var(--black);
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
         .schedule-trainer-rating {
@@ -816,7 +814,7 @@
             gap: 4px;
             font-size: 12px;
             color: var(--gray-600);
-            margin-bottom: auto;
+            margin-bottom: 4px;
         }
 
         .schedule-trainer-rating svg {
@@ -825,16 +823,23 @@
             fill: var(--warning);
         }
 
+        .schedule-trainer-desc {
+            font-size: 12px;
+            color: var(--gray-400);
+            margin-bottom: auto;
+        }
+
         .schedule-book-btn {
-            padding: 8px 16px;
+            padding: 10px 20px;
             background: var(--primary);
             color: var(--white);
             border: none;
             border-radius: 8px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            align-self: flex-end;
+            align-self: flex-start;
+            margin-top: auto;
             transition: all 0.2s ease;
         }
 
@@ -854,8 +859,8 @@
             justify-content: center;
             color: var(--gray-300);
             font-size: 13px;
-            height: 100%;
-            width: 100%;
+            padding: 40px 20px;
+            text-align: center;
         }
 
         /* Gym Info Bar */
@@ -960,13 +965,12 @@
 
         <!-- Schedule Grid -->
         <div class="schedule-container">
-            <!-- Time Column -->
-            <div class="time-column" id="timeColumn">
+            <!-- Time List (Left) -->
+            <div class="time-list" id="timeList">
                 <!-- Generated by JavaScript -->
             </div>
-
-            <!-- Trainer Column -->
-            <div class="trainer-column" id="trainerColumn">
+            <!-- Trainer List (Right) -->
+            <div class="trainer-list-panel" id="trainerListPanel">
                 <!-- Generated by JavaScript -->
             </div>
         </div>
@@ -1350,6 +1354,7 @@
 
         let scheduleData = generateScheduleData();
         let selectedDate = 0;
+        let selectedTime = '10:00'; // 기본 선택 시간
 
         // Initialize Date Selector
         function initDateSelector() {
@@ -1383,22 +1388,21 @@
             renderSchedule();
         }
 
-        // Render Time Column
-        function renderTimeColumn() {
-            const container = document.getElementById('timeColumn');
+        // Render Time List (Left)
+        function renderTimeList() {
+            const container = document.getElementById('timeList');
             const currentHour = new Date().getHours();
             let html = '';
 
             timeSlots.forEach(time => {
                 const hour = parseInt(time.split(':')[0]);
-                const isPast = hour < currentHour;
-                const isNow = hour === currentHour;
-                const statusText = isPast ? '종료' : '';
+                const isPast = hour < currentHour && selectedDate === 0;
+                const isActive = time === selectedTime;
 
                 html += `
-                    <div class="time-slot ${isNow ? 'now' : ''}">
-                        <span class="time-slot-time">${time}</span>
-                        ${statusText ? `<span class="time-slot-status">${statusText}</span>` : ''}
+                    <div class="time-item ${isActive ? 'active' : ''} ${isPast ? 'past' : ''}" onclick="selectTime('${time}')">
+                        <span class="time-item-time">${time}</span>
+                        ${isPast ? '<span class="time-item-status">종료</span>' : ''}
                     </div>
                 `;
             });
@@ -1406,52 +1410,54 @@
             container.innerHTML = html;
         }
 
-        // Render Trainer Column
-        function renderTrainerColumn() {
-            const container = document.getElementById('trainerColumn');
+        // Render Trainer List (Right)
+        function renderTrainerList() {
+            const container = document.getElementById('trainerListPanel');
             const currentHour = new Date().getHours();
+            const hour = parseInt(selectedTime.split(':')[0]);
+            const isPast = hour < currentHour && selectedDate === 0;
+            const trainers = scheduleData[selectedTime] || [];
+
             let html = '';
 
-            timeSlots.forEach(time => {
-                const hour = parseInt(time.split(':')[0]);
-                const isPast = hour < currentHour && selectedDate === 0;
-                const trainers = scheduleData[time] || [];
-
-                html += '<div class="trainer-row">';
-
-                if (trainers.length === 0 || isPast) {
-                    html += '<div class="empty-slot">예약 가능한 트레이너가 없습니다</div>';
-                } else {
-                    trainers.forEach(trainer => {
-                        html += `
-                            <div class="schedule-trainer-card" onclick="viewTrainer(${trainer.id})">
-                                <div class="schedule-trainer-photo">
-                                    <img src="${trainer.photo}" alt="${trainer.name}">
-                                </div>
-                                <div class="schedule-trainer-info">
-                                    <span class="schedule-trainer-name">${trainer.name} 선생님</span>
-                                    <div class="schedule-trainer-rating">
-                                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                        ${trainer.rating} (${trainer.reviews})
-                                    </div>
-                                    <button class="schedule-book-btn ${trainer.booked ? 'booked' : ''}" onclick="event.stopPropagation(); ${trainer.booked ? '' : `bookLesson(${trainer.id}, '${time}')`}">
-                                        ${trainer.booked ? '예약완료' : '약속잡기'}
-                                    </button>
-                                </div>
+            if (trainers.length === 0 || isPast) {
+                html = '<div class="empty-slot">예약 가능한 트레이너가 없습니다</div>';
+            } else {
+                trainers.forEach(trainer => {
+                    html += `
+                        <div class="schedule-trainer-card" onclick="viewTrainer(${trainer.id})">
+                            <div class="schedule-trainer-photo">
+                                <img src="${trainer.photo}" alt="${trainer.name}">
                             </div>
-                        `;
-                    });
-                }
-
-                html += '</div>';
-            });
+                            <div class="schedule-trainer-info">
+                                <span class="schedule-trainer-name">${trainer.name}</span>
+                                <div class="schedule-trainer-rating">
+                                    호감도 ${(trainer.rating * 20).toFixed(1)}%
+                                </div>
+                                <span class="schedule-trainer-desc">바디채널 강남점</span>
+                            </div>
+                            <button class="schedule-book-btn ${trainer.booked ? 'booked' : ''}" onclick="event.stopPropagation(); ${trainer.booked ? '' : `bookLesson(${trainer.id}, '${selectedTime}')`}">
+                                ${trainer.booked ? '예약완료' : '예약하기'}
+                            </button>
+                        </div>
+                    `;
+                });
+            }
 
             container.innerHTML = html;
         }
 
+        // Select Time
+        function selectTime(time) {
+            selectedTime = time;
+            renderTimeList();
+            renderTrainerList();
+        }
+
+        // Render Schedule
         function renderSchedule() {
-            renderTimeColumn();
-            renderTrainerColumn();
+            renderTimeList();
+            renderTrainerList();
         }
 
         function bookLesson(trainerId, time) {
