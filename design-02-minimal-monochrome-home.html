@@ -102,14 +102,19 @@
 
         /* Main Content */
         .main-content {
-            padding: 24px 28px;
+            padding: 16px 20px;
             overflow-x: hidden;
+        }
+
+        /* Common Section Spacing */
+        .section-spacing {
+            margin-bottom: 8px;
         }
 
         /* Hero Slider - 컴팩트 사이즈 */
         .hero-slider {
             position: relative;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             border-radius: 12px;
             overflow: hidden;
             animation: slideUp 0.2s ease-out backwards;
@@ -266,7 +271,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .section-title {
@@ -375,12 +380,8 @@
 
         /* Center Section */
         .center-section {
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             animation: slideUp 0.2s ease-out 0.1s backwards;
-        }
-
-        .center-section .section-header {
-            margin-bottom: 12px;
         }
 
         .gym-scroll {
@@ -620,6 +621,7 @@
 
         /* Trainer Section */
         .trainer-section {
+            padding: 16px 0;
             animation: slideUp 0.2s ease-out 0.2s backwards;
         }
 
@@ -704,12 +706,12 @@
 
         /* Personal Trainer Scroll Section */
         .personal-trainer-section {
-            padding: 24px 20px;
+            padding: 16px 0;
         }
 
         .personal-trainer-scroll {
             display: flex;
-            gap: 14px;
+            gap: 12px;
             overflow-x: auto;
             overflow-y: visible;
             padding: 8px 0 16px;
@@ -788,6 +790,245 @@
             font-size: 13px;
             font-weight: 700;
             color: var(--primary);
+        }
+
+        /* Store Product Section */
+        .store-product-section {
+            padding: 16px 0;
+        }
+
+        .store-product-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            overflow-y: visible;
+            padding: 4px 0 12px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .store-product-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .store-product-card {
+            flex-shrink: 0;
+            width: 110px;
+            scroll-snap-align: start;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .store-product-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .store-product-image {
+            width: 110px;
+            height: 110px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .store-product-category {
+            display: inline-block;
+            padding: 2px 6px;
+            background: var(--gray-100);
+            color: var(--gray-600);
+            font-size: 9px;
+            font-weight: 600;
+            border-radius: 4px;
+            margin-bottom: 4px;
+        }
+
+        .store-product-name {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .store-product-price {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Meetup Section */
+        .meetup-section {
+            padding: 16px 0;
+        }
+
+        .meetup-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            overflow-y: visible;
+            padding: 4px 0 12px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .meetup-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .meetup-card {
+            flex-shrink: 0;
+            width: 200px;
+            scroll-snap-align: start;
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .meetup-card:hover {
+            border-color: var(--black);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .meetup-image {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .meetup-content {
+            padding: 12px;
+        }
+
+        .meetup-category {
+            display: inline-block;
+            padding: 2px 8px;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 10px;
+            font-weight: 600;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .meetup-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .meetup-info {
+            font-size: 12px;
+            color: var(--gray-600);
+            margin-bottom: 8px;
+        }
+
+        .meetup-members {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: var(--gray-400);
+        }
+
+        .meetup-members svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--gray-400);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Feed Section */
+        .feed-section {
+            padding: 16px 0;
+        }
+
+        .feed-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .feed-card {
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .feed-card:hover {
+            transform: scale(1.02);
+        }
+
+        .feed-image {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+        }
+
+        .feed-content {
+            padding: 10px;
+        }
+
+        .feed-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .feed-author-photo {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .feed-author-name {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .feed-text {
+            font-size: 12px;
+            color: var(--gray-600);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .feed-stats {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 8px;
+            font-size: 11px;
+            color: var(--gray-400);
+        }
+
+        .feed-stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .feed-stat svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--gray-400);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .feed-stat.liked svg {
+            fill: var(--like-red);
+            stroke: var(--like-red);
         }
 
         /* Bottom Navigation */
@@ -992,8 +1233,8 @@
             background: var(--white);
             border-radius: 20px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            padding: 20px 12px 16px;
-            margin-bottom: 24px;
+            padding: 16px 12px;
+            margin-bottom: 16px;
             animation: slideUp 0.2s ease-out 0.05s backwards;
         }
 
@@ -1122,7 +1363,7 @@
 
         /* Recent View Section - 최근 본 상품 */
         .recent-view-section {
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             animation: slideUp 0.2s ease-out 0.08s backwards;
         }
 
@@ -1240,8 +1481,8 @@
         /* Quick Tabs - 쿠폰, 한정특가, 이벤트 탭 */
         .quick-tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 24px;
+            gap: 12px;
+            margin-bottom: 16px;
             animation: slideUp 0.2s ease-out 0.1s backwards;
         }
 
@@ -1283,6 +1524,75 @@
             font-size: 13px;
             font-weight: 600;
             color: var(--black);
+        }
+
+        /* Recent Chat */
+        .recent-chat {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--gray-100);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .recent-chat:hover {
+            background: var(--gray-200);
+        }
+
+        .recent-chat-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .recent-chat-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .recent-chat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2px;
+        }
+
+        .recent-chat-name {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .recent-chat-time {
+            font-size: 11px;
+            color: var(--gray-400);
+        }
+
+        .recent-chat-message {
+            font-size: 12px;
+            color: var(--gray-600);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .recent-chat-badge {
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
         /* Map Modal */
@@ -1481,22 +1791,14 @@
             display: none;
             flex-direction: column;
             gap: 12px;
-            padding: 0 20px 16px;
-            height: 400px;
+            width: calc(100% - 40px);
+            height: 800px;
+            margin: 0 20px 16px;
             overflow-y: auto;
         }
 
         .store-list-view.active {
             display: flex;
-        }
-
-        .map-container {
-            width: calc(100% - 40px);
-            height: 400px;
-            margin: 0 20px 16px;
-            border-radius: 16px;
-            overflow: hidden;
-            background: var(--gray-100);
         }
 
         .map-container.hidden {
@@ -1666,6 +1968,41 @@
             </div>
         </div>
 
+        <!-- Quick Tabs - 쿠폰, 한정특가, 이벤트 -->
+        <div class="quick-tabs">
+            <div class="quick-tab">
+                <span class="quick-tab-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 5H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                </span>
+                <span class="quick-tab-label">쿠폰</span>
+            </div>
+            <div class="quick-tab">
+                <span class="quick-tab-icon">
+                    <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </span>
+                <span class="quick-tab-label">한정특가</span>
+            </div>
+            <div class="quick-tab">
+                <span class="quick-tab-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </span>
+                <span class="quick-tab-label">이벤트</span>
+            </div>
+        </div>
+
+        <!-- Recent Chat -->
+        <div class="recent-chat">
+            <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=100&h=100&fit=crop&crop=face" alt="김민수 트레이너" class="recent-chat-avatar">
+            <div class="recent-chat-content">
+                <div class="recent-chat-header">
+                    <span class="recent-chat-name">김민수 트레이너</span>
+                    <span class="recent-chat-time">오후 2:30</span>
+                </div>
+                <div class="recent-chat-message">내일 PT 수업 시간 변경 가능할까요?</div>
+            </div>
+            <span class="recent-chat-badge">1</span>
+        </div>
+
         <!-- Online Class Section - 온라인 강의 -->
         <div class="recent-view-section">
             <div class="section-header">
@@ -1739,57 +2076,6 @@
                 <div class="hero-indicator active" onclick="goToSlide(0)"></div>
                 <div class="hero-indicator" onclick="goToSlide(1)"></div>
                 <div class="hero-indicator" onclick="goToSlide(2)"></div>
-            </div>
-        </div>
-
-        <!-- Quick Tabs - 쿠폰, 한정특가, 이벤트 -->
-        <div class="quick-tabs">
-            <div class="quick-tab">
-                <span class="quick-tab-icon">
-                    <svg viewBox="0 0 24 24"><path d="M21 5H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-                </span>
-                <span class="quick-tab-label">쿠폰</span>
-            </div>
-            <div class="quick-tab">
-                <span class="quick-tab-icon">
-                    <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                </span>
-                <span class="quick-tab-label">한정특가</span>
-            </div>
-            <div class="quick-tab">
-                <span class="quick-tab-icon">
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                </span>
-                <span class="quick-tab-label">이벤트</span>
-            </div>
-        </div>
-
-        <!-- Center Introduction Section -->
-        <div class="center-section">
-            <div class="section-header">
-                <h2 class="section-title">센터 소개</h2>
-            </div>
-            <div class="gym-scroll">
-                <div class="gym-card">
-                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=200&fit=crop" alt="강남점" class="gym-card-image">
-                    <div class="gym-card-name">바디채널 강남점</div>
-                    <div class="gym-card-address">서울 강남구 테헤란로 123</div>
-                </div>
-                <div class="gym-card">
-                    <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&h=200&fit=crop" alt="서초점" class="gym-card-image">
-                    <div class="gym-card-name">바디채널 서초점</div>
-                    <div class="gym-card-address">서울 서초구 서초대로 456</div>
-                </div>
-                <div class="gym-card">
-                    <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=200&fit=crop" alt="역삼점" class="gym-card-image">
-                    <div class="gym-card-name">바디채널 역삼점</div>
-                    <div class="gym-card-address">서울 강남구 역삼로 789</div>
-                </div>
-                <div class="gym-card">
-                    <img src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1?w=400&h=200&fit=crop" alt="판교점" class="gym-card-image">
-                    <div class="gym-card-name">바디채널 판교점</div>
-                    <div class="gym-card-address">경기 성남시 분당구 판교로 321</div>
-                </div>
             </div>
         </div>
 
@@ -1910,6 +2196,243 @@
                             <span>4.8 (112)</span>
                         </div>
                         <div class="personal-trainer-price">1회 85,000원</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Store Products Section -->
+        <div class="store-product-section">
+            <div class="section-header">
+                <h2 class="section-title">매장 상품</h2>
+                <a href="#" class="section-more">
+                    전체보기
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </a>
+            </div>
+            <div class="store-product-scroll">
+                <div class="store-product-card">
+                    <img src="https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=200&h=200&fit=crop" alt="프로틴 쉐이크" class="store-product-image">
+                    <span class="store-product-category">프로틴</span>
+                    <div class="store-product-name">프로틴 쉐이크</div>
+                    <div class="store-product-price">5,500원</div>
+                </div>
+                <div class="store-product-card">
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=200&h=200&fit=crop" alt="아메리카노" class="store-product-image">
+                    <span class="store-product-category">커피</span>
+                    <div class="store-product-name">아메리카노</div>
+                    <div class="store-product-price">3,500원</div>
+                </div>
+                <div class="store-product-card">
+                    <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=200&h=200&fit=crop" alt="카페라떼" class="store-product-image">
+                    <span class="store-product-category">커피</span>
+                    <div class="store-product-name">카페라떼</div>
+                    <div class="store-product-price">4,500원</div>
+                </div>
+                <div class="store-product-card">
+                    <img src="https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=200&h=200&fit=crop" alt="바나나 프로틴" class="store-product-image">
+                    <span class="store-product-category">프로틴</span>
+                    <div class="store-product-name">바나나 프로틴</div>
+                    <div class="store-product-price">6,000원</div>
+                </div>
+                <div class="store-product-card">
+                    <img src="https://images.unsplash.com/photo-1534353473418-4cfa6c56fd38?w=200&h=200&fit=crop" alt="에너지 드링크" class="store-product-image">
+                    <span class="store-product-category">음료</span>
+                    <div class="store-product-name">에너지 드링크</div>
+                    <div class="store-product-price">3,000원</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Meetup Section - 추천 모임 -->
+        <div class="meetup-section">
+            <div class="section-header">
+                <h2 class="section-title">추천 모임</h2>
+                <a href="design-02-minimal-monochrome-activity.html#meetup" class="section-more">
+                    전체보기
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </a>
+            </div>
+            <div class="meetup-scroll">
+                <div class="meetup-card">
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=200&fit=crop" alt="러닝크루" class="meetup-image">
+                    <div class="meetup-content">
+                        <span class="meetup-category">러닝</span>
+                        <div class="meetup-title">강남 러닝크루</div>
+                        <div class="meetup-info">매주 토요일 오전 7시</div>
+                        <div class="meetup-members">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <span>멤버 24명</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="meetup-card">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=200&fit=crop" alt="요가모임" class="meetup-image">
+                    <div class="meetup-content">
+                        <span class="meetup-category">요가</span>
+                        <div class="meetup-title">모닝 요가 클럽</div>
+                        <div class="meetup-info">매주 수/금 오전 6시</div>
+                        <div class="meetup-members">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <span>멤버 18명</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="meetup-card">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=200&fit=crop" alt="웨이트모임" class="meetup-image">
+                    <div class="meetup-content">
+                        <span class="meetup-category">웨이트</span>
+                        <div class="meetup-title">벌크업 챌린지</div>
+                        <div class="meetup-info">매일 저녁 8시</div>
+                        <div class="meetup-members">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <span>멤버 32명</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="meetup-card">
+                    <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&h=200&fit=crop" alt="다이어트모임" class="meetup-image">
+                    <div class="meetup-content">
+                        <span class="meetup-category">다이어트</span>
+                        <div class="meetup-title">30일 다이어트</div>
+                        <div class="meetup-info">매주 월/수/금</div>
+                        <div class="meetup-members">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <span>멤버 45명</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feed Section - 피드 -->
+        <div class="feed-section">
+            <div class="section-header">
+                <h2 class="section-title">피드</h2>
+                <a href="design-02-minimal-monochrome-activity.html" class="section-more">
+                    전체보기
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </a>
+            </div>
+            <div class="feed-grid">
+                <div class="feed-card">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop" alt="피드1" class="feed-image">
+                    <div class="feed-content">
+                        <div class="feed-author">
+                            <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=100&h=100&fit=crop&crop=face" alt="김민수" class="feed-author-photo">
+                            <span class="feed-author-name">김민수</span>
+                        </div>
+                        <div class="feed-text">오늘도 열심히 운동 완료! 💪</div>
+                        <div class="feed-stats">
+                            <span class="feed-stat liked">
+                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                                128
+                            </span>
+                            <span class="feed-stat">
+                                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                24
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="feed-card">
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=400&fit=crop" alt="피드2" class="feed-image">
+                    <div class="feed-content">
+                        <div class="feed-author">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop&crop=face" alt="박지영" class="feed-author-photo">
+                            <span class="feed-author-name">박지영</span>
+                        </div>
+                        <div class="feed-text">필라테스 수업 후기 🧘‍♀️ 정말 시원하네요</div>
+                        <div class="feed-stats">
+                            <span class="feed-stat">
+                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                                89
+                            </span>
+                            <span class="feed-stat">
+                                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                12
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="feed-card">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=400&fit=crop" alt="피드3" class="feed-image">
+                    <div class="feed-content">
+                        <div class="feed-author">
+                            <img src="https://images.unsplash.com/photo-1597347316205-36f6c451902a?w=100&h=100&fit=crop&crop=face" alt="이준혁" class="feed-author-photo">
+                            <span class="feed-author-name">이준혁</span>
+                        </div>
+                        <div class="feed-text">3개월 벌크업 결과! 드디어 목표 달성 🎉</div>
+                        <div class="feed-stats">
+                            <span class="feed-stat liked">
+                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                                256
+                            </span>
+                            <span class="feed-stat">
+                                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                48
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="feed-card">
+                    <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&h=400&fit=crop" alt="피드4" class="feed-image">
+                    <div class="feed-content">
+                        <div class="feed-author">
+                            <img src="https://images.unsplash.com/photo-1549476464-37392f717541?w=100&h=100&fit=crop&crop=face" alt="정서연" class="feed-author-photo">
+                            <span class="feed-author-name">정서연</span>
+                        </div>
+                        <div class="feed-text">오늘의 운동 루틴 공유해요 ✨</div>
+                        <div class="feed-stats">
+                            <span class="feed-stat">
+                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                                67
+                            </span>
+                            <span class="feed-stat">
+                                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                8
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="feed-card">
+                    <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&h=400&fit=crop" alt="피드5" class="feed-image">
+                    <div class="feed-content">
+                        <div class="feed-author">
+                            <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=100&h=100&fit=crop&crop=face" alt="한동훈" class="feed-author-photo">
+                            <span class="feed-author-name">한동훈</span>
+                        </div>
+                        <div class="feed-text">러닝크루와 함께한 주말 아침 🏃‍♂️</div>
+                        <div class="feed-stats">
+                            <span class="feed-stat liked">
+                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                                192
+                            </span>
+                            <span class="feed-stat">
+                                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                32
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="feed-card">
+                    <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=400&fit=crop" alt="피드6" class="feed-image">
+                    <div class="feed-content">
+                        <div class="feed-author">
+                            <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=100&h=100&fit=crop&crop=face" alt="윤미래" class="feed-author-photo">
+                            <span class="feed-author-name">윤미래</span>
+                        </div>
+                        <div class="feed-text">다이어트 1개월 차 -5kg 달성! 🔥</div>
+                        <div class="feed-stats">
+                            <span class="feed-stat liked">
+                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                                312
+                            </span>
+                            <span class="feed-stat">
+                                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                56
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
