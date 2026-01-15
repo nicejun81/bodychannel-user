@@ -340,11 +340,22 @@
             overflow: hidden;
             cursor: pointer;
             transition: all 0.2s ease;
+            position: relative;
         }
 
         .gym-card:hover {
             border-color: var(--black);
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .gym-card.my-gym {
+            border: 2px solid var(--primary);
+            background: linear-gradient(to bottom, rgba(255, 107, 53, 0.05), var(--white));
+        }
+
+        .gym-card.my-gym:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
         }
 
         .gym-card-image {
@@ -1879,7 +1890,7 @@
         }
 
         function viewGymDetail(gymId) {
-            alert('헬스장 상세 페이지로 이동합니다. (ID: ' + gymId + ')');
+            window.location.href = `design-02-minimal-monochrome-gym-detail.html?id=${gymId}`;
         }
 
         function viewMyMembership(id) {
