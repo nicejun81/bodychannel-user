@@ -1087,10 +1087,11 @@
 
         /* Trainer Section Group */
         .trainer-section-group {
-            background: var(--black);
+            background: linear-gradient(135deg, #f5f7fa 0%, #eef1f5 100%);
             border-radius: 16px;
             margin: 8px 0 20px;
             overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         /* Trainer Recommendation Banner */
@@ -1103,29 +1104,15 @@
             transition: all 0.2s ease;
             position: relative;
             overflow: hidden;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .trainer-recommend-banner::before {
-            content: '';
-            position: absolute;
-            right: -20px;
-            top: -20px;
-            width: 140px;
-            height: 140px;
-            background: rgba(255, 107, 53, 0.15);
-            border-radius: 50%;
+            display: none;
         }
 
         .trainer-recommend-banner::after {
-            content: '';
-            position: absolute;
-            right: 40px;
-            bottom: -30px;
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 107, 53, 0.1);
-            border-radius: 50%;
+            display: none;
         }
 
         .trainer-recommend-banner:hover {
@@ -1164,19 +1151,19 @@
         .recommend-title {
             font-size: 16px;
             font-weight: 700;
-            color: white;
+            color: var(--black);
             margin-bottom: 4px;
         }
 
         .recommend-desc {
             font-size: 13px;
-            color: var(--gray-400);
+            color: var(--gray-500);
         }
 
         .recommend-arrow {
             width: 32px;
             height: 32px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.06);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1189,7 +1176,7 @@
         .recommend-arrow svg {
             width: 18px;
             height: 18px;
-            stroke: white;
+            stroke: var(--black);
             stroke-width: 2;
             fill: none;
         }
@@ -1204,11 +1191,11 @@
         }
 
         .trainer-section-group .pt-trainer-section .section-title {
-            color: #fff;
+            color: var(--black);
         }
 
         .trainer-section-group .pt-trainer-section .section-more {
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--gray-500);
         }
 
         .trainer-section-group .pt-trainer-section .section-more:hover {
@@ -1216,29 +1203,14 @@
         }
 
         .trainer-section-group .pt-trainer-card {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
         .trainer-section-group .pt-trainer-card:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .trainer-section-group .pt-trainer-name {
-            color: #fff;
-        }
-
-        .trainer-section-group .pt-trainer-gym {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .trainer-section-group .pt-trainer-rating {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .trainer-section-group .trial-price {
-            color: #fff;
+            border-color: var(--black);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .pt-trainer-scroll {
