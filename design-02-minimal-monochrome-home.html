@@ -628,74 +628,100 @@
         .trainer-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            padding: 0;
         }
 
         .trainer-item {
             display: flex;
-            gap: 16px;
-            padding: 16px;
-            background: var(--gray-100);
-            border-radius: 12px;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--gray-100);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: background 0.2s ease;
+            background: var(--white);
         }
 
         .trainer-item:hover {
-            background: var(--gray-200);
+            background: var(--gray-100);
         }
 
         .trainer-photo {
-            width: 72px;
-            height: 72px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
-            flex-shrink: 0;
             object-fit: cover;
-            border: 3px solid var(--white);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-shrink: 0;
         }
 
         .trainer-content {
             flex: 1;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 0;
         }
 
-        .trainer-header {
+        .trainer-info-left {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex: 1;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
         }
 
         .trainer-name-row {
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 4px;
         }
 
-        .trainer-specialty {
+        .trainer-category-badge {
             display: inline-block;
-            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
             font-weight: 600;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
+        }
+
+        .trainer-category-badge.bareton {
+            background: #FF6B35;
+            color: white;
+        }
+
+        .trainer-category-badge.hit35 {
+            background: #3B82F6;
+            color: white;
+        }
+
+        .trainer-category-badge.gymground {
+            background: #10B981;
+            color: white;
         }
 
         .trainer-name {
             font-size: 15px;
             font-weight: 700;
-            line-height: 1.4;
+            line-height: 1.3;
         }
 
         .trainer-gym {
             font-size: 12px;
+            color: var(--gray-400);
+        }
+
+        .trainer-rating-info {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
             color: var(--gray-600);
-            font-weight: 500;
+        }
+
+        .trainer-rating-info svg {
+            width: 14px;
+            height: 14px;
+            fill: #fbbf24;
+            stroke: none;
         }
 
         .trainer-address {
@@ -1034,6 +1060,92 @@
             stroke: var(--gray-400);
             stroke-width: 2;
             fill: none;
+        }
+
+        /* PT Trainer Card Section */
+        .pt-trainer-section {
+            padding: 16px 0;
+        }
+
+        .pt-trainer-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            overflow-y: visible;
+            padding: 4px 0 12px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .pt-trainer-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .pt-trainer-card {
+            flex-shrink: 0;
+            width: 200px;
+            scroll-snap-align: start;
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--white);
+        }
+
+        .pt-trainer-card:hover {
+            border-color: var(--black);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .pt-trainer-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .pt-trainer-content {
+            padding: 12px;
+        }
+
+        .pt-trainer-category {
+            display: inline-block;
+            padding: 2px 8px;
+            background: var(--black);
+            color: var(--white);
+            font-size: 10px;
+            font-weight: 600;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .pt-trainer-name {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .pt-trainer-gym {
+            font-size: 12px;
+            color: var(--gray-600);
+            margin-bottom: 8px;
+        }
+
+        .pt-trainer-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: var(--gray-600);
+        }
+
+        .pt-trainer-rating svg {
+            width: 14px;
+            height: 14px;
+            fill: #fbbf24;
+            stroke: none;
         }
 
         /* Feed Section */
@@ -2728,75 +2840,63 @@
                 </a>
             </div>
             <div class="trainer-list">
-                <div class="trainer-item">
+                <div class="trainer-item" onclick="bookTrainer(4)">
                     <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face" alt="김민수 트레이너" class="trainer-photo">
                     <div class="trainer-content">
-                        <div class="trainer-header">
-                            <div>
-                                <div class="trainer-name-row">
-                                    <span class="trainer-name">김민수 선생님</span>
-                                    <span class="trainer-gym">바디채널 강남점</span>
-                                </div>
-                                <p class="trainer-address">서울특별시 강남구 테헤란로 123</p>
+                        <div class="trainer-info-left">
+                            <div class="trainer-name-row">
+                                <span class="trainer-name">김민수 선생님</span>
+                                <span class="trainer-category-badge bareton">바레톤</span>
                             </div>
-                            <div class="trainer-like" onclick="event.stopPropagation(); toggleTrainerLike(this)">
-                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                            </div>
-                        </div>
-                        <div class="trainer-meta">
+                            <div class="trainer-gym">바디채널 강남점</div>
                             <div class="trainer-rating-info">
                                 <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                                 <span>4.9 (85)</span>
                             </div>
-                            <button class="trainer-book-btn" onclick="event.stopPropagation(); bookTrainer(4)">예약하기</button>
+                        </div>
+                        <div class="trainer-price-info">
+                            <span class="trial-badge">체험권</span>
+                            <span class="trial-price">15,000원</span>
                         </div>
                     </div>
                 </div>
-                <div class="trainer-item">
+                <div class="trainer-item" onclick="bookTrainer(5)">
                     <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop&crop=face" alt="박지영 트레이너" class="trainer-photo">
                     <div class="trainer-content">
-                        <div class="trainer-header">
-                            <div>
-                                <div class="trainer-name-row">
-                                    <span class="trainer-name">박지영 선생님</span>
-                                    <span class="trainer-gym">바디채널 서초점</span>
-                                </div>
-                                <p class="trainer-address">서울특별시 서초구 서초대로 456</p>
+                        <div class="trainer-info-left">
+                            <div class="trainer-name-row">
+                                <span class="trainer-name">박지영 선생님</span>
+                                <span class="trainer-category-badge hit35">히트35</span>
                             </div>
-                            <div class="trainer-like" onclick="event.stopPropagation(); toggleTrainerLike(this)">
-                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                            </div>
-                        </div>
-                        <div class="trainer-meta">
+                            <div class="trainer-gym">바디채널 서초점</div>
                             <div class="trainer-rating-info">
                                 <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                                 <span>4.8 (72)</span>
                             </div>
-                            <button class="trainer-book-btn" onclick="event.stopPropagation(); bookTrainer(5)">예약하기</button>
+                        </div>
+                        <div class="trainer-price-info">
+                            <span class="trial-badge">체험권</span>
+                            <span class="trial-price">18,000원</span>
                         </div>
                     </div>
                 </div>
-                <div class="trainer-item">
+                <div class="trainer-item" onclick="bookTrainer(6)">
                     <img src="https://images.unsplash.com/photo-1597347316205-36f6c451902a?w=200&h=200&fit=crop&crop=face" alt="이준혁 트레이너" class="trainer-photo">
                     <div class="trainer-content">
-                        <div class="trainer-header">
-                            <div>
-                                <div class="trainer-name-row">
-                                    <span class="trainer-name">이준혁 선생님</span>
-                                    <span class="trainer-gym">바디채널 역삼점</span>
-                                </div>
-                                <p class="trainer-address">서울특별시 강남구 역삼로 789</p>
+                        <div class="trainer-info-left">
+                            <div class="trainer-name-row">
+                                <span class="trainer-name">이준혁 선생님</span>
+                                <span class="trainer-category-badge gymground">짐그라운드</span>
                             </div>
-                            <div class="trainer-like" onclick="event.stopPropagation(); toggleTrainerLike(this)">
-                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                            </div>
-                        </div>
-                        <div class="trainer-meta">
+                            <div class="trainer-gym">바디채널 역삼점</div>
                             <div class="trainer-rating-info">
                                 <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                                 <span>4.7 (63)</span>
                             </div>
-                            <button class="trainer-book-btn" onclick="event.stopPropagation(); bookTrainer(6)">예약하기</button>
+                        </div>
+                        <div class="trainer-price-info">
+                            <span class="trial-badge">체험권</span>
+                            <span class="trial-price">20,000원</span>
                         </div>
                     </div>
                 </div>
@@ -2804,7 +2904,7 @@
         </div>
 
         <!-- Personal Trainer Section -->
-        <div class="trainer-section">
+        <div class="pt-trainer-section">
             <div class="section-header">
                 <h2 class="section-title">PT 강사</h2>
                 <a href="#" class="section-more">
@@ -2812,76 +2912,40 @@
                     <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
                 </a>
             </div>
-            <div class="trainer-list">
-                <div class="trainer-item">
-                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop&crop=face" alt="최강민 PT" class="trainer-photo">
-                    <div class="trainer-content">
-                        <div class="trainer-header">
-                            <div>
-                                <div class="trainer-name-row">
-                                    <span class="trainer-name">최강민 선생님</span>
-                                    <span class="trainer-gym">바디채널 강남점</span>
-                                </div>
-                                <p class="trainer-address">서울특별시 강남구 테헤란로 123</p>
-                            </div>
-                            <div class="trainer-like" onclick="event.stopPropagation(); toggleTrainerLike(this)">
-                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                            </div>
-                        </div>
-                        <div class="trainer-meta">
-                            <div class="trainer-rating-info">
-                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                                <span>4.9 (127)</span>
-                            </div>
-                            <button class="trainer-book-btn" onclick="event.stopPropagation(); bookTrainer(1)">예약하기</button>
+            <div class="pt-trainer-scroll">
+                <div class="pt-trainer-card" onclick="bookTrainer(1)">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=240&fit=crop" alt="최강민 PT" class="pt-trainer-image">
+                    <div class="pt-trainer-content">
+                        <span class="pt-trainer-category">PT</span>
+                        <div class="pt-trainer-name">최강민 선생님</div>
+                        <div class="pt-trainer-gym">바디채널 강남점</div>
+                        <div class="pt-trainer-rating">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <span>4.9 (127)</span>
                         </div>
                     </div>
                 </div>
-                <div class="trainer-item">
-                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop&crop=face" alt="정서연 PT" class="trainer-photo">
-                    <div class="trainer-content">
-                        <div class="trainer-header">
-                            <div>
-                                <div class="trainer-name-row">
-                                    <span class="trainer-name">정서연 선생님</span>
-                                    <span class="trainer-gym">바디채널 서초점</span>
-                                </div>
-                                <p class="trainer-address">서울특별시 서초구 서초대로 456</p>
-                            </div>
-                            <div class="trainer-like" onclick="event.stopPropagation(); toggleTrainerLike(this)">
-                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                            </div>
-                        </div>
-                        <div class="trainer-meta">
-                            <div class="trainer-rating-info">
-                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                                <span>4.8 (89)</span>
-                            </div>
-                            <button class="trainer-book-btn" onclick="event.stopPropagation(); bookTrainer(2)">예약하기</button>
+                <div class="pt-trainer-card" onclick="bookTrainer(2)">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=240&fit=crop" alt="정서연 PT" class="pt-trainer-image">
+                    <div class="pt-trainer-content">
+                        <span class="pt-trainer-category">PT</span>
+                        <div class="pt-trainer-name">정서연 선생님</div>
+                        <div class="pt-trainer-gym">바디채널 서초점</div>
+                        <div class="pt-trainer-rating">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <span>4.8 (89)</span>
                         </div>
                     </div>
                 </div>
-                <div class="trainer-item">
-                    <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop&crop=face" alt="한동훈 PT" class="trainer-photo">
-                    <div class="trainer-content">
-                        <div class="trainer-header">
-                            <div>
-                                <div class="trainer-name-row">
-                                    <span class="trainer-name">한동훈 선생님</span>
-                                    <span class="trainer-gym">바디채널 역삼점</span>
-                                </div>
-                                <p class="trainer-address">서울특별시 강남구 역삼로 789</p>
-                            </div>
-                            <div class="trainer-like" onclick="event.stopPropagation(); toggleTrainerLike(this)">
-                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                            </div>
-                        </div>
-                        <div class="trainer-meta">
-                            <div class="trainer-rating-info">
-                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                                <span>4.9 (156)</span>
-                            </div>
-                            <button class="trainer-book-btn" onclick="event.stopPropagation(); bookTrainer(3)">예약하기</button>
+                <div class="pt-trainer-card" onclick="bookTrainer(3)">
+                    <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&h=240&fit=crop" alt="한동훈 PT" class="pt-trainer-image">
+                    <div class="pt-trainer-content">
+                        <span class="pt-trainer-category">PT</span>
+                        <div class="pt-trainer-name">한동훈 선생님</div>
+                        <div class="pt-trainer-gym">바디채널 역삼점</div>
+                        <div class="pt-trainer-rating">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <span>4.9 (156)</span>
                         </div>
                     </div>
                 </div>
