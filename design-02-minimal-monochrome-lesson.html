@@ -22,7 +22,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { overscroll-behavior: none; }
+        html, body { overflow-x: hidden; overflow-y: scroll; }
 
         body {
             font-family: 'Poppins', -apple-system, sans-serif;
@@ -803,11 +803,85 @@
             min-width: 0;
         }
 
+        .schedule-trainer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex: 1;
+        }
+
+        .schedule-trainer-name-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
         .schedule-trainer-name {
             font-size: 15px;
             font-weight: 700;
             color: var(--black);
-            margin-bottom: 4px;
+        }
+
+        .schedule-trainer-gym {
+            font-size: 12px;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+
+        .schedule-trainer-address {
+            font-size: 12px;
+            color: var(--gray-400);
+            margin: 0;
+        }
+
+        .schedule-trainer-like {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .schedule-trainer-like svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--gray-400);
+            stroke-width: 2;
+            fill: none;
+            transition: all 0.2s ease;
+        }
+
+        .schedule-trainer-like.active svg {
+            stroke: #ff5252;
+            fill: #ff5252;
+        }
+
+        .schedule-trainer-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .schedule-trainer-rating-info {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .schedule-trainer-rating-info svg {
+            width: 14px;
+            height: 14px;
+            fill: #FFD700;
+        }
+
+        .schedule-trainer-rating-info span {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--black);
         }
 
         .schedule-trainer-rating {
@@ -1475,15 +1549,28 @@
                                 <img src="${trainer.photo}" alt="${trainer.name}">
                             </div>
                             <div class="schedule-trainer-info">
-                                <span class="schedule-trainer-name">${trainer.name}</span>
-                                <div class="schedule-trainer-rating">
-                                    호감도 ${(trainer.rating * 20).toFixed(1)}%
+                                <div class="schedule-trainer-header">
+                                    <div>
+                                        <div class="schedule-trainer-name-row">
+                                            <span class="schedule-trainer-name">${trainer.name} 선생님</span>
+                                            <span class="schedule-trainer-gym">바디채널 강남점</span>
+                                        </div>
+                                        <p class="schedule-trainer-address">서울특별시 강남구 테헤란로 123</p>
+                                    </div>
+                                    <div class="schedule-trainer-like" onclick="event.stopPropagation(); toggleScheduleLike(this)">
+                                        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                                    </div>
                                 </div>
-                                <span class="schedule-trainer-desc">바디채널 강남점</span>
+                                <div class="schedule-trainer-meta">
+                                    <div class="schedule-trainer-rating-info">
+                                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                        <span>${trainer.rating.toFixed(1)} (${Math.floor(trainer.rating * 25)})</span>
+                                    </div>
+                                    <button class="schedule-book-btn ${trainer.booked ? 'booked' : ''}" onclick="event.stopPropagation(); ${trainer.booked ? '' : `bookLesson(${trainer.id}, '${selectedTime}')`}">
+                                        ${trainer.booked ? '예약완료' : '예약하기'}
+                                    </button>
+                                </div>
                             </div>
-                            <button class="schedule-book-btn ${trainer.booked ? 'booked' : ''}" onclick="event.stopPropagation(); ${trainer.booked ? '' : `bookLesson(${trainer.id}, '${selectedTime}')`}">
-                                ${trainer.booked ? '예약완료' : '예약하기'}
-                            </button>
                         </div>
                     `;
                 });
@@ -1560,6 +1647,10 @@
 
         function viewMyLesson(id) {
             alert('내 레슨권 상세 페이지로 이동합니다.');
+        }
+
+        function toggleScheduleLike(element) {
+            element.classList.toggle('active');
         }
 
         // Initialize on page load

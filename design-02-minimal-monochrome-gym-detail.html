@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BODYCHANNEL - 헬스장 상세</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-600: #525252;
+            --primary: #FF6B35;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { overflow-x: hidden; overflow-y: scroll; }
+
+        body {
+            font-family: 'Poppins', -apple-system, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            min-height: 100vh;
+            padding-bottom: 100px;
+            animation: pageEnter 0.2s ease-out;
+        }
+
+        @keyframes pageEnter {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header with Image */
+        .gym-header {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            background: var(--gray-100);
+            overflow: hidden;
+        }
+
+        .gym-header-slider {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .gym-header-slide {
+            min-width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+        }
+
+        .gym-header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .gym-header-dots {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 2;
+        }
+
+        .gym-header-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gym-header-dot.active {
+            width: 20px;
+            border-radius: 3px;
+            background: var(--white);
+        }
+
+        .gym-header-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            padding: 20px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            width: 40px;
+            height: 40px;
+            background: var(--white);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+
+        .back-button svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--black);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .share-button {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 40px;
+            height: 40px;
+            background: var(--white);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+
+        .share-button svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--black);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .gym-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        /* Main Content */
+        .gym-content {
+            padding: 24px 20px;
+        }
+
+        .gym-title-section {
+            margin-bottom: 24px;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .gym-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .gym-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .gym-rating svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--warning);
+        }
+
+        .gym-rating .rating-value {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .gym-rating .review-count {
+            font-size: 14px;
+            color: var(--gray-400);
+            font-weight: 400;
+        }
+
+        .gym-address {
+            font-size: 15px;
+            color: var(--gray-400);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .gym-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .gym-tag {
+            padding: 8px 14px;
+            background: var(--gray-100);
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--gray-600);
+        }
+
+        /* Quick Action Buttons */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 32px;
+            animation: slideUp 0.3s ease-out 0.1s backwards;
+        }
+
+        .quick-action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 16px;
+            background: var(--gray-100);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-action-btn:hover {
+            background: var(--gray-200);
+        }
+
+        .quick-action-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--white);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quick-action-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--primary);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .quick-action-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 32px;
+            animation: slideUp 0.3s ease-out backwards;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.15s; }
+        .section:nth-child(3) { animation-delay: 0.2s; }
+        .section:nth-child(4) { animation-delay: 0.25s; }
+        .section:nth-child(5) { animation-delay: 0.3s; }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .info-item {
+            padding: 16px;
+            background: var(--gray-100);
+            border-radius: 12px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: var(--gray-400);
+            margin-bottom: 6px;
+        }
+
+        .info-value {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* Description */
+        .gym-description {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--gray-600);
+        }
+
+        /* Facility List */
+        .facility-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .facility-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: var(--gray-100);
+            border-radius: 12px;
+        }
+
+        .facility-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--white);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .facility-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--primary);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .facility-name {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* Price List */
+        .price-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px;
+            background: var(--gray-100);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .price-item:hover {
+            background: var(--gray-200);
+        }
+
+        .price-item.popular {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .price-item.popular .price-name {
+            color: var(--white);
+        }
+
+        .price-item.popular .price-value {
+            color: var(--primary);
+        }
+
+        .price-left {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .price-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .price-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 10px;
+            font-weight: 700;
+            border-radius: 4px;
+            width: fit-content;
+        }
+
+        .price-right {
+            text-align: right;
+        }
+
+        .price-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .price-original {
+            font-size: 13px;
+            color: var(--gray-400);
+            text-decoration: line-through;
+            margin-top: 2px;
+        }
+
+        /* Trainers */
+        .trainer-list {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .trainer-list::-webkit-scrollbar {
+            display: none;
+        }
+
+        .trainer-item {
+            min-width: 140px;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            background: var(--gray-100);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .trainer-item:hover {
+            background: var(--gray-200);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .trainer-photo {
+            width: 100%;
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            background: var(--gray-200);
+        }
+
+        .trainer-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .trainer-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .trainer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2px;
+        }
+
+        .trainer-name {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .trainer-rating {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .trainer-rating svg {
+            width: 11px;
+            height: 11px;
+            fill: var(--warning);
+        }
+
+        .trainer-rating span {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .trainer-specialties {
+            display: flex;
+            gap: 3px;
+            flex-wrap: wrap;
+            margin-bottom: 4px;
+        }
+
+        .trainer-specialty {
+            padding: 3px 6px;
+            background: var(--white);
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .trainer-experience {
+            font-size: 10px;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+
+        .trainer-description {
+            display: none;
+        }
+
+        /* Reviews */
+        .review-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .review-item {
+            padding: 16px;
+            background: var(--gray-100);
+            border-radius: 12px;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .review-author {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .review-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .review-rating svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--warning);
+        }
+
+        .review-rating span {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .review-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--gray-600);
+            margin-bottom: 8px;
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: var(--gray-400);
+        }
+
+        /* Map */
+        .map-container {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--gray-100);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Gallery Modal */
+        .gallery-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--black);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .gallery-modal.active {
+            display: flex;
+        }
+
+        .gallery-modal-header {
+            position: relative;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-modal-counter {
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .gallery-modal-close {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .gallery-modal-close svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--white);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .gallery-modal-content {
+            flex: 1;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .gallery-modal-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-modal-slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            scroll-snap-align: center;
+        }
+
+        .gallery-modal-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Bottom CTA */
+        .bottom-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+            padding: 16px 20px 28px;
+            display: flex;
+            gap: 12px;
+            z-index: 50;
+        }
+
+        .cta-btn {
+            flex: 1;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cta-btn.secondary {
+            background: var(--gray-100);
+            color: var(--black);
+        }
+
+        .cta-btn.secondary:hover {
+            background: var(--gray-200);
+        }
+
+        .cta-btn.primary {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .cta-btn.primary:hover {
+            background: var(--primary);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-around;
+            padding: 16px 0 28px;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            color: var(--gray-400);
+            transition: color 0.2s ease;
+        }
+
+        .nav-item.active { color: var(--primary); }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.active .nav-icon svg {
+            fill: currentColor;
+            stroke-width: 0;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Image -->
+    <div class="gym-header">
+        <div class="gym-header-slider" id="gymHeaderSlider"></div>
+        <div class="gym-header-dots" id="gymHeaderDots"></div>
+        <button class="back-button" onclick="goBack()">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <button class="share-button" onclick="shareGym()">
+            <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </button>
+    </div>
+
+    <!-- Gallery Modal -->
+    <div class="gallery-modal" id="galleryModal">
+        <div class="gallery-modal-header">
+            <div class="gallery-modal-counter" id="galleryCounter">1 / 5</div>
+            <button class="gallery-modal-close" onclick="closeGallery()">
+                <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div class="gallery-modal-content" id="galleryModalContent"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="gym-content">
+        <!-- Title Section -->
+        <div class="gym-title-section">
+            <div id="gymBadge"></div>
+            <h1 class="gym-title" id="gymTitle"></h1>
+            <div class="gym-rating">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span class="rating-value" id="gymRating"></span>
+                <span class="review-count" id="gymReviews"></span>
+            </div>
+            <p class="gym-address" id="gymAddress"></p>
+            <div class="gym-tags" id="gymTags"></div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <button class="quick-action-btn" onclick="callGym()">
+                <div class="quick-action-icon">
+                    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <span class="quick-action-label">전화</span>
+            </button>
+            <button class="quick-action-btn" onclick="showMap()">
+                <div class="quick-action-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <span class="quick-action-label">길찾기</span>
+            </button>
+            <button class="quick-action-btn" onclick="shareGym()">
+                <div class="quick-action-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                </div>
+                <span class="quick-action-label">공유</span>
+            </button>
+        </div>
+
+        <!-- Operating Info Section -->
+        <div class="section">
+            <h2 class="section-title">운영 정보</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">운영시간</div>
+                    <div class="info-value" id="gymHours"></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">휴무일</div>
+                    <div class="info-value" id="gymClosedDays"></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">전화번호</div>
+                    <div class="info-value" id="gymPhone"></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">주차</div>
+                    <div class="info-value" id="gymParking"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Price Section -->
+        <div class="section">
+            <h2 class="section-title">회원권 가격</h2>
+            <div class="price-list" id="gymPrices"></div>
+        </div>
+
+        <!-- Description Section -->
+        <div class="section">
+            <h2 class="section-title">소개</h2>
+            <p class="gym-description" id="gymDescription"></p>
+        </div>
+
+        <!-- Facilities Section -->
+        <div class="section">
+            <h2 class="section-title">시설 안내</h2>
+            <div class="facility-list" id="gymFacilities"></div>
+        </div>
+
+        <!-- Trainers Section -->
+        <div class="section">
+            <h2 class="section-title">트레이너</h2>
+            <div class="trainer-list" id="gymTrainers"></div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="section">
+            <h2 class="section-title">리뷰</h2>
+            <div class="review-list" id="gymReviewList"></div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="section">
+            <h2 class="section-title">위치</h2>
+            <div class="map-container">
+                <iframe
+                    id="gymMap"
+                    src=""
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="bottom-cta">
+        <button class="cta-btn secondary" onclick="addToFavorites()">
+            찜하기
+        </button>
+        <button class="cta-btn primary" onclick="purchaseMembership()">
+            회원권 구매
+        </button>
+    </div>
+
+    <script>
+        // Get gym ID from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const gymId = urlParams.get('id');
+
+        // Gym data
+        const gymData = {
+            gym1: {
+                name: '바디채널 강남점',
+                badge: 'BEST',
+                rating: 4.8,
+                reviews: 324,
+                address: '서울 강남구 테헤란로 123\n강남역 5번 출구 도보 5분',
+                image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=400&fit=crop',
+                tags: ['24시간', '주차가능', '샤워실', 'Wi-Fi', '락커', '무료 수건'],
+                hours: '24시간',
+                closedDays: '연중무휴',
+                phone: '02-1234-5678',
+                parking: '가능 (2시간)',
+                facilities: [
+                    { name: '웨이트 트레이닝 구역', icon: 'dumbbell' },
+                    { name: '유산소 운동 구역', icon: 'activity' },
+                    { name: '그룹 운동실 (GX)', icon: 'users' },
+                    { name: '샤워실 & 락커룸', icon: 'droplet' },
+                    { name: '주차장 (2시간 무료)', icon: 'car' },
+                    { name: '무료 Wi-Fi', icon: 'wifi' }
+                ],
+                gallery: [
+                    'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1558611848-73f7eb4001a1?w=1200&h=800&fit=crop'
+                ],
+                prices: [
+                    { name: '1개월 회원권', price: '99,000원', badge: '첫결제 19,900원', popular: false },
+                    { name: '3개월 회원권', price: '249,000원', original: '297,000원', popular: true },
+                    { name: '6개월 회원권', price: '459,000원', original: '594,000원', popular: false },
+                    { name: '12개월 회원권', price: '840,000원', original: '1,188,000원', popular: false }
+                ],
+                trainers: [
+                    { name: '김민준 트레이너', photo: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', specialties: ['보디빌딩', '다이어트', '근력강화'], experience: '경력 8년', rating: 4.9, description: '국가대표 출신 보디빌더로 체계적인 근력 운동 지도가 가능합니다.' },
+                    { name: '이지현 트레이너', photo: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', specialties: ['필라테스', '요가', '재활'], experience: '경력 6년', rating: 5.0, description: '재활 운동 전문가로 부상 예방과 체형 교정에 특화되어 있습니다.' },
+                    { name: '박준호 트레이너', photo: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', specialties: ['크로스핏', '기능성운동', '체력향상'], experience: '경력 5년', rating: 4.8, description: '크로스핏 공인 코치로 폭발적인 근력과 체력 향상을 도와드립니다.' }
+                ],
+                reviews: [
+                    { author: '김**', rating: 5, text: '시설도 깨끗하고 24시간이라 편하게 다닐 수 있어요. 강남역에서 가까워서 회사 끝나고 들르기 좋습니다.', date: '2024.01.10' },
+                    { author: '이**', rating: 4, text: '기구 상태도 좋고 직원분들도 친절하세요. 주차는 2시간만 무료라 조금 아쉬워요.', date: '2024.01.08' },
+                    { author: '박**', rating: 5, text: '다른 헬스장에 비해 넓고 쾌적합니다. PT도 받고 있는데 만족스러워요!', date: '2024.01.05' }
+                ],
+                description: '강남역 도보 5분 거리에 위치한 프리미엄 헬스장입니다. 최신 운동 기구와 쾌적한 환경에서 운동하실 수 있습니다. 전문 트레이너의 상담도 가능하며, 24시간 운영으로 언제든지 편리하게 이용하실 수 있습니다.',
+                mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.1234567890!2d127.02758827431642!3d37.49795899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a61219a43%3A0x3ed8bf8fb80ae22!2z6rCV64Ko6rWs!5e0!3m2!1sko!2skr!4v1699000000000!5m2!1sko!2skr'
+            },
+            gym2: {
+                name: '바디채널 역삼점',
+                badge: '50% 할인',
+                rating: 4.6,
+                reviews: 198,
+                address: '서울 강남구 역삼로 789\n역삼역 3번 출구 도보 3분',
+                image: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&h=400&fit=crop',
+                tags: ['24시간', 'PT', 'GX', '샤워실'],
+                hours: '24시간',
+                closedDays: '연중무휴',
+                phone: '02-2345-6789',
+                parking: '가능 (1시간)',
+                facilities: [
+                    { name: '웨이트 트레이닝 구역', icon: 'dumbbell' },
+                    { name: '유산소 운동 구역', icon: 'activity' },
+                    { name: 'PT 전용 공간', icon: 'user' },
+                    { name: '그룹 운동실', icon: 'users' },
+                    { name: '샤워실', icon: 'droplet' }
+                ],
+                gallery: [
+                    'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1200&h=800&fit=crop'
+                ],
+                prices: [
+                    { name: '1개월 회원권', price: '79,000원', badge: '첫결제 9,900원', popular: false },
+                    { name: '3개월 회원권', price: '219,000원', popular: true },
+                    { name: '6개월 회원권', price: '399,000원', popular: false },
+                    { name: '12개월 회원권', price: '720,000원', popular: false }
+                ],
+                trainers: [
+                    { name: '최서윤 트레이너', photo: 'https://images.unsplash.com/photo-1595078475328-1ab05d0a6a0e?w=200&h=200&fit=crop', specialties: ['PT', '다이어트', '체형교정'], experience: '경력 7년', rating: 4.9, description: 'NASM 공인 퍼스널 트레이너로 개인별 맞춤 운동 프로그램을 제공합니다.' },
+                    { name: '정태영 트레이너', photo: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&h=200&fit=crop', specialties: ['GX', '그룹운동', '스피닝'], experience: '경력 4년', rating: 4.7, description: '에너지 넘치는 그룹 운동 수업으로 즐겁게 운동할 수 있도록 도와드립니다.' }
+                ],
+                reviews: [
+                    { author: '최**', rating: 5, text: 'PT 선생님이 정말 전문적이세요. 3개월 만에 눈에 띄게 달라졌어요!', date: '2024.01.12' },
+                    { author: '정**', rating: 4, text: 'GX 프로그램이 다양해서 좋아요. 특히 요가 클래스 추천합니다.', date: '2024.01.09' }
+                ],
+                description: '역삼역 인근의 편리한 위치에 있는 헬스장입니다. PT와 그룹 운동 프로그램이 다양하게 운영되고 있습니다.',
+                mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.1234567890!2d127.02758827431642!3d37.49795899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a61219a43%3A0x3ed8bf8fb80ae22!2z6rCV64Ko6rWs!5e0!3m2!1sko!2skr!4v1699000000000!5m2!1sko!2skr'
+            },
+            gym3: {
+                name: '바디채널 서초점',
+                badge: null,
+                rating: 4.7,
+                reviews: 256,
+                address: '서울 서초구 서초대로 456\n서초역 1번 출구 앞',
+                image: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=400&fit=crop',
+                tags: ['24시간', '무인', '락커'],
+                hours: '24시간',
+                closedDays: '연중무휴',
+                phone: '02-3456-7890',
+                parking: '불가',
+                facilities: [
+                    { name: '웨이트 트레이닝 구역', icon: 'dumbbell' },
+                    { name: '유산소 운동 구역', icon: 'activity' },
+                    { name: '무인 시스템', icon: 'smartphone' },
+                    { name: '락커룸', icon: 'lock' }
+                ],
+                gallery: [
+                    'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&h=800&fit=crop'
+                ],
+                prices: [
+                    { name: '1개월 회원권', price: '49,000원', popular: false },
+                    { name: '3개월 회원권', price: '139,000원', popular: true },
+                    { name: '6개월 회원권', price: '259,000원', popular: false },
+                    { name: '12개월 회원권', price: '480,000원', popular: false }
+                ],
+                trainers: [],
+                reviews: [
+                    { author: '강**', rating: 5, text: '무인이라 편하고 24시간이라 새벽에도 운동할 수 있어요.', date: '2024.01.11' },
+                    { author: '윤**', rating: 4, text: '가성비 좋은 헬스장입니다. 기구도 충분해요.', date: '2024.01.07' }
+                ],
+                description: '24시간 무인 운영 시스템으로 언제든지 편리하게 이용 가능한 헬스장입니다.',
+                mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.1234567890!2d127.02758827431642!3d37.49795899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a61219a43%3A0x3ed8bf8fb80ae22!2z6rCV64Ko6rWs!5e0!3m2!1sko!2skr!4v1699000000000!5m2!1sko!2skr'
+            },
+            gym4: {
+                name: '바디채널 판교점',
+                badge: 'NEW',
+                rating: 4.9,
+                reviews: 412,
+                address: '경기 성남시 분당구 판교로 321\n판교역 2번 출구 도보 10분',
+                image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&h=400&fit=crop',
+                tags: ['크로스핏', 'PT', '그룹운동', '주차'],
+                hours: '06:00 - 23:00',
+                closedDays: '일요일',
+                phone: '031-4567-8901',
+                parking: '가능 (3시간)',
+                facilities: [
+                    { name: '크로스핏 전용 구역', icon: 'zap' },
+                    { name: '웨이트 트레이닝', icon: 'dumbbell' },
+                    { name: 'PT 전용 공간', icon: 'user' },
+                    { name: '그룹 운동실', icon: 'users' },
+                    { name: '샤워실 & 사우나', icon: 'droplet' }
+                ],
+                gallery: [
+                    'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1200&h=800&fit=crop'
+                ],
+                prices: [
+                    { name: '1개월 회원권', price: '150,000원', badge: '첫결제 29,900원', popular: false },
+                    { name: '3개월 회원권', price: '420,000원', popular: true },
+                    { name: '6개월 회원권', price: '780,000원', popular: false },
+                    { name: '12개월 회원권', price: '1,440,000원', popular: false }
+                ],
+                trainers: [
+                    { name: '강동현 트레이너', photo: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=200&h=200&fit=crop', specialties: ['크로스핏', '올림픽리프팅', '기능성운동'], experience: '경력 9년', rating: 5.0, description: '크로스핏 레벨2 코치 자격증 보유. 올림픽 역도 출신으로 폭발적인 파워를 키워드립니다.' },
+                    { name: '김하늘 트레이너', photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop', specialties: ['체조', '유연성', '재활'], experience: '경력 6년', rating: 4.9, description: '체조 선수 출신으로 유연성과 코어 강화에 특화되어 있습니다.' }
+                ],
+                reviews: [
+                    { author: '조**', rating: 5, text: '크로스핏 프로그램이 정말 체계적이에요. 코치님들도 전문성이 높습니다.', date: '2024.01.13' },
+                    { author: '임**', rating: 5, text: '시설이 최고예요! 새로 생긴 곳이라 깨끗하고 기구도 최신식입니다.', date: '2024.01.10' },
+                    { author: '한**', rating: 4, text: '가격은 좀 있지만 그만큼 가치가 있어요. 주차도 넉넉해서 좋습니다.', date: '2024.01.06' }
+                ],
+                description: '크로스핏과 기능성 트레이닝에 특화된 프리미엄 헬스장입니다. 전문 코치진의 체계적인 프로그램을 경험하실 수 있습니다.',
+                mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.1234567890!2d127.02758827431642!3d37.49795899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a61219a43%3A0x3ed8bf8fb80ae22!2z6rCV64Ko6rWs!5e0!3m2!1sko!2skr!4v1699000000000!5m2!1sko!2skr'
+            },
+            gym5: {
+                name: '바디채널 선릉점',
+                badge: null,
+                rating: 4.5,
+                reviews: 167,
+                address: '서울 강남구 선릉로 567\n선릉역 4번 출구 도보 7분',
+                image: 'https://images.unsplash.com/photo-1558611848-73f7eb4001a1?w=800&h=400&fit=crop',
+                tags: ['웨이트', '유산소', '사우나'],
+                hours: '06:00 - 22:00',
+                closedDays: '월 1회',
+                phone: '02-5678-9012',
+                parking: '가능',
+                facilities: [
+                    { name: '웨이트 트레이닝', icon: 'dumbbell' },
+                    { name: '유산소 운동 구역', icon: 'activity' },
+                    { name: '사우나', icon: 'sun' },
+                    { name: '샤워실', icon: 'droplet' }
+                ],
+                gallery: [
+                    'https://images.unsplash.com/photo-1558611848-73f7eb4001a1?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1200&h=800&fit=crop'
+                ],
+                prices: [
+                    { name: '1개월 회원권', price: '89,000원', popular: false },
+                    { name: '3개월 회원권', price: '249,000원', popular: true },
+                    { name: '6개월 회원권', price: '459,000원', popular: false },
+                    { name: '12개월 회원권', price: '840,000원', popular: false }
+                ],
+                trainers: [
+                    { name: '윤재석 트레이너', photo: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=200&h=200&fit=crop', specialties: ['웨이트', '보디빌딩', '식단관리'], experience: '경력 5년', rating: 4.6, description: '체계적인 근비대 프로그램과 맞춤 식단 관리로 목표 달성을 도와드립니다.' }
+                ],
+                reviews: [
+                    { author: '송**', rating: 5, text: '사우나가 있어서 운동 후 시원하게 씻을 수 있어요!', date: '2024.01.09' },
+                    { author: '신**', rating: 4, text: '조용하고 쾌적한 분위기입니다. 선릉역에서 조금 걷긴 해요.', date: '2024.01.04' }
+                ],
+                description: '선릉역 인근에 위치한 쾌적한 환경의 헬스장입니다. 사우나 시설도 함께 이용하실 수 있습니다.',
+                mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.1234567890!2d127.02758827431642!3d37.49795899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a61219a43%3A0x3ed8bf8fb80ae22!2z6rCV64Ko6rWs!5e0!3m2!1sko!2skr!4v1699000000000!5m2!1sko!2skr'
+            }
+        };
+
+        let currentSlideIndex = 0;
+        let currentGalleryIndex = 0;
+        let currentGym = null;
+
+        function loadGymDetail() {
+            const gym = gymData[gymId];
+            if (!gym) {
+                alert('헬스장 정보를 찾을 수 없습니다.');
+                window.location.href = 'design-02-minimal-monochrome-membership.html';
+                return;
+            }
+
+            currentGym = gym;
+
+            // Set header slider
+            const sliderContainer = document.getElementById('gymHeaderSlider');
+            const dotsContainer = document.getElementById('gymHeaderDots');
+
+            sliderContainer.innerHTML = gym.gallery.map((img, index) => `
+                <div class="gym-header-slide">
+                    <img class="gym-header-image" src="${img}" alt="헬스장 이미지 ${index + 1}" onclick="openGallery(${index})">
+                </div>
+            `).join('');
+
+            dotsContainer.innerHTML = gym.gallery.map((_, index) => `
+                <div class="gym-header-dot ${index === 0 ? 'active' : ''}" onclick="goToSlide(${index})"></div>
+            `).join('');
+
+            // Enable swipe on header
+            let startX = 0;
+            let currentX = 0;
+            const slider = document.getElementById('gymHeaderSlider');
+
+            slider.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+
+            slider.addEventListener('touchmove', (e) => {
+                currentX = e.touches[0].clientX;
+            });
+
+            slider.addEventListener('touchend', () => {
+                const diff = startX - currentX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0 && currentSlideIndex < gym.gallery.length - 1) {
+                        currentSlideIndex++;
+                    } else if (diff < 0 && currentSlideIndex > 0) {
+                        currentSlideIndex--;
+                    }
+                    updateSlide();
+                }
+            });
+
+            // Set badge
+            if (gym.badge) {
+                document.getElementById('gymBadge').innerHTML = `<span class="gym-badge">${gym.badge}</span>`;
+            }
+
+            // Set basic info
+            document.getElementById('gymTitle').textContent = gym.name;
+            document.getElementById('gymRating').textContent = gym.rating;
+            document.getElementById('gymReviews').textContent = `(${gym.reviews}개 리뷰)`;
+            document.getElementById('gymAddress').textContent = gym.address;
+
+            // Set tags
+            const tagsContainer = document.getElementById('gymTags');
+            tagsContainer.innerHTML = gym.tags.map(tag =>
+                `<span class="gym-tag">${tag}</span>`
+            ).join('');
+
+            // Set operation info
+            document.getElementById('gymHours').textContent = gym.hours;
+            document.getElementById('gymClosedDays').textContent = gym.closedDays;
+            document.getElementById('gymPhone').textContent = gym.phone;
+            document.getElementById('gymParking').textContent = gym.parking;
+
+            // Set description
+            document.getElementById('gymDescription').textContent = gym.description;
+
+            // Set facilities
+            const facilitiesContainer = document.getElementById('gymFacilities');
+            facilitiesContainer.innerHTML = gym.facilities.map(facility => `
+                <div class="facility-item">
+                    <div class="facility-icon">
+                        <svg viewBox="0 0 24 24">
+                            ${getFacilityIcon(facility.icon)}
+                        </svg>
+                    </div>
+                    <div class="facility-name">${facility.name}</div>
+                </div>
+            `).join('');
+
+            // Set trainers
+            const trainersContainer = document.getElementById('gymTrainers');
+            if (gym.trainers && gym.trainers.length > 0) {
+                trainersContainer.innerHTML = gym.trainers.map(trainer => `
+                    <div class="trainer-item" onclick="selectTrainer('${trainer.name}')">
+                        <div class="trainer-photo">
+                            <img src="${trainer.photo}" alt="${trainer.name}">
+                        </div>
+                        <div class="trainer-info">
+                            <div class="trainer-header">
+                                <div class="trainer-name">${trainer.name}</div>
+                                <div class="trainer-rating">
+                                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                    <span>${trainer.rating}</span>
+                                </div>
+                            </div>
+                            <div class="trainer-experience">${trainer.experience}</div>
+                            <div class="trainer-specialties">
+                                ${trainer.specialties.map(s => `<span class="trainer-specialty">${s}</span>`).join('')}
+                            </div>
+                            <div class="trainer-description">${trainer.description}</div>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                trainersContainer.innerHTML = '<p style="text-align: center; color: var(--gray-400); padding: 20px; width: 100%;">트레이너 정보가 없습니다.</p>';
+            }
+
+            // Set prices
+            const pricesContainer = document.getElementById('gymPrices');
+            pricesContainer.innerHTML = gym.prices.map(price => `
+                <div class="price-item${price.popular ? ' popular' : ''}" onclick="selectPrice('${price.name}')">
+                    <div class="price-left">
+                        <div class="price-name">${price.name}</div>
+                        ${price.badge ? `<span class="price-badge">${price.badge}</span>` : ''}
+                    </div>
+                    <div class="price-right">
+                        <div class="price-value">${price.price}</div>
+                        ${price.original ? `<div class="price-original">${price.original}</div>` : ''}
+                    </div>
+                </div>
+            `).join('');
+
+            // Set reviews
+            const reviewsContainer = document.getElementById('gymReviewList');
+            reviewsContainer.innerHTML = gym.reviews.map(review => `
+                <div class="review-item">
+                    <div class="review-header">
+                        <span class="review-author">${review.author}</span>
+                        <div class="review-rating">
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <span>${review.rating}</span>
+                        </div>
+                    </div>
+                    <p class="review-text">${review.text}</p>
+                    <div class="review-date">${review.date}</div>
+                </div>
+            `).join('');
+
+            // Set map
+            document.getElementById('gymMap').src = gym.mapUrl;
+        }
+
+        function getFacilityIcon(iconName) {
+            const icons = {
+                'dumbbell': '<path d="M6.5 6.5v11M17.5 6.5v11M3 9.5h4M3 14.5h4M17 9.5h4M17 14.5h4"/>',
+                'activity': '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
+                'users': '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+                'user': '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+                'droplet': '<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>',
+                'car': '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>',
+                'smartphone': '<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>',
+                'lock': '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+                'zap': '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+                'sun': '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>',
+                'wifi': '<path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>'
+            };
+            return icons[iconName] || icons['activity'];
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function shareGym() {
+            alert('헬스장 정보를 공유합니다.');
+        }
+
+        function callGym() {
+            const gym = gymData[gymId];
+            if (gym) {
+                window.location.href = `tel:${gym.phone}`;
+            }
+        }
+
+        function showMap() {
+            const mapSection = document.querySelector('.map-container').parentElement;
+            mapSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function addToFavorites() {
+            alert('찜 목록에 추가되었습니다!');
+        }
+
+        function purchaseMembership() {
+            window.location.href = 'design-02-minimal-monochrome-purchase.html';
+        }
+
+        function selectPrice(priceName) {
+            alert(`${priceName}을(를) 선택하셨습니다.`);
+        }
+
+        function selectTrainer(trainerName) {
+            alert(`${trainerName}와 상담을 예약하시겠습니까?`);
+        }
+
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            updateSlide();
+        }
+
+        function updateSlide() {
+            const slider = document.getElementById('gymHeaderSlider');
+            slider.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+
+            // Update dots
+            document.querySelectorAll('.gym-header-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlideIndex);
+            });
+        }
+
+        function openGallery(startIndex = 0) {
+            currentGalleryIndex = startIndex;
+            const modal = document.getElementById('galleryModal');
+            const content = document.getElementById('galleryModalContent');
+
+            content.innerHTML = currentGym.gallery.map((img, index) => `
+                <div class="gallery-modal-slide">
+                    <img class="gallery-modal-image" src="${img}" alt="헬스장 이미지 ${index + 1}">
+                </div>
+            `).join('');
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Scroll to start index
+            setTimeout(() => {
+                content.scrollLeft = startIndex * window.innerWidth;
+            }, 0);
+
+            // Update counter on scroll
+            content.addEventListener('scroll', updateGalleryCounter);
+            updateGalleryCounter();
+        }
+
+        function closeGallery() {
+            const modal = document.getElementById('galleryModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+
+            const content = document.getElementById('galleryModalContent');
+            content.removeEventListener('scroll', updateGalleryCounter);
+        }
+
+        function updateGalleryCounter() {
+            const content = document.getElementById('galleryModalContent');
+            const scrollLeft = content.scrollLeft;
+            const slideWidth = window.innerWidth;
+            const currentIndex = Math.round(scrollLeft / slideWidth);
+
+            document.getElementById('galleryCounter').textContent =
+                `${currentIndex + 1} / ${currentGym.gallery.length}`;
+        }
+
+        // Load gym detail on page load
+        loadGymDetail();
+    </script>
+</body>
+</html>
