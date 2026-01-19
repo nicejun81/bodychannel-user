@@ -724,6 +724,29 @@
             stroke: none;
         }
 
+        .trainer-price-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .trial-badge {
+            padding: 3px 8px;
+            background: #fff4f0;
+            color: #FF6B35;
+            font-size: 10px;
+            font-weight: 600;
+            border-radius: 4px;
+        }
+
+        .trial-price {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
         .trainer-address {
             font-size: 12px;
             color: var(--gray-400);
@@ -1062,6 +1085,108 @@
             fill: none;
         }
 
+        /* Trainer Recommendation Banner */
+        .trainer-recommend-banner {
+            display: flex;
+            align-items: center;
+            margin: 8px 0 20px;
+            padding: 20px 24px;
+            background: var(--black);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trainer-recommend-banner::before {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            width: 140px;
+            height: 140px;
+            background: rgba(255, 107, 53, 0.15);
+            border-radius: 50%;
+        }
+
+        .trainer-recommend-banner::after {
+            content: '';
+            position: absolute;
+            right: 40px;
+            bottom: -30px;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 50%;
+        }
+
+        .trainer-recommend-banner:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .recommend-icon {
+            width: 52px;
+            height: 52px;
+            background: var(--primary);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-right: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .recommend-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .recommend-content {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .recommend-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .recommend-desc {
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+
+        .recommend-arrow {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .recommend-arrow svg {
+            width: 18px;
+            height: 18px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+
         /* PT Trainer Card Section */
         .pt-trainer-section {
             padding: 16px 0;
@@ -1146,6 +1271,30 @@
             height: 14px;
             fill: #fbbf24;
             stroke: none;
+        }
+
+        .pt-trainer-trial {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--gray-100);
+        }
+
+        .pt-trainer-trial .trial-badge {
+            padding: 3px 8px;
+            background: #fff4f0;
+            color: #FF6B35;
+            font-size: 10px;
+            font-weight: 600;
+            border-radius: 4px;
+        }
+
+        .pt-trainer-trial .trial-price {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--black);
         }
 
         /* Feed Section */
@@ -2903,6 +3052,20 @@
             </div>
         </div>
 
+        <!-- Trainer Recommendation Banner -->
+        <div class="trainer-recommend-banner" onclick="openTrainerRecommend()">
+            <div class="recommend-icon">
+                <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            <div class="recommend-content">
+                <div class="recommend-title">나에게 맞는 트레이너 추천받기</div>
+                <div class="recommend-desc">목표와 운동 스타일에 맞는 트레이너를 찾아드려요</div>
+            </div>
+            <div class="recommend-arrow">
+                <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+        </div>
+
         <!-- Personal Trainer Section -->
         <div class="pt-trainer-section">
             <div class="section-header">
@@ -2923,6 +3086,10 @@
                             <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                             <span>4.9 (127)</span>
                         </div>
+                        <div class="pt-trainer-trial">
+                            <span class="trial-badge">체험권</span>
+                            <span class="trial-price">50,000원</span>
+                        </div>
                     </div>
                 </div>
                 <div class="pt-trainer-card" onclick="bookTrainer(2)">
@@ -2935,6 +3102,10 @@
                             <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                             <span>4.8 (89)</span>
                         </div>
+                        <div class="pt-trainer-trial">
+                            <span class="trial-badge">체험권</span>
+                            <span class="trial-price">45,000원</span>
+                        </div>
                     </div>
                 </div>
                 <div class="pt-trainer-card" onclick="bookTrainer(3)">
@@ -2946,6 +3117,10 @@
                         <div class="pt-trainer-rating">
                             <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                             <span>4.9 (156)</span>
+                        </div>
+                        <div class="pt-trainer-trial">
+                            <span class="trial-badge">체험권</span>
+                            <span class="trial-price">55,000원</span>
                         </div>
                     </div>
                 </div>
@@ -3654,6 +3829,10 @@
         }
 
         // Book Trainer
+        function openTrainerRecommend() {
+            alert('트레이너 추천 페이지로 이동합니다.\n\n목표: 다이어트 / 근력 증가 / 체형 교정\n운동 경험: 초보 / 중급 / 고급\n선호 스타일: 친절한 / 엄격한 / 동기부여형');
+        }
+
         function bookTrainer(trainerId) {
             alert('예약 페이지로 이동합니다.');
             // window.location.href = 'design-02-minimal-monochrome-reservation.html?trainer=' + trainerId;
