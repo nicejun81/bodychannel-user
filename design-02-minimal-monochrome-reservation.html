@@ -794,6 +794,356 @@
             opacity: 1;
             pointer-events: auto;
         }
+
+        /* Lesson Styles */
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            padding: 12px 20px;
+            overflow-x: auto;
+            border-bottom: 1px solid var(--gray-100);
+            -webkit-overflow-scrolling: touch;
+        }
+        .filter-tabs::-webkit-scrollbar { display: none; }
+        .filter-tab {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+        .filter-tab:hover { border-color: var(--gray-400); }
+        .filter-tab.active {
+            background: var(--black);
+            border-color: var(--black);
+            color: var(--white);
+        }
+        .filter-tab svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+        .filter-tab.active svg { stroke: var(--white); }
+
+        .my-lesson-banners {
+            display: flex;
+            gap: 12px;
+            padding: 16px 20px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .my-lesson-banners::-webkit-scrollbar { display: none; }
+        .my-lesson-banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            background: var(--black);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 280px;
+            flex-shrink: 0;
+        }
+        .my-lesson-banner:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .my-lesson-banner.secondary { background: var(--gray-600); }
+        .banner-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .banner-status {
+            padding: 4px 8px;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 10px;
+            font-weight: 700;
+            border-radius: 4px;
+        }
+        .banner-trainer {
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .banner-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .banner-remain {
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .banner-right svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--gray-400);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .date-selector {
+            display: flex;
+            gap: 8px;
+            padding: 16px 20px;
+            overflow-x: auto;
+            border-bottom: 1px solid var(--gray-100);
+            -webkit-overflow-scrolling: touch;
+        }
+        .date-selector::-webkit-scrollbar { display: none; }
+        .date-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 52px;
+            padding: 10px 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .date-item:hover { background: var(--gray-100); }
+        .date-item.active { background: var(--primary); }
+        .date-item.active .date-day,
+        .date-item.active .date-num { color: var(--white); }
+        .date-day {
+            font-size: 12px;
+            color: var(--gray-400);
+            margin-bottom: 4px;
+        }
+        .date-num {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        .gym-info-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            background: var(--gray-100);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .gym-info-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .gym-info-left svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--primary);
+            stroke-width: 2;
+            fill: none;
+        }
+        .gym-info-distance {
+            font-size: 12px;
+            color: var(--gray-400);
+        }
+        .priority-badge {
+            padding: 6px 12px;
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 6px;
+        }
+
+        .schedule-container {
+            display: flex;
+        }
+        .time-list {
+            flex-shrink: 0;
+            width: 65px;
+            border-right: 1px solid var(--gray-100);
+        }
+        .time-item {
+            padding: 16px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            border-bottom: 1px solid var(--gray-100);
+            transition: all 0.2s ease;
+        }
+        .time-item:hover { background: var(--gray-100); }
+        .time-item.active {
+            background: rgba(255, 107, 53, 0.1);
+            position: relative;
+        }
+        .time-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary);
+        }
+        .time-item-time {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--black);
+        }
+        .time-item.active .time-item-time {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        .time-item-status {
+            font-size: 10px;
+            color: var(--gray-400);
+            margin-top: 2px;
+        }
+
+        .trainer-list-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 16px;
+            overflow-y: auto;
+        }
+        .schedule-trainer-card {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .schedule-trainer-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.15);
+        }
+        .schedule-trainer-photo {
+            width: 80px;
+            height: 90px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: var(--gray-200);
+        }
+        .schedule-trainer-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .schedule-trainer-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        .schedule-trainer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex: 1;
+        }
+        .schedule-trainer-name-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .schedule-trainer-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--black);
+        }
+        .schedule-trainer-gym {
+            font-size: 12px;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+        .schedule-trainer-address {
+            font-size: 12px;
+            color: var(--gray-400);
+            margin: 0;
+        }
+        .schedule-trainer-like {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .schedule-trainer-like svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--gray-400);
+            stroke-width: 2;
+            fill: none;
+            transition: all 0.2s ease;
+        }
+        .schedule-trainer-like.active svg {
+            stroke: #ff5252;
+            fill: #ff5252;
+        }
+        .schedule-trainer-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .schedule-trainer-rating-info {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .schedule-trainer-rating-info svg {
+            width: 14px;
+            height: 14px;
+            fill: #FFD700;
+        }
+        .schedule-trainer-rating-info span {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--black);
+        }
+        .schedule-book-btn {
+            padding: 10px 20px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            align-self: flex-start;
+            margin-top: auto;
+            transition: all 0.2s ease;
+        }
+        .schedule-book-btn:hover { background: var(--black); }
+        .empty-slot {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+            font-size: 13px;
+            padding: 40px 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -813,152 +1163,83 @@
 
         <!-- Tabs -->
         <div class="tabs">
-            <button class="tab active" onclick="switchTab('new')">새 예약</button>
+            <button class="tab active" onclick="switchTab('new')">레슨권</button>
             <button class="tab" onclick="switchTab('my')">내 예약</button>
         </div>
 
-        <!-- New Reservation Section -->
+        <!-- Lesson Section -->
         <div class="new-reservation-section" id="newReservation">
-            <!-- Calendar -->
-            <div class="section calendar-section">
-                <h2 class="section-title">날짜 선택</h2>
-                <div class="calendar">
-                    <div class="calendar-header">
-                        <div class="calendar-nav">
-                            <button class="calendar-nav-btn" onclick="prevMonth()">
-                                <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-                            </button>
-                            <button class="calendar-nav-btn" onclick="nextMonth()">
-                                <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-                            </button>
-                        </div>
-                        <div class="calendar-month" id="calendarMonth">2024년 12월</div>
-                    </div>
-                    <div class="calendar-weekdays">
-                        <div class="weekday">일</div>
-                        <div class="weekday">월</div>
-                        <div class="weekday">화</div>
-                        <div class="weekday">수</div>
-                        <div class="weekday">목</div>
-                        <div class="weekday">금</div>
-                        <div class="weekday">토</div>
-                    </div>
-                    <div class="calendar-days" id="calendarDays"></div>
-                </div>
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="filter-tab" onclick="toggleLessonFilter(this)">
+                    <svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line></svg>
+                    필터
+                </button>
+                <button class="filter-tab active" onclick="toggleLessonFilter(this)">바레톤</button>
+                <button class="filter-tab" onclick="toggleLessonFilter(this)">히트35</button>
+                <button class="filter-tab" onclick="toggleLessonFilter(this)">짐그라운드</button>
+                <button class="filter-tab" onclick="toggleLessonFilter(this)">PT</button>
             </div>
 
-            <!-- Time Slots -->
-            <div class="section time-section">
-                <h2 class="section-title">시간 선택</h2>
-                <div class="time-slots" id="timeSlots">
-                    <div class="time-slot" onclick="selectTime(this, '09:00')">
-                        <div class="time-slot-time">09:00</div>
-                        <div class="time-slot-status">예약가능</div>
+            <!-- My Lesson Banners -->
+            <div class="my-lesson-banners">
+                <div class="my-lesson-banner">
+                    <div class="banner-left">
+                        <span class="banner-status">이용중</span>
+                        <span class="banner-trainer">김민수 선생님 PT</span>
                     </div>
-                    <div class="time-slot" onclick="selectTime(this, '10:00')">
-                        <div class="time-slot-time">10:00</div>
-                        <div class="time-slot-status">예약가능</div>
+                    <div class="banner-right">
+                        <span class="banner-remain">7회 남음</span>
+                        <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
                     </div>
-                    <div class="time-slot disabled">
-                        <div class="time-slot-time">11:00</div>
-                        <div class="time-slot-status">마감</div>
+                </div>
+                <div class="my-lesson-banner secondary">
+                    <div class="banner-left">
+                        <span class="banner-status">이용중</span>
+                        <span class="banner-trainer">바레톤 10회</span>
                     </div>
-                    <div class="time-slot" onclick="selectTime(this, '12:00')">
-                        <div class="time-slot-time">12:00</div>
-                        <div class="time-slot-status">예약가능</div>
+                    <div class="banner-right">
+                        <span class="banner-remain">3회 남음</span>
+                        <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
                     </div>
-                    <div class="time-slot" onclick="selectTime(this, '14:00')">
-                        <div class="time-slot-time">14:00</div>
-                        <div class="time-slot-status">예약가능</div>
+                </div>
+                <div class="my-lesson-banner secondary">
+                    <div class="banner-left">
+                        <span class="banner-status">이용중</span>
+                        <span class="banner-trainer">히트35 무제한</span>
                     </div>
-                    <div class="time-slot" onclick="selectTime(this, '15:00')">
-                        <div class="time-slot-time">15:00</div>
-                        <div class="time-slot-status">예약가능</div>
-                    </div>
-                    <div class="time-slot disabled">
-                        <div class="time-slot-time">16:00</div>
-                        <div class="time-slot-status">마감</div>
-                    </div>
-                    <div class="time-slot" onclick="selectTime(this, '17:00')">
-                        <div class="time-slot-time">17:00</div>
-                        <div class="time-slot-status">예약가능</div>
-                    </div>
-                    <div class="time-slot" onclick="selectTime(this, '18:00')">
-                        <div class="time-slot-time">18:00</div>
-                        <div class="time-slot-status">예약가능</div>
-                    </div>
-                    <div class="time-slot" onclick="selectTime(this, '19:00')">
-                        <div class="time-slot-time">19:00</div>
-                        <div class="time-slot-status">예약가능</div>
-                    </div>
-                    <div class="time-slot disabled">
-                        <div class="time-slot-time">20:00</div>
-                        <div class="time-slot-status">마감</div>
-                    </div>
-                    <div class="time-slot" onclick="selectTime(this, '21:00')">
-                        <div class="time-slot-time">21:00</div>
-                        <div class="time-slot-status">예약가능</div>
+                    <div class="banner-right">
+                        <span class="banner-remain">D-23</span>
+                        <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
                     </div>
                 </div>
             </div>
 
-            <!-- Trainer Selection -->
-            <div class="section trainer-section">
-                <h2 class="section-title">트레이너 선택</h2>
-                <div class="trainer-list">
-                    <div class="trainer-card" onclick="selectTrainer(this, '김트레이너')">
-                        <div class="trainer-avatar">
-                            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
-                        </div>
-                        <div class="trainer-name">김트레이너</div>
-                        <div class="trainer-specialty">웨이트 전문</div>
-                    </div>
-                    <div class="trainer-card" onclick="selectTrainer(this, '이트레이너')">
-                        <div class="trainer-avatar">
-                            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
-                        </div>
-                        <div class="trainer-name">이트레이너</div>
-                        <div class="trainer-specialty">다이어트 전문</div>
-                    </div>
-                    <div class="trainer-card" onclick="selectTrainer(this, '박트레이너')">
-                        <div class="trainer-avatar">
-                            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
-                        </div>
-                        <div class="trainer-name">박트레이너</div>
-                        <div class="trainer-specialty">재활 전문</div>
-                    </div>
-                    <div class="trainer-card" onclick="selectTrainer(this, '최트레이너')">
-                        <div class="trainer-avatar">
-                            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
-                        </div>
-                        <div class="trainer-name">최트레이너</div>
-                        <div class="trainer-specialty">체형교정 전문</div>
-                    </div>
-                </div>
+            <!-- Date Selector -->
+            <div class="date-selector" id="lessonDateSelector">
+                <!-- Generated by JavaScript -->
             </div>
 
-            <!-- Reservation Summary -->
-            <div class="section summary-section">
-                <h2 class="section-title">예약 정보</h2>
-                <div class="summary-card">
-                    <div class="summary-row">
-                        <span class="summary-label">날짜</span>
-                        <span class="summary-value" id="summaryDate">날짜를 선택하세요</span>
-                    </div>
-                    <div class="summary-row">
-                        <span class="summary-label">시간</span>
-                        <span class="summary-value" id="summaryTime">시간을 선택하세요</span>
-                    </div>
-                    <div class="summary-row">
-                        <span class="summary-label">트레이너</span>
-                        <span class="summary-value" id="summaryTrainer">트레이너를 선택하세요</span>
-                    </div>
-                    <div class="summary-row">
-                        <span class="summary-label">이용권</span>
-                        <span class="summary-value highlight">PT 20회 패키지 (12회 남음)</span>
-                    </div>
+            <!-- Gym Info Bar -->
+            <div class="gym-info-bar">
+                <div class="gym-info-left">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    바디채널 강남점
+                    <span class="gym-info-distance">| 거리 0m</span>
                 </div>
-                <button class="submit-btn" id="submitBtn" onclick="makeReservation()" disabled>예약하기</button>
+                <span class="priority-badge">회원권 우선</span>
+            </div>
+
+            <!-- Schedule Grid -->
+            <div class="schedule-container">
+                <!-- Time List (Left) -->
+                <div class="time-list" id="lessonTimeList">
+                    <!-- Generated by JavaScript -->
+                </div>
+                <!-- Trainer List (Right) -->
+                <div class="trainer-list-panel" id="lessonTrainerPanel">
+                    <!-- Generated by JavaScript -->
+                </div>
             </div>
         </div>
 
@@ -1102,6 +1383,116 @@
         let selectedDate = null;
         let selectedTime = null;
         let selectedTrainer = null;
+        let selectedLessonTime = '10:00';
+
+        // Lesson Section Functions
+        function initLessonSection() {
+            renderLessonDates();
+            renderLessonTimes();
+            renderLessonTrainers();
+        }
+
+        function toggleLessonFilter(btn) {
+            if (btn.textContent.trim() === '필터') return;
+            document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function renderLessonDates() {
+            const container = document.getElementById('lessonDateSelector');
+            if (!container) return;
+            const days = ['일', '월', '화', '수', '목', '금', '토'];
+            const today = new Date();
+            let html = '';
+            for (let i = 0; i < 14; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + i);
+                const isActive = i === 0 ? 'active' : '';
+                html += `<div class="date-item ${isActive}" onclick="selectLessonDate(this)">
+                    <span class="date-day">${days[date.getDay()]}</span>
+                    <span class="date-num">${date.getDate()}</span>
+                </div>`;
+            }
+            container.innerHTML = html;
+        }
+
+        function selectLessonDate(el) {
+            document.querySelectorAll('.date-item').forEach(d => d.classList.remove('active'));
+            el.classList.add('active');
+            renderLessonTrainers();
+        }
+
+        function renderLessonTimes() {
+            const container = document.getElementById('lessonTimeList');
+            if (!container) return;
+            const times = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
+            let html = '';
+            times.forEach((time, idx) => {
+                const isActive = time === selectedLessonTime ? 'active' : '';
+                const slots = Math.floor(Math.random() * 5);
+                html += `<div class="time-item ${isActive}" onclick="selectLessonTime(this, '${time}')">
+                    <span class="time-item-time">${time}</span>
+                    <span class="time-item-status">${slots}석</span>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function selectLessonTime(el, time) {
+            selectedLessonTime = time;
+            document.querySelectorAll('.time-item').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            renderLessonTrainers();
+        }
+
+        function renderLessonTrainers() {
+            const container = document.getElementById('lessonTrainerPanel');
+            if (!container) return;
+            const trainers = [
+                { name: '김민수', gym: '강남점', img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', rating: 4.9 },
+                { name: '정서연', gym: '서초점', img: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', rating: 4.8 },
+                { name: '한동훈', gym: '역삼점', img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', rating: 4.9 }
+            ];
+            let html = '';
+            trainers.forEach(t => {
+                html += `<div class="schedule-trainer-card">
+                    <div class="schedule-trainer-photo">
+                        <img src="${t.img}" alt="${t.name}">
+                    </div>
+                    <div class="schedule-trainer-info">
+                        <div class="schedule-trainer-header">
+                            <div>
+                                <div class="schedule-trainer-name-row">
+                                    <span class="schedule-trainer-name">${t.name} 선생님</span>
+                                    <span class="schedule-trainer-gym">바디채널 ${t.gym}</span>
+                                </div>
+                                <p class="schedule-trainer-address">서울특별시 강남구</p>
+                            </div>
+                            <div class="schedule-trainer-like" onclick="event.stopPropagation();">
+                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                            </div>
+                        </div>
+                        <div class="schedule-trainer-meta">
+                            <div class="schedule-trainer-rating-info">
+                                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                <span>${t.rating}</span>
+                            </div>
+                            <button class="schedule-book-btn" onclick="bookLesson('${t.name}')">예약</button>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function bookLesson(trainer) {
+            showToast(`${trainer} 선생님 수업이 예약되었습니다!`);
+        }
+
+        // Initialize lesson section on load
+        document.addEventListener('DOMContentLoaded', function() {
+            initLessonSection();
+        });
 
         // 예약 데이터 (데모용)
         const myReservations = [
