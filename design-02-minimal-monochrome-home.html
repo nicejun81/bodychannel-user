@@ -1085,18 +1085,25 @@
             fill: none;
         }
 
+        /* Trainer Section Group */
+        .trainer-section-group {
+            background: var(--black);
+            border-radius: 16px;
+            margin: 8px 0 20px;
+            overflow: hidden;
+        }
+
         /* Trainer Recommendation Banner */
         .trainer-recommend-banner {
             display: flex;
             align-items: center;
-            margin: 8px 0 20px;
             padding: 20px 24px;
-            background: var(--black);
-            border-radius: 12px;
+            background: transparent;
             cursor: pointer;
             transition: all 0.2s ease;
             position: relative;
             overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .trainer-recommend-banner::before {
@@ -1189,7 +1196,49 @@
 
         /* PT Trainer Card Section */
         .pt-trainer-section {
-            padding: 16px 0;
+            padding: 16px 20px 20px;
+        }
+
+        .trainer-section-group .pt-trainer-section .section-header {
+            padding: 0 4px;
+        }
+
+        .trainer-section-group .pt-trainer-section .section-title {
+            color: #fff;
+        }
+
+        .trainer-section-group .pt-trainer-section .section-more {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .trainer-section-group .pt-trainer-section .section-more:hover {
+            color: var(--primary);
+        }
+
+        .trainer-section-group .pt-trainer-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .trainer-section-group .pt-trainer-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .trainer-section-group .pt-trainer-name {
+            color: #fff;
+        }
+
+        .trainer-section-group .pt-trainer-gym {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .trainer-section-group .pt-trainer-rating {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .trainer-section-group .trial-price {
+            color: #fff;
         }
 
         .pt-trainer-scroll {
@@ -3052,8 +3101,10 @@
             </div>
         </div>
 
-        <!-- Trainer Recommendation Banner -->
-        <div class="trainer-recommend-banner" onclick="openTrainerRecommend()">
+        <!-- Trainer Section Group -->
+        <div class="trainer-section-group">
+            <!-- Trainer Recommendation Banner -->
+            <div class="trainer-recommend-banner" onclick="openTrainerRecommend()">
             <div class="recommend-icon">
                 <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
             </div>
@@ -3064,10 +3115,10 @@
             <div class="recommend-arrow">
                 <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
             </div>
-        </div>
+            </div>
 
-        <!-- Personal Trainer Section -->
-        <div class="pt-trainer-section">
+            <!-- Personal Trainer Section -->
+            <div class="pt-trainer-section">
             <div class="section-header">
                 <h2 class="section-title">PT 강사</h2>
                 <a href="#" class="section-more">
@@ -3123,6 +3174,7 @@
                             <span class="trial-price">55,000원</span>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
