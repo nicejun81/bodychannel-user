@@ -801,8 +801,8 @@
         /* Lesson Styles */
         .filter-tabs {
             display: flex;
-            gap: 8px;
-            padding: 12px 20px;
+            gap: 10px;
+            padding: 16px 20px;
             overflow-x: auto;
             border-bottom: 1px solid var(--gray-100);
             -webkit-overflow-scrolling: touch;
@@ -812,7 +812,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            padding: 8px 14px;
+            padding: 10px 16px;
             background: var(--white);
             border: 1px solid var(--gray-200);
             border-radius: 20px;
@@ -900,8 +900,8 @@
 
         .date-selector {
             display: flex;
-            gap: 8px;
-            padding: 16px 20px;
+            gap: 12px;
+            padding: 20px;
             overflow-x: auto;
             border-bottom: 1px solid var(--gray-100);
             -webkit-overflow-scrolling: touch;
@@ -911,8 +911,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-width: 52px;
-            padding: 10px 8px;
+            min-width: 56px;
+            padding: 12px 10px;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -977,7 +977,7 @@
             border-right: 1px solid var(--gray-100);
         }
         .time-item {
-            padding: 16px 8px;
+            padding: 18px 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1018,14 +1018,14 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            padding: 16px;
+            gap: 16px;
+            padding: 20px;
             overflow-y: auto;
         }
         .schedule-trainer-card {
             display: flex;
-            gap: 12px;
-            padding: 12px;
+            gap: 16px;
+            padding: 16px;
             background: var(--white);
             border: 1px solid var(--gray-200);
             border-radius: 12px;
@@ -1049,65 +1049,53 @@
             height: 100%;
             object-fit: cover;
         }
-        .schedule-trainer-info {
+        .schedule-trainer-content {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-        }
-        .schedule-trainer-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            flex: 1;
+            min-width: 0;
+        }
+        .schedule-trainer-info-left {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
         .schedule-trainer-name-row {
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 4px;
         }
         .schedule-trainer-name {
             font-size: 15px;
             font-weight: 700;
             color: var(--black);
         }
+        .schedule-trainer-category {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .schedule-trainer-category.bareton {
+            background: #FF6B35;
+            color: white;
+        }
+        .schedule-trainer-category.hit35 {
+            background: #3B82F6;
+            color: white;
+        }
+        .schedule-trainer-category.gymground {
+            background: #10B981;
+            color: white;
+        }
+        .schedule-trainer-category.pt {
+            background: #8B5CF6;
+            color: white;
+        }
         .schedule-trainer-gym {
             font-size: 12px;
-            color: var(--gray-600);
-            font-weight: 500;
-        }
-        .schedule-trainer-address {
-            font-size: 12px;
             color: var(--gray-400);
-            margin: 0;
-        }
-        .schedule-trainer-like {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-        .schedule-trainer-like svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--gray-400);
-            stroke-width: 2;
-            fill: none;
-            transition: all 0.2s ease;
-        }
-        .schedule-trainer-like.active svg {
-            stroke: #ff5252;
-            fill: #ff5252;
-        }
-        .schedule-trainer-meta {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 10px;
         }
         .schedule-trainer-rating-info {
             display: flex;
@@ -1124,20 +1112,222 @@
             font-weight: 600;
             color: var(--black);
         }
-        .schedule-book-btn {
-            padding: 10px 20px;
-            background: var(--primary);
-            color: var(--white);
-            border: none;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            align-self: flex-start;
-            margin-top: auto;
-            transition: all 0.2s ease;
+        .schedule-trainer-price-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+        }
+        .schedule-trial-badge {
+            font-size: 11px;
+            color: var(--gray-400);
+        }
+        .schedule-trial-price {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--black);
         }
         .schedule-book-btn:hover { background: var(--black); }
+
+        /* PT Trainer List View */
+        .pt-trainer-list-view {
+            display: none;
+        }
+        .pt-trainer-list-view.active {
+            display: block;
+        }
+        .pt-trainer-list {
+            padding: 8px 0;
+        }
+        .pt-trainer-item {
+            display: flex;
+            gap: 16px;
+            padding: 20px;
+            border-bottom: 1px solid var(--gray-100);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .pt-trainer-item:hover {
+            background: var(--gray-100);
+        }
+        .pt-trainer-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: var(--gray-200);
+            position: relative;
+        }
+        .pt-trainer-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .pt-trainer-badge {
+            position: absolute;
+            bottom: 6px;
+            left: 6px;
+            padding: 3px 6px;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 9px;
+            font-weight: 700;
+            border-radius: 4px;
+        }
+        .pt-trainer-info {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .pt-trainer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 4px;
+        }
+        .pt-trainer-name-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .pt-trainer-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black);
+        }
+        .pt-trainer-gym {
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+        .pt-trainer-like {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .pt-trainer-like svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--gray-300);
+            stroke-width: 1.5;
+            fill: none;
+            transition: all 0.2s;
+        }
+        .pt-trainer-like:hover svg {
+            stroke: var(--primary);
+        }
+        .pt-trainer-like.active svg {
+            stroke: var(--primary);
+            fill: var(--primary);
+        }
+        .pt-trainer-address {
+            font-size: 13px;
+            color: var(--gray-400);
+            margin-bottom: 4px;
+        }
+        .pt-trainer-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: auto;
+        }
+        .pt-trainer-rating svg {
+            width: 14px;
+            height: 14px;
+            fill: #FFD700;
+            stroke: none;
+        }
+        .pt-trainer-rating-score {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--black);
+        }
+        .pt-trainer-rating-count {
+            font-size: 12px;
+            color: var(--gray-400);
+        }
+        .pt-trainer-price {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: auto;
+            justify-content: space-between;
+        }
+        .pt-price-right {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+        .pt-trial-badge {
+            padding: 4px 8px;
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 4px;
+        }
+        .pt-price-original {
+            font-size: 13px;
+            color: var(--gray-400);
+            text-decoration: line-through;
+        }
+        .pt-price-discount {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .pt-price-current {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--black);
+        }
+        .pt-price-unit {
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+        .pt-trainer-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 4px 0;
+        }
+        .pt-trainer-category {
+            display: inline-block;
+            width: fit-content;
+            padding: 4px 10px;
+            background: var(--gray-100);
+            color: var(--gray-500);
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 4px;
+        }
+        .pt-trainer-trial {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: auto;
+        }
+        .trial-badge {
+            padding: 4px 8px;
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 4px;
+        }
+        .trial-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
         .empty-slot {
             display: flex;
             align-items: center;
@@ -1171,14 +1361,10 @@
         <div class="new-reservation-section" id="newReservation">
             <!-- Filter Tabs -->
             <div class="filter-tabs">
-                <button class="filter-tab" onclick="toggleLessonFilter(this)">
-                    <svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line></svg>
-                    필터
-                </button>
                 <button class="filter-tab active" onclick="toggleLessonFilter(this)">바레톤</button>
                 <button class="filter-tab" onclick="toggleLessonFilter(this)">히트35</button>
                 <button class="filter-tab" onclick="toggleLessonFilter(this)">짐그라운드</button>
-                <button class="filter-tab" onclick="toggleLessonFilter(this)">PT</button>
+                <button class="filter-tab" onclick="toggleLessonFilter(this)">레슨권 PT</button>
             </div>
 
             <!-- Date Selector -->
@@ -1197,13 +1383,20 @@
             </div>
 
             <!-- Schedule Grid -->
-            <div class="schedule-container">
+            <div class="schedule-container" id="scheduleView">
                 <!-- Time List (Left) -->
                 <div class="time-list" id="lessonTimeList">
                     <!-- Generated by JavaScript -->
                 </div>
                 <!-- Trainer List (Right) -->
                 <div class="trainer-list-panel" id="lessonTrainerPanel">
+                    <!-- Generated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- PT Trainer List View -->
+            <div class="pt-trainer-list-view" id="ptTrainerListView">
+                <div class="pt-trainer-list" id="ptTrainerList">
                     <!-- Generated by JavaScript -->
                 </div>
             </div>
@@ -1350,6 +1543,7 @@
         let selectedTime = null;
         let selectedTrainer = null;
         let selectedLessonTime = '10:00';
+        let selectedLessonDate = 0; // 오늘부터 며칠 후인지
 
         // Lesson Section Functions
         function initLessonSection() {
@@ -1359,9 +1553,72 @@
         }
 
         function toggleLessonFilter(btn) {
-            if (btn.textContent.trim() === '필터') return;
+            const filterText = btn.textContent.trim();
+            if (filterText === '필터') return;
+
             document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+
+            const scheduleView = document.getElementById('scheduleView');
+            const ptListView = document.getElementById('ptTrainerListView');
+            const dateSelector = document.getElementById('lessonDateSelector');
+            const gymInfoBar = document.querySelector('.gym-info-bar');
+
+            // PT 탭이면 리스트 뷰 표시
+            if (filterText === '레슨권 PT') {
+                scheduleView.style.display = 'none';
+                dateSelector.style.display = 'none';
+                gymInfoBar.style.display = 'none';
+                ptListView.classList.add('active');
+                renderPTTrainerList();
+            } else {
+                // 다른 탭이면 스케줄 뷰 표시
+                scheduleView.style.display = 'flex';
+                dateSelector.style.display = 'flex';
+                gymInfoBar.style.display = 'flex';
+                ptListView.classList.remove('active');
+            }
+        }
+
+        function renderPTTrainerList() {
+            const container = document.getElementById('ptTrainerList');
+            if (!container) return;
+
+            const trainers = [
+                { name: '김민수', gym: '바디채널 강남점', address: '서울특별시 강남구 테헤란로 123', img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', rating: 4.9, reviews: 128, hasTrial: true, originalPrice: '88,000원~', discount: '10%', price: '80,000원~' },
+                { name: '정서연', gym: '바디채널 서초점', address: '서울특별시 서초구 서초대로 456', img: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', rating: 4.8, reviews: 85, hasBadge: true, hasTrial: false, price: '70,000원~' },
+                { name: '한동훈', gym: '바디채널 역삼점', address: '서울특별시 강남구 역삼로 789', img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', rating: 4.9, reviews: 56, hasBadge: true, hasTrial: true, originalPrice: '100,000원~', discount: '10%', price: '90,000원~' },
+                { name: '윤미래', gym: '바디채널 판교점', address: '경기도 성남시 분당구 판교로 321', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', rating: 4.7, reviews: 42, hasTrial: false, price: '75,000원~' },
+                { name: '이수진', gym: '바디채널 강남점', address: '서울특별시 강남구 테헤란로 123', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', rating: 4.8, reviews: 95, hasBadge: true, hasTrial: true, originalPrice: '35,000원~', discount: '15%', price: '30,000원~' }
+            ];
+
+            let html = '';
+            trainers.forEach(t => {
+                html += `<div class="pt-trainer-item" onclick="viewPTTrainer('${t.name}')">
+                    <div class="pt-trainer-content">
+                        <span class="pt-trainer-category">PT</span>
+                        <div class="pt-trainer-name">${t.name} 강사</div>
+                        <div class="pt-trainer-gym">${t.gym}</div>
+                        <div class="pt-trainer-rating">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <span>${t.rating} (${t.reviews})</span>
+                        </div>
+                        <div class="pt-trainer-trial">
+                            ${t.hasTrial ? '<span class="trial-badge">체험권</span>' : ''}
+                            <span class="trial-price">${t.price}</span>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function viewPTTrainer(name) {
+            showToast(`${name} 강사 상세 페이지로 이동합니다.`);
+        }
+
+        function togglePTLike(el) {
+            el.classList.toggle('active');
         }
 
         function renderLessonDates() {
@@ -1373,8 +1630,8 @@
             for (let i = 0; i < 14; i++) {
                 const date = new Date(today);
                 date.setDate(today.getDate() + i);
-                const isActive = i === 0 ? 'active' : '';
-                html += `<div class="date-item ${isActive}" onclick="selectLessonDate(this)">
+                const isActive = i === selectedLessonDate ? 'active' : '';
+                html += `<div class="date-item ${isActive}" onclick="selectLessonDate(this, ${i})">
                     <span class="date-day">${days[date.getDay()]}</span>
                     <span class="date-num">${date.getDate()}</span>
                 </div>`;
@@ -1382,9 +1639,11 @@
             container.innerHTML = html;
         }
 
-        function selectLessonDate(el) {
+        function selectLessonDate(el, dateIndex) {
+            selectedLessonDate = dateIndex;
             document.querySelectorAll('.date-item').forEach(d => d.classList.remove('active'));
             el.classList.add('active');
+            renderLessonTimes(); // 시간대 슬롯도 다시 렌더링
             renderLessonTrainers();
         }
 
@@ -1411,39 +1670,49 @@
             renderLessonTrainers();
         }
 
+        // 전체 강사 데이터
+        const allTrainers = [
+            { name: '김민수', gym: '바디채널 강남점', img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', rating: 4.9, reviews: 85, category: 'bareton', categoryName: '바레톤', price: '15,000원', times: ['09:00', '10:00', '14:00', '15:00'] },
+            { name: '정서연', gym: '바디채널 서초점', img: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', rating: 4.8, reviews: 72, category: 'hit35', categoryName: '히트35', price: '18,000원', times: ['10:00', '11:00', '16:00', '17:00'] },
+            { name: '한동훈', gym: '바디채널 역삼점', img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', rating: 4.9, reviews: 93, category: 'gymground', categoryName: '짐그라운드', price: '20,000원', times: ['11:00', '14:00', '18:00', '19:00'] },
+            { name: '박지영', gym: '바디채널 강남점', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', rating: 4.7, reviews: 64, category: 'bareton', categoryName: '바레톤', price: '16,000원', times: ['09:00', '12:00', '15:00', '20:00'] },
+            { name: '이준혁', gym: '바디채널 서초점', img: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', rating: 4.6, reviews: 58, category: 'hit35', categoryName: '히트35', price: '17,000원', times: ['09:00', '10:00', '19:00', '20:00'] },
+            { name: '최유진', gym: '바디채널 역삼점', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', rating: 4.8, reviews: 81, category: 'gymground', categoryName: '짐그라운드', price: '19,000원', times: ['12:00', '16:00', '17:00', '18:00'] }
+        ];
+
         function renderLessonTrainers() {
             const container = document.getElementById('lessonTrainerPanel');
             if (!container) return;
-            const trainers = [
-                { name: '김민수', gym: '강남점', img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', rating: 4.9 },
-                { name: '정서연', gym: '서초점', img: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', rating: 4.8 },
-                { name: '한동훈', gym: '역삼점', img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', rating: 4.9 }
-            ];
+
+            // 선택된 시간에 가능한 강사만 필터링
+            const availableTrainers = allTrainers.filter(t => t.times.includes(selectedLessonTime));
+
+            if (availableTrainers.length === 0) {
+                container.innerHTML = '<div class="empty-slot">선택한 시간에 가능한 강사가 없습니다.</div>';
+                return;
+            }
+
             let html = '';
-            trainers.forEach(t => {
+            availableTrainers.forEach(t => {
                 html += `<div class="schedule-trainer-card">
                     <div class="schedule-trainer-photo">
                         <img src="${t.img}" alt="${t.name}">
                     </div>
-                    <div class="schedule-trainer-info">
-                        <div class="schedule-trainer-header">
-                            <div>
-                                <div class="schedule-trainer-name-row">
-                                    <span class="schedule-trainer-name">${t.name} 강사</span>
-                                    <span class="schedule-trainer-gym">바디채널 ${t.gym}</span>
-                                </div>
-                                <p class="schedule-trainer-address">서울특별시 강남구</p>
+                    <div class="schedule-trainer-content">
+                        <div class="schedule-trainer-info-left">
+                            <div class="schedule-trainer-name-row">
+                                <span class="schedule-trainer-name">${t.name} 강사</span>
+                                <span class="schedule-trainer-category ${t.category}">${t.categoryName}</span>
                             </div>
-                            <div class="schedule-trainer-like" onclick="event.stopPropagation();">
-                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                            <div class="schedule-trainer-gym">${t.gym}</div>
+                            <div class="schedule-trainer-rating-info">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <span>${t.rating} (${t.reviews})</span>
                             </div>
                         </div>
-                        <div class="schedule-trainer-meta">
-                            <div class="schedule-trainer-rating-info">
-                                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                <span>${t.rating}</span>
-                            </div>
-                            <button class="schedule-book-btn" onclick="bookLesson('${t.name}')">예약</button>
+                        <div class="schedule-trainer-price-info">
+                            <span class="schedule-trial-badge">체험권</span>
+                            <span class="schedule-trial-price">${t.price}</span>
                         </div>
                     </div>
                 </div>`;
@@ -1468,8 +1737,11 @@
 
         // Initialize calendar
         function renderCalendar() {
+            const calendarMonthEl = document.getElementById('calendarMonth');
+            if (!calendarMonthEl) return; // 새 예약 탭에서는 캘린더가 없음
+
             const monthNames = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
-            document.getElementById('calendarMonth').textContent = `${currentYear}년 ${monthNames[currentMonth]}`;
+            calendarMonthEl.textContent = `${currentYear}년 ${monthNames[currentMonth]}`;
 
             const firstDay = new Date(currentYear, currentMonth, 1).getDay();
             const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
