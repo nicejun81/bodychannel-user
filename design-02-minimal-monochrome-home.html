@@ -628,21 +628,24 @@
         .trainer-list {
             display: flex;
             flex-direction: column;
+            gap: 12px;
             padding: 0;
         }
 
         .trainer-item {
             display: flex;
             gap: 12px;
-            padding: 12px 20px;
-            border-bottom: 1px solid var(--gray-100);
-            cursor: pointer;
-            transition: background 0.2s ease;
+            padding: 12px;
             background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
         .trainer-item:hover {
-            background: var(--gray-100);
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.15);
         }
 
         .trainer-photo-wrap {
@@ -723,8 +726,7 @@
         .trainer-rating-info svg {
             width: 14px;
             height: 14px;
-            fill: #fbbf24;
-            stroke: none;
+            fill: #FFD700;
         }
 
         .trainer-rating-info span {
@@ -1673,11 +1675,12 @@
             fill: white;
         }
 
-        .event-banner.store .event-banner-icon {
-            background: linear-gradient(135deg, #4F46E5 0%, #7c75f0 100%);
+        .event-banner.video .event-banner-icon {
+            background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
         }
-        .event-banner.store .event-banner-icon svg {
+        .event-banner.video .event-banner-icon svg {
             stroke: white;
+            fill: none;
         }
 
         .event-banner.shop .event-banner-icon {
@@ -2844,17 +2847,11 @@
         <!-- Category Card - 여기어때 스타일 카드 -->
         <div class="category-card">
             <div class="event-banners">
-                <a href="design-02-minimal-monochrome-favorites.html" class="event-banner favorites">
+                <a href="design-02-minimal-monochrome-online-class.html" class="event-banner video">
                     <div class="event-banner-icon">
-                        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
                     </div>
-                    <div class="event-banner-title">내 찜 목록</div>
-                </a>
-                <a href="design-02-minimal-monochrome-membership.html" class="event-banner store">
-                    <div class="event-banner-icon">
-                        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    </div>
-                    <div class="event-banner-title">매장구매</div>
+                    <div class="event-banner-title">온라인 강의</div>
                 </a>
                 <a href="design-02-minimal-monochrome-purchase.html" class="event-banner shop">
                     <div class="event-banner-icon">
@@ -2867,6 +2864,18 @@
                         <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                     </div>
                     <div class="event-banner-title">피드</div>
+                </a>
+                <a href="design-02-minimal-monochrome-activity.html#meetup" class="event-banner meetup">
+                    <div class="event-banner-icon">
+                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <div class="event-banner-title">모임</div>
+                </a>
+                <a href="design-02-minimal-monochrome-favorites.html" class="event-banner favorites">
+                    <div class="event-banner-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    </div>
+                    <div class="event-banner-title">내 찜 목록</div>
                 </a>
                 <div class="event-banner friend">
                     <div class="event-banner-icon">
@@ -2886,12 +2895,6 @@
                     </div>
                     <div class="event-banner-title">엠버서더 지원</div>
                 </div>
-                <a href="design-02-minimal-monochrome-activity.html#meetup" class="event-banner meetup">
-                    <div class="event-banner-icon">
-                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    </div>
-                    <div class="event-banner-title">모임</div>
-                </a>
             </div>
         </div>
 

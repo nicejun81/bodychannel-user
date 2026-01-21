@@ -1150,7 +1150,8 @@
         .pt-trainer-list {
             display: flex;
             flex-direction: column;
-            padding: 0;
+            gap: 12px;
+            padding: 20px;
         }
         .pt-trainer-item {
             display: flex;
@@ -1389,19 +1390,21 @@
             text-align: center;
         }
 
-        /* Trainer Item Styles (like home) */
+        /* Trainer Item Styles (like schedule-trainer-card) */
         .trainer-item {
             display: flex;
             gap: 12px;
-            padding: 12px 20px;
-            border-bottom: 1px solid var(--gray-100);
-            cursor: pointer;
-            transition: background 0.2s ease;
+            padding: 12px;
             background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
         .trainer-item:hover {
-            background: var(--gray-100);
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.15);
         }
 
         .trainer-photo-wrap {
@@ -1470,6 +1473,7 @@
             font-size: 16px;
             font-weight: 700;
             line-height: 1.3;
+            color: var(--black);
         }
 
         .trainer-gym {
@@ -1487,8 +1491,7 @@
         .trainer-rating-info svg {
             width: 14px;
             height: 14px;
-            fill: #fbbf24;
-            stroke: none;
+            fill: #FFD700;
         }
 
         .trainer-rating-info span {
@@ -1503,6 +1506,20 @@
             justify-content: flex-end;
             gap: 5px;
             margin-top: 4px;
+        }
+
+        .trainer-price-info .trial-badge {
+            padding: 0;
+            background: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .trainer-price-info .trial-price {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--black);
         }
     </style>
 </head>
