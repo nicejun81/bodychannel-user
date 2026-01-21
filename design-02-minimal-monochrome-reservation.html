@@ -1148,61 +1148,68 @@
             display: block;
         }
         .pt-trainer-list {
-            padding: 8px 0;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
         }
         .pt-trainer-item {
             display: flex;
-            gap: 16px;
-            padding: 20px;
-            border-bottom: 1px solid var(--gray-100);
+            gap: 12px;
+            padding: 12px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s ease;
         }
         .pt-trainer-item:hover {
-            background: var(--gray-100);
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.15);
+        }
+        .pt-trainer-photo-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            flex-shrink: 0;
+            width: 64px;
         }
         .pt-trainer-photo {
-            width: 100px;
-            height: 100px;
+            width: 64px;
+            height: 64px;
             border-radius: 8px;
             overflow: hidden;
-            flex-shrink: 0;
             background: var(--gray-200);
-            position: relative;
         }
         .pt-trainer-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .pt-trainer-badge {
-            position: absolute;
-            bottom: 6px;
-            left: 6px;
-            padding: 3px 6px;
-            background: var(--primary);
-            color: var(--white);
-            font-size: 9px;
-            font-weight: 700;
+        .pt-trainer-category {
+            width: 64px;
+            text-align: center;
+            padding: 4px 0;
             border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            box-sizing: border-box;
+            background: #8B5CF6;
+            color: white;
         }
-        .pt-trainer-info {
+        .pt-trainer-content {
             flex: 1;
-            min-width: 0;
             display: flex;
             flex-direction: column;
-        }
-        .pt-trainer-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 4px;
+            justify-content: center;
+            gap: 2px;
+            min-width: 0;
         }
         .pt-trainer-name-row {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 8px;
-            flex-wrap: wrap;
         }
         .pt-trainer-name {
             font-size: 16px;
@@ -1210,8 +1217,41 @@
             color: var(--black);
         }
         .pt-trainer-gym {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--gray-400);
+            margin-top: 2px;
+        }
+        .pt-trainer-rating {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .pt-trainer-rating svg {
+            width: 14px;
+            height: 14px;
+            fill: #FFD700;
+        }
+        .pt-trainer-rating span {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-500);
+        }
+        .pt-trainer-trial {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 5px;
+            margin-top: 4px;
+        }
+        .pt-trainer-trial .trial-badge {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .pt-trainer-trial .trial-price {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--black);
         }
         .pt-trainer-like {
             width: 32px;
@@ -1348,6 +1388,122 @@
             padding: 40px 20px;
             text-align: center;
         }
+
+        /* Trainer Item Styles (like home) */
+        .trainer-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--gray-100);
+            cursor: pointer;
+            transition: background 0.2s ease;
+            background: var(--white);
+        }
+
+        .trainer-item:hover {
+            background: var(--gray-100);
+        }
+
+        .trainer-photo-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            flex-shrink: 0;
+            width: 64px;
+        }
+
+        .trainer-photo {
+            width: 64px;
+            height: 64px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .trainer-category-badge {
+            width: 64px;
+            text-align: center;
+            padding: 4px 0;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            box-sizing: border-box;
+        }
+
+        .trainer-category-badge.bareton {
+            background: #FF6B35;
+            color: white;
+        }
+
+        .trainer-category-badge.hit35 {
+            background: #3B82F6;
+            color: white;
+        }
+
+        .trainer-category-badge.gymground {
+            background: #10B981;
+            color: white;
+        }
+
+        .trainer-category-badge.pt {
+            background: #0a0a0a;
+            color: white;
+        }
+
+        .trainer-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2px;
+            min-width: 0;
+        }
+
+        .trainer-name-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .trainer-name {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .trainer-gym {
+            font-size: 14px;
+            color: var(--gray-400);
+            margin-top: 2px;
+        }
+
+        .trainer-rating-info {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .trainer-rating-info svg {
+            width: 14px;
+            height: 14px;
+            fill: #fbbf24;
+            stroke: none;
+        }
+
+        .trainer-rating-info span {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-500);
+        }
+
+        .trainer-price-info {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 5px;
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
@@ -1375,7 +1531,7 @@
                 <button class="filter-tab active" onclick="toggleLessonFilter(this)">바레톤</button>
                 <button class="filter-tab" onclick="toggleLessonFilter(this)">히트35</button>
                 <button class="filter-tab" onclick="toggleLessonFilter(this)">짐그라운드</button>
-                <button class="filter-tab" onclick="toggleLessonFilter(this)">레슨권 PT</button>
+                <button class="filter-tab" onclick="toggleLessonFilter(this)">개인 레슨</button>
             </div>
 
             <!-- Date Selector -->
@@ -1576,7 +1732,7 @@
             const gymInfoBar = document.querySelector('.gym-info-bar');
 
             // PT 탭이면 리스트 뷰 표시
-            if (filterText === '레슨권 PT') {
+            if (filterText === '개인 레슨') {
                 scheduleView.style.display = 'none';
                 dateSelector.style.display = 'none';
                 gymInfoBar.style.display = 'none';
@@ -1605,16 +1761,21 @@
 
             let html = '';
             trainers.forEach(t => {
-                html += `<div class="pt-trainer-item" onclick="viewPTTrainer('${t.name}')">
-                    <div class="pt-trainer-content">
-                        <span class="pt-trainer-category">PT</span>
-                        <div class="pt-trainer-name">${t.name} 강사</div>
-                        <div class="pt-trainer-gym">${t.gym}</div>
-                        <div class="pt-trainer-rating">
-                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                            <span>${t.rating} (${t.reviews})</span>
+                html += `<div class="trainer-item" onclick="viewPTTrainer('${t.name}')">
+                    <div class="trainer-photo-wrap">
+                        <img src="${t.img}" alt="${t.name} 트레이너" class="trainer-photo">
+                        <span class="trainer-category-badge pt">PT</span>
+                    </div>
+                    <div class="trainer-content">
+                        <div class="trainer-name-row">
+                            <span class="trainer-name">${t.name} 강사</span>
+                            <div class="trainer-rating-info">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <span>${t.rating} (${t.reviews})</span>
+                            </div>
                         </div>
-                        <div class="pt-trainer-trial">
+                        <div class="trainer-gym">${t.gym}</div>
+                        <div class="trainer-price-info">
                             ${t.hasTrial ? '<span class="trial-badge">체험권</span>' : ''}
                             <span class="trial-price">${t.price}</span>
                         </div>
