@@ -974,11 +974,11 @@
         }
         .time-list {
             flex-shrink: 0;
-            width: 65px;
+            width: 56px;
             border-right: 1px solid var(--gray-100);
         }
         .time-item {
-            padding: 18px 12px;
+            padding: 12px 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1010,7 +1010,7 @@
             font-weight: 700;
         }
         .time-item-status {
-            font-size: 10px;
+            font-size: 11px;
             color: var(--gray-400);
             margin-top: 2px;
         }
@@ -1019,14 +1019,14 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
             padding: 20px;
             overflow-y: auto;
         }
         .schedule-trainer-card {
             display: flex;
-            gap: 16px;
-            padding: 16px;
+            gap: 12px;
+            padding: 12px;
             background: var(--white);
             border: 1px solid var(--gray-200);
             border-radius: 12px;
@@ -1037,12 +1037,19 @@
             border-color: var(--primary);
             box-shadow: 0 2px 8px rgba(255, 107, 53, 0.15);
         }
+        .schedule-trainer-photo-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            flex-shrink: 0;
+            width: 64px;
+        }
         .schedule-trainer-photo {
-            width: 80px;
-            height: 90px;
+            width: 64px;
+            height: 64px;
             border-radius: 8px;
             overflow: hidden;
-            flex-shrink: 0;
             background: var(--gray-200);
         }
         .schedule-trainer-photo img {
@@ -1053,30 +1060,30 @@
         .schedule-trainer-content {
             flex: 1;
             display: flex;
-            justify-content: space-between;
-            min-width: 0;
-        }
-        .schedule-trainer-info-left {
-            display: flex;
             flex-direction: column;
-            gap: 6px;
+            justify-content: center;
+            gap: 2px;
+            min-width: 0;
         }
         .schedule-trainer-name-row {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 8px;
         }
         .schedule-trainer-name {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--black);
         }
         .schedule-trainer-category {
-            display: inline-block;
-            padding: 3px 8px;
+            width: 64px;
+            text-align: center;
+            padding: 4px 0;
             border-radius: 4px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
+            box-sizing: border-box;
         }
         .schedule-trainer-category.bareton {
             background: #FF6B35;
@@ -1095,13 +1102,14 @@
             color: white;
         }
         .schedule-trainer-gym {
-            font-size: 12px;
+            font-size: 14px;
             color: var(--gray-400);
+            margin-top: 2px;
         }
         .schedule-trainer-rating-info {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
         .schedule-trainer-rating-info svg {
             width: 14px;
@@ -1109,22 +1117,24 @@
             fill: #FFD700;
         }
         .schedule-trainer-rating-info span {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
-            color: var(--black);
+            color: var(--gray-500);
         }
         .schedule-trainer-price-info {
             display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 4px;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 5px;
+            margin-top: 4px;
         }
         .schedule-trial-badge {
-            font-size: 11px;
-            color: var(--gray-400);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
         }
         .schedule-trial-price {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: var(--black);
         }
@@ -1696,21 +1706,21 @@
             let html = '';
             availableTrainers.forEach(t => {
                 html += `<div class="schedule-trainer-card">
-                    <div class="schedule-trainer-photo">
-                        <img src="${t.img}" alt="${t.name}">
+                    <div class="schedule-trainer-photo-wrap">
+                        <div class="schedule-trainer-photo">
+                            <img src="${t.img}" alt="${t.name}">
+                        </div>
+                        <span class="schedule-trainer-category ${t.category}">${t.categoryName}</span>
                     </div>
                     <div class="schedule-trainer-content">
-                        <div class="schedule-trainer-info-left">
-                            <div class="schedule-trainer-name-row">
-                                <span class="schedule-trainer-name">${t.name} 강사</span>
-                                <span class="schedule-trainer-category ${t.category}">${t.categoryName}</span>
-                            </div>
-                            <div class="schedule-trainer-gym">${t.gym}</div>
+                        <div class="schedule-trainer-name-row">
+                            <span class="schedule-trainer-name">${t.name} 강사</span>
                             <div class="schedule-trainer-rating-info">
                                 <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                                 <span>${t.rating} (${t.reviews})</span>
                             </div>
                         </div>
+                        <div class="schedule-trainer-gym">${t.gym}</div>
                         <div class="schedule-trainer-price-info">
                             <span class="schedule-trial-badge">체험권</span>
                             <span class="schedule-trial-price">${t.price}</span>
