@@ -535,6 +535,7 @@
         /* My Reservations */
         .reservations-section {
             display: none;
+            padding: 0 20px;
             animation: slideUp 0.2s ease-out backwards;
         }
 
@@ -546,7 +547,7 @@
             border: 1px solid var(--gray-200);
             border-radius: 16px;
             padding: 20px;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             transition: all 0.2s ease;
         }
 
@@ -1585,11 +1586,11 @@
             if (!container) return;
 
             const trainers = [
-                { name: '김민수', gym: '바디채널 강남점', address: '서울특별시 강남구 테헤란로 123', img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', rating: 4.9, reviews: 128, hasTrial: true, originalPrice: '88,000원~', discount: '10%', price: '80,000원~' },
-                { name: '정서연', gym: '바디채널 서초점', address: '서울특별시 서초구 서초대로 456', img: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', rating: 4.8, reviews: 85, hasBadge: true, hasTrial: false, price: '70,000원~' },
-                { name: '한동훈', gym: '바디채널 역삼점', address: '서울특별시 강남구 역삼로 789', img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', rating: 4.9, reviews: 56, hasBadge: true, hasTrial: true, originalPrice: '100,000원~', discount: '10%', price: '90,000원~' },
-                { name: '윤미래', gym: '바디채널 판교점', address: '경기도 성남시 분당구 판교로 321', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', rating: 4.7, reviews: 42, hasTrial: false, price: '75,000원~' },
-                { name: '이수진', gym: '바디채널 강남점', address: '서울특별시 강남구 테헤란로 123', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', rating: 4.8, reviews: 95, hasBadge: true, hasTrial: true, originalPrice: '35,000원~', discount: '15%', price: '30,000원~' }
+                { name: '김민수', gym: '바디채널 강남점', address: '서울특별시 강남구 테헤란로 123', img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', rating: 4.9, reviews: 128, hasTrial: true, originalPrice: '88,000원~', discount: '10%', price: '1회 / 80,000원~' },
+                { name: '정서연', gym: '바디채널 서초점', address: '서울특별시 서초구 서초대로 456', img: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', rating: 4.8, reviews: 85, hasBadge: true, hasTrial: false, price: '1회 / 70,000원~' },
+                { name: '한동훈', gym: '바디채널 역삼점', address: '서울특별시 강남구 역삼로 789', img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', rating: 4.9, reviews: 56, hasBadge: true, hasTrial: true, originalPrice: '100,000원~', discount: '10%', price: '1회 / 90,000원~' },
+                { name: '윤미래', gym: '바디채널 판교점', address: '경기도 성남시 분당구 판교로 321', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', rating: 4.7, reviews: 42, hasTrial: false, price: '1회 / 75,000원~' },
+                { name: '이수진', gym: '바디채널 강남점', address: '서울특별시 강남구 테헤란로 123', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', rating: 4.8, reviews: 95, hasBadge: true, hasTrial: true, originalPrice: '35,000원~', discount: '15%', price: '1회 / 30,000원~' }
             ];
 
             let html = '';
@@ -1672,12 +1673,12 @@
 
         // 전체 강사 데이터
         const allTrainers = [
-            { name: '김민수', gym: '바디채널 강남점', img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', rating: 4.9, reviews: 85, category: 'bareton', categoryName: '바레톤', price: '15,000원', times: ['09:00', '10:00', '14:00', '15:00'] },
-            { name: '정서연', gym: '바디채널 서초점', img: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', rating: 4.8, reviews: 72, category: 'hit35', categoryName: '히트35', price: '18,000원', times: ['10:00', '11:00', '16:00', '17:00'] },
-            { name: '한동훈', gym: '바디채널 역삼점', img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', rating: 4.9, reviews: 93, category: 'gymground', categoryName: '짐그라운드', price: '20,000원', times: ['11:00', '14:00', '18:00', '19:00'] },
-            { name: '박지영', gym: '바디채널 강남점', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', rating: 4.7, reviews: 64, category: 'bareton', categoryName: '바레톤', price: '16,000원', times: ['09:00', '12:00', '15:00', '20:00'] },
-            { name: '이준혁', gym: '바디채널 서초점', img: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', rating: 4.6, reviews: 58, category: 'hit35', categoryName: '히트35', price: '17,000원', times: ['09:00', '10:00', '19:00', '20:00'] },
-            { name: '최유진', gym: '바디채널 역삼점', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', rating: 4.8, reviews: 81, category: 'gymground', categoryName: '짐그라운드', price: '19,000원', times: ['12:00', '16:00', '17:00', '18:00'] }
+            { name: '김민수', gym: '바디채널 강남점', img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', rating: 4.9, reviews: 85, category: 'bareton', categoryName: '바레톤', price: '2회 / 15,000원', times: ['09:00', '10:00', '14:00', '15:00'] },
+            { name: '정서연', gym: '바디채널 서초점', img: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', rating: 4.8, reviews: 72, category: 'hit35', categoryName: '히트35', price: '3회 / 18,000원', times: ['10:00', '11:00', '16:00', '17:00'] },
+            { name: '한동훈', gym: '바디채널 역삼점', img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', rating: 4.9, reviews: 93, category: 'gymground', categoryName: '짐그라운드', price: '1회 / 20,000원', times: ['11:00', '14:00', '18:00', '19:00'] },
+            { name: '박지영', gym: '바디채널 강남점', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', rating: 4.7, reviews: 64, category: 'bareton', categoryName: '바레톤', price: '2회 / 16,000원', times: ['09:00', '12:00', '15:00', '20:00'] },
+            { name: '이준혁', gym: '바디채널 서초점', img: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', rating: 4.6, reviews: 58, category: 'hit35', categoryName: '히트35', price: '3회 / 17,000원', times: ['09:00', '10:00', '19:00', '20:00'] },
+            { name: '최유진', gym: '바디채널 역삼점', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', rating: 4.8, reviews: 81, category: 'gymground', categoryName: '짐그라운드', price: '1회 / 19,000원', times: ['12:00', '16:00', '17:00', '18:00'] }
         ];
 
         function renderLessonTrainers() {
