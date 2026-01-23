@@ -1014,6 +1014,20 @@
             color: var(--gray-400);
             margin-top: 2px;
         }
+        .time-item.disabled {
+            cursor: not-allowed;
+            opacity: 0.4;
+            background: var(--gray-100);
+        }
+        .time-item.disabled:hover {
+            background: var(--gray-100);
+        }
+        .time-item.disabled .time-item-time {
+            color: var(--gray-400);
+        }
+        .time-item.disabled .time-item-status {
+            color: var(--gray-400);
+        }
 
         .trainer-list-panel {
             flex: 1;
@@ -2579,13 +2593,34 @@
             if (!container) return;
             const times = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
             let html = '';
+
+            // 현재 시간 가져오기
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+
             times.forEach((time, idx) => {
-                const isActive = time === selectedLessonTime ? 'active' : '';
-                const slots = Math.floor(Math.random() * 5);
-                html += `<div class="time-item ${isActive}" onclick="selectLessonTime(this, '${time}')">
-                    <span class="time-item-time">${time}</span>
-                    <span class="time-item-status">${slots}석</span>
-                </div>`;
+                const [hour, minute] = time.split(':').map(Number);
+
+                // 오늘(selectedLessonDate === 0)이고 현재 시간이 지났으면 disabled
+                const isPastTime = selectedLessonDate === 0 && (hour < currentHour || (hour === currentHour && minute <= currentMinute));
+
+                const isActive = time === selectedLessonTime && !isPastTime ? 'active' : '';
+                const isDisabled = isPastTime ? 'disabled' : '';
+                const slots = isPastTime ? 0 : Math.floor(Math.random() * 5);
+                const statusText = isPastTime ? '마감' : `${slots}석`;
+
+                if (isPastTime) {
+                    html += `<div class="time-item ${isDisabled}">
+                        <span class="time-item-time">${time}</span>
+                        <span class="time-item-status">${statusText}</span>
+                    </div>`;
+                } else {
+                    html += `<div class="time-item ${isActive}" onclick="selectLessonTime(this, '${time}')">
+                        <span class="time-item-time">${time}</span>
+                        <span class="time-item-status">${statusText}</span>
+                    </div>`;
+                }
             });
             container.innerHTML = html;
         }

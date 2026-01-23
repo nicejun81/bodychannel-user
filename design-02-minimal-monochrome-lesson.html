@@ -979,12 +979,196 @@
             font-weight: 700;
             border-radius: 6px;
         }
+
+        /* Page Title */
+        .page-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            gap: 8px;
+            padding: 16px 20px;
+            overflow-x: auto;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .category-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-tab {
+            padding: 8px 16px;
+            border: 1px solid var(--gray-300);
+            border-radius: 20px;
+            background: var(--white);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-600);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .category-tab.active {
+            background: var(--black);
+            border-color: var(--black);
+            color: var(--white);
+        }
+
+        /* Trainer List Panel */
+        .trainer-list-panel {
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .schedule-trainer-card {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .schedule-trainer-card:active {
+            background: var(--gray-100);
+        }
+
+        .schedule-trainer-photo-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .schedule-trainer-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .schedule-trainer-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .schedule-trainer-category {
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .schedule-trainer-category.bareton {
+            background: #fce7f3;
+            color: #db2777;
+        }
+
+        .schedule-trainer-category.hit35 {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .schedule-trainer-category.gymground {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .schedule-trainer-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .schedule-trainer-name-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .schedule-trainer-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .schedule-trainer-rating-info {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            color: var(--gray-600);
+        }
+
+        .schedule-trainer-rating-info svg {
+            width: 14px;
+            height: 14px;
+            fill: #fbbf24;
+            stroke: none;
+        }
+
+        .schedule-trainer-gym {
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+
+        .schedule-trainer-price-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .schedule-trial-badge {
+            padding: 3px 8px;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 4px;
+        }
+
+        .schedule-trial-price {
+            font-size: 14px;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header class="header">
+        <div class="page-title">레슨권</div>
+        <div class="header-actions">
+            <button class="header-btn">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            </button>
+        </div>
+    </header>
 
+    <!-- Category Tabs -->
+    <div class="category-tabs">
+        <button class="category-tab active" onclick="filterLesson('all')">전체</button>
+        <button class="category-tab" onclick="filterLesson('bareton')">바레톤</button>
+        <button class="category-tab" onclick="filterLesson('hit35')">히트35</button>
+        <button class="category-tab" onclick="filterLesson('gymground')">짐그라운드</button>
+    </div>
+
+    <!-- Trainer List Panel -->
     <div class="trainer-list-panel" id="lessonTrainerPanel">
-        <div class="schedule-trainer-card" onclick="openTrainerDetail('박지영')">
+        <div class="schedule-trainer-card" data-category="bareton" onclick="openTrainerDetail('박지영')">
             <div class="schedule-trainer-photo-wrap">
                 <div class="schedule-trainer-photo">
                     <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop" alt="박지영">
@@ -1006,7 +1190,8 @@
                 </div>
             </div>
         </div>
-        <div class="schedule-trainer-card" onclick="openTrainerDetail('최유진')">
+
+        <div class="schedule-trainer-card" data-category="gymground" onclick="openTrainerDetail('최유진')">
             <div class="schedule-trainer-photo-wrap">
                 <div class="schedule-trainer-photo">
                     <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop" alt="최유진">
@@ -1028,7 +1213,210 @@
                 </div>
             </div>
         </div>
+
+        <div class="schedule-trainer-card" data-category="hit35" onclick="openTrainerDetail('한동훈')">
+            <div class="schedule-trainer-photo-wrap">
+                <div class="schedule-trainer-photo">
+                    <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop" alt="한동훈">
+                </div>
+                <span class="schedule-trainer-category hit35">히트35</span>
+            </div>
+            <div class="schedule-trainer-content">
+                <div class="schedule-trainer-name-row">
+                    <span class="schedule-trainer-name">한동훈 강사</span>
+                    <div class="schedule-trainer-rating-info">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                        <span>4.9 (93)</span>
+                    </div>
+                </div>
+                <div class="schedule-trainer-gym">바디채널 역삼점</div>
+                <div class="schedule-trainer-price-info">
+                    <span class="schedule-trial-badge">체험권</span>
+                    <span class="schedule-trial-price">10회 / 66,000원</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="schedule-trainer-card" data-category="bareton" onclick="openTrainerDetail('김서연')">
+            <div class="schedule-trainer-photo-wrap">
+                <div class="schedule-trainer-photo">
+                    <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop" alt="김서연">
+                </div>
+                <span class="schedule-trainer-category bareton">바레톤</span>
+            </div>
+            <div class="schedule-trainer-content">
+                <div class="schedule-trainer-name-row">
+                    <span class="schedule-trainer-name">김서연 강사</span>
+                    <div class="schedule-trainer-rating-info">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                        <span>4.8 (72)</span>
+                    </div>
+                </div>
+                <div class="schedule-trainer-gym">바디채널 서초점</div>
+                <div class="schedule-trainer-price-info">
+                    <span class="schedule-trial-badge">체험권</span>
+                    <span class="schedule-trial-price">10회 / 66,000원</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="schedule-trainer-card" data-category="gymground" onclick="openTrainerDetail('이준혁')">
+            <div class="schedule-trainer-photo-wrap">
+                <div class="schedule-trainer-photo">
+                    <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop" alt="이준혁">
+                </div>
+                <span class="schedule-trainer-category gymground">짐그라운드</span>
+            </div>
+            <div class="schedule-trainer-content">
+                <div class="schedule-trainer-name-row">
+                    <span class="schedule-trainer-name">이준혁 강사</span>
+                    <div class="schedule-trainer-rating-info">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                        <span>4.6 (58)</span>
+                    </div>
+                </div>
+                <div class="schedule-trainer-gym">바디채널 판교점</div>
+                <div class="schedule-trainer-price-info">
+                    <span class="schedule-trial-badge">체험권</span>
+                    <span class="schedule-trial-price">10회 / 66,000원</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="schedule-trainer-card" data-category="hit35" onclick="openTrainerDetail('정민아')">
+            <div class="schedule-trainer-photo-wrap">
+                <div class="schedule-trainer-photo">
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop" alt="정민아">
+                </div>
+                <span class="schedule-trainer-category hit35">히트35</span>
+            </div>
+            <div class="schedule-trainer-content">
+                <div class="schedule-trainer-name-row">
+                    <span class="schedule-trainer-name">정민아 강사</span>
+                    <div class="schedule-trainer-rating-info">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                        <span>4.9 (105)</span>
+                    </div>
+                </div>
+                <div class="schedule-trainer-gym">바디채널 강남점</div>
+                <div class="schedule-trainer-price-info">
+                    <span class="schedule-trial-badge">체험권</span>
+                    <span class="schedule-trial-price">10회 / 66,000원</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="schedule-trainer-card" data-category="bareton" onclick="openTrainerDetail('송하늘')">
+            <div class="schedule-trainer-photo-wrap">
+                <div class="schedule-trainer-photo">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop" alt="송하늘">
+                </div>
+                <span class="schedule-trainer-category bareton">바레톤</span>
+            </div>
+            <div class="schedule-trainer-content">
+                <div class="schedule-trainer-name-row">
+                    <span class="schedule-trainer-name">송하늘 강사</span>
+                    <div class="schedule-trainer-rating-info">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                        <span>4.5 (45)</span>
+                    </div>
+                </div>
+                <div class="schedule-trainer-gym">바디채널 역삼점</div>
+                <div class="schedule-trainer-price-info">
+                    <span class="schedule-trial-badge">체험권</span>
+                    <span class="schedule-trial-price">10회 / 66,000원</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="schedule-trainer-card" data-category="gymground" onclick="openTrainerDetail('오승우')">
+            <div class="schedule-trainer-photo-wrap">
+                <div class="schedule-trainer-photo">
+                    <img src="https://images.unsplash.com/photo-1597347316205-36f6c451902a?w=200&h=200&fit=crop" alt="오승우">
+                </div>
+                <span class="schedule-trainer-category gymground">짐그라운드</span>
+            </div>
+            <div class="schedule-trainer-content">
+                <div class="schedule-trainer-name-row">
+                    <span class="schedule-trainer-name">오승우 강사</span>
+                    <div class="schedule-trainer-rating-info">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                        <span>4.7 (68)</span>
+                    </div>
+                </div>
+                <div class="schedule-trainer-gym">바디채널 강남점</div>
+                <div class="schedule-trainer-price-info">
+                    <span class="schedule-trial-badge">체험권</span>
+                    <span class="schedule-trial-price">10회 / 66,000원</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="schedule-trainer-card" data-category="hit35" onclick="openTrainerDetail('윤지수')">
+            <div class="schedule-trainer-photo-wrap">
+                <div class="schedule-trainer-photo">
+                    <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=200&h=200&fit=crop" alt="윤지수">
+                </div>
+                <span class="schedule-trainer-category hit35">히트35</span>
+            </div>
+            <div class="schedule-trainer-content">
+                <div class="schedule-trainer-name-row">
+                    <span class="schedule-trainer-name">윤지수 강사</span>
+                    <div class="schedule-trainer-rating-info">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                        <span>4.8 (89)</span>
+                    </div>
+                </div>
+                <div class="schedule-trainer-gym">바디채널 서초점</div>
+                <div class="schedule-trainer-price-info">
+                    <span class="schedule-trial-badge">체험권</span>
+                    <span class="schedule-trial-price">10회 / 66,000원</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="schedule-trainer-card" data-category="bareton" onclick="openTrainerDetail('강예린')">
+            <div class="schedule-trainer-photo-wrap">
+                <div class="schedule-trainer-photo">
+                    <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=200&h=200&fit=crop" alt="강예린">
+                </div>
+                <span class="schedule-trainer-category bareton">바레톤</span>
+            </div>
+            <div class="schedule-trainer-content">
+                <div class="schedule-trainer-name-row">
+                    <span class="schedule-trainer-name">강예린 강사</span>
+                    <div class="schedule-trainer-rating-info">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                        <span>4.9 (112)</span>
+                    </div>
+                </div>
+                <div class="schedule-trainer-gym">바디채널 판교점</div>
+                <div class="schedule-trainer-price-info">
+                    <span class="schedule-trial-badge">체험권</span>
+                    <span class="schedule-trial-price">10회 / 66,000원</span>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        function filterLesson(category) {
+            document.querySelectorAll('.category-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('.schedule-trainer-card').forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openTrainerDetail(name) {
+            alert(name + ' 강사의 레슨권 상세 페이지로 이동합니다.');
+        }
+    </script>
 
     <!-- Bottom Navigation -->
     <nav class="bottom-nav">
