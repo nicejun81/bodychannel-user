@@ -2273,11 +2273,11 @@
             if (!container) return;
 
             const trainers = [
-                { name: '김민수', gym: '바디채널 강남점', address: '서울특별시 강남구 테헤란로 123', img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', rating: 4.9, reviews: 128, hasTrial: true, originalPrice: '88,000원~', discount: '10%', price: '1회 / 80,000원~' },
-                { name: '정서연', gym: '바디채널 서초점', address: '서울특별시 서초구 서초대로 456', img: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', rating: 4.8, reviews: 85, hasBadge: true, hasTrial: false, price: '1회 / 70,000원~' },
-                { name: '한동훈', gym: '바디채널 역삼점', address: '서울특별시 강남구 역삼로 789', img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', rating: 4.9, reviews: 56, hasBadge: true, hasTrial: true, originalPrice: '100,000원~', discount: '10%', price: '1회 / 90,000원~' },
-                { name: '윤미래', gym: '바디채널 판교점', address: '경기도 성남시 분당구 판교로 321', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', rating: 4.7, reviews: 42, hasTrial: false, price: '1회 / 75,000원~' },
-                { name: '이수진', gym: '바디채널 강남점', address: '서울특별시 강남구 테헤란로 123', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', rating: 4.8, reviews: 95, hasBadge: true, hasTrial: true, originalPrice: '35,000원~', discount: '15%', price: '1회 / 30,000원~' }
+                { name: '김민수', gym: '바디채널 강남점', address: '서울특별시 강남구 테헤란로 123', img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', rating: 4.9, reviews: 128, hasTrial: true, originalPrice: '88,000원~', discount: '10%', price: '10회 / 66,000원' },
+                { name: '정서연', gym: '바디채널 서초점', address: '서울특별시 서초구 서초대로 456', img: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', rating: 4.8, reviews: 85, hasBadge: true, hasTrial: false, price: '10회 / 66,000원' },
+                { name: '한동훈', gym: '바디채널 역삼점', address: '서울특별시 강남구 역삼로 789', img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', rating: 4.9, reviews: 56, hasBadge: true, hasTrial: true, originalPrice: '100,000원~', discount: '10%', price: '10회 / 66,000원' },
+                { name: '윤미래', gym: '바디채널 판교점', address: '경기도 성남시 분당구 판교로 321', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', rating: 4.7, reviews: 42, hasTrial: false, price: '10회 / 66,000원' },
+                { name: '이수진', gym: '바디채널 강남점', address: '서울특별시 강남구 테헤란로 123', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', rating: 4.8, reviews: 95, hasBadge: true, hasTrial: true, originalPrice: '35,000원~', discount: '15%', price: '10회 / 66,000원' }
             ];
 
             let html = '';
@@ -2321,7 +2321,7 @@
                 careers: ['한국무용 전공', '바레톤 마스터 강사 자격증', '필라테스 지도자 자격증', '바레톤 강사 경력 7년'],
                 schedule: [{ day: '월/수/금', time: '09:00, 10:00, 14:00, 15:00' }, { day: '화/목', time: '11:00, 16:00' }, { day: '토요일', time: '10:00, 14:00' }],
                 prices: [{ name: '체험권 2회', price: '15,000원' }, { name: '10회권', price: '150,000원' }, { name: '20회권', price: '280,000원' }],
-                trialPrice: '2회 / 15,000원',
+                trialPrice: '10회 / 66,000원',
                 reviews: [{ name: '서**', avatar: 'https://i.pravatar.cc/150?img=20', rating: 5, date: '2024.01.16', text: '바레톤 처음 해봤는데 너무 재미있어요!' }]
             },
             '정서연': {
@@ -2337,7 +2337,7 @@
                 careers: ['스포츠과학과 졸업', 'ACE 그룹 피트니스 자격증', 'HIIT 전문 트레이너', '히트35 마스터 강사'],
                 schedule: [{ day: '월/수/금', time: '10:00, 11:00, 16:00, 17:00' }, { day: '화/목', time: '09:00, 18:00' }],
                 prices: [{ name: '체험권 3회', price: '18,000원' }, { name: '10회권', price: '180,000원' }, { name: '20회권', price: '320,000원' }],
-                trialPrice: '3회 / 18,000원',
+                trialPrice: '10회 / 66,000원',
                 reviews: [{ name: '한**', avatar: 'https://i.pravatar.cc/150?img=40', rating: 5, date: '2024.01.14', text: '땀이 엄청 나고 개운해요!' }]
             },
             '한동훈': {
@@ -2353,7 +2353,7 @@
                 careers: ['체육교육과 졸업', '기능성 트레이닝 자격증', '케틀벨 전문 강사', '짐그라운드 인증 강사'],
                 schedule: [{ day: '월/수/금', time: '11:00, 14:00, 18:00, 19:00' }, { day: '화/목', time: '10:00, 17:00' }],
                 prices: [{ name: '체험권 1회', price: '20,000원' }, { name: '10회권', price: '200,000원' }, { name: '20회권', price: '360,000원' }],
-                trialPrice: '1회 / 20,000원',
+                trialPrice: '10회 / 66,000원',
                 reviews: [{ name: '임**', avatar: 'https://i.pravatar.cc/150?img=45', rating: 5, date: '2024.01.12', text: '다양한 기구로 운동하니까 지루하지 않아요!' }]
             },
             '박지영': {
@@ -2369,7 +2369,7 @@
                 careers: ['무용학과 졸업', '바레톤 강사 자격증', '필라테스 지도자 2급'],
                 schedule: [{ day: '월/수/금', time: '09:00, 12:00, 15:00, 20:00' }, { day: '토요일', time: '11:00' }],
                 prices: [{ name: '체험권 2회', price: '16,000원' }, { name: '10회권', price: '160,000원' }, { name: '20회권', price: '300,000원' }],
-                trialPrice: '2회 / 16,000원',
+                trialPrice: '10회 / 66,000원',
                 reviews: [{ name: '최**', avatar: 'https://i.pravatar.cc/150?img=25', rating: 4, date: '2024.01.10', text: '설명을 잘해주셔서 따라하기 좋았어요.' }]
             },
             '이준혁': {
@@ -2385,7 +2385,7 @@
                 careers: ['체육학과 졸업', 'HIIT 전문 자격증', '그룹 피트니스 강사'],
                 schedule: [{ day: '월/수/금', time: '09:00, 10:00, 19:00, 20:00' }, { day: '화/목', time: '18:00' }],
                 prices: [{ name: '체험권 3회', price: '17,000원' }, { name: '10회권', price: '170,000원' }, { name: '20회권', price: '310,000원' }],
-                trialPrice: '3회 / 17,000원',
+                trialPrice: '10회 / 66,000원',
                 reviews: [{ name: '강**', avatar: 'https://i.pravatar.cc/150?img=35', rating: 5, date: '2024.01.08', text: '에너지 넘치는 수업이에요!' }]
             },
             '최유진': {
@@ -2401,7 +2401,7 @@
                 careers: ['스포츠지도사 2급', '짐그라운드 마스터', '기능성 트레이닝 전문'],
                 schedule: [{ day: '월/수/금', time: '12:00, 16:00, 17:00, 18:00' }, { day: '화/목', time: '14:00, 19:00' }],
                 prices: [{ name: '체험권 1회', price: '19,000원' }, { name: '10회권', price: '190,000원' }, { name: '20회권', price: '350,000원' }],
-                trialPrice: '1회 / 19,000원',
+                trialPrice: '10회 / 66,000원',
                 reviews: [{ name: '박**', avatar: 'https://i.pravatar.cc/150?img=30', rating: 5, date: '2024.01.11', text: '재미있게 운동할 수 있어요!' }]
             },
             // PT 트레이너
@@ -2418,7 +2418,7 @@
                 careers: ['생활체육지도사 2급', 'ACSM 인증 트레이너', '필라테스 지도자 자격증', '다이어트 전문 코치 5년 경력'],
                 schedule: [{ day: '월 - 금', time: '07:00 - 21:00' }, { day: '토요일', time: '10:00 - 17:00' }],
                 prices: [{ name: '체험권 1회', price: '30,000원' }, { name: '10회권', price: '480,000원' }, { name: '20회권', price: '900,000원' }],
-                trialPrice: '1회 / 30,000원',
+                trialPrice: '10회 / 66,000원',
                 reviews: [{ name: '김**', avatar: 'https://i.pravatar.cc/150?img=10', rating: 5, date: '2024.01.15', text: '체형교정에 정말 효과적이에요!' }]
             },
             '윤미래': {
@@ -2434,7 +2434,7 @@
                 careers: ['체육학과 졸업', 'NASM-CPT 자격증', '재활운동 전문'],
                 schedule: [{ day: '월 - 금', time: '09:00 - 20:00' }, { day: '토요일', time: '10:00 - 16:00' }],
                 prices: [{ name: '체험권 1회', price: '75,000원' }, { name: '10회권', price: '700,000원' }],
-                trialPrice: '1회 / 75,000원',
+                trialPrice: '10회 / 66,000원',
                 reviews: [{ name: '이**', avatar: 'https://i.pravatar.cc/150?img=15', rating: 5, date: '2024.01.12', text: '친절하고 전문적이에요!' }]
             }
         };
@@ -2599,12 +2599,12 @@
 
         // 전체 강사 데이터
         const allTrainers = [
-            { name: '김민수', gym: '바디채널 강남점', img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', rating: 4.9, reviews: 85, category: 'bareton', categoryName: '바레톤', price: '2회 / 15,000원', times: ['09:00', '10:00', '14:00', '15:00'] },
-            { name: '정서연', gym: '바디채널 서초점', img: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', rating: 4.8, reviews: 72, category: 'hit35', categoryName: '히트35', price: '3회 / 18,000원', times: ['10:00', '11:00', '16:00', '17:00'] },
-            { name: '한동훈', gym: '바디채널 역삼점', img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', rating: 4.9, reviews: 93, category: 'gymground', categoryName: '짐그라운드', price: '1회 / 20,000원', times: ['11:00', '14:00', '18:00', '19:00'] },
-            { name: '박지영', gym: '바디채널 강남점', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', rating: 4.7, reviews: 64, category: 'bareton', categoryName: '바레톤', price: '2회 / 16,000원', times: ['09:00', '12:00', '15:00', '20:00'] },
-            { name: '이준혁', gym: '바디채널 서초점', img: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', rating: 4.6, reviews: 58, category: 'hit35', categoryName: '히트35', price: '3회 / 17,000원', times: ['09:00', '10:00', '19:00', '20:00'] },
-            { name: '최유진', gym: '바디채널 역삼점', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', rating: 4.8, reviews: 81, category: 'gymground', categoryName: '짐그라운드', price: '1회 / 19,000원', times: ['12:00', '16:00', '17:00', '18:00'] }
+            { name: '김민수', gym: '바디채널 강남점', img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', rating: 4.9, reviews: 85, category: 'bareton', categoryName: '바레톤', price: '10회 / 66,000원', times: ['09:00', '10:00', '14:00', '15:00'] },
+            { name: '정서연', gym: '바디채널 서초점', img: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', rating: 4.8, reviews: 72, category: 'hit35', categoryName: '히트35', price: '10회 / 66,000원', times: ['10:00', '11:00', '16:00', '17:00'] },
+            { name: '한동훈', gym: '바디채널 역삼점', img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', rating: 4.9, reviews: 93, category: 'gymground', categoryName: '짐그라운드', price: '10회 / 66,000원', times: ['11:00', '14:00', '18:00', '19:00'] },
+            { name: '박지영', gym: '바디채널 강남점', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', rating: 4.7, reviews: 64, category: 'bareton', categoryName: '바레톤', price: '10회 / 66,000원', times: ['09:00', '12:00', '15:00', '20:00'] },
+            { name: '이준혁', gym: '바디채널 서초점', img: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', rating: 4.6, reviews: 58, category: 'hit35', categoryName: '히트35', price: '10회 / 66,000원', times: ['09:00', '10:00', '19:00', '20:00'] },
+            { name: '최유진', gym: '바디채널 역삼점', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', rating: 4.8, reviews: 81, category: 'gymground', categoryName: '짐그라운드', price: '10회 / 66,000원', times: ['12:00', '16:00', '17:00', '18:00'] }
         ];
 
         function renderLessonTrainers() {
