@@ -655,12 +655,19 @@
             gap: 4px;
             flex-shrink: 0;
             width: 64px;
+            position: relative;
         }
 
         .trainer-photo {
             width: 64px;
             height: 64px;
             border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .trainer-photo img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
 
@@ -680,29 +687,31 @@
             gap: 8px;
         }
 
-        .trainer-category-badge {
-            width: 64px;
-            text-align: center;
-            padding: 4px 0;
-            border-radius: 4px;
-            font-size: 12px;
+        .schedule-trainer-category {
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 10px;
             font-weight: 600;
-            box-sizing: border-box;
+            white-space: nowrap;
         }
 
-        .trainer-category-badge.bareton {
-            background: #FF6B35;
-            color: white;
+        .schedule-trainer-category.bareton {
+            background: #fce7f3;
+            color: #db2777;
         }
 
-        .trainer-category-badge.hit35 {
-            background: #3B82F6;
-            color: white;
+        .schedule-trainer-category.hit35 {
+            background: #dbeafe;
+            color: #2563eb;
         }
 
-        .trainer-category-badge.gymground {
-            background: #10B981;
-            color: white;
+        .schedule-trainer-category.gymground {
+            background: #dcfce7;
+            color: #16a34a;
         }
 
         .trainer-name {
@@ -3433,8 +3442,10 @@
             <div class="trainer-list">
                 <div class="trainer-item" onclick="bookTrainer(4)">
                     <div class="trainer-photo-wrap">
-                        <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face" alt="김민수 트레이너" class="trainer-photo">
-                        <span class="trainer-category-badge bareton">바레톤</span>
+                        <div class="trainer-photo">
+                            <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face" alt="김민수 트레이너">
+                        </div>
+                        <span class="schedule-trainer-category bareton">바레톤</span>
                     </div>
                     <div class="trainer-content">
                         <div class="trainer-name-row">
@@ -3453,8 +3464,10 @@
                 </div>
                 <div class="trainer-item" onclick="bookTrainer(5)">
                     <div class="trainer-photo-wrap">
-                        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop&crop=face" alt="박지영 트레이너" class="trainer-photo">
-                        <span class="trainer-category-badge hit35">히트35</span>
+                        <div class="trainer-photo">
+                            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop&crop=face" alt="박지영 트레이너">
+                        </div>
+                        <span class="schedule-trainer-category hit35">히트35</span>
                     </div>
                     <div class="trainer-content">
                         <div class="trainer-name-row">
@@ -3473,8 +3486,10 @@
                 </div>
                 <div class="trainer-item" onclick="bookTrainer(6)">
                     <div class="trainer-photo-wrap">
-                        <img src="https://images.unsplash.com/photo-1597347316205-36f6c451902a?w=200&h=200&fit=crop&crop=face" alt="이준혁 트레이너" class="trainer-photo">
-                        <span class="trainer-category-badge gymground">짐그라운드</span>
+                        <div class="trainer-photo">
+                            <img src="https://images.unsplash.com/photo-1597347316205-36f6c451902a?w=200&h=200&fit=crop&crop=face" alt="이준혁 트레이너">
+                        </div>
+                        <span class="schedule-trainer-category gymground">짐그라운드</span>
                     </div>
                     <div class="trainer-content">
                         <div class="trainer-name-row">

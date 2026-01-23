@@ -1428,6 +1428,7 @@
             gap: 4px;
             flex-shrink: 0;
             width: 64px;
+            position: relative;
         }
 
         .trainer-photo {
@@ -1437,34 +1438,36 @@
             object-fit: cover;
         }
 
-        .trainer-category-badge {
-            width: 64px;
-            text-align: center;
-            padding: 4px 0;
-            border-radius: 4px;
-            font-size: 12px;
+        .schedule-trainer-category {
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 10px;
             font-weight: 600;
-            box-sizing: border-box;
+            white-space: nowrap;
         }
 
-        .trainer-category-badge.bareton {
-            background: #FF6B35;
-            color: white;
+        .schedule-trainer-category.bareton {
+            background: #fce7f3;
+            color: #db2777;
         }
 
-        .trainer-category-badge.hit35 {
-            background: #3B82F6;
-            color: white;
+        .schedule-trainer-category.hit35 {
+            background: #dbeafe;
+            color: #2563eb;
         }
 
-        .trainer-category-badge.gymground {
-            background: #10B981;
-            color: white;
+        .schedule-trainer-category.gymground {
+            background: #dcfce7;
+            color: #16a34a;
         }
 
-        .trainer-category-badge.pt {
-            background: #0a0a0a;
-            color: white;
+        .schedule-trainer-category.pt {
+            background: #fef3c7;
+            color: #d97706;
         }
 
         .trainer-content {
@@ -2299,7 +2302,7 @@
                 html += `<div class="trainer-item" onclick="viewPTTrainer('${t.name}')">
                     <div class="trainer-photo-wrap">
                         <img src="${t.img}" alt="${t.name} 트레이너" class="trainer-photo">
-                        <span class="trainer-category-badge pt">PT</span>
+                        <span class="schedule-trainer-category pt">PT</span>
                     </div>
                     <div class="trainer-content">
                         <div class="trainer-name-row">
