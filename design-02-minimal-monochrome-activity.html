@@ -515,6 +515,13 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            overflow: hidden;
+        }
+
+        .meetup-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .meetup-image svg {
@@ -810,7 +817,7 @@
                         <div class="story-item">
                             <div class="story-avatar">
                                 <div class="story-avatar-inner">
-                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+                                    <img src=".playwright-mcp/김트레이너_프로필.jpg" alt="김트레이너" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
                                 </div>
                             </div>
                             <span class="story-name">김트레이너</span>
@@ -818,7 +825,7 @@
                         <div class="story-item">
                             <div class="story-avatar">
                                 <div class="story-avatar-inner">
-                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+                                    <img src=".playwright-mcp/헬스왕_프로필.jpg" alt="헬스왕" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
                                 </div>
                             </div>
                             <span class="story-name">헬스왕</span>
@@ -826,7 +833,7 @@
                         <div class="story-item">
                             <div class="story-avatar seen">
                                 <div class="story-avatar-inner">
-                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+                                    <img src=".playwright-mcp/운동하는직장인_프로필2.jpg" alt="운동하는직장인" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
                                 </div>
                             </div>
                             <span class="story-name">운동하는직장인</span>
@@ -834,7 +841,7 @@
                         <div class="story-item">
                             <div class="story-avatar">
                                 <div class="story-avatar-inner">
-                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+                                    <img src=".playwright-mcp/필라테스요정_프로필.png.jpg" alt="필라테스요정" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
                                 </div>
                             </div>
                             <span class="story-name">필라테스요정</span>
@@ -842,7 +849,7 @@
                         <div class="story-item">
                             <div class="story-avatar seen">
                                 <div class="story-avatar-inner">
-                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+                                    <img src=".playwright-mcp/크로스핏러_프로필.jpg" alt="크로스핏러" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
                                 </div>
                             </div>
                             <span class="story-name">크로스핏러</span>
@@ -855,7 +862,7 @@
                     <div class="post-header">
                         <div class="post-user">
                             <div class="post-avatar">
-                                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+                                <img src=".playwright-mcp/김트레이너_프로필.jpg" alt="김트레이너" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
                             </div>
                             <div class="post-user-info">
                                 <span class="post-username">김트레이너</span>
@@ -867,9 +874,7 @@
                         </button>
                     </div>
                     <div class="post-image">
-                        <div class="post-image-placeholder">
-                            <svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M6.5 17.5h11M4 10h2.5v4H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zM17.5 10H20a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2.5v-4zM6.5 8v8M17.5 8v8M9 10v4M15 10v4"/></svg>
-                        </div>
+                        <img src=".playwright-mcp/김트레이너.jpg" alt="김트레이너 운동 사진" style="width:100%;height:100%;object-fit:cover;">
                     </div>
                     <div class="post-actions">
                         <div class="post-actions-left">
@@ -902,7 +907,7 @@
                     <div class="post-header">
                         <div class="post-user">
                             <div class="post-avatar">
-                                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+                                <img src=".playwright-mcp/헬스왕_프로필.jpg" alt="헬스왕" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
                             </div>
                             <div class="post-user-info">
                                 <span class="post-username">헬스왕</span>
@@ -914,9 +919,7 @@
                         </button>
                     </div>
                     <div class="post-image">
-                        <div class="post-image-placeholder">
-                            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                        </div>
+                        <img src=".playwright-mcp/헬스왕.png" alt="헬스왕 운동 기록" style="width:100%;height:100%;object-fit:cover;">
                     </div>
                     <div class="post-actions">
                         <div class="post-actions-left">
@@ -949,7 +952,7 @@
                     <div class="post-header">
                         <div class="post-user">
                             <div class="post-avatar">
-                                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+                                <img src=".playwright-mcp/필라테스요정_프로필.png.jpg" alt="필라테스요정" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
                             </div>
                             <div class="post-user-info">
                                 <span class="post-username">필라테스요정</span>
@@ -961,9 +964,7 @@
                         </button>
                     </div>
                     <div class="post-image">
-                        <div class="post-image-placeholder">
-                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
-                        </div>
+                        <img src=".playwright-mcp/필라테스요정.png" alt="필라테스요정 운동 사진" style="width:100%;height:100%;object-fit:cover;">
                     </div>
                     <div class="post-actions">
                         <div class="post-actions-left">
@@ -1012,7 +1013,7 @@
                 <div class="meetup-list">
                     <div class="meetup-card">
                         <div class="meetup-image">
-                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+                            <img src=".playwright-mcp/한강 러닝 크루 매주 토요일 아침 달리기.jpg" alt="한강 러닝 크루">
                             <span class="meetup-badge">HOT</span>
                         </div>
                         <div class="meetup-content">
@@ -1049,7 +1050,7 @@
 
                     <div class="meetup-card">
                         <div class="meetup-image">
-                            <svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M6.5 17.5h11M4 10h2.5v4H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zM17.5 10H20a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2.5v-4z"/></svg>
+                            <img src=".playwright-mcp/강남 헬스 번개 같이 운동하고 식단도 공유해요!.jpg" alt="강남 헬스 번개">
                             <span class="meetup-badge new">NEW</span>
                         </div>
                         <div class="meetup-content">
@@ -1083,7 +1084,7 @@
 
                     <div class="meetup-card">
                         <div class="meetup-image">
-                            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                            <img src=".playwright-mcp/크로스핏 초보 모임 함께 시작해요!.jpg" alt="크로스핏 초보 모임">
                             <span class="meetup-badge full">마감</span>
                         </div>
                         <div class="meetup-content">
@@ -1120,7 +1121,7 @@
 
                     <div class="meetup-card">
                         <div class="meetup-image">
-                            <svg viewBox="0 0 24 24"><path d="M18 8c0-3.3-2.7-6-6-6S6 4.7 6 8c0 4.5 6 11 6 11s6-6.5 6-11z"/><circle cx="12" cy="8" r="2"/></svg>
+                            <img src=".playwright-mcp/북한산 등산 모임 초보도 환영!.jpg" alt="북한산 등산 모임">
                         </div>
                         <div class="meetup-content">
                             <span class="meetup-category">등산</span>

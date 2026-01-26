@@ -1058,6 +1058,7 @@
             gap: 4px;
             flex-shrink: 0;
             width: 64px;
+            position: relative;
         }
         .schedule-trainer-photo {
             width: 64px;
@@ -1468,6 +1469,21 @@
         .schedule-trainer-category.pt {
             background: #fef3c7;
             color: #d97706;
+        }
+
+        .schedule-trainer-category.pilates {
+            background: #f3e8ff;
+            color: #9333ea;
+        }
+
+        .schedule-trainer-category.yoga {
+            background: #ecfdf5;
+            color: #059669;
+        }
+
+        .schedule-trainer-category.crossfit {
+            background: #fef2f2;
+            color: #dc2626;
         }
 
         .trainer-content {
@@ -2247,11 +2263,34 @@
         let selectedDate = null;
         let selectedTime = null;
         let selectedTrainer = null;
-        let selectedLessonTime = '10:00';
+        let selectedLessonTime = null; // 현재 시간 기준으로 초기화됨
         let selectedLessonDate = 0; // 오늘부터 며칠 후인지
+
+        // 현재 시간에 가장 가까운 예약 가능 시간 찾기
+        function getDefaultLessonTime() {
+            const times = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+
+            // 오늘인 경우, 현재 시간 이후의 첫 번째 시간대 찾기
+            if (selectedLessonDate === 0) {
+                for (const time of times) {
+                    const [hour, minute] = time.split(':').map(Number);
+                    if (hour > currentHour || (hour === currentHour && minute > currentMinute)) {
+                        return time;
+                    }
+                }
+                // 오늘 남은 시간이 없으면 내일 첫 시간
+                return times[0];
+            }
+            // 다른 날이면 첫 번째 시간
+            return times[0];
+        }
 
         // Lesson Section Functions
         function initLessonSection() {
+            selectedLessonTime = getDefaultLessonTime();
             renderLessonDates();
             renderLessonTimes();
             renderLessonTrainers();
@@ -2610,7 +2649,7 @@
 
                 const isActive = time === selectedLessonTime && !isPastTime ? 'active' : '';
                 const isDisabled = isPastTime ? 'disabled' : '';
-                const slots = isPastTime ? 0 : Math.floor(Math.random() * 5);
+                const slots = isPastTime ? 0 : Math.floor(Math.random() * 8) + 3;
                 const statusText = isPastTime ? '마감' : `${slots}석`;
 
                 if (isPastTime) {
@@ -2637,9 +2676,14 @@
 
         // 전체 강사 데이터
         const allTrainers = [
-            { name: '한동훈', gym: '바디채널 역삼점', img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', rating: 4.9, reviews: 93, category: 'gymground', categoryName: '짐그라운드', price: '10회 / 66,000원', times: ['11:00', '14:00', '18:00', '19:00'] },
-            { name: '박지영', gym: '바디채널 강남점', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', rating: 4.7, reviews: 64, category: 'bareton', categoryName: '바레톤', price: '10회 / 66,000원', times: ['09:00', '12:00', '15:00', '20:00'] },
-            { name: '최유진', gym: '바디채널 역삼점', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', rating: 4.8, reviews: 81, category: 'gymground', categoryName: '짐그라운드', price: '10회 / 66,000원', times: ['12:00', '16:00', '17:00', '18:00'] }
+            { name: '한동훈', gym: '바디채널 역삼점', img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', rating: 4.9, reviews: 93, category: 'gymground', categoryName: '짐그라운드', price: '10회 / 66,000원', times: ['09:00', '10:00', '11:00', '14:00', '18:00', '19:00'] },
+            { name: '박지영', gym: '바디채널 강남점', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', rating: 4.7, reviews: 64, category: 'bareton', categoryName: '바레톤', price: '10회 / 66,000원', times: ['09:00', '10:00', '12:00', '15:00', '16:00', '20:00'] },
+            { name: '최유진', gym: '바디채널 역삼점', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', rating: 4.8, reviews: 81, category: 'gymground', categoryName: '짐그라운드', price: '10회 / 66,000원', times: ['10:00', '11:00', '12:00', '16:00', '17:00', '18:00'] },
+            { name: '김민수', gym: '바디채널 강남점', img: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', rating: 4.6, reviews: 72, category: 'pt', categoryName: 'PT', price: '10회 / 80,000원', times: ['09:00', '11:00', '14:00', '15:00', '17:00', '19:00', '20:00'] },
+            { name: '이수현', gym: '바디채널 서초점', img: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', rating: 4.9, reviews: 105, category: 'pilates', categoryName: '필라테스', price: '10회 / 70,000원', times: ['09:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00'] },
+            { name: '정예린', gym: '바디채널 판교점', img: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=200&h=200&fit=crop', rating: 4.8, reviews: 88, category: 'yoga', categoryName: '요가', price: '10회 / 65,000원', times: ['10:00', '11:00', '12:00', '15:00', '17:00', '19:00'] },
+            { name: '오진호', gym: '바디채널 역삼점', img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', rating: 4.5, reviews: 56, category: 'crossfit', categoryName: '크로스핏', price: '10회 / 75,000원', times: ['09:00', '14:00', '15:00', '16:00', '18:00', '19:00', '20:00'] },
+            { name: '송하윤', gym: '바디채널 강남점', img: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', rating: 4.7, reviews: 67, category: 'bareton', categoryName: '바레톤', price: '10회 / 66,000원', times: ['10:00', '11:00', '14:00', '16:00', '17:00', '20:00'] }
         ];
 
         function renderLessonTrainers() {

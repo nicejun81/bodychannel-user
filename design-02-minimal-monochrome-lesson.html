@@ -232,32 +232,45 @@
             fill: none;
         }
 
-        /* Trainer List */
+        /* Trainer List - Matching Home Page Exactly */
         .trainer-list {
-            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 16px 20px;
         }
 
         .trainer-item {
             display: flex;
-            gap: 16px;
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--gray-100);
+            gap: 12px;
+            padding: 12px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s ease;
         }
 
         .trainer-item:hover {
-            background: var(--gray-100);
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.15);
+        }
+
+        .trainer-photo-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            flex-shrink: 0;
+            width: 64px;
+            position: relative;
         }
 
         .trainer-photo {
-            width: 100px;
-            height: 100px;
+            width: 64px;
+            height: 64px;
             border-radius: 8px;
             overflow: hidden;
-            flex-shrink: 0;
-            background: var(--gray-200);
-            position: relative;
         }
 
         .trainer-photo img {
@@ -266,101 +279,69 @@
             object-fit: cover;
         }
 
-        .trainer-badge {
-            position: absolute;
-            bottom: 6px;
-            left: 6px;
-            padding: 3px 6px;
-            background: var(--primary);
-            color: var(--white);
-            font-size: 9px;
-            font-weight: 700;
-            border-radius: 4px;
-        }
-
-        .trainer-info {
+        .trainer-content {
             flex: 1;
-            min-width: 0;
             display: flex;
             flex-direction: column;
-        }
-
-        .trainer-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 4px;
+            justify-content: center;
+            gap: 2px;
+            min-width: 0;
         }
 
         .trainer-name-row {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 8px;
-            flex-wrap: wrap;
         }
 
         .trainer-name {
             font-size: 16px;
             font-weight: 700;
-            color: var(--black);
+            line-height: 1.3;
         }
 
         .trainer-gym {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--gray-400);
+            margin-top: 2px;
         }
 
-        .trainer-like {
-            width: 32px;
-            height: 32px;
+        .trainer-rating-info {
             display: flex;
             align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            flex-shrink: 0;
+            gap: 3px;
         }
 
-        .trainer-like svg {
-            width: 22px;
-            height: 22px;
-            stroke: var(--gray-300);
-            stroke-width: 1.5;
-            fill: none;
-            transition: all 0.2s;
-        }
-
-        .trainer-like:hover svg {
-            stroke: var(--primary);
-        }
-
-        .trainer-like.active svg {
-            stroke: var(--primary);
-            fill: var(--primary);
-        }
-
-        .trainer-address {
-            font-size: 13px;
-            color: var(--gray-400);
-            margin-bottom: 4px;
-        }
-
-        .trainer-rating {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            margin-bottom: auto;
-        }
-
-        .trainer-rating svg {
+        .trainer-rating-info svg {
             width: 14px;
             height: 14px;
-            fill: var(--warning);
-            stroke: none;
+            fill: #FFD700;
         }
 
-        .trainer-rating-score {
+        .trainer-rating-info span {
             font-size: 13px;
             font-weight: 600;
+            color: var(--black);
+        }
+
+        .trainer-price-info {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 5px;
+            margin-top: 4px;
+        }
+
+        .trial-badge {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .trial-price {
+            font-size: 14px;
+            font-weight: 700;
             color: var(--black);
         }
 
@@ -381,15 +362,6 @@
             display: flex;
             align-items: baseline;
             gap: 6px;
-        }
-
-        .trial-badge {
-            padding: 4px 8px;
-            background: var(--primary-light);
-            color: var(--primary);
-            font-size: 11px;
-            font-weight: 700;
-            border-radius: 4px;
         }
 
         .price-original {
@@ -1145,6 +1117,7 @@
             font-size: 14px;
             font-weight: 600;
         }
+
     </style>
 </head>
 <body>
