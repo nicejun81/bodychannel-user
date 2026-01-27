@@ -17,7 +17,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { overflow-x: hidden; overflow-y: scroll; }
+        html { overflow-x: hidden; overflow-y: auto; }
 
         body {
             font-family: 'Poppins', -apple-system, sans-serif;
@@ -27,7 +27,7 @@
             padding-bottom: 100px;
             animation: pageEnter 0.2s ease-out;
             overflow-x: hidden;
-            overflow-y: scroll;
+            overflow-y: auto;
         }
 
         @keyframes pageEnter {
@@ -58,19 +58,48 @@
             z-index: 50;
         }
 
-        .location-selector {
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-symbol {
+            flex-shrink: 0;
+        }
+
+        .location-btn {
             display: flex;
             align-items: center;
             gap: 4px;
-            font-size: 20px;
+            padding: 6px 12px;
+            background: var(--gray-100);
+            border: none;
+            border-radius: 20px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s ease;
         }
 
-        .location-selector svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--black);
+        .location-btn:hover {
+            background: var(--gray-200);
+        }
+
+        .location-btn svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--gray-600);
             stroke-width: 2;
             fill: none;
         }
@@ -78,25 +107,56 @@
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 8px;
         }
 
         .header-btn {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             background: none;
             border: none;
+            border-radius: 50%;
+            transition: background 0.2s ease;
+        }
+
+        .header-btn:hover {
+            background: var(--gray-100);
         }
 
         .header-btn svg {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             stroke: var(--black);
-            stroke-width: 1.5;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--gray-100);
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--black);
+            stroke-width: 2;
             fill: none;
         }
 
@@ -2100,17 +2160,70 @@
 
         .map-container {
             width: calc(100% - 40px);
-            height: 800px;
+            height: 300px;
             margin: 0 20px 16px;
             border-radius: 16px;
             overflow: hidden;
             background: var(--gray-100);
+            position: relative;
+        }
+
+        .map-container.hidden {
+            display: none;
+        }
+
+        .map-container #storeMap {
+            width: 100%;
+            height: 100%;
         }
 
         .map-container iframe {
             width: 100%;
             height: 100%;
             border: 0;
+        }
+
+        .map-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-100);
+        }
+
+        .map-placeholder svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--gray-400);
+            stroke-width: 1.5;
+            fill: none;
+            margin-bottom: 12px;
+        }
+
+        .map-placeholder p {
+            color: var(--gray-400);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .map-init-btn {
+            padding: 12px 24px;
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .map-init-btn:hover {
+            background: var(--primary);
         }
 
         .current-location-btn {
@@ -2301,6 +2414,7 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
+            overflow: hidden;
         }
 
         .class-detail-overlay.active {
@@ -2318,8 +2432,21 @@
             z-index: 1001;
             transform: translateY(100%);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .class-detail-scroll {
+            flex: 1;
             overflow-y: auto;
             overflow-x: hidden;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .class-detail-scroll::-webkit-scrollbar {
+            display: none;
         }
 
         .class-detail-overlay.active .class-detail-modal {
@@ -2771,7 +2898,7 @@
         }
 
         .detail-bottom-bar {
-            position: fixed;
+            position: sticky;
             bottom: 0;
             left: 0;
             right: 0;
@@ -2782,6 +2909,7 @@
             align-items: center;
             gap: 12px;
             z-index: 1002;
+            flex-shrink: 0;
         }
 
         .detail-price-info {
@@ -2846,6 +2974,7 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
+            overflow: hidden;
         }
 
         .trainer-detail-overlay.active {
@@ -2863,8 +2992,21 @@
             z-index: 1001;
             transform: translateY(100%);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .trainer-detail-scroll {
+            flex: 1;
             overflow-y: auto;
             overflow-x: hidden;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .trainer-detail-scroll::-webkit-scrollbar {
+            display: none;
         }
 
         .trainer-detail-overlay.active .trainer-detail-modal {
@@ -3198,7 +3340,7 @@
         }
 
         .trainer-detail-bottom {
-            position: fixed;
+            position: sticky;
             bottom: 0;
             left: 0;
             right: 0;
@@ -3209,6 +3351,7 @@
             align-items: center;
             gap: 12px;
             z-index: 1002;
+            flex-shrink: 0;
         }
 
         .trainer-trial-info {
@@ -3247,24 +3390,68 @@
 </head>
 <body>
     <header class="header">
-        <div class="location-selector" onclick="openLocationModal()">
-            <span>바디채널 강남점</span>
-            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        <div class="header-left">
+            <div class="logo">
+                <img src="symbol.png" alt="logo" class="logo-symbol" width="28" height="28">
+                <span>BODYCHANNEL</span>
+            </div>
+            <button class="location-btn" onclick="openLocationModal()">
+                <span>강남점</span>
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
         </div>
         <div class="header-actions">
-            <button class="header-btn" onclick="openQrModal()">
+            <button class="header-btn" onclick="openQrModal()" title="QR 입장">
                 <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="14" width="3" height="3"/><rect x="14" y="18" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/></svg>
             </button>
-            <button class="header-btn">
+            <button class="header-btn" title="검색">
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
             </button>
-            <button class="header-btn">
+            <button class="header-btn" title="알림">
                 <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
             </button>
         </div>
     </header>
 
     <main class="main-content">
+        <!-- Hero Slider -->
+        <div class="hero-slider">
+            <div class="hero-track" id="heroTrack">
+                <!-- Slide 1: 인사 -->
+                <div class="hero-slide">
+                    <p class="hero-greeting">안녕하세요, 김피트님!</p>
+                    <h1 class="hero-title">오늘도 <span>건강한 하루</span><br>시작해볼까요?</h1>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-value">12</span>
+                            <span class="hero-stat-label">남은 PT 횟수</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-value">67</span>
+                            <span class="hero-stat-label">멤버십 잔여일</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2: 이벤트 -->
+                <div class="hero-slide slide-event">
+                    <p class="hero-greeting">EVENT</p>
+                    <h1 class="hero-title">신규 회원 <span>20% 할인</span><br>이벤트 진행중!</h1>
+                    <a href="#" class="hero-cta">자세히 보기</a>
+                </div>
+                <!-- Slide 3: 프로모션 -->
+                <div class="hero-slide slide-promo">
+                    <p class="hero-greeting">SPECIAL OFFER</p>
+                    <h1 class="hero-title">PT 패키지 <span>최대 40%</span><br>할인 혜택</h1>
+                    <a href="design-02-minimal-monochrome-purchase.html" class="hero-cta">구매하기</a>
+                </div>
+            </div>
+            <div class="hero-indicators">
+                <div class="hero-indicator active" onclick="goToSlide(0)"></div>
+                <div class="hero-indicator" onclick="goToSlide(1)"></div>
+                <div class="hero-indicator" onclick="goToSlide(2)"></div>
+            </div>
+        </div>
+
         <!-- Category Card - 여기어때 스타일 카드 -->
         <div class="category-card">
             <div class="event-banners">
@@ -3274,7 +3461,7 @@
                     </div>
                     <div class="event-banner-title">온라인 강의</div>
                 </a>
-                <a href="design-02-minimal-monochrome-purchase.html" class="event-banner shop">
+                <a href="javascript:void(0)" class="event-banner shop">
                     <div class="event-banner-icon">
                         <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                     </div>
@@ -3392,67 +3579,29 @@
             </div>
         </div>
 
-        <!-- Hero Slider -->
-        <div class="hero-slider">
-            <div class="hero-track" id="heroTrack">
-                <!-- Slide 1: 인사 -->
-                <div class="hero-slide">
-                    <p class="hero-greeting">안녕하세요, 김피트님!</p>
-                    <h1 class="hero-title">오늘도 <span>건강한 하루</span><br>시작해볼까요?</h1>
-                    <div class="hero-stats">
-                        <div class="hero-stat">
-                            <span class="hero-stat-value">12</span>
-                            <span class="hero-stat-label">남은 PT 횟수</span>
-                        </div>
-                        <div class="hero-stat">
-                            <span class="hero-stat-value">67</span>
-                            <span class="hero-stat-label">멤버십 잔여일</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Slide 2: 이벤트 -->
-                <div class="hero-slide slide-event">
-                    <p class="hero-greeting">EVENT</p>
-                    <h1 class="hero-title">신규 회원 <span>20% 할인</span><br>이벤트 진행중!</h1>
-                    <a href="#" class="hero-cta">자세히 보기</a>
-                </div>
-                <!-- Slide 3: 프로모션 -->
-                <div class="hero-slide slide-promo">
-                    <p class="hero-greeting">SPECIAL OFFER</p>
-                    <h1 class="hero-title">PT 패키지 <span>최대 40%</span><br>할인 혜택</h1>
-                    <a href="design-02-minimal-monochrome-purchase.html" class="hero-cta">구매하기</a>
-                </div>
-            </div>
-            <div class="hero-indicators">
-                <div class="hero-indicator active" onclick="goToSlide(0)"></div>
-                <div class="hero-indicator" onclick="goToSlide(1)"></div>
-                <div class="hero-indicator" onclick="goToSlide(2)"></div>
-            </div>
-        </div>
-
         <!-- Group Trainer Section -->
         <div class="trainer-section">
             <div class="section-header">
                 <h2 class="section-title">그룹 수업</h2>
-                <a href="#" class="section-more">
+                <a href="design-02-minimal-monochrome-lesson.html" class="section-more">
                     전체보기
                     <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
                 </a>
             </div>
             <div class="trainer-list">
-                <div class="trainer-item" onclick="bookTrainer(4)">
+                <div class="trainer-item" onclick="openTrainerDetail('박지영')">
                     <div class="trainer-photo-wrap">
                         <div class="trainer-photo">
-                            <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face" alt="김민수 트레이너">
+                            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop" alt="박지영 트레이너">
                         </div>
                         <span class="schedule-trainer-category bareton">바레톤</span>
                     </div>
                     <div class="trainer-content">
                         <div class="trainer-name-row">
-                            <span class="trainer-name">김민수 강사</span>
+                            <span class="trainer-name">박지영 강사</span>
                             <div class="trainer-rating-info">
                                 <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                                <span>4.9 (85)</span>
+                                <span>4.7 (64)</span>
                             </div>
                         </div>
                         <div class="trainer-gym">바디채널 강남점</div>
@@ -3462,32 +3611,32 @@
                         </div>
                     </div>
                 </div>
-                <div class="trainer-item" onclick="bookTrainer(5)">
+                <div class="trainer-item" onclick="openTrainerDetail('한동훈')">
                     <div class="trainer-photo-wrap">
                         <div class="trainer-photo">
-                            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop&crop=face" alt="박지영 트레이너">
+                            <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop" alt="한동훈 트레이너">
                         </div>
                         <span class="schedule-trainer-category hit35">히트35</span>
                     </div>
                     <div class="trainer-content">
                         <div class="trainer-name-row">
-                            <span class="trainer-name">박지영 강사</span>
+                            <span class="trainer-name">한동훈 강사</span>
                             <div class="trainer-rating-info">
                                 <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                                <span>4.8 (72)</span>
+                                <span>4.9 (93)</span>
                             </div>
                         </div>
-                        <div class="trainer-gym">바디채널 서초점</div>
+                        <div class="trainer-gym">바디채널 역삼점</div>
                         <div class="trainer-price-info">
                             <span class="trial-badge">체험권</span>
                             <span class="trial-price">10회 / 66,000원</span>
                         </div>
                     </div>
                 </div>
-                <div class="trainer-item" onclick="bookTrainer(6)">
+                <div class="trainer-item" onclick="openTrainerDetail('이준혁')">
                     <div class="trainer-photo-wrap">
                         <div class="trainer-photo">
-                            <img src="https://images.unsplash.com/photo-1597347316205-36f6c451902a?w=200&h=200&fit=crop&crop=face" alt="이준혁 트레이너">
+                            <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop" alt="이준혁 트레이너">
                         </div>
                         <span class="schedule-trainer-category gymground">짐그라운드</span>
                     </div>
@@ -3496,10 +3645,10 @@
                             <span class="trainer-name">이준혁 강사</span>
                             <div class="trainer-rating-info">
                                 <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                                <span>4.7 (63)</span>
+                                <span>4.6 (58)</span>
                             </div>
                         </div>
-                        <div class="trainer-gym">바디채널 역삼점</div>
+                        <div class="trainer-gym">바디채널 판교점</div>
                         <div class="trainer-price-info">
                             <span class="trial-badge">체험권</span>
                             <span class="trial-price">10회 / 66,000원</span>
@@ -3800,6 +3949,7 @@
                 </div>
             </header>
 
+            <div class="class-detail-scroll">
             <div class="detail-hero" id="detailHero">
                 <img id="detailHeroImg" src="" alt="">
                 <div class="detail-hero-overlay"></div>
@@ -3865,6 +4015,7 @@
                     <button class="more-reviews-btn">후기 더보기</button>
                 </div>
             </div>
+            </div>
 
             <div class="detail-bottom-bar">
                 <div class="detail-price-info">
@@ -3896,6 +4047,7 @@
                 </div>
             </header>
 
+            <div class="trainer-detail-scroll">
             <div class="trainer-profile-hero">
                 <img class="trainer-profile-photo" id="trainerPhoto" src="" alt="">
                 <div class="trainer-profile-name" id="trainerName"></div>
@@ -3961,6 +4113,7 @@
                     </h2>
                     <div class="trainer-review-list" id="trainerReviewList"></div>
                 </div>
+            </div>
             </div>
 
             <div class="trainer-detail-bottom">
@@ -4152,11 +4305,12 @@
             </div>
             <!-- Map View -->
             <div class="map-container hidden" id="mapContainerView">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25512.098978957498!2d127.02758827431642!3d37.49795899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a61219a43%3A0x3ed8bf8fb80ae22!2z6rCV64Ko6rWs!5e0!3m2!1sko!2skr!4v1699000000000!5m2!1sko!2skr"
-                    allowfullscreen=""
-                    loading="lazy">
-                </iframe>
+                <div id="storeMap"></div>
+                <div class="map-placeholder" id="storeMapPlaceholder">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <p>지도에서 지점을 확인하세요</p>
+                    <button class="map-init-btn" onclick="initStoreMap()">지도 열기</button>
+                </div>
             </div>
             <button class="current-location-btn" onclick="getCurrentLocation()">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
@@ -4209,6 +4363,19 @@
 
         // Map Modal
         const mapModal = document.getElementById('mapModal');
+        let storeMap = null;
+        let storeMarkers = [];
+        let storeInfowindow = null;
+        let kakaoLoaded = false;
+        let kakaoLoading = false;
+
+        // 지점 데이터
+        const storeData = [
+            { name: '바디채널 강남점', address: '서울 강남구 테헤란로 123', lat: 37.5012, lng: 127.0396, distance: '0.3km' },
+            { name: '바디채널 서초점', address: '서울 서초구 서초대로 456', lat: 37.4923, lng: 127.0292, distance: '1.2km' },
+            { name: '바디채널 역삼점', address: '서울 강남구 역삼로 789', lat: 37.5001, lng: 127.0365, distance: '1.8km' },
+            { name: '바디채널 판교점', address: '경기 성남시 분당구 판교로 321', lat: 37.3947, lng: 127.1112, distance: '8.5km' }
+        ];
 
         function openLocationModal() {
             mapModal.classList.add('active');
@@ -4220,9 +4387,113 @@
             document.body.style.overflow = '';
         }
 
+        // 카카오맵 SDK 동적 로드
+        function loadKakaoMapsForStore(callback) {
+            if (kakaoLoaded && window.kakao && window.kakao.maps) {
+                callback();
+                return;
+            }
+            if (kakaoLoading) {
+                const checkLoaded = setInterval(() => {
+                    if (kakaoLoaded) {
+                        clearInterval(checkLoaded);
+                        callback();
+                    }
+                }, 100);
+                return;
+            }
+
+            kakaoLoading = true;
+            const script = document.createElement('script');
+            script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_KAKAO_APP_KEY&libraries=services&autoload=false';
+            script.onload = () => {
+                kakao.maps.load(() => {
+                    kakaoLoaded = true;
+                    kakaoLoading = false;
+                    callback();
+                });
+            };
+            script.onerror = () => {
+                kakaoLoading = false;
+                alert('지도를 불러올 수 없습니다.');
+            };
+            document.head.appendChild(script);
+        }
+
+        function initStoreMap() {
+            document.getElementById('storeMapPlaceholder').style.display = 'none';
+
+            loadKakaoMapsForStore(() => {
+                const container = document.getElementById('storeMap');
+                const options = {
+                    center: new kakao.maps.LatLng(37.4979, 127.0276),
+                    level: 7
+                };
+
+                storeMap = new kakao.maps.Map(container, options);
+                storeInfowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+
+                // 지점 마커 추가
+                const bounds = new kakao.maps.LatLngBounds();
+                storeData.forEach((store, index) => {
+                    const position = new kakao.maps.LatLng(store.lat, store.lng);
+                    const marker = new kakao.maps.Marker({
+                        position: position,
+                        map: storeMap
+                    });
+
+                    bounds.extend(position);
+                    storeMarkers.push(marker);
+
+                    kakao.maps.event.addListener(marker, 'click', () => {
+                        const content = `
+                            <div style="padding:12px 16px;min-width:180px;font-family:'Poppins',sans-serif;">
+                                <div style="font-weight:700;font-size:14px;margin-bottom:4px;">${store.name}</div>
+                                <div style="font-size:12px;color:#666;margin-bottom:8px;">${store.address}</div>
+                                <button onclick="selectStoreFromMap('${store.name}')" style="width:100%;padding:8px;background:#0a0a0a;color:white;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;">선택하기</button>
+                            </div>
+                        `;
+                        storeInfowindow.setContent(content);
+                        storeInfowindow.open(storeMap, marker);
+                    });
+                });
+
+                storeMap.setBounds(bounds);
+            });
+        }
+
+        function selectStoreFromMap(storeName) {
+            const storeCards = document.querySelectorAll('.store-card');
+            storeCards.forEach(card => {
+                card.classList.remove('selected');
+                if (card.querySelector('.store-card-name').textContent === storeName) {
+                    card.classList.add('selected');
+                }
+            });
+            document.querySelector('.location-btn span').textContent = storeName;
+            closeMapModal();
+        }
+
         function getCurrentLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+
+                    if (storeMap) {
+                        storeMap.setCenter(new kakao.maps.LatLng(lat, lng));
+
+                        // 내 위치 마커 추가
+                        new kakao.maps.Marker({
+                            position: new kakao.maps.LatLng(lat, lng),
+                            map: storeMap,
+                            image: new kakao.maps.MarkerImage(
+                                'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI4IiBmaWxsPSIjRkY2QjM1IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMyIvPjwvc3ZnPg==',
+                                new kakao.maps.Size(24, 24),
+                                { offset: new kakao.maps.Point(12, 12) }
+                            )
+                        });
+                    }
                     alert('현재 위치를 기준으로 가까운 지점을 찾습니다.');
                 }, function() {
                     alert('위치 정보를 가져올 수 없습니다.');
@@ -4248,6 +4519,11 @@
                 listView.classList.remove('active');
                 mapView.classList.remove('hidden');
                 toggleBtns[1].classList.add('active');
+                if (!storeMap) {
+                    initStoreMap();
+                } else {
+                    setTimeout(() => storeMap.relayout(), 100);
+                }
             }
         }
 
@@ -4645,6 +4921,10 @@
         function bookTrainerLesson() {
             alert('예약 페이지로 이동합니다.');
             // window.location.href = 'design-02-minimal-monochrome-reservation.html?trainer=' + currentTrainerId;
+        }
+
+        function openTrainerDetail(name) {
+            window.location.href = 'design-02-minimal-monochrome-trainer-detail.html?name=' + encodeURIComponent(name);
         }
 
         // ========== Class Detail Modal ==========

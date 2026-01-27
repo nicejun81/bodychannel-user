@@ -79,22 +79,60 @@
         }
 
         .header-btn {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             background: none;
             border: none;
+            border-radius: 50%;
+            transition: background 0.2s ease;
+        }
+
+        .header-btn:hover {
+            background: var(--gray-100);
         }
 
         .header-btn svg {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             stroke: var(--black);
-            stroke-width: 1.5;
+            stroke-width: 2;
             fill: none;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--gray-100);
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--black);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .page-title {
+            flex: 1;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
         }
 
         /* Main Content */
@@ -1200,15 +1238,64 @@
 
         .map-container {
             width: calc(100% - 40px);
-            height: 450px;
+            height: 300px;
             margin: 0 20px 16px;
             border-radius: 16px;
             overflow: hidden;
             background: var(--gray-100);
+            position: relative;
+        }
+
+        .map-container #regionMap {
+            width: 100%;
+            height: 100%;
         }
 
         .map-container iframe {
             border-radius: 16px;
+        }
+
+        .map-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-100);
+        }
+
+        .map-placeholder svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--gray-400);
+            stroke-width: 1.5;
+            fill: none;
+            margin-bottom: 12px;
+        }
+
+        .map-placeholder p {
+            color: var(--gray-400);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .map-init-btn {
+            padding: 12px 24px;
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .map-init-btn:hover {
+            background: var(--primary);
         }
 
         .current-location-btn {
@@ -1543,18 +1630,13 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="location-selector" onclick="openLocationModal()">
-            <span>바디채널 강남점</span>
-            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="header-actions">
-            <button class="header-btn">
-                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            </button>
-            <button class="header-btn">
-                <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-            </button>
-        </div>
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <div class="page-title">지점소개</div>
+        <button class="header-btn">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
     </header>
 
     <!-- Filter Tabs -->
@@ -1835,14 +1917,12 @@
                 <input type="text" placeholder="지역, 주소 검색">
             </div>
             <div class="map-container">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25512.098978957498!2d127.02758827431642!3d37.49795899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a61219a43%3A0x3ed8bf8fb80ae22!2z6rCV64Ko6rWs!5e0!3m2!1sko!2skr!4v1699000000000!5m2!1sko!2skr"
-                    width="100%"
-                    height="100%"
-                    style="border:0;"
-                    allowfullscreen=""
-                    loading="lazy">
-                </iframe>
+                <div id="regionMap"></div>
+                <div class="map-placeholder" id="regionMapPlaceholder">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <p>지도에서 지역을 선택하세요</p>
+                    <button class="map-init-btn" onclick="initRegionMap()">지도 열기</button>
+                </div>
             </div>
             <button class="current-location-btn" onclick="getCurrentLocation()">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
@@ -1854,6 +1934,9 @@
     <script>
         // Map Modal
         const mapModal = document.getElementById('mapModal');
+        let regionMap = null;
+        let kakaoLoaded = false;
+        let kakaoLoading = false;
 
         function openLocationModal() {
             mapModal.classList.add('active');
@@ -1865,10 +1948,96 @@
             document.body.style.overflow = '';
         }
 
+        // 카카오맵 SDK 동적 로드
+        function loadKakaoMaps(callback) {
+            if (kakaoLoaded && window.kakao && window.kakao.maps) {
+                callback();
+                return;
+            }
+            if (kakaoLoading) {
+                const checkLoaded = setInterval(() => {
+                    if (kakaoLoaded) {
+                        clearInterval(checkLoaded);
+                        callback();
+                    }
+                }, 100);
+                return;
+            }
+
+            kakaoLoading = true;
+            const script = document.createElement('script');
+            script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_KAKAO_APP_KEY&libraries=services&autoload=false';
+            script.onload = () => {
+                kakao.maps.load(() => {
+                    kakaoLoaded = true;
+                    kakaoLoading = false;
+                    callback();
+                });
+            };
+            script.onerror = () => {
+                kakaoLoading = false;
+                alert('지도를 불러올 수 없습니다.');
+            };
+            document.head.appendChild(script);
+        }
+
+        function initRegionMap() {
+            document.getElementById('regionMapPlaceholder').style.display = 'none';
+
+            loadKakaoMaps(() => {
+                const container = document.getElementById('regionMap');
+                const options = {
+                    center: new kakao.maps.LatLng(37.5665, 126.9780),
+                    level: 8
+                };
+
+                regionMap = new kakao.maps.Map(container, options);
+
+                // 지도 클릭 이벤트
+                kakao.maps.event.addListener(regionMap, 'click', function(mouseEvent) {
+                    const latlng = mouseEvent.latLng;
+                    const geocoder = new kakao.maps.services.Geocoder();
+
+                    geocoder.coord2RegionCode(latlng.getLng(), latlng.getLat(), function(result, status) {
+                        if (status === kakao.maps.services.Status.OK) {
+                            const region = result[0];
+                            const locationName = region.region_1depth_name + ' ' + region.region_2depth_name;
+                            document.querySelector('.location-selector span').textContent = locationName;
+                            closeMapModal();
+                        }
+                    });
+                });
+            });
+        }
+
         function getCurrentLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    document.querySelector('.location-selector span').textContent = '현재 위치';
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+
+                    if (regionMap) {
+                        regionMap.setCenter(new kakao.maps.LatLng(lat, lng));
+                        regionMap.setLevel(5);
+
+                        // 현재 위치 마커 추가
+                        new kakao.maps.Marker({
+                            position: new kakao.maps.LatLng(lat, lng),
+                            map: regionMap
+                        });
+
+                        // 주소 가져오기
+                        const geocoder = new kakao.maps.services.Geocoder();
+                        geocoder.coord2RegionCode(lng, lat, function(result, status) {
+                            if (status === kakao.maps.services.Status.OK) {
+                                const region = result[0];
+                                const locationName = region.region_1depth_name + ' ' + region.region_2depth_name;
+                                document.querySelector('.location-selector span').textContent = locationName;
+                            }
+                        });
+                    } else {
+                        document.querySelector('.location-selector span').textContent = '현재 위치';
+                    }
                     closeMapModal();
                 }, function() {
                     alert('위치 정보를 가져올 수 없습니다.');

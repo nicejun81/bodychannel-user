@@ -71,14 +71,14 @@
         .header-btn {
             width: 40px;
             height: 40px;
-            border: 1px solid var(--gray-200);
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            background: var(--white);
-            transition: all 0.2s ease;
+            background: none;
+            border: none;
+            border-radius: 50%;
+            transition: background 0.2s ease;
         }
 
         .header-btn:hover {
@@ -86,10 +86,35 @@
         }
 
         .header-btn svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--black);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--gray-100);
+        }
+
+        .back-btn svg {
             width: 20px;
             height: 20px;
             stroke: var(--black);
-            stroke-width: 1.5;
+            stroke-width: 2;
             fill: none;
         }
 
@@ -97,11 +122,10 @@
         .main-content { padding: 24px 0; }
 
         .page-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 28px;
+            flex: 1;
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 8px;
-            animation: slideUp 0.2s ease-out backwards;
+            text-align: center;
         }
 
         .page-subtitle {
@@ -1567,6 +1591,7 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
+            overflow: hidden;
         }
 
         .trainer-detail-overlay.active {
@@ -1584,8 +1609,21 @@
             z-index: 1001;
             transform: translateY(100%);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .trainer-detail-scroll {
+            flex: 1;
             overflow-y: auto;
             overflow-x: hidden;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .trainer-detail-scroll::-webkit-scrollbar {
+            display: none;
         }
 
         .trainer-detail-overlay.active .trainer-detail-modal {
@@ -1919,7 +1957,7 @@
         }
 
         .trainer-detail-bottom {
-            position: fixed;
+            position: sticky;
             bottom: 0;
             left: 0;
             right: 0;
@@ -1930,6 +1968,7 @@
             align-items: center;
             gap: 12px;
             z-index: 1002;
+            flex-shrink: 0;
         }
 
         .trainer-trial-info {
@@ -1968,12 +2007,12 @@
 </head>
 <body>
     <header class="header">
-        <div class="location-selector">
-            <span>바디채널 강남점</span>
-            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <div class="page-title">예약</div>
         <button class="header-btn">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         </button>
     </header>
 
@@ -2145,6 +2184,7 @@
                 </div>
             </header>
 
+            <div class="trainer-detail-scroll">
             <div class="trainer-profile-hero">
                 <img class="trainer-profile-photo" id="trainerPhoto" src="" alt="">
                 <div class="trainer-profile-name" id="trainerName"></div>
@@ -2210,6 +2250,7 @@
                     </h2>
                     <div class="trainer-review-list" id="trainerReviewList"></div>
                 </div>
+            </div>
             </div>
 
             <div class="trainer-detail-bottom">
