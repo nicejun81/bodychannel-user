@@ -1,0 +1,6 @@
+export { HomePage } from './Home'
+export { ComponentsShowcasePage } from './ComponentsShowcase'
+export { MyPage } from './Mypage'
+export { MembershipPage } from './Membership'
+export { LessonPage } from './Lesson'
+export { ReservationPage } from './Reservation'
