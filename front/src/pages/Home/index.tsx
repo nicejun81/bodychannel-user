@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import {
   Header,
   BottomNav,
@@ -217,6 +218,8 @@ const feeds = [
 ]
 
 export const HomePage = () => {
+  const navigate = useNavigate()
+
   return (
     <div className="min-h-screen bg-white pb-[100px]">
       <Header />
@@ -245,6 +248,7 @@ export const HomePage = () => {
                 title={item.title}
                 lessonCount={item.lessonCount}
                 level={item.level}
+                onClick={() => navigate(`/class/${item.id}`)}
               />
             ))}
           </div>
@@ -265,6 +269,7 @@ export const HomePage = () => {
                 rating={trainer.rating}
                 reviewCount={trainer.reviewCount}
                 trialInfo={trainer.trialInfo}
+                onClick={() => navigate(`/trainer/${trainer.id}`)}
               />
             ))}
           </div>
@@ -285,6 +290,7 @@ export const HomePage = () => {
                   rating={trainer.rating}
                   reviewCount={trainer.reviewCount}
                   trialInfo={trainer.trialInfo}
+                  onClick={() => navigate(`/trainer/${trainer.id}`)}
                 />
               ))}
             </div>
@@ -303,6 +309,7 @@ export const HomePage = () => {
                 title={meetup.title}
                 schedule={meetup.schedule}
                 memberCount={meetup.memberCount}
+                onClick={() => navigate(`/meetup/${meetup.id}`)}
               />
             ))}
           </div>
@@ -322,6 +329,7 @@ export const HomePage = () => {
                 likeCount={feed.likeCount}
                 commentCount={feed.commentCount}
                 isLiked={feed.isLiked}
+                onClick={() => navigate(`/feed/${feed.id}`)}
               />
             ))}
           </div>

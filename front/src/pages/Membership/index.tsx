@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { BottomNav } from '../../components'
 import { IconStarFilled, IconChevronRight, IconSearch, IconFilter } from '../../components/Icons'
 
@@ -73,6 +74,7 @@ const gyms = [
 ]
 
 export const MembershipPage = () => {
+  const navigate = useNavigate()
   const [activeFilters, setActiveFilters] = useState<string[]>([])
 
   const toggleFilter = (id: string) => {
@@ -161,6 +163,7 @@ export const MembershipPage = () => {
             {gyms.map((gym) => (
               <div
                 key={gym.id}
+                onClick={() => navigate(`/gym/${gym.id}`)}
                 className="border border-gray-200 rounded-2xl overflow-hidden cursor-pointer transition-all hover:border-[var(--black)] hover:-translate-y-0.5 hover:shadow-lg"
               >
                 <div className="relative">

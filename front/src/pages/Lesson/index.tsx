@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { BottomNav, TrainerListItem, SectionHeader } from '../../components'
 import { IconSearch, IconChevronRight } from '../../components/Icons'
 
@@ -86,6 +87,7 @@ const trainers = [
 ]
 
 export const LessonPage = () => {
+  const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('all')
 
   return (
@@ -171,6 +173,7 @@ export const LessonPage = () => {
                 rating={trainer.rating}
                 reviewCount={trainer.reviewCount}
                 trialInfo={trainer.trialInfo}
+                onClick={() => navigate(`/trainer/${trainer.id}`)}
               />
             ))}
           </div>
