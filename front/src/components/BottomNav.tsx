@@ -19,8 +19,8 @@ export const BottomNav = () => {
   const location = useLocation()
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50">
-      <div className="flex justify-around items-center pt-4 pb-7">
+    <nav className="fixed bottom-0 left-0 right-0 bg-surface border-t border-border z-50">
+      <div className="flex justify-around items-center pt-3 pb-7">
         {navItems.map((item) => {
           const isActive = location.pathname === item.path
           const Icon = item.icon
@@ -28,8 +28,8 @@ export const BottomNav = () => {
             <Link
               key={item.path}
               to={item.path}
-              className={`flex flex-col items-center gap-1.5 group transition-colors ${
-                isActive ? 'text-[var(--primary)]' : 'text-gray-400'
+              className={`flex flex-col items-center gap-1 group transition-colors ${
+                isActive ? 'text-primary' : 'text-ink-placeholder'
               }`}
             >
               <span className="w-6 h-6 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -37,11 +37,11 @@ export const BottomNav = () => {
                   className={`w-6 h-6 ${
                     isActive
                       ? 'fill-current stroke-0'
-                      : 'stroke-current stroke-[1.5] fill-none group-hover:stroke-[var(--primary)]'
+                      : 'stroke-current stroke-[1.5] fill-none group-hover:stroke-primary'
                   }`}
                 />
               </span>
-              <span className="text-[11px] font-medium uppercase tracking-wider">{item.label}</span>
+              <span className="text-caption font-medium tracking-wider">{item.label}</span>
             </Link>
           )
         })}

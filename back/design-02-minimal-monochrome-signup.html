@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIT. - 회원가입</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-400: #a3a3a3;
+            --gray-600: #525252;
+            --primary: #FF6B35;
+            --success: #22c55e;
+            --error: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', -apple-system, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            min-height: 100vh;
+            animation: pageEnter 0.2s ease-out;
+        }
+
+        @keyframes pageEnter {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        .header {
+            padding: 24px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--gray-200);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: var(--white);
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: var(--gray-100);
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--black);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-symbol {
+            flex-shrink: 0;
+        }
+
+        .header-spacer {
+            width: 40px;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 32px 28px 40px;
+        }
+
+        /* Title Section */
+        .title-section {
+            text-align: center;
+            margin-bottom: 32px;
+            animation: slideUp 0.2s ease-out backwards;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: var(--gray-400);
+            font-size: 14px;
+        }
+
+        /* Progress Steps */
+        .progress-steps {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 32px;
+            animation: slideUp 0.2s ease-out 0.05s backwards;
+        }
+
+        .step {
+            width: 40px;
+            height: 4px;
+            background: var(--gray-200);
+            border-radius: 2px;
+            transition: background 0.3s ease;
+        }
+
+        .step.active {
+            background: var(--primary);
+        }
+
+        .step.completed {
+            background: var(--black);
+        }
+
+        /* Signup Form */
+        .signup-form {
+            animation: slideUp 0.2s ease-out 0.1s backwards;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: var(--gray-600);
+        }
+
+        .label-required {
+            color: var(--primary);
+            font-size: 11px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--black);
+            background: var(--gray-100);
+        }
+
+        .form-input::placeholder {
+            color: var(--gray-400);
+        }
+
+        .form-input.error {
+            border-color: var(--error);
+        }
+
+        .form-input.success {
+            border-color: var(--success);
+        }
+
+        /* Input with Button */
+        .input-with-btn {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-with-btn .form-input {
+            flex: 1;
+        }
+
+        .input-btn {
+            padding: 16px 20px;
+            background: var(--gray-100);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-600);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .input-btn:hover {
+            background: var(--black);
+            color: var(--white);
+            border-color: var(--black);
+        }
+
+        .input-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Password Field */
+        .password-field {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .password-toggle svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--gray-400);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .password-toggle:hover svg {
+            stroke: var(--black);
+        }
+
+        /* Helper Text */
+        .helper-text {
+            font-size: 12px;
+            color: var(--gray-400);
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .helper-text.error {
+            color: var(--error);
+        }
+
+        .helper-text.success {
+            color: var(--success);
+        }
+
+        .helper-text svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Password Strength */
+        .password-strength {
+            display: flex;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .strength-bar {
+            flex: 1;
+            height: 4px;
+            background: var(--gray-200);
+            border-radius: 2px;
+            transition: background 0.3s ease;
+        }
+
+        .strength-bar.weak { background: var(--error); }
+        .strength-bar.medium { background: #f59e0b; }
+        .strength-bar.strong { background: var(--success); }
+
+        /* Terms Section */
+        .terms-section {
+            margin-top: 28px;
+            padding-top: 24px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .terms-title {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray-600);
+            margin-bottom: 16px;
+        }
+
+        .terms-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .term-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .term-item input {
+            display: none;
+        }
+
+        .term-checkbox {
+            width: 22px;
+            height: 22px;
+            border: 1px solid var(--gray-200);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .term-item input:checked + .term-checkbox {
+            background: var(--black);
+            border-color: var(--black);
+        }
+
+        .term-checkbox svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--white);
+            stroke-width: 2;
+            fill: none;
+            opacity: 0;
+        }
+
+        .term-item input:checked + .term-checkbox svg {
+            opacity: 1;
+        }
+
+        .term-label {
+            flex: 1;
+            font-size: 14px;
+            color: var(--gray-600);
+            cursor: pointer;
+        }
+
+        .term-label a {
+            color: var(--black);
+            text-decoration: underline;
+        }
+
+        .term-label.all {
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        .term-required {
+            color: var(--primary);
+            font-size: 12px;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 28px;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary);
+        }
+
+        .submit-btn:disabled {
+            background: var(--gray-200);
+            color: var(--gray-400);
+            cursor: not-allowed;
+        }
+
+        /* Login Link */
+        .login-link {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 14px;
+            color: var(--gray-600);
+        }
+
+        .login-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="design-02-minimal-monochrome-login.html" class="back-btn">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </a>
+        <div class="logo">
+            <img src="symbol.png" alt="logo" class="logo-symbol" width="32" height="32">
+            <span>BODYCHANNEL</span>
+        </div>
+        <div class="header-spacer"></div>
+    </header>
+
+    <main class="main-content">
+        <!-- Title Section -->
+        <div class="title-section">
+            <h1 class="page-title">회원가입</h1>
+            <p class="page-subtitle">FIT.과 함께 건강한 라이프를 시작하세요</p>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="progress-steps">
+            <div class="step active"></div>
+            <div class="step"></div>
+            <div class="step"></div>
+        </div>
+
+        <!-- Signup Form -->
+        <form class="signup-form" onsubmit="handleSignup(event)">
+            <div class="form-group">
+                <label class="form-label">
+                    이름
+                    <span class="label-required">필수</span>
+                </label>
+                <input type="text" class="form-input" id="nameInput" placeholder="이름을 입력하세요" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    이메일
+                    <span class="label-required">필수</span>
+                </label>
+                <div class="input-with-btn">
+                    <input type="email" class="form-input" id="emailInput" placeholder="이메일을 입력하세요" required>
+                    <button type="button" class="input-btn" onclick="checkEmail()">중복확인</button>
+                </div>
+                <div class="helper-text" id="emailHelper"></div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    비밀번호
+                    <span class="label-required">필수</span>
+                </label>
+                <div class="password-field">
+                    <input type="password" class="form-input" id="passwordInput" placeholder="비밀번호를 입력하세요" oninput="checkPasswordStrength()" required>
+                    <button type="button" class="password-toggle" onclick="togglePassword('passwordInput')">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button>
+                </div>
+                <div class="password-strength" id="passwordStrength">
+                    <div class="strength-bar" id="str1"></div>
+                    <div class="strength-bar" id="str2"></div>
+                    <div class="strength-bar" id="str3"></div>
+                    <div class="strength-bar" id="str4"></div>
+                </div>
+                <div class="helper-text">영문, 숫자, 특수문자 포함 8자 이상</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    비밀번호 확인
+                    <span class="label-required">필수</span>
+                </label>
+                <div class="password-field">
+                    <input type="password" class="form-input" id="passwordConfirmInput" placeholder="비밀번호를 다시 입력하세요" oninput="checkPasswordMatch()" required>
+                    <button type="button" class="password-toggle" onclick="togglePassword('passwordConfirmInput')">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button>
+                </div>
+                <div class="helper-text" id="passwordMatchHelper"></div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    휴대폰 번호
+                    <span class="label-required">필수</span>
+                </label>
+                <div class="input-with-btn">
+                    <input type="tel" class="form-input" id="phoneInput" placeholder="010-0000-0000" required>
+                    <button type="button" class="input-btn" onclick="sendVerification()">인증요청</button>
+                </div>
+            </div>
+
+            <div class="form-group" id="verificationGroup" style="display: none;">
+                <label class="form-label">인증번호</label>
+                <div class="input-with-btn">
+                    <input type="text" class="form-input" id="verificationInput" placeholder="인증번호 6자리">
+                    <button type="button" class="input-btn" onclick="verifyCode()">확인</button>
+                </div>
+                <div class="helper-text" id="verificationHelper"></div>
+            </div>
+
+            <!-- Terms Section -->
+            <div class="terms-section">
+                <div class="terms-title">약관 동의</div>
+                <div class="terms-list">
+                    <label class="term-item">
+                        <input type="checkbox" id="agreeAll" onchange="toggleAllTerms()">
+                        <div class="term-checkbox">
+                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <span class="term-label all">전체 동의</span>
+                    </label>
+                    <label class="term-item">
+                        <input type="checkbox" class="term-check" required>
+                        <div class="term-checkbox">
+                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <span class="term-label"><a href="#">이용약관</a> 동의</span>
+                        <span class="term-required">필수</span>
+                    </label>
+                    <label class="term-item">
+                        <input type="checkbox" class="term-check" required>
+                        <div class="term-checkbox">
+                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <span class="term-label"><a href="#">개인정보 처리방침</a> 동의</span>
+                        <span class="term-required">필수</span>
+                    </label>
+                    <label class="term-item">
+                        <input type="checkbox" class="term-check">
+                        <div class="term-checkbox">
+                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <span class="term-label">마케팅 정보 수신 동의</span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">가입하기</button>
+
+            <div class="login-link">
+                이미 회원이신가요? <a href="design-02-minimal-monochrome-login.html">로그인</a>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.parentElement.querySelector('.password-toggle svg');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+            } else {
+                input.type = 'password';
+                icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+            }
+        }
+
+        function checkEmail() {
+            const email = document.getElementById('emailInput').value;
+            const helper = document.getElementById('emailHelper');
+            const input = document.getElementById('emailInput');
+
+            if (!email) {
+                helper.innerHTML = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> 이메일을 입력해주세요';
+                helper.className = 'helper-text error';
+                input.classList.add('error');
+                input.classList.remove('success');
+                return;
+            }
+
+            // 이메일 형식 검사
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                helper.innerHTML = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> 올바른 이메일 형식이 아닙니다';
+                helper.className = 'helper-text error';
+                input.classList.add('error');
+                input.classList.remove('success');
+                return;
+            }
+
+            // 사용 가능 (데모)
+            helper.innerHTML = '<svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 사용 가능한 이메일입니다';
+            helper.className = 'helper-text success';
+            input.classList.remove('error');
+            input.classList.add('success');
+        }
+
+        function checkPasswordStrength() {
+            const password = document.getElementById('passwordInput').value;
+            const bars = ['str1', 'str2', 'str3', 'str4'];
+
+            // Reset bars
+            bars.forEach(id => {
+                document.getElementById(id).className = 'strength-bar';
+            });
+
+            if (password.length === 0) return;
+
+            let strength = 0;
+            if (password.length >= 8) strength++;
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+            for (let i = 0; i < strength; i++) {
+                const bar = document.getElementById(bars[i]);
+                if (strength <= 1) bar.classList.add('weak');
+                else if (strength <= 2) bar.classList.add('medium');
+                else bar.classList.add('strong');
+            }
+        }
+
+        function checkPasswordMatch() {
+            const password = document.getElementById('passwordInput').value;
+            const confirm = document.getElementById('passwordConfirmInput').value;
+            const helper = document.getElementById('passwordMatchHelper');
+            const input = document.getElementById('passwordConfirmInput');
+
+            if (!confirm) {
+                helper.innerHTML = '';
+                input.classList.remove('error', 'success');
+                return;
+            }
+
+            if (password === confirm) {
+                helper.innerHTML = '<svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 비밀번호가 일치합니다';
+                helper.className = 'helper-text success';
+                input.classList.remove('error');
+                input.classList.add('success');
+            } else {
+                helper.innerHTML = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> 비밀번호가 일치하지 않습니다';
+                helper.className = 'helper-text error';
+                input.classList.add('error');
+                input.classList.remove('success');
+            }
+        }
+
+        function sendVerification() {
+            const phone = document.getElementById('phoneInput').value;
+            if (!phone) {
+                alert('휴대폰 번호를 입력해주세요');
+                return;
+            }
+
+            document.getElementById('verificationGroup').style.display = 'block';
+            alert('인증번호가 발송되었습니다');
+        }
+
+        function verifyCode() {
+            const code = document.getElementById('verificationInput').value;
+            const helper = document.getElementById('verificationHelper');
+            const input = document.getElementById('verificationInput');
+
+            if (code.length === 6) {
+                helper.innerHTML = '<svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 인증이 완료되었습니다';
+                helper.className = 'helper-text success';
+                input.classList.remove('error');
+                input.classList.add('success');
+            } else {
+                helper.innerHTML = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> 인증번호를 확인해주세요';
+                helper.className = 'helper-text error';
+                input.classList.add('error');
+                input.classList.remove('success');
+            }
+        }
+
+        function toggleAllTerms() {
+            const allCheck = document.getElementById('agreeAll').checked;
+            document.querySelectorAll('.term-check').forEach(check => {
+                check.checked = allCheck;
+            });
+        }
+
+        // 개별 체크박스 변경 시 전체동의 상태 업데이트
+        document.querySelectorAll('.term-check').forEach(check => {
+            check.addEventListener('change', () => {
+                const allChecked = Array.from(document.querySelectorAll('.term-check')).every(c => c.checked);
+                document.getElementById('agreeAll').checked = allChecked;
+            });
+        });
+
+        function handleSignup(event) {
+            event.preventDefault();
+
+            // 진행 상태 업데이트
+            const steps = document.querySelectorAll('.step');
+            steps[0].classList.add('completed');
+            steps[1].classList.add('active');
+
+            // 회원가입 완료 후 로그인 페이지로 이동
+            alert('회원가입이 완료되었습니다!');
+            window.location.href = 'design-02-minimal-monochrome-login.html';
+        }
+    </script>
+</body>
+</html>

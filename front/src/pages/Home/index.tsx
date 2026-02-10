@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import {
   Header,
-  BottomNav,
+  PageLayout,
+  ScrollRow,
   HeroSlider,
   CategoryGrid,
   QuickTabs,
@@ -221,50 +222,66 @@ export const HomePage = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-white pb-[100px]">
-      <Header />
+    <PageLayout header={<Header />} className="overflow-x-hidden">
+      <HeroSlider />
+      <CategoryGrid />
+      <QuickTabs />
 
-      <main className="px-5 py-4 overflow-x-hidden">
-        <HeroSlider />
-        <CategoryGrid />
-        <QuickTabs />
+      <RecentChat
+        avatarUrl="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=100&h=100&fit=crop&crop=face"
+        name="김민수 트레이너"
+        message="내일 PT 수업 시간 변경 가능할까요?"
+        time="오후 2:30"
+        unreadCount={1}
+      />
 
-        <RecentChat
-          avatarUrl="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=100&h=100&fit=crop&crop=face"
-          name="김민수 트레이너"
-          message="내일 PT 수업 시간 변경 가능할까요?"
-          time="오후 2:30"
-          unreadCount={1}
-        />
+      {/* Online Class */}
+      <section className="section">
+        <SectionHeader title="온라인 강의" href="/online-class" />
+        <ScrollRow>
+          {onlineClasses.map((item) => (
+            <OnlineClassCard
+              key={item.id}
+              imageUrl={item.imageUrl}
+              title={item.title}
+              lessonCount={item.lessonCount}
+              level={item.level}
+              onClick={() => navigate(`/class/${item.id}`)}
+            />
+          ))}
+        </ScrollRow>
+      </section>
 
-        {/* Online Class Section */}
-        <section className="mb-4">
-          <SectionHeader title="온라인 강의" href="/online-class" />
-          <div className="flex gap-3 overflow-x-auto py-1 pb-2 hide-scrollbar scroll-snap-x">
-            {onlineClasses.map((item) => (
-              <OnlineClassCard
-                key={item.id}
-                imageUrl={item.imageUrl}
-                title={item.title}
-                lessonCount={item.lessonCount}
-                level={item.level}
-                onClick={() => navigate(`/class/${item.id}`)}
-              />
-            ))}
-          </div>
-        </section>
+      {/* Group Trainers */}
+      <section className="section">
+        <SectionHeader title="그룹 수업" href="/lesson" />
+        {groupTrainers.map((trainer) => (
+          <TrainerListItem
+            key={trainer.id}
+            imageUrl={trainer.imageUrl}
+            name={trainer.name}
+            category={trainer.category}
+            categoryColor={trainer.categoryColor}
+            gym={trainer.gym}
+            rating={trainer.rating}
+            reviewCount={trainer.reviewCount}
+            trialInfo={trainer.trialInfo}
+            onClick={() => navigate(`/trainer/${trainer.id}`)}
+          />
+        ))}
+      </section>
 
-        {/* Group Trainer Section */}
-        <section className="py-4">
-          <SectionHeader title="그룹 수업" href="/lesson" />
-          <div className="p-0">
-            {groupTrainers.map((trainer) => (
-              <TrainerListItem
+      {/* PT Trainers (highlighted section) */}
+      <div className="bg-gradient-to-br from-surface-muted to-[#eef1f5] rounded-card-lg mb-section overflow-hidden border border-ink/5">
+        <TrainerRecommendBanner />
+        <div className="px-card-lg pb-card-lg">
+          <SectionHeader title="개인 레슨" href="/lesson" />
+          <ScrollRow>
+            {ptTrainers.map((trainer) => (
+              <PTTrainerCard
                 key={trainer.id}
                 imageUrl={trainer.imageUrl}
                 name={trainer.name}
-                category={trainer.category}
-                categoryColor={trainer.categoryColor}
                 gym={trainer.gym}
                 rating={trainer.rating}
                 reviewCount={trainer.reviewCount}
@@ -272,71 +289,47 @@ export const HomePage = () => {
                 onClick={() => navigate(`/trainer/${trainer.id}`)}
               />
             ))}
-          </div>
-        </section>
-
-        {/* PT Trainer Section */}
-        <div className="bg-gradient-to-br from-[#f5f7fa] to-[#eef1f5] rounded-2xl my-2 mb-5 overflow-hidden border border-[rgba(0,0,0,0.05)]">
-          <TrainerRecommendBanner />
-          <div className="px-4 py-4 pt-0">
-            <SectionHeader title="개인 레슨" href="/lesson" />
-            <div className="flex gap-3 overflow-x-auto py-1 pb-3 hide-scrollbar">
-              {ptTrainers.map((trainer) => (
-                <PTTrainerCard
-                  key={trainer.id}
-                  imageUrl={trainer.imageUrl}
-                  name={trainer.name}
-                  gym={trainer.gym}
-                  rating={trainer.rating}
-                  reviewCount={trainer.reviewCount}
-                  trialInfo={trainer.trialInfo}
-                  onClick={() => navigate(`/trainer/${trainer.id}`)}
-                />
-              ))}
-            </div>
-          </div>
+          </ScrollRow>
         </div>
+      </div>
 
-        {/* Meetup Section */}
-        <section className="py-4">
-          <SectionHeader title="추천 모임" href="/activity#meetup" />
-          <div className="flex gap-3 overflow-x-auto py-1 pb-3 hide-scrollbar">
-            {meetups.map((meetup) => (
-              <MeetupCard
-                key={meetup.id}
-                imageUrl={meetup.imageUrl}
-                category={meetup.category}
-                title={meetup.title}
-                schedule={meetup.schedule}
-                memberCount={meetup.memberCount}
-                onClick={() => navigate(`/meetup/${meetup.id}`)}
-              />
-            ))}
-          </div>
-        </section>
+      {/* Meetups */}
+      <section className="section">
+        <SectionHeader title="추천 모임" href="/activity#meetup" />
+        <ScrollRow>
+          {meetups.map((meetup) => (
+            <MeetupCard
+              key={meetup.id}
+              imageUrl={meetup.imageUrl}
+              category={meetup.category}
+              title={meetup.title}
+              schedule={meetup.schedule}
+              memberCount={meetup.memberCount}
+              onClick={() => navigate(`/meetup/${meetup.id}`)}
+            />
+          ))}
+        </ScrollRow>
+      </section>
 
-        {/* Feed Section */}
-        <section className="py-4">
-          <SectionHeader title="피드" href="/activity" />
-          <div className="grid grid-cols-2 gap-3">
-            {feeds.map((feed) => (
-              <FeedCard
-                key={feed.id}
-                imageUrl={feed.imageUrl}
-                authorImageUrl={feed.authorImageUrl}
-                authorName={feed.authorName}
-                text={feed.text}
-                likeCount={feed.likeCount}
-                commentCount={feed.commentCount}
-                isLiked={feed.isLiked}
-                onClick={() => navigate(`/feed/${feed.id}`)}
-              />
-            ))}
-          </div>
-        </section>
-      </main>
-
-      <BottomNav />
-    </div>
+      {/* Feed */}
+      <section className="section">
+        <SectionHeader title="피드" href="/activity" />
+        <div className="grid grid-cols-2 gap-3">
+          {feeds.map((feed) => (
+            <FeedCard
+              key={feed.id}
+              imageUrl={feed.imageUrl}
+              authorImageUrl={feed.authorImageUrl}
+              authorName={feed.authorName}
+              text={feed.text}
+              likeCount={feed.likeCount}
+              commentCount={feed.commentCount}
+              isLiked={feed.isLiked}
+              onClick={() => navigate(`/feed/${feed.id}`)}
+            />
+          ))}
+        </div>
+      </section>
+    </PageLayout>
   )
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { BottomNav } from '../../components'
+import { PageLayout, SubPageHeader, ScrollRow } from '../../components'
 import { IconStarFilled, IconChevronRight, IconSearch, IconFilter } from '../../components/Icons'
 
 const filterTabs = [
@@ -83,33 +83,24 @@ export const MembershipPage = () => {
     )
   }
 
-  return (
-    <div className="min-h-screen bg-white pb-[100px]">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
-        <div className="flex items-center justify-between px-5 py-4">
-          <button onClick={() => window.history.back()} className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors">
-            <svg viewBox="0 0 24 24" className="w-5 h-5 stroke-[var(--black)] stroke-2 fill-none">
-              <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <div className="flex-1 text-center text-lg font-bold">지점소개</div>
-          <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors">
-            <IconSearch className="w-[22px] h-[22px] stroke-[var(--black)] stroke-2" />
-          </button>
-        </div>
-      </header>
-
-      {/* Filter Tabs */}
-      <div className="flex gap-2 px-5 py-3 overflow-x-auto border-b border-gray-100 hide-scrollbar">
+  const header = (
+    <SubPageHeader
+      title="지점소개"
+      right={
+        <button className="icon-btn">
+          <IconSearch className="w-[22px] h-[22px] stroke-ink stroke-2" />
+        </button>
+      }
+    >
+      <div className="flex gap-2 px-page py-3 overflow-x-auto border-t border-border-light hide-scrollbar">
         {filterTabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => toggleFilter(tab.id)}
-            className={`flex items-center gap-1.5 px-3.5 py-2 border rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+            className={`flex items-center gap-1.5 px-3.5 py-2 border rounded-pill text-body font-medium whitespace-nowrap transition-colors ${
               activeFilters.includes(tab.id)
-                ? 'bg-[var(--black)] border-[var(--black)] text-white'
-                : 'bg-white border-gray-200 text-[var(--black)] hover:border-gray-400'
+                ? 'bg-ink border-ink text-white'
+                : 'bg-surface border-border text-ink hover:border-ink-placeholder'
             }`}
           >
             {tab.icon && <tab.icon className="w-4 h-4 stroke-current stroke-[1.5]" />}
@@ -117,104 +108,104 @@ export const MembershipPage = () => {
           </button>
         ))}
       </div>
+    </SubPageHeader>
+  )
 
-      <main className="px-5 py-4">
-        {/* My Memberships Banner */}
-        <div className="flex gap-3 overflow-x-auto pb-5 hide-scrollbar">
-          {myMemberships.map((membership) => (
+  return (
+    <PageLayout header={header}>
+      {/* My Memberships Banner */}
+      <ScrollRow className="pb-4">
+        {myMemberships.map((membership) => (
+          <div
+            key={membership.id}
+            className={`min-w-[280px] flex-shrink-0 flex justify-between items-center p-3.5 rounded-card cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-elevated ${
+              membership.variant === 'waiting'
+                ? 'bg-surface border-2 border-ink-disabled'
+                : membership.variant === 'secondary'
+                ? 'bg-gray-600'
+                : 'bg-ink'
+            }`}
+          >
+            <div className="flex items-center gap-2.5">
+              <span className={`badge ${
+                membership.variant === 'waiting' ? 'bg-ink-placeholder text-white' : 'bg-primary text-white'
+              }`}>
+                {membership.status}
+              </span>
+              <span className={membership.variant === 'waiting' ? 'text-ink text-body font-semibold' : 'text-white text-body font-semibold'}>
+                {membership.gym}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className={membership.variant === 'waiting' ? 'text-ink-secondary text-body font-semibold' : 'text-primary text-body font-semibold'}>
+                {membership.days}
+              </span>
+              <IconChevronRight className="w-4 h-4 stroke-ink-placeholder stroke-[1.5]" />
+            </div>
+          </div>
+        ))}
+      </ScrollRow>
+
+      {/* Gym List */}
+      <section>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-heading">헬스장</h2>
+          <span className="text-body text-ink-placeholder">{gyms.length}개</span>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          {gyms.map((gym) => (
             <div
-              key={membership.id}
-              className={`min-w-[280px] flex-shrink-0 flex justify-between items-center p-3.5 rounded-xl cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-lg ${
-                membership.variant === 'waiting'
-                  ? 'bg-white border-2 border-gray-300'
-                  : membership.variant === 'secondary'
-                  ? 'bg-gray-600'
-                  : 'bg-[var(--black)]'
-              }`}
+              key={gym.id}
+              onClick={() => navigate(`/gym/${gym.id}`)}
+              className="border border-border rounded-card-lg overflow-hidden cursor-pointer transition-all hover:border-ink hover:-translate-y-0.5 hover:shadow-elevated"
             >
-              <div className="flex items-center gap-2.5">
-                <span className={`px-2 py-1 text-[10px] font-bold rounded ${
-                  membership.variant === 'waiting' ? 'bg-gray-400 text-white' : 'bg-[var(--primary)] text-white'
-                }`}>
-                  {membership.status}
-                </span>
-                <span className={membership.variant === 'waiting' ? 'text-[var(--black)] text-sm font-semibold' : 'text-white text-sm font-semibold'}>
-                  {membership.gym}
-                </span>
+              <div className="relative">
+                <img src={gym.image} alt={gym.name} className="w-full h-[140px] object-cover" />
+                {gym.badge && (
+                  <span className={`absolute top-3 left-3 badge ${
+                    gym.badgeType === 'sale' ? 'bg-red-500 text-white' :
+                    gym.badgeType === 'new' ? 'bg-green-500 text-white' :
+                    'bg-primary text-white'
+                  }`}>
+                    {gym.badge}
+                  </span>
+                )}
               </div>
-              <div className="flex items-center gap-2">
-                <span className={membership.variant === 'waiting' ? 'text-gray-600 text-sm font-semibold' : 'text-[var(--primary)] text-sm font-semibold'}>
-                  {membership.days}
-                </span>
-                <IconChevronRight className="w-4 h-4 stroke-gray-400 stroke-[1.5]" />
+              <div className="p-card-lg">
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="text-title">{gym.name}</h3>
+                  <div className="flex items-center gap-1">
+                    <IconStarFilled className="w-4 h-4 text-[#FFD700]" />
+                    <span className="text-body font-semibold">{gym.rating}</span>
+                  </div>
+                </div>
+                <p className="text-body text-ink-placeholder mb-3">{gym.address}</p>
+                <div className="flex gap-2 mb-3">
+                  {gym.tags.map((tag) => (
+                    <span key={tag} className="px-2.5 py-1 bg-surface-muted text-label font-medium rounded-md">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex justify-between items-center">
+                  {gym.firstPay && (
+                    <span className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary-50 rounded-lg">
+                      <span className="text-label text-ink-tertiary">첫결제</span>
+                      <span className="text-body font-bold text-primary">{gym.firstPay}</span>
+                    </span>
+                  )}
+                  <div className="flex items-center gap-1 ml-auto">
+                    <span className="text-body text-ink-placeholder">월</span>
+                    <span className="text-heading">{gym.monthlyPrice}</span>
+                    <span className="text-body text-ink-placeholder">원~</span>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
         </div>
-
-        {/* Gym List */}
-        <div className="mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-bold">헬스장</h2>
-            <span className="text-sm text-gray-400">{gyms.length}개</span>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            {gyms.map((gym) => (
-              <div
-                key={gym.id}
-                onClick={() => navigate(`/gym/${gym.id}`)}
-                className="border border-gray-200 rounded-2xl overflow-hidden cursor-pointer transition-all hover:border-[var(--black)] hover:-translate-y-0.5 hover:shadow-lg"
-              >
-                <div className="relative">
-                  <img src={gym.image} alt={gym.name} className="w-full h-[140px] object-cover" />
-                  {gym.badge && (
-                    <span className={`absolute top-3 left-3 px-2.5 py-1 text-xs font-bold rounded ${
-                      gym.badgeType === 'sale' ? 'bg-red-500 text-white' :
-                      gym.badgeType === 'new' ? 'bg-green-500 text-white' :
-                      'bg-[var(--primary)] text-white'
-                    }`}>
-                      {gym.badge}
-                    </span>
-                  )}
-                </div>
-                <div className="p-4">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-base font-bold">{gym.name}</h3>
-                    <div className="flex items-center gap-1">
-                      <IconStarFilled className="w-4 h-4 text-[#FFD700]" />
-                      <span className="text-sm font-semibold">{gym.rating}</span>
-                    </div>
-                  </div>
-                  <p className="text-sm text-gray-400 mb-3">{gym.address}</p>
-                  <div className="flex gap-2 mb-3">
-                    {gym.tags.map((tag) => (
-                      <span key={tag} className="px-2.5 py-1 bg-gray-100 text-xs font-medium rounded-md">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex justify-between items-center">
-                    {gym.firstPay && (
-                      <span className="flex items-center gap-1.5 px-2.5 py-1.5 bg-[#fff4f0] rounded-lg">
-                        <span className="text-xs text-gray-500">첫결제</span>
-                        <span className="text-sm font-bold text-[var(--primary)]">{gym.firstPay}</span>
-                      </span>
-                    )}
-                    <div className="flex items-center gap-1 ml-auto">
-                      <span className="text-sm text-gray-400">월</span>
-                      <span className="text-lg font-bold">{gym.monthlyPrice}</span>
-                      <span className="text-sm text-gray-400">원~</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </main>
-
-      <BottomNav />
-    </div>
+      </section>
+    </PageLayout>
   )
 }

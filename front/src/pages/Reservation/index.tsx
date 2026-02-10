@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BottomNav } from '../../components'
+import { PageLayout, SubPageHeader } from '../../components'
 import { IconChevronLeft, IconChevronRight } from '../../components/Icons'
 
 const weekdays = ['일', '월', '화', '수', '목', '금', '토']
@@ -116,19 +116,19 @@ export const ReservationPage = () => {
           key={day}
           onClick={() => !isPast && setSelectedDate(new Date(year, month, day))}
           disabled={isPast}
-          className={`aspect-square flex items-center justify-center text-sm font-medium rounded-xl transition-colors relative ${
+          className={`aspect-square flex items-center justify-center text-body font-medium rounded-card transition-colors relative ${
             isPast
-              ? 'text-gray-300 cursor-not-allowed bg-transparent'
+              ? 'text-ink-disabled cursor-not-allowed bg-transparent'
               : isSelected(day)
-              ? 'bg-[var(--primary)] text-white'
+              ? 'bg-primary text-white'
               : isToday(day)
-              ? 'border-2 border-[var(--primary)] bg-white'
-              : 'bg-white hover:bg-gray-200'
+              ? 'border-2 border-primary bg-surface'
+              : 'bg-surface hover:bg-surface-muted'
           }`}
         >
           {day}
           {hasReservation(day) && !isPast && (
-            <span className={`absolute bottom-1.5 w-1 h-1 rounded-full ${isSelected(day) ? 'bg-white' : 'bg-[var(--primary)]'}`} />
+            <span className={`absolute bottom-1.5 w-1 h-1 rounded-full ${isSelected(day) ? 'bg-white' : 'bg-primary'}`} />
           )}
         </button>
       )
@@ -137,162 +137,148 @@ export const ReservationPage = () => {
     return days
   }
 
-  return (
-    <div className="min-h-screen bg-white pb-[100px]">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
-        <div className="flex items-center justify-between px-5 py-4">
-          <button onClick={() => window.history.back()} className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors">
-            <svg viewBox="0 0 24 24" className="w-5 h-5 stroke-[var(--black)] stroke-2 fill-none">
-              <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <div className="flex-1 text-center text-lg font-bold">예약</div>
-          <div className="w-10" />
-        </div>
-      </header>
-
-      {/* Tabs */}
-      <div className="flex border-b border-gray-200">
+  const header = (
+    <SubPageHeader title="예약">
+      <div className="flex border-t border-border-light">
         <button
           onClick={() => setActiveTab('calendar')}
-          className={`flex-1 py-4 text-[15px] font-medium text-center border-b-2 transition-colors ${
+          className={`flex-1 py-3 text-body font-semibold text-center border-b-2 transition-colors ${
             activeTab === 'calendar'
-              ? 'text-[var(--black)] font-bold border-[var(--black)]'
-              : 'text-gray-400 border-transparent hover:text-gray-600'
+              ? 'text-ink font-bold border-ink'
+              : 'text-ink-placeholder border-transparent hover:text-ink-secondary'
           }`}
         >
           캘린더
         </button>
         <button
           onClick={() => setActiveTab('list')}
-          className={`flex-1 py-4 text-[15px] font-medium text-center border-b-2 transition-colors ${
+          className={`flex-1 py-3 text-body font-semibold text-center border-b-2 transition-colors ${
             activeTab === 'list'
-              ? 'text-[var(--black)] font-bold border-[var(--black)]'
-              : 'text-gray-400 border-transparent hover:text-gray-600'
+              ? 'text-ink font-bold border-ink'
+              : 'text-ink-placeholder border-transparent hover:text-ink-secondary'
           }`}
         >
           예약 목록
         </button>
       </div>
+    </SubPageHeader>
+  )
 
-      <main className="px-5 py-6">
-        {activeTab === 'calendar' ? (
-          <>
-            {/* Calendar */}
-            <div className="bg-gray-100 rounded-2xl p-6 mb-6">
-              <div className="flex justify-between items-center mb-5">
-                <span className="text-lg font-bold">
-                  {year}년 {month + 1}월
-                </span>
-                <div className="flex gap-2">
-                  <button
-                    onClick={prevMonth}
-                    className="w-9 h-9 border border-gray-200 rounded-lg bg-white flex items-center justify-center hover:bg-[var(--black)] hover:text-white transition-colors group"
-                  >
-                    <IconChevronLeft className="w-4 h-4 stroke-[var(--black)] stroke-2 group-hover:stroke-white" />
-                  </button>
-                  <button
-                    onClick={nextMonth}
-                    className="w-9 h-9 border border-gray-200 rounded-lg bg-white flex items-center justify-center hover:bg-[var(--black)] hover:text-white transition-colors group"
-                  >
-                    <IconChevronRight className="w-4 h-4 stroke-[var(--black)] stroke-2 group-hover:stroke-white" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Weekdays */}
-              <div className="grid grid-cols-7 gap-1 mb-2">
-                {weekdays.map((day, index) => (
-                  <div
-                    key={day}
-                    className={`text-center text-xs font-semibold py-2 ${
-                      index === 0 ? 'text-red-500' : index === 6 ? 'text-blue-500' : 'text-gray-400'
-                    }`}
-                  >
-                    {day}
-                  </div>
-                ))}
-              </div>
-
-              {/* Days */}
-              <div className="grid grid-cols-7 gap-1">
-                {renderDays()}
-              </div>
-            </div>
-
-            {/* Selected Date Reservations */}
-            <div>
-              <h3 className="text-base font-bold mb-4">
-                {selectedDate.getMonth() + 1}월 {selectedDate.getDate()}일 예약
-              </h3>
-              {reservations.length > 0 ? (
-                <div className="flex flex-col gap-3">
-                  {reservations.map((res) => (
-                    <div
-                      key={res.id}
-                      className="flex items-center gap-4 p-4 border border-gray-200 rounded-xl hover:border-[var(--black)] transition-colors cursor-pointer"
-                    >
-                      <div className="text-center min-w-[50px]">
-                        <div className="text-lg font-bold">{res.time}</div>
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-base font-bold">{res.trainer}</span>
-                          <span className="px-2 py-0.5 bg-gray-100 text-xs font-medium rounded">
-                            {res.type}
-                          </span>
-                        </div>
-                        <div className="text-sm text-gray-400">{res.location}</div>
-                      </div>
-                      <span
-                        className={`px-2.5 py-1 text-xs font-bold rounded ${
-                          res.status === 'confirmed'
-                            ? 'bg-green-100 text-green-600'
-                            : 'bg-yellow-100 text-yellow-600'
-                        }`}
-                      >
-                        {res.status === 'confirmed' ? '확정' : '대기'}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-12 text-gray-400">
-                  예약된 일정이 없습니다
-                </div>
-              )}
-            </div>
-          </>
-        ) : (
-          /* List View */
-          <div>
-            <h3 className="text-base font-bold mb-4">다가오는 예약</h3>
-            <div className="flex flex-col gap-3">
-              {upcomingReservations.map((res) => (
-                <div
-                  key={res.id}
-                  className="p-4 border border-gray-200 rounded-xl hover:border-[var(--black)] transition-colors cursor-pointer"
+  return (
+    <PageLayout header={header}>
+      {activeTab === 'calendar' ? (
+        <>
+          {/* Calendar */}
+          <div className="bg-surface-muted rounded-card-lg p-card-lg mb-section">
+            <div className="flex justify-between items-center mb-5">
+              <span className="text-heading">
+                {year}년 {month + 1}월
+              </span>
+              <div className="flex gap-2">
+                <button
+                  onClick={prevMonth}
+                  className="w-9 h-9 border border-border rounded-card bg-surface flex items-center justify-center hover:bg-ink hover:text-white transition-colors group"
                 >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-bold text-[var(--primary)]">{res.date}</span>
-                    <span className="text-sm font-bold">{res.time}</span>
-                  </div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-base font-bold">{res.trainer}</span>
-                    <span className="px-2 py-0.5 bg-gray-100 text-xs font-medium rounded">
-                      {res.type}
-                    </span>
-                  </div>
-                  <div className="text-sm text-gray-400">{res.location}</div>
+                  <IconChevronLeft className="w-4 h-4 stroke-ink stroke-2 group-hover:stroke-white" />
+                </button>
+                <button
+                  onClick={nextMonth}
+                  className="w-9 h-9 border border-border rounded-card bg-surface flex items-center justify-center hover:bg-ink hover:text-white transition-colors group"
+                >
+                  <IconChevronRight className="w-4 h-4 stroke-ink stroke-2 group-hover:stroke-white" />
+                </button>
+              </div>
+            </div>
+
+            {/* Weekdays */}
+            <div className="grid grid-cols-7 gap-1 mb-2">
+              {weekdays.map((day, index) => (
+                <div
+                  key={day}
+                  className={`text-center text-label font-semibold py-2 ${
+                    index === 0 ? 'text-red-500' : index === 6 ? 'text-blue-500' : 'text-ink-placeholder'
+                  }`}
+                >
+                  {day}
                 </div>
               ))}
             </div>
-          </div>
-        )}
-      </main>
 
-      <BottomNav />
-    </div>
+            {/* Days */}
+            <div className="grid grid-cols-7 gap-1">
+              {renderDays()}
+            </div>
+          </div>
+
+          {/* Selected Date Reservations */}
+          <div>
+            <h3 className="text-title mb-4">
+              {selectedDate.getMonth() + 1}월 {selectedDate.getDate()}일 예약
+            </h3>
+            {reservations.length > 0 ? (
+              <div className="flex flex-col gap-3">
+                {reservations.map((res) => (
+                  <div
+                    key={res.id}
+                    className="flex items-center gap-4 p-card border border-border rounded-card hover:border-ink transition-colors cursor-pointer"
+                  >
+                    <div className="text-center min-w-[50px]">
+                      <div className="text-heading">{res.time}</div>
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-title">{res.trainer}</span>
+                        <span className="px-2 py-0.5 bg-surface-muted text-label font-medium rounded">
+                          {res.type}
+                        </span>
+                      </div>
+                      <div className="text-body text-ink-placeholder">{res.location}</div>
+                    </div>
+                    <span
+                      className={`badge ${
+                        res.status === 'confirmed'
+                          ? 'bg-green-100 text-green-600'
+                          : 'bg-yellow-100 text-yellow-600'
+                      }`}
+                    >
+                      {res.status === 'confirmed' ? '확정' : '대기'}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12 text-ink-placeholder">
+                예약된 일정이 없습니다
+              </div>
+            )}
+          </div>
+        </>
+      ) : (
+        /* List View */
+        <div>
+          <h3 className="text-title mb-4">다가오는 예약</h3>
+          <div className="flex flex-col gap-3">
+            {upcomingReservations.map((res) => (
+              <div
+                key={res.id}
+                className="p-card border border-border rounded-card hover:border-ink transition-colors cursor-pointer"
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-body font-bold text-primary">{res.date}</span>
+                  <span className="text-body font-bold">{res.time}</span>
+                </div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-title">{res.trainer}</span>
+                  <span className="px-2 py-0.5 bg-surface-muted text-label font-medium rounded">
+                    {res.type}
+                  </span>
+                </div>
+                <div className="text-body text-ink-placeholder">{res.location}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </PageLayout>
   )
 }

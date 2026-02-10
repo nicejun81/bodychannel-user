@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIT. - PT+</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-400: #a3a3a3;
+            --gray-600: #525252;
+            --primary: #FF6B35;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', -apple-system, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            min-height: 100vh;
+            padding-bottom: 100px;
+            animation: pageEnter 0.2s ease-out;
+        }
+
+        @keyframes pageEnter {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        .header {
+            padding: 24px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-symbol {
+            flex-shrink: 0;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--gray-200);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: var(--white);
+            transition: all 0.2s ease;
+        }
+
+        .back-btn.show {
+            display: flex;
+        }
+
+        .header-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            display: none;
+            flex: 1;
+            text-align: center;
+        }
+
+        .header-title.show {
+            display: block;
+        }
+
+        .header-spacer {
+            width: 40px;
+            display: none;
+        }
+
+        .header-spacer.show {
+            display: block;
+        }
+
+        .logo.hidden {
+            display: none;
+        }
+
+        .back-btn:hover {
+            background: var(--gray-100);
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--black);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        /* Main Content */
+        .main-content { padding: 32px 28px; }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: var(--gray-400);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        /* Gym Selection */
+        .gym-selection {
+            opacity: 1;
+            transform: translateX(0);
+            transition: all 0.2s ease;
+        }
+
+        .gym-selection.hidden {
+            opacity: 0;
+            transform: translateX(-20px);
+            pointer-events: none;
+            position: absolute;
+            visibility: hidden;
+        }
+
+        /* Search Box */
+        .search-box {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            animation: slideUp 0.2s ease-out 0.05s backwards;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 16px 20px;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--black);
+        }
+
+        .search-btn {
+            width: 54px;
+            height: 54px;
+            border: none;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: var(--black);
+            color: white;
+            transition: all 0.2s ease;
+        }
+
+        .search-btn:hover {
+            background: var(--primary);
+        }
+
+        .search-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* View Tabs */
+        .view-tabs {
+            display: flex;
+            background: var(--gray-100);
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 24px;
+            animation: slideUp 0.2s ease-out 0.1s backwards;
+        }
+
+        .view-tab {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-400);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .view-tab.active {
+            background: var(--white);
+            color: var(--black);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .view-tab svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        /* List View */
+        .list-view { display: block; }
+        .list-view.hidden { display: none; }
+
+        /* Map View */
+        .map-view { display: none; }
+        .map-view.active { display: block; }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .result-count {
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+
+        /* Gym List */
+        .gym-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .gym-card {
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            animation: slideUp 0.2s ease-out backwards;
+        }
+
+        .gym-card:nth-child(1) { animation-delay: 0.12s; }
+        .gym-card:nth-child(2) { animation-delay: 0.16s; }
+        .gym-card:nth-child(3) { animation-delay: 0.20s; }
+        .gym-card:nth-child(4) { animation-delay: 0.24s; }
+
+        .gym-card:hover {
+            border-color: var(--black);
+            background: var(--gray-100);
+        }
+
+        .gym-card.selected {
+            border-color: var(--primary);
+            background: rgba(255, 107, 53, 0.05);
+        }
+
+        .gym-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .gym-info { flex: 1; }
+
+        .gym-name {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .gym-address {
+            font-size: 13px;
+            color: var(--gray-400);
+            margin-bottom: 8px;
+        }
+
+        .gym-phone {
+            font-size: 13px;
+            color: var(--gray-600);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .gym-phone svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--gray-400);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .gym-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .gym-tag {
+            background: var(--gray-100);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .gym-tag.category {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .gym-distance {
+            text-align: right;
+        }
+
+        .gym-distance-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Map Container */
+        .map-container {
+            width: 100%;
+            height: calc(100vh - 320px);
+            min-height: 400px;
+            background: var(--gray-100);
+            border-radius: 16px;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-100);
+            z-index: 10;
+        }
+
+        .map-overlay.hidden { display: none; }
+
+        .map-placeholder {
+            text-align: center;
+            color: var(--gray-400);
+        }
+
+        .map-placeholder-icon {
+            margin-bottom: 16px;
+        }
+
+        .map-placeholder-icon svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--gray-400);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .map-placeholder-text {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .map-init-btn {
+            background: var(--black);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .map-init-btn:hover {
+            background: var(--primary);
+        }
+
+        .location-tag {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            background: var(--white);
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .location-tag svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--primary);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .my-location-btn {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            width: 44px;
+            height: 44px;
+            background: var(--white);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            z-index: 5;
+            transition: all 0.2s ease;
+        }
+
+        .my-location-btn:hover {
+            background: var(--primary);
+        }
+
+        .my-location-btn:hover svg {
+            stroke: white;
+        }
+
+        .my-location-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--black);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        /* Map View Gym List - Horizontal Scroll */
+        .map-view .gym-list {
+            flex-direction: row;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .map-view .gym-list::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .map-view .gym-list::-webkit-scrollbar-track {
+            background: var(--gray-100);
+            border-radius: 2px;
+        }
+
+        .map-view .gym-list::-webkit-scrollbar-thumb {
+            background: var(--gray-300);
+            border-radius: 2px;
+        }
+
+        .map-view .gym-card {
+            min-width: 240px;
+            max-width: 240px;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            padding: 16px;
+        }
+
+        .map-view .gym-name {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .map-view .gym-address {
+            font-size: 11px;
+            margin-bottom: 6px;
+        }
+
+        .map-view .gym-phone { display: none; }
+
+        .map-view .gym-tag {
+            padding: 3px 8px;
+            font-size: 10px;
+        }
+
+        .map-view .gym-distance-value {
+            font-size: 14px;
+        }
+
+        /* Loading & Empty States */
+        .loading-spinner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            color: var(--gray-400);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--gray-200);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--gray-400);
+        }
+
+        .no-results-icon {
+            margin-bottom: 16px;
+        }
+
+        .no-results-icon svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--gray-300);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        /* Product Section */
+        .product-section {
+            opacity: 0;
+            transform: translateX(20px);
+            pointer-events: none;
+            position: absolute;
+            visibility: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .product-section.show {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+            position: relative;
+            visibility: visible;
+        }
+
+        .selected-gym-banner {
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .selected-gym-info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .selected-gym-info p {
+            font-size: 13px;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .change-gym-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .change-gym-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+
+        .filter-tabs::-webkit-scrollbar { display: none; }
+
+        .filter-tab {
+            padding: 10px 20px;
+            border: 1px solid var(--gray-200);
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            background: var(--white);
+        }
+
+        .filter-tab.active {
+            background: var(--black);
+            color: var(--white);
+            border-color: var(--black);
+        }
+
+        /* Product Cards */
+        .products-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .product-card {
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.2s ease;
+            animation: slideUp 0.2s ease-out backwards;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.05s; }
+        .product-card:nth-child(2) { animation-delay: 0.10s; }
+        .product-card:nth-child(3) { animation-delay: 0.15s; }
+        .product-card:nth-child(4) { animation-delay: 0.20s; }
+
+        .product-card:hover {
+            border-color: var(--black);
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .product-badge {
+            background: var(--primary);
+            color: var(--white);
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-badge.sale {
+            background: var(--black);
+        }
+
+        .product-popular {
+            font-size: 12px;
+            color: var(--gray-400);
+        }
+
+        .product-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .product-desc {
+            color: var(--gray-600);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .product-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
+        .feature-tag {
+            background: var(--gray-100);
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 6px;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray-100);
+        }
+
+        .price-original {
+            font-size: 13px;
+            color: var(--gray-400);
+            text-decoration: line-through;
+        }
+
+        .price-current {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .buy-btn {
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            padding: 14px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .buy-btn:hover {
+            background: var(--primary);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-around;
+            padding: 16px 0 28px;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            color: var(--gray-400);
+            transition: color 0.2s ease;
+        }
+
+        .nav-item.active { color: var(--primary); }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item:hover .nav-icon svg {
+            stroke: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .nav-item.active .nav-icon svg {
+            fill: currentColor;
+            stroke-width: 0;
+        }
+
+        .nav-item.active:hover .nav-icon svg {
+            transform: scale(1.1);
+        }
+
+        .nav-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        /* Kakao Map InfoWindow */
+        .infowindow-content {
+            padding: 12px 16px;
+            font-family: 'Poppins', sans-serif;
+            min-width: 200px;
+        }
+        .infowindow-content .name {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        .infowindow-content .address {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .infowindow-content .select-btn {
+            background: #0a0a0a;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s ease;
+        }
+        .infowindow-content .select-btn:hover {
+            background: #FF6B35;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <button class="back-btn" id="backBtn" onclick="showGymSelection()">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <div class="logo" id="headerLogo">
+            <img src="symbol.png" alt="logo" class="logo-symbol" width="32" height="32">
+            <span>BODYCHANNEL</span>
+        </div>
+        <div class="header-title" id="headerTitle">상품 선택</div>
+        <div class="header-spacer" id="headerSpacer"></div>
+    </header>
+
+    <main class="main-content">
+        <!-- Gym Selection -->
+        <div class="gym-selection" id="gymSelection">
+            <h1 class="page-title">PT+</h1>
+            <p class="page-subtitle">헬스장을 선택하고 다양한 프로그램을 만나보세요</p>
+
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="헬스장 이름 또는 지역 검색" value="헬스장">
+                <button class="search-btn" onclick="searchGyms()">
+                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                </button>
+            </div>
+
+            <!-- View Tabs -->
+            <div class="view-tabs">
+                <button class="view-tab active" id="listTabBtn" onclick="switchToListView()">
+                    <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
+                    리스트
+                </button>
+                <button class="view-tab" id="mapTabBtn" onclick="switchToMapView()">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    지도
+                </button>
+            </div>
+
+            <!-- List View -->
+            <div class="list-view" id="listView">
+                <div class="section-header">
+                    <span class="section-title">검색 결과</span>
+                    <span class="result-count" id="resultCount"></span>
+                </div>
+                <div class="gym-list" id="gymList">
+                    <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>헬스장을 검색하고 있습니다...</p>
+                    </div>
+                    <div class="no-results" id="noResults" style="display: none;">
+                        <div class="no-results-icon">
+                            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                        </div>
+                        <p>검색 결과가 없습니다.<br>다른 지역이나 키워드로 검색해보세요.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map View -->
+            <div class="map-view" id="mapView">
+                <div class="map-container" id="mapContainer">
+                    <div class="map-overlay" id="mapOverlay">
+                        <div class="map-placeholder">
+                            <div class="map-placeholder-icon">
+                                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div class="map-placeholder-text">지도에서 주변 헬스장을 찾아보세요</div>
+                            <button class="map-init-btn" onclick="initMap()">지도 열기</button>
+                        </div>
+                    </div>
+                    <div id="map"></div>
+                    <div class="location-tag" id="locationTag">
+                        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        위치 확인 중...
+                    </div>
+                    <button class="my-location-btn" onclick="moveToMyLocation()" title="내 위치로">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+                    </button>
+                </div>
+                <div class="section-header">
+                    <span class="section-title">주변 헬스장</span>
+                    <span class="result-count" id="mapResultCount"></span>
+                </div>
+                <div class="gym-list" id="mapGymList"></div>
+            </div>
+        </div>
+
+        <!-- Product Section -->
+        <div class="product-section" id="productSection">
+            <div class="selected-gym-banner">
+                <div class="selected-gym-info">
+                    <h3 id="selectedGymName">피트니스 센터</h3>
+                    <p id="selectedGymAddress">
+                        <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;stroke-width:1.5;fill:none;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        주소
+                    </p>
+                </div>
+                <button class="change-gym-btn" onclick="showGymSelection()">변경</button>
+            </div>
+
+            <div class="filter-tabs">
+                <div class="filter-tab active">전체</div>
+                <div class="filter-tab">PT</div>
+                <div class="filter-tab">GX</div>
+                <div class="filter-tab">멤버십</div>
+                <div class="filter-tab">이용권</div>
+            </div>
+
+            <div class="products-list">
+                <div class="product-card">
+                    <div class="product-header">
+                        <span class="product-badge">BEST</span>
+                        <span class="product-popular">98명 구매</span>
+                    </div>
+                    <h3 class="product-name">PT 20회 패키지</h3>
+                    <p class="product-desc">전문 트레이너와 함께하는 1:1 맞춤 퍼스널 트레이닝</p>
+                    <div class="product-features">
+                        <span class="feature-tag">1:1 맞춤</span>
+                        <span class="feature-tag">체성분 분석</span>
+                        <span class="feature-tag">식단 관리</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">
+                            <div class="price-original">1,200,000원</div>
+                            <div class="price-current">990,000원</div>
+                        </div>
+                        <button class="buy-btn">구매하기</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-header">
+                        <span class="product-badge sale">SALE</span>
+                        <span class="product-popular">신규 출시</span>
+                    </div>
+                    <h3 class="product-name">GX 무제한 이용권</h3>
+                    <p class="product-desc">스피닝, 요가, 필라테스 등 모든 GX 클래스 무제한</p>
+                    <div class="product-features">
+                        <span class="feature-tag">무제한</span>
+                        <span class="feature-tag">전 클래스</span>
+                        <span class="feature-tag">1개월</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">
+                            <div class="price-original">150,000원</div>
+                            <div class="price-current">99,000원</div>
+                        </div>
+                        <button class="buy-btn">구매하기</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-header">
+                        <span class="product-badge sale">40% OFF</span>
+                        <span class="product-popular">인기</span>
+                    </div>
+                    <h3 class="product-name">3개월 멤버십</h3>
+                    <p class="product-desc">헬스장 자유이용 + 락커 + 운동복 대여 포함</p>
+                    <div class="product-features">
+                        <span class="feature-tag">자유이용</span>
+                        <span class="feature-tag">락커</span>
+                        <span class="feature-tag">운동복</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">
+                            <div class="price-original">450,000원</div>
+                            <div class="price-current">270,000원</div>
+                        </div>
+                        <button class="buy-btn">구매하기</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-header">
+                        <span class="product-badge">NEW</span>
+                        <span class="product-popular">추천</span>
+                    </div>
+                    <h3 class="product-name">1일 이용권</h3>
+                    <p class="product-desc">부담없이 하루 체험해보세요</p>
+                    <div class="product-features">
+                        <span class="feature-tag">당일 사용</span>
+                        <span class="feature-tag">전 시설</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price">
+                            <div class="price-current">15,000원</div>
+                        </div>
+                        <button class="buy-btn">구매하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="design-02-minimal-monochrome-purchase.html" class="nav-item active">
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M6.5 17.5h11M4 10h2.5v4H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zM17.5 10H20a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2.5v-4zM6.5 8v8M17.5 8v8M9 10v4M15 10v4"/></svg>
+            </span>
+            <span class="nav-label">PT+</span>
+        </a>
+        <a href="design-02-minimal-monochrome-mypage.html" class="nav-item">
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+            </span>
+            <span class="nav-label">마이</span>
+        </a>
+    </nav>
+
+    <script>
+        let map = null;
+        let markers = [];
+        let infowindow = null;
+        let ps = null;
+        let geocoder = null;
+        let currentPosition = { lat: 37.5665, lng: 126.9780 };
+        let placesData = [];
+        let kakaoLoaded = false;
+        let kakaoLoading = false;
+
+        // Kakao Maps SDK 동적 로드
+        function loadKakaoMaps(callback) {
+            if (kakaoLoaded) {
+                callback();
+                return;
+            }
+            if (kakaoLoading) {
+                // 이미 로딩 중이면 로딩 완료 대기
+                const checkLoaded = setInterval(() => {
+                    if (kakaoLoaded) {
+                        clearInterval(checkLoaded);
+                        callback();
+                    }
+                }, 100);
+                return;
+            }
+
+            kakaoLoading = true;
+            const script = document.createElement('script');
+            script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_KAKAO_APP_KEY&libraries=services&autoload=false';
+            script.onload = () => {
+                kakao.maps.load(() => {
+                    kakaoLoaded = true;
+                    kakaoLoading = false;
+                    callback();
+                });
+            };
+            script.onerror = () => {
+                kakaoLoading = false;
+                console.warn('Kakao Maps SDK 로드 실패 - 데모 모드로 전환');
+                showDemoResults();
+            };
+            document.head.appendChild(script);
+        }
+
+        function initMap() {
+            document.getElementById('mapOverlay').classList.add('hidden');
+
+            loadKakaoMaps(() => {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            currentPosition = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude
+                            };
+                            createMap();
+                            updateLocationTag();
+                        },
+                        (error) => {
+                            createMap();
+                            document.getElementById('locationTag').innerHTML = '<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--primary);stroke-width:1.5;fill:none;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> 서울시 (기본 위치)';
+                        }
+                    );
+                } else {
+                    createMap();
+                }
+            });
+        }
+
+        function createMap() {
+            const container = document.getElementById('map');
+            const options = {
+                center: new kakao.maps.LatLng(currentPosition.lat, currentPosition.lng),
+                level: 5
+            };
+            map = new kakao.maps.Map(container, options);
+            ps = new kakao.maps.services.Places();
+            geocoder = new kakao.maps.services.Geocoder();
+            infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+            new kakao.maps.Marker({
+                position: new kakao.maps.LatLng(currentPosition.lat, currentPosition.lng),
+                map: map
+            });
+            searchGyms();
+        }
+
+        function updateLocationTag() {
+            if (geocoder) {
+                const coord = new kakao.maps.LatLng(currentPosition.lat, currentPosition.lng);
+                geocoder.coord2RegionCode(coord.getLng(), coord.getLat(), (result, status) => {
+                    if (status === kakao.maps.services.Status.OK) {
+                        const region = result[0];
+                        document.getElementById('locationTag').innerHTML = `<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--primary);stroke-width:1.5;fill:none;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> ${region.region_1depth_name} ${region.region_2depth_name}`;
+                    }
+                });
+            }
+        }
+
+        function searchGyms() {
+            const keyword = document.getElementById('searchInput').value || '헬스장';
+            if (!map) {
+                showDemoResults();
+                return;
+            }
+            document.getElementById('loadingSpinner').style.display = 'flex';
+            document.getElementById('noResults').style.display = 'none';
+            clearGymCards();
+
+            ps.keywordSearch(keyword, (data, status) => {
+                document.getElementById('loadingSpinner').style.display = 'none';
+                if (status === kakao.maps.services.Status.OK) {
+                    displayResults(data);
+                    document.getElementById('resultCount').textContent = `${data.length}개 발견`;
+                    document.getElementById('mapResultCount').textContent = `${data.length}개 발견`;
+                } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+                    document.getElementById('noResults').style.display = 'block';
+                    document.getElementById('resultCount').textContent = '';
+                    document.getElementById('mapResultCount').textContent = '';
+                } else {
+                    showDemoResults();
+                }
+            }, {
+                location: new kakao.maps.LatLng(currentPosition.lat, currentPosition.lng),
+                radius: 5000,
+                sort: kakao.maps.services.SortBy.DISTANCE
+            });
+        }
+
+        function displayResults(places) {
+            markers.forEach(marker => marker.setMap(null));
+            markers = [];
+            placesData = places;
+
+            const bounds = new kakao.maps.LatLngBounds();
+            const gymListEl = document.getElementById('gymList');
+            const mapGymListEl = document.getElementById('mapGymList');
+
+            places.forEach((place, index) => {
+                const position = new kakao.maps.LatLng(place.y, place.x);
+                const marker = new kakao.maps.Marker({ position, map });
+                markers.push(marker);
+                bounds.extend(position);
+
+                kakao.maps.event.addListener(marker, 'click', () => openInfoWindow(index));
+
+                const distance = place.distance ?
+                    (place.distance >= 1000 ? (place.distance / 1000).toFixed(1) + 'km' : place.distance + 'm') : '';
+
+                const listCardHtml = `
+                    <div class="gym-card" onclick="selectGym('${place.place_name}', '${place.road_address_name || place.address_name}', '${place.phone || ''}')">
+                        <div class="gym-card-header">
+                            <div class="gym-info">
+                                <div class="gym-name">${place.place_name}</div>
+                                <div class="gym-address">${place.road_address_name || place.address_name}</div>
+                                ${place.phone ? `<div class="gym-phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>${place.phone}</div>` : ''}
+                                <div class="gym-tags">
+                                    <span class="gym-tag category">${place.category_group_name || '헬스장'}</span>
+                                </div>
+                            </div>
+                            ${distance ? `<div class="gym-distance"><div class="gym-distance-value">${distance}</div></div>` : ''}
+                        </div>
+                    </div>
+                `;
+
+                const mapCardHtml = `
+                    <div class="gym-card" data-index="${index}" onclick="focusOnMarker(${index})">
+                        <div class="gym-card-header">
+                            <div class="gym-info">
+                                <div class="gym-name">${place.place_name}</div>
+                                <div class="gym-address">${place.road_address_name || place.address_name}</div>
+                                <div class="gym-tags">
+                                    <span class="gym-tag category">${place.category_group_name || '헬스장'}</span>
+                                </div>
+                            </div>
+                            ${distance ? `<div class="gym-distance"><div class="gym-distance-value">${distance}</div></div>` : ''}
+                        </div>
+                    </div>
+                `;
+
+                gymListEl.insertAdjacentHTML('beforeend', listCardHtml);
+                mapGymListEl.insertAdjacentHTML('beforeend', mapCardHtml);
+            });
+
+            map.setBounds(bounds);
+        }
+
+        function openInfoWindow(index) {
+            const place = placesData[index];
+            const marker = markers[index];
+            if (!place || !marker) return;
+
+            const content = `
+                <div class="infowindow-content">
+                    <div class="name">${place.place_name}</div>
+                    <div class="address">${place.road_address_name || place.address_name}</div>
+                    <button class="select-btn" onclick="selectGym('${place.place_name}', '${place.road_address_name || place.address_name}', '${place.phone || ''}')">선택하기</button>
+                </div>
+            `;
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+        }
+
+        function focusOnMarker(index) {
+            const place = placesData[index];
+            const marker = markers[index];
+            if (!place || !marker || !map) return;
+
+            map.panTo(marker.getPosition());
+            openInfoWindow(index);
+
+            const mapGymListEl = document.getElementById('mapGymList');
+            mapGymListEl.querySelectorAll('.gym-card').forEach(card => card.classList.remove('selected'));
+            const selectedCard = mapGymListEl.querySelector(`[data-index="${index}"]`);
+            if (selectedCard) selectedCard.classList.add('selected');
+        }
+
+        function showDemoResults() {
+            document.getElementById('loadingSpinner').style.display = 'none';
+            const gymListEl = document.getElementById('gymList');
+            const mapGymListEl = document.getElementById('mapGymList');
+
+            const demoGyms = [
+                { name: '피트니스 센터 강남점', address: '서울 강남구 테헤란로 123', phone: '02-1234-5678', distance: '350m', tags: ['PREMIUM', '24시간'] },
+                { name: '파워짐 선릉역점', address: '서울 강남구 선릉로 456', phone: '02-2345-6789', distance: '800m', tags: ['GX클래스', '샤워실'] },
+                { name: '스포애니 역삼점', address: '서울 강남구 역삼동 789', phone: '02-3456-7890', distance: '1.2km', tags: ['24시간', '무인'] },
+                { name: '애니타임 피트니스', address: '서울 강남구 삼성로 111', phone: '02-4567-8901', distance: '1.5km', tags: ['24시간'] },
+            ];
+
+            demoGyms.forEach((gym, index) => {
+                const cardHtml = `
+                    <div class="gym-card" onclick="selectGym('${gym.name}', '${gym.address}', '${gym.phone}')">
+                        <div class="gym-card-header">
+                            <div class="gym-info">
+                                <div class="gym-name">${gym.name}</div>
+                                <div class="gym-address">${gym.address}</div>
+                                <div class="gym-phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>${gym.phone}</div>
+                                <div class="gym-tags">
+                                    ${gym.tags.map(tag => `<span class="gym-tag ${tag === 'PREMIUM' ? 'category' : ''}">${tag}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="gym-distance">
+                                <div class="gym-distance-value">${gym.distance}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                const mapCardHtml = `
+                    <div class="gym-card" data-index="${index}">
+                        <div class="gym-card-header">
+                            <div class="gym-info">
+                                <div class="gym-name">${gym.name}</div>
+                                <div class="gym-address">${gym.address}</div>
+                                <div class="gym-tags">
+                                    ${gym.tags.map(tag => `<span class="gym-tag ${tag === 'PREMIUM' ? 'category' : ''}">${tag}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="gym-distance">
+                                <div class="gym-distance-value">${gym.distance}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                gymListEl.insertAdjacentHTML('beforeend', cardHtml);
+                mapGymListEl.insertAdjacentHTML('beforeend', mapCardHtml);
+            });
+
+            document.getElementById('resultCount').textContent = `${demoGyms.length}개 발견`;
+            document.getElementById('mapResultCount').textContent = `${demoGyms.length}개 발견`;
+        }
+
+        function clearGymCards() {
+            const gymListEl = document.getElementById('gymList');
+            const mapGymListEl = document.getElementById('mapGymList');
+            gymListEl.querySelectorAll('.gym-card').forEach(card => card.remove());
+            mapGymListEl.querySelectorAll('.gym-card').forEach(card => card.remove());
+        }
+
+        function selectGym(name, address, phone) {
+            document.getElementById('gymSelection').classList.add('hidden');
+            document.getElementById('productSection').classList.add('show');
+            document.getElementById('selectedGymName').textContent = name;
+            document.getElementById('selectedGymAddress').innerHTML = `<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;stroke-width:1.5;fill:none;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> ${address}`;
+            // 헤더 변경: 서브페이지 스타일로
+            document.getElementById('backBtn').classList.add('show');
+            document.getElementById('headerLogo').classList.add('hidden');
+            document.getElementById('headerTitle').classList.add('show');
+            document.getElementById('headerTitle').textContent = name;
+            document.getElementById('headerSpacer').classList.add('show');
+            if (infowindow) infowindow.close();
+        }
+
+        function showGymSelection() {
+            document.getElementById('gymSelection').classList.remove('hidden');
+            document.getElementById('productSection').classList.remove('show');
+            // 헤더 변경: 메인페이지 스타일로
+            document.getElementById('backBtn').classList.remove('show');
+            document.getElementById('headerLogo').classList.remove('hidden');
+            document.getElementById('headerTitle').classList.remove('show');
+            document.getElementById('headerSpacer').classList.remove('show');
+        }
+
+        function switchToListView() {
+            document.getElementById('listView').classList.remove('hidden');
+            document.getElementById('mapView').classList.remove('active');
+            document.getElementById('listTabBtn').classList.add('active');
+            document.getElementById('mapTabBtn').classList.remove('active');
+        }
+
+        function switchToMapView() {
+            document.getElementById('listView').classList.add('hidden');
+            document.getElementById('mapView').classList.add('active');
+            document.getElementById('listTabBtn').classList.remove('active');
+            document.getElementById('mapTabBtn').classList.add('active');
+            if (!map) {
+                initMap();
+            } else {
+                setTimeout(() => map.relayout(), 100);
+            }
+        }
+
+        function moveToMyLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        currentPosition = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        if (map) {
+                            map.setCenter(new kakao.maps.LatLng(currentPosition.lat, currentPosition.lng));
+                            updateLocationTag();
+                            searchGyms();
+                        }
+                    },
+                    () => alert('위치 정보를 가져올 수 없습니다.')
+                );
+            }
+        }
+
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') searchGyms();
+        });
+
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => showDemoResults());
+    </script>
+</body>
+</html>

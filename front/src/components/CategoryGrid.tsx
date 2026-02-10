@@ -16,7 +16,6 @@ interface CategoryItem {
   icon: React.ReactNode
   href: string
   gradient: string
-  iconClass?: string
 }
 
 const categories: CategoryItem[] = [
@@ -53,7 +52,7 @@ const categories: CategoryItem[] = [
     label: '내 찜 목록',
     icon: <IconHeart className="w-7 h-7 stroke-white fill-white stroke-[1.5]" />,
     href: '/favorites',
-    gradient: 'bg-gradient-to-br from-[#FF6B35] to-[#ff8f6a]',
+    gradient: 'bg-gradient-to-br from-primary to-primary-light',
   },
   {
     id: 'friend',
@@ -80,20 +79,20 @@ const categories: CategoryItem[] = [
 
 export const CategoryGrid = () => {
   return (
-    <div className="bg-white rounded-[20px] shadow-[0_2px_12px_rgba(0,0,0,0.08)] px-3 py-4 mb-4">
+    <div className="bg-surface rounded-card-lg shadow-card px-3 py-4 mb-section">
       <div className="grid grid-cols-4 gap-y-2 gap-x-1">
         {categories.map((category) => (
           <Link
             key={category.id}
             to={category.href}
-            className="flex flex-col items-center py-3 px-1 rounded-xl hover:bg-gray-100 active:scale-95 transition-all"
+            className="flex flex-col items-center py-3 px-1 rounded-card hover:bg-surface-muted active:scale-95 transition-all"
           >
             <div
-              className={`w-[52px] h-[52px] rounded-2xl flex items-center justify-center mb-2 ${category.gradient}`}
+              className={`w-[52px] h-[52px] rounded-card-lg flex items-center justify-center mb-2 ${category.gradient}`}
             >
               {category.icon}
             </div>
-            <span className="text-xs font-semibold text-[var(--black)] text-center leading-tight">
+            <span className="text-label font-semibold text-ink text-center leading-tight">
               {category.label}
             </span>
           </Link>
