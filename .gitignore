@@ -1,0 +1,22 @@
+# Node
+node_modules/
+
+# Temp files
+tmpclaude-*
+nul
+
+# Screenshots & images (playwright)
+.playwright-mcp/
+*.png
+*.jpg
+
+# IDE
+.idea/
+.vscode/
+
+# Claude
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db

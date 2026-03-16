@@ -233,6 +233,7 @@ export const HomePage = () => {
         message="내일 PT 수업 시간 변경 가능할까요?"
         time="오후 2:30"
         unreadCount={1}
+        onClick={() => navigate('/chat/1')}
       />
 
       {/* Online Class */}

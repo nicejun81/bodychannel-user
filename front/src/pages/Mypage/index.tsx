@@ -87,6 +87,7 @@ export const MyPage = () => {
   const header = (
     <SubPageHeader
       title="마이페이지"
+      showChat
       right={
         <button className="icon-btn">
           <IconSettings className="w-5 h-5 stroke-ink stroke-[1.5]" />

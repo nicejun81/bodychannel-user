@@ -7,9 +7,10 @@ export { ScrollRow } from './ScrollRow'
 
 // Layout Components
 export { Header } from './Header'
-export { SubPageHeader } from './SubPageHeader'
+export { SubPageHeader, ChatButton } from './SubPageHeader'
 export { BottomNav } from './BottomNav'
 export { SectionHeader } from './SectionHeader'
+export { FilterTabs } from './FilterTabs'
 
 // Home Components
 export { HeroSlider } from './HeroSlider'

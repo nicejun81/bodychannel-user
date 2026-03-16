@@ -138,7 +138,7 @@ export const ReservationPage = () => {
   }
 
   const header = (
-    <SubPageHeader title="예약">
+    <SubPageHeader title="예약" showChat>
       <div className="flex border-t border-border-light">
         <button
           onClick={() => setActiveTab('calendar')}

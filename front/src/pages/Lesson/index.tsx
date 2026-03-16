@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { PageLayout, SubPageHeader, ScrollRow, TrainerListItem, SectionHeader } from '../../components'
+import { PageLayout, SubPageHeader, ScrollRow, TrainerListItem, SectionHeader, FilterTabs } from '../../components'
 import { IconSearch, IconChevronRight } from '../../components/Icons'
 
 const filterTabs = [
@@ -93,27 +93,20 @@ export const LessonPage = () => {
   const header = (
     <SubPageHeader
       title="레슨권"
+      showChat
       right={
         <button className="icon-btn">
           <IconSearch className="w-[22px] h-[22px] stroke-ink stroke-2" />
         </button>
       }
     >
-      <div className="flex gap-2 px-page py-3 overflow-x-auto border-t border-border-light hide-scrollbar">
-        {filterTabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`px-3.5 py-2 border rounded-pill text-body font-medium whitespace-nowrap transition-colors ${
-              activeTab === tab.id
-                ? 'bg-ink border-ink text-white'
-                : 'bg-surface border-border text-ink hover:border-ink-placeholder'
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+      <FilterTabs
+        tabs={filterTabs.map(t => ({ key: t.id, label: t.label }))}
+        active={activeTab}
+        onSelect={setActiveTab}
+        scrollable
+        className="border-t border-border-light"
+      />
     </SubPageHeader>
   )
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { PageLayout, SubPageHeader, ScrollRow } from '../../components'
+import { PageLayout, SubPageHeader, ScrollRow, FilterTabs } from '../../components'
 import { IconStarFilled, IconChevronRight, IconSearch, IconFilter } from '../../components/Icons'
 
 const filterTabs = [
@@ -86,28 +86,24 @@ export const MembershipPage = () => {
   const header = (
     <SubPageHeader
       title="지점소개"
+      showChat
       right={
         <button className="icon-btn">
           <IconSearch className="w-[22px] h-[22px] stroke-ink stroke-2" />
         </button>
       }
     >
-      <div className="flex gap-2 px-page py-3 overflow-x-auto border-t border-border-light hide-scrollbar">
-        {filterTabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => toggleFilter(tab.id)}
-            className={`flex items-center gap-1.5 px-3.5 py-2 border rounded-pill text-body font-medium whitespace-nowrap transition-colors ${
-              activeFilters.includes(tab.id)
-                ? 'bg-ink border-ink text-white'
-                : 'bg-surface border-border text-ink hover:border-ink-placeholder'
-            }`}
-          >
-            {tab.icon && <tab.icon className="w-4 h-4 stroke-current stroke-[1.5]" />}
-            {tab.label}
-          </button>
-        ))}
-      </div>
+      <FilterTabs
+        tabs={filterTabs.map(t => ({
+          key: t.id,
+          label: t.label,
+          icon: t.icon ? <t.icon className="w-4 h-4 stroke-current stroke-[1.5]" /> : undefined,
+        }))}
+        active={activeFilters}
+        onSelect={toggleFilter}
+        scrollable
+        className="border-t border-border-light"
+      />
     </SubPageHeader>
   )
 
