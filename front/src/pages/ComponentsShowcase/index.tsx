@@ -85,7 +85,7 @@ export const ComponentsShowcasePage = () => {
         {/* Header */}
         <ComponentSection title="Header">
           <div className="bg-white rounded-lg overflow-hidden">
-            <Header location="강남점" />
+            <Header />
           </div>
         </ComponentSection>
 

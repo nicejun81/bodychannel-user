@@ -1,10 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { IconQrCode } from './Icons'
 import { ChatButton } from './SubPageHeader'
 
 export const Header = () => {
-  const navigate = useNavigate()
   const [showQr, setShowQr] = useState(false)
   const [qrVisible, setQrVisible] = useState(false)
   const [countdown, setCountdown] = useState(10)
