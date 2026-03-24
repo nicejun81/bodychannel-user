@@ -370,7 +370,7 @@ export const TrainerDetailPage = () => {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-4 border-b border-border-light">
+      <div className="grid grid-cols-4">
         {[
           { label: '총 회원', value: `${trainer.stats.totalClients}명` },
           { label: '누적 세션', value: `${trainer.stats.totalSessions.toLocaleString()}회` },
@@ -383,6 +383,7 @@ export const TrainerDetailPage = () => {
           </div>
         ))}
       </div>
+      <div className="h-2 bg-surface-muted" />
 
       {/* Sticky Tabs */}
       <div className="sticky top-0 z-40 bg-white border-b border-border">
@@ -400,44 +401,49 @@ export const TrainerDetailPage = () => {
       {activeTab === '소개' && (
         <div>
           {/* Intro */}
-          <section className="px-page py-5 border-b border-border-light">
-            <h2 className="text-title font-bold text-ink mb-3">소개</h2>
+          <section className="px-page py-section">
+            <h2 className="text-heading font-bold text-ink mb-3">소개</h2>
             <p className="text-body text-ink-secondary leading-relaxed">{trainer.intro}</p>
           </section>
+          <div className="h-2 bg-surface-muted" />
 
           {/* Specialties */}
-          <section className="px-page py-5 border-b border-border-light">
-            <h2 className="text-title font-bold text-ink mb-3">전문 분야</h2>
+          <section className="px-page py-section">
+            <h2 className="text-heading font-bold text-ink mb-3">전문 분야</h2>
             <div className="flex flex-wrap gap-2">
               {trainer.specialties.map((item, i) => (
                 <span key={i} className="px-3 py-1.5 bg-[#fff8f5] text-primary text-label font-medium rounded-full border border-primary/20">{item}</span>
               ))}
             </div>
           </section>
+          <div className="h-2 bg-surface-muted" />
 
           {/* Training Style */}
           {trainer.trainingStyle.length > 0 && (
-            <section className="px-page py-5 border-b border-border-light">
-              <button onClick={() => setStyleOpen(!styleOpen)} className="w-full flex items-center justify-between">
-                <h2 className="text-title font-bold text-ink">트레이닝 스타일</h2>
-                <IconChevronDown className={`w-4 h-4 stroke-ink-tertiary stroke-2 transition-transform ${styleOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {styleOpen && (
-                <ul className="mt-3 space-y-2.5">
-                  {trainer.trainingStyle.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-label text-ink-secondary leading-relaxed">
-                      <span className="w-5 h-5 flex items-center justify-center bg-primary/10 text-primary text-caption font-bold rounded-full flex-shrink-0 mt-0.5">{i + 1}</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </section>
+            <>
+              <section className="px-page py-section">
+                <button onClick={() => setStyleOpen(!styleOpen)} className="w-full flex items-center justify-between">
+                  <h2 className="text-heading font-bold text-ink">트레이닝 스타일</h2>
+                  <IconChevronDown className={`w-4 h-4 stroke-ink-tertiary stroke-2 transition-transform ${styleOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {styleOpen && (
+                  <ul className="mt-3 space-y-2.5">
+                    {trainer.trainingStyle.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-label text-ink-secondary leading-relaxed">
+                        <span className="w-5 h-5 flex items-center justify-center bg-primary/10 text-primary text-caption font-bold rounded-full flex-shrink-0 mt-0.5">{i + 1}</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+              <div className="h-2 bg-surface-muted" />
+            </>
           )}
 
           {/* Career */}
-          <section className="px-page py-5 border-b border-border-light">
-            <h2 className="text-title font-bold text-ink mb-3">경력 및 자격</h2>
+          <section className="px-page py-section">
+            <h2 className="text-heading font-bold text-ink mb-3">경력 및 자격</h2>
             <ul className="space-y-2">
               {trainer.career.map((item, i) => (
                 <li key={i} className="flex items-center gap-2.5 text-body text-ink-secondary">
@@ -447,35 +453,39 @@ export const TrainerDetailPage = () => {
               ))}
             </ul>
           </section>
+          <div className="h-2 bg-surface-muted" />
 
           {/* Gallery */}
           {trainer.galleryPhotos.length > 0 && (
-            <section className="px-page py-5 border-b border-border-light">
-              <div className="flex items-center justify-between mb-3">
-                <h2 className="text-title font-bold text-ink">트레이닝 사진</h2>
-                {trainer.galleryPhotos.length > 4 && (
-                  <button onClick={() => setGalleryOpen(true)} className="text-label text-primary font-medium">전체보기 ({trainer.galleryPhotos.length})</button>
-                )}
-              </div>
-              <div className="grid grid-cols-3 gap-1.5 rounded-xl overflow-hidden">
-                {trainer.galleryPhotos.slice(0, 6).map((photo, i) => (
-                  <div key={i} className="relative">
-                    <img src={photo} alt={`트레이닝 ${i + 1}`} className="w-full aspect-square object-cover" />
-                    {i === 5 && trainer.galleryPhotos.length > 6 && (
-                      <button onClick={() => setGalleryOpen(true)} className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                        <span className="text-white text-body font-bold">+{trainer.galleryPhotos.length - 6}</span>
-                      </button>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </section>
+            <>
+              <section className="px-page py-section">
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-heading font-bold text-ink">트레이닝 사진</h2>
+                  {trainer.galleryPhotos.length > 4 && (
+                    <button onClick={() => setGalleryOpen(true)} className="text-label text-primary font-medium">전체보기 ({trainer.galleryPhotos.length})</button>
+                  )}
+                </div>
+                <div className="grid grid-cols-3 gap-1.5 rounded-xl overflow-hidden">
+                  {trainer.galleryPhotos.slice(0, 6).map((photo, i) => (
+                    <div key={i} className="relative">
+                      <img src={photo} alt={`트레이닝 ${i + 1}`} className="w-full aspect-square object-cover" />
+                      {i === 5 && trainer.galleryPhotos.length > 6 && (
+                        <button onClick={() => setGalleryOpen(true)} className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                          <span className="text-white text-body font-bold">+{trainer.galleryPhotos.length - 6}</span>
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </section>
+              <div className="h-2 bg-surface-muted" />
+            </>
           )}
 
           {/* Transformations */}
           {trainer.transformations.length > 0 && (
-            <section className="px-page py-5 border-b border-border-light">
-              <h2 className="text-title font-bold text-ink mb-3">Before & After</h2>
+            <section className="px-page py-section">
+              <h2 className="text-heading font-bold text-ink mb-3">Before & After</h2>
               <div className="space-y-4">
                 {trainer.transformations.map((t, i) => (
                   <div key={i} className="bg-surface-subtle rounded-xl p-3">
@@ -503,7 +513,7 @@ export const TrainerDetailPage = () => {
 
       {/* ── 회원권 탭 ── */}
       {activeTab === '회원권' && (
-        <div className="px-page py-5">
+        <div className="px-page py-section">
           <div className="space-y-3">
             {trainer.prices.map((price, i) => (
               <div key={i} className={`p-4 rounded-xl border ${price.tag === '인기' ? 'border-primary bg-[#fff8f5]' : 'border-border'}`}>
@@ -534,8 +544,8 @@ export const TrainerDetailPage = () => {
 
       {/* ── 스케줄 탭 ── */}
       {activeTab === '스케줄' && (
-        <div className="px-page py-5">
-          <h2 className="text-title font-bold text-ink mb-1">주간 예약 가능 시간</h2>
+        <div className="px-page py-section">
+          <h2 className="text-heading font-bold text-ink mb-1">주간 예약 가능 시간</h2>
           <p className="text-label text-ink-tertiary mb-4">원하는 시간을 선택하여 예약하세요</p>
 
           {trainer.schedule.length > 0 ? (
@@ -565,7 +575,7 @@ export const TrainerDetailPage = () => {
 
       {/* ── 후기 탭 ── */}
       {activeTab === '후기' && (
-        <div className="px-page py-5">
+        <div className="px-page py-section">
           {/* Summary */}
           <RatingSummary rating={trainer.rating} reviewCount={trainer.reviewCount} distribution={[78, 15, 5, 1, 1]} />
 

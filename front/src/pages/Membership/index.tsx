@@ -92,19 +92,7 @@ export const MembershipPage = () => {
           <IconSearch className="w-[22px] h-[22px] stroke-ink stroke-2" />
         </button>
       }
-    >
-      <FilterTabs
-        tabs={filterTabs.map(t => ({
-          key: t.id,
-          label: t.label,
-          icon: t.icon ? <t.icon className="w-4 h-4 stroke-current stroke-[1.5]" /> : undefined,
-        }))}
-        active={activeFilters}
-        onSelect={toggleFilter}
-        scrollable
-        className="border-t border-border-light"
-      />
-    </SubPageHeader>
+    />
   )
 
   return (

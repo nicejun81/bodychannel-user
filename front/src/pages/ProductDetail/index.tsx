@@ -71,41 +71,47 @@ export const ProductDetailPage = () => {
         <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
       </div>
 
-      <main className="px-page py-section">
-        {/* Title & Price */}
-        <div className="mb-section">
-          <h1 className="text-display font-bold mb-3">{product.name}</h1>
-          <div className="flex items-center gap-3">
-            <span className="text-primary font-bold text-heading">{product.discount}%</span>
-            <span className="text-display font-bold">{product.price.toLocaleString()}원</span>
-          </div>
-          <span className="text-ink-tertiary line-through">{product.originalPrice.toLocaleString()}원</span>
+      {/* Title & Price */}
+      <div className="px-page py-section">
+        <h1 className="text-display font-bold mb-3">{product.name}</h1>
+        <div className="flex items-center gap-3">
+          <span className="text-primary font-bold text-heading">{product.discount}%</span>
+          <span className="text-display font-bold">{product.price.toLocaleString()}원</span>
         </div>
+        <span className="text-ink-tertiary line-through">{product.originalPrice.toLocaleString()}원</span>
+      </div>
 
-        {/* Description */}
-        <section className="mb-section">
-          <h2 className="font-bold text-heading mb-3">상품 설명</h2>
-          <p className="text-ink-secondary text-body leading-relaxed">{product.description}</p>
-        </section>
+      <div className="h-2 bg-surface-muted" />
 
-        {/* Details */}
-        <section className="mb-section">
-          <h2 className="font-bold text-heading mb-3">상세 정보</h2>
-          <ul className="space-y-2">
-            {product.details.map((detail, i) => (
-              <li key={i} className="flex items-center gap-2 text-body text-ink-secondary">
-                <span className="w-1.5 h-1.5 bg-ink-tertiary rounded-full" />
-                {detail}
-              </li>
-            ))}
-          </ul>
-        </section>
+      {/* Description */}
+      <div className="px-page py-section">
+        <h2 className="text-heading font-bold text-ink mb-3">상품 설명</h2>
+        <p className="text-ink-secondary text-body leading-relaxed">{product.description}</p>
+      </div>
 
-        {/* Delivery Info */}
+      <div className="h-2 bg-surface-muted" />
+
+      {/* Details */}
+      <div className="px-page py-section">
+        <h2 className="text-heading font-bold text-ink mb-3">상세 정보</h2>
+        <ul className="space-y-2">
+          {product.details.map((detail, i) => (
+            <li key={i} className="flex items-center gap-2 text-body text-ink-secondary">
+              <span className="w-1.5 h-1.5 bg-ink-tertiary rounded-full" />
+              {detail}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="h-2 bg-surface-muted" />
+
+      {/* Delivery Info */}
+      <div className="px-page py-section">
         <section className="p-4 bg-surface-subtle rounded-xl">
           <p className="text-body text-ink-secondary">📦 무료배송 | 평균 2-3일 내 도착</p>
         </section>
-      </main>
+      </div>
 
       {/* Bottom CTA */}
       <BottomCTA>

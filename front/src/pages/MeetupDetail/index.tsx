@@ -94,9 +94,9 @@ export const MeetupDetailPage = () => {
         </div>
       </div>
 
-      <main className="px-page py-section">
-        {/* Info */}
-        <div className="space-y-3 mb-section">
+      {/* Info */}
+      <div className="px-page py-section">
+        <div className="space-y-3">
           <div className="flex items-center gap-3 text-body text-ink-secondary">
             <IconCalendar className="w-5 h-5 stroke-ink-tertiary stroke-2" />
             <span>{meetup.schedule}</span>
@@ -110,45 +110,51 @@ export const MeetupDetailPage = () => {
             <span>{meetup.memberCount}/{meetup.maxMembers}명</span>
           </div>
         </div>
+      </div>
 
-        {/* Host */}
-        <section className="mb-section">
-          <h2 className="font-bold text-heading mb-3">모임장</h2>
-          <div className="flex items-center gap-3 p-4 bg-surface-subtle rounded-xl">
-            <img src={meetup.host.imageUrl} alt={meetup.host.name} className="w-12 h-12 rounded-full object-cover" />
-            <div>
-              <p className="font-semibold">{meetup.host.name}</p>
-              <p className="text-caption text-ink-secondary">모임장</p>
+      <div className="h-2 bg-surface-muted" />
+
+      {/* Host */}
+      <div className="px-page py-section">
+        <h2 className="text-heading font-bold text-ink mb-3">모임장</h2>
+        <div className="flex items-center gap-3 p-4 bg-surface-subtle rounded-xl">
+          <img src={meetup.host.imageUrl} alt={meetup.host.name} className="w-12 h-12 rounded-full object-cover" />
+          <div>
+            <p className="font-semibold">{meetup.host.name}</p>
+            <p className="text-caption text-ink-secondary">모임장</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="h-2 bg-surface-muted" />
+
+      {/* Description */}
+      <div className="px-page py-section">
+        <h2 className="text-heading font-bold text-ink mb-3">모임 소개</h2>
+        <p className="text-ink-secondary text-sm leading-relaxed">{meetup.description}</p>
+      </div>
+
+      <div className="h-2 bg-surface-muted" />
+
+      {/* Members */}
+      <div className="px-page py-section">
+        <h2 className="text-heading font-bold text-ink mb-3">참여 멤버</h2>
+        <div className="flex -space-x-2">
+          {meetup.members.map((member, i) => (
+            <img
+              key={i}
+              src={member.imageUrl}
+              alt="멤버"
+              className="w-10 h-10 rounded-full border-2 border-white object-cover"
+            />
+          ))}
+          {meetup.memberCount > meetup.members.length && (
+            <div className="w-10 h-10 rounded-full bg-ink-disabled border-2 border-white flex items-center justify-center text-caption font-semibold text-ink-secondary">
+              +{meetup.memberCount - meetup.members.length}
             </div>
-          </div>
-        </section>
-
-        {/* Description */}
-        <section className="mb-section">
-          <h2 className="font-bold text-heading mb-3">모임 소개</h2>
-          <p className="text-ink-secondary text-sm leading-relaxed">{meetup.description}</p>
-        </section>
-
-        {/* Members */}
-        <section>
-          <h2 className="font-bold text-heading mb-3">참여 멤버</h2>
-          <div className="flex -space-x-2">
-            {meetup.members.map((member, i) => (
-              <img
-                key={i}
-                src={member.imageUrl}
-                alt="멤버"
-                className="w-10 h-10 rounded-full border-2 border-white object-cover"
-              />
-            ))}
-            {meetup.memberCount > meetup.members.length && (
-              <div className="w-10 h-10 rounded-full bg-ink-disabled border-2 border-white flex items-center justify-center text-caption font-semibold text-ink-secondary">
-                +{meetup.memberCount - meetup.members.length}
-              </div>
-            )}
-          </div>
-        </section>
-      </main>
+          )}
+        </div>
+      </div>
 
       {/* Bottom CTA */}
       <BottomCTA>

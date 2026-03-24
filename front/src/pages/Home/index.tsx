@@ -61,7 +61,8 @@ const groupTrainers = [
     name: '박지영 강사',
     category: '바레톤',
     categoryColor: 'bareton' as const,
-    gym: '바디채널 강남점',
+    description: '발레 동작 기반 체형 교정 & 코어 강화 프로그램',
+    todayTime: '오늘 14:00, 19:30',
     rating: 4.7,
     reviewCount: 64,
     trialInfo: '10회 / 66,000원',
@@ -72,7 +73,8 @@ const groupTrainers = [
     name: '한동훈 강사',
     category: '히트35',
     categoryColor: 'hit35' as const,
-    gym: '바디채널 역삼점',
+    description: '35분 고강도 인터벌 트레이닝으로 칼로리 폭발',
+    todayTime: '오늘 10:00, 18:00',
     rating: 4.9,
     reviewCount: 93,
     trialInfo: '10회 / 66,000원',
@@ -83,7 +85,8 @@ const groupTrainers = [
     name: '이준혁 강사',
     category: '짐그라운드',
     categoryColor: 'gymground' as const,
-    gym: '바디채널 판교점',
+    description: '소도구 활용 전신 근력 & 체력 향상 서킷',
+    todayTime: '오늘 11:00, 20:00',
     rating: 4.6,
     reviewCount: 58,
     trialInfo: '10회 / 66,000원',
@@ -95,28 +98,31 @@ const ptTrainers = [
     id: 1,
     imageUrl: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=240&fit=crop',
     name: '최강민 강사',
-    gym: '바디채널 강남점',
+    description: 'PT · 체형교정',
+    todayTime: '오늘 09:00, 15:00',
     rating: 4.9,
     reviewCount: 127,
-    trialInfo: '10회 / 66,000원',
+    trialInfo: '1회 70,000원',
   },
   {
     id: 2,
     imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=240&fit=crop',
     name: '정서연 강사',
-    gym: '바디채널 서초점',
+    description: '필라테스 · 바레톤',
+    todayTime: '오늘 13:00, 17:00',
     rating: 4.8,
     reviewCount: 89,
-    trialInfo: '10회 / 66,000원',
+    trialInfo: '1회 65,000원',
   },
   {
     id: 3,
     imageUrl: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&h=240&fit=crop',
     name: '한동훈 강사',
-    gym: '바디채널 역삼점',
+    description: 'PT · 다이어트',
+    todayTime: '오늘 10:00, 18:00',
     rating: 4.9,
     reviewCount: 156,
-    trialInfo: '10회 / 66,000원',
+    trialInfo: '1회 60,000원',
   },
 ]
 
@@ -263,7 +269,8 @@ export const HomePage = () => {
             name={trainer.name}
             category={trainer.category}
             categoryColor={trainer.categoryColor}
-            gym={trainer.gym}
+            description={trainer.description}
+            todayTime={trainer.todayTime}
             rating={trainer.rating}
             reviewCount={trainer.reviewCount}
             trialInfo={trainer.trialInfo}
@@ -272,27 +279,30 @@ export const HomePage = () => {
         ))}
       </section>
 
-      {/* PT Trainers (highlighted section) */}
-      <div className="bg-gradient-to-br from-surface-muted to-[#eef1f5] rounded-card-lg mb-section overflow-hidden border border-ink/5">
+      {/* Trainer Recommend Banner */}
+      <div className="mb-section">
         <TrainerRecommendBanner />
-        <div className="px-card-lg pb-card-lg">
-          <SectionHeader title="개인 레슨" href="/lesson" />
-          <ScrollRow>
-            {ptTrainers.map((trainer) => (
-              <PTTrainerCard
-                key={trainer.id}
-                imageUrl={trainer.imageUrl}
-                name={trainer.name}
-                gym={trainer.gym}
-                rating={trainer.rating}
-                reviewCount={trainer.reviewCount}
-                trialInfo={trainer.trialInfo}
-                onClick={() => navigate(`/trainer/${trainer.id}`)}
-              />
-            ))}
-          </ScrollRow>
-        </div>
       </div>
+
+      {/* PT Trainers */}
+      <section className="section">
+        <SectionHeader title="개인 레슨" href="/lesson" />
+        <ScrollRow>
+          {ptTrainers.map((trainer) => (
+            <PTTrainerCard
+              key={trainer.id}
+              imageUrl={trainer.imageUrl}
+              name={trainer.name}
+              description={trainer.description}
+              todayTime={trainer.todayTime}
+              rating={trainer.rating}
+              reviewCount={trainer.reviewCount}
+              trialInfo={trainer.trialInfo}
+              onClick={() => navigate(`/trainer/${trainer.id}`)}
+            />
+          ))}
+        </ScrollRow>
+      </section>
 
       {/* Meetups */}
       <section className="section">

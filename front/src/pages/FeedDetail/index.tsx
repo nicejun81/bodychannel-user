@@ -72,7 +72,7 @@ export const FeedDetailPage = () => {
   return (
     <PageLayout header={header} className="!px-0 !py-0 !pb-[160px]">
       {/* Author */}
-      <div className="flex items-center gap-3 px-page py-4">
+      <div className="flex items-center gap-3 px-page py-section">
         <img src={feed.authorImageUrl} alt={feed.authorName} className="w-10 h-10 rounded-full object-cover" />
         <div>
           <p className="font-semibold">{feed.authorName}</p>
@@ -105,9 +105,11 @@ export const FeedDetailPage = () => {
         </p>
       </div>
 
+      <div className="h-2 bg-surface-muted" />
+
       {/* Comments */}
-      <div className="px-page border-t border-border-light">
-        <h3 className="font-semibold py-3">댓글 {feed.comments.length}개</h3>
+      <div className="px-page py-section">
+        <h3 className="text-heading font-bold text-ink mb-3">댓글 {feed.comments.length}개</h3>
         <div className="space-y-4">
           {feed.comments.map((comment, i) => (
             <div key={i} className="flex gap-3">

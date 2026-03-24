@@ -320,7 +320,7 @@ export const ClassDetailPage = () => {
       </div>
 
       {/* ── 클래스 소개 ── */}
-      <div ref={(el) => { sectionRefs.current['클래스 소개'] = el }} className="px-page py-section border-b border-border-light">
+      <div ref={(el) => { sectionRefs.current['클래스 소개'] = el }} className="px-page py-section">
         <p className="text-body text-ink-secondary leading-relaxed mb-section">{data.description}</p>
 
         <div className="bg-surface-subtle rounded-xl p-card-lg">
@@ -338,10 +338,12 @@ export const ClassDetailPage = () => {
         </div>
       </div>
 
+      <div className="h-2 bg-surface-muted" />
+
       {/* ── 커리큘럼 ── */}
-      <div ref={(el) => { sectionRefs.current['커리큘럼'] = el }} className="px-page py-section border-b border-border-light">
+      <div ref={(el) => { sectionRefs.current['커리큘럼'] = el }} className="px-page py-section">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-title font-bold text-ink">커리큘럼</h2>
+          <h2 className="text-heading font-bold text-ink">커리큘럼</h2>
           <span className="text-label text-ink-tertiary">{data.chapters.reduce((a, c) => a + c.lessons.length, 0)}개 강의 · {data.duration}</span>
         </div>
 
@@ -391,9 +393,11 @@ export const ClassDetailPage = () => {
         </div>
       </div>
 
+      <div className="h-2 bg-surface-muted" />
+
       {/* ── 크리에이터 ── */}
-      <div ref={(el) => { sectionRefs.current['크리에이터'] = el }} className="px-page py-section border-b border-border-light">
-        <h2 className="text-title font-bold text-ink mb-4">크리에이터</h2>
+      <div ref={(el) => { sectionRefs.current['크리에이터'] = el }} className="px-page py-section">
+        <h2 className="text-heading font-bold text-ink mb-4">크리에이터</h2>
         <div className="flex items-center gap-3 mb-4">
           <img src={data.instructorAvatar} alt={data.instructor} className="w-14 h-14 rounded-full object-cover" />
           <div>
@@ -407,15 +411,19 @@ export const ClassDetailPage = () => {
         </button>
       </div>
 
+      <div className="h-2 bg-surface-muted" />
+
       {/* ── 후기 ── */}
       <div ref={(el) => { sectionRefs.current['후기'] = el }} className="px-page py-section">
         <div className="flex items-center justify-between mb-section">
-          <h2 className="text-title font-bold text-ink">수강생 후기</h2>
+          <h2 className="text-heading font-bold text-ink">수강생 후기</h2>
           <span className="text-label text-ink-tertiary">{data.reviewCount}개</span>
         </div>
 
         {/* rating summary */}
-        <RatingSummary rating={data.rating} reviewCount={data.reviewCount} distribution={[82, 14, 3, 1, 0]} />
+        <div className="mb-4">
+          <RatingSummary rating={data.rating} reviewCount={data.reviewCount} distribution={[82, 14, 3, 1, 0]} />
+        </div>
 
         {/* review list */}
         <div className="space-y-4">

@@ -343,65 +343,58 @@ export const GymDetailPage = () => {
       </div>
 
       {/* ── 1. 기본정보 + 소개 ── */}
-      <div className="px-page pt-5 pb-4 border-b border-border-light">
-        {data.badge && <Badge variant={data.badgeType === 'sale' ? 'danger' : data.badgeType === 'new' ? 'success' : 'primary'} size="md">{data.badge}</Badge>}
-        <h1 className="text-display font-bold text-ink mb-1.5">{data.name}</h1>
+      <div className="px-page pt-page pb-section">
+        <div className="flex items-center gap-2 mb-2">
+          {data.badge && <Badge variant={data.badgeType === 'sale' ? 'danger' : data.badgeType === 'new' ? 'success' : 'primary'} size="md">{data.badge}</Badge>}
+          {(() => {
+            const h = currentHour
+            const match = data.hours.match(/(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})/)
+            const isOpen = match && h >= parseInt(match[1]) && h < parseInt(match[3])
+            return <Badge variant={isOpen ? 'success' : 'danger'} size="sm">{isOpen ? '영업중' : '영업종료'}</Badge>
+          })()}
+        </div>
+        <h1 className="text-display font-bold text-ink mb-1">{data.name}</h1>
         <div className="flex items-center gap-1 mb-3">
           <StarIcon className="text-semantic-star" style={{ width: 14, height: 14 }} />
           <span className="text-body font-bold text-ink">{data.rating}</span>
           <span className="text-body text-ink-tertiary">({data.reviewCount})</span>
         </div>
-        <p className="text-body text-ink-secondary leading-relaxed mb-4">{data.description}</p>
-        <div className="space-y-1.5">
+        <p className="text-body text-ink-secondary leading-relaxed mb-section">{data.description}</p>
+
+        {/* 정보 */}
+        <div className="space-y-2 mb-section">
           <InfoRow icon={<IconMapPin className="w-4 h-4 stroke-ink-tertiary stroke-2" />} href={`https://map.naver.com/v5/search/${encodeURIComponent(data.name + ' ' + data.address)}`}>{data.address}</InfoRow>
           <InfoRow icon={<svg viewBox="0 0 24 24" className="w-4 h-4 stroke-ink-tertiary stroke-2" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>}>{data.phone}</InfoRow>
           <div className="flex items-start gap-2 text-body text-ink-secondary">
             <IconClock className="w-4 h-4 stroke-ink-tertiary stroke-2 flex-shrink-0 mt-0.5" />
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-1">
-                <span>{data.hours}</span>
-                {(() => {
-                  const h = currentHour
-                  const match = data.hours.match(/(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})/)
-                  const isOpen = match && h >= parseInt(match[1]) && h < parseInt(match[3])
-                  return (
-                    <span className={`px-1.5 py-0.5 text-caption font-bold rounded ${isOpen ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-500'}`}>
-                      {isOpen ? '영업중' : '영업종료'}
-                    </span>
-                  )
-                })()}
-              </div>
-              <div className="space-y-0.5">
-                {data.hoursDetail.map((h, i) => (
-                  <div key={i} className="flex justify-between text-label"><span className="text-ink-tertiary">{h.day}</span><span className="text-ink font-medium">{h.time}</span></div>
-                ))}
-              </div>
+            <div className="flex-1 space-y-0.5">
+              {data.hoursDetail.map((h, i) => (
+                <div key={i} className="flex justify-between text-label"><span className="text-ink-tertiary">{h.day}</span><span className="text-ink font-medium">{h.time}</span></div>
+              ))}
             </div>
           </div>
         </div>
-      </div>
 
-      {/* ── 2. 쿠폰 (프로모션 상단 노출) ── */}
-      {data.coupons.length > 0 && (
-        <div className="px-page py-section border-b border-border-light">
-          <div className="flex gap-2 overflow-x-auto hide-scrollbar">
+        {/* 쿠폰 */}
+        {data.coupons.length > 0 && (
+          <div className="flex gap-2 overflow-x-auto hide-scrollbar -mx-page px-page">
             {data.coupons.map((c, i) => (
-              <div key={i} className="min-w-[200px] flex-shrink-0 p-card bg-gradient-to-r from-[#fff4f0] to-[#fff9f7] border border-primary/20 rounded-xl">
-                <div className="flex items-center gap-1.5 mb-1">
-                  <span className="px-1.5 py-0.5 bg-primary text-white text-[9px] font-bold rounded">{c.label}</span>
-                </div>
-                <p className="text-title font-bold text-primary">{c.discount}</p>
-                <p className="text-label text-ink-tertiary">{c.condition}</p>
+              <div key={i} className="min-w-[180px] flex-shrink-0 p-card-lg bg-primary-50 border border-primary/20 rounded-card">
+                <Badge variant="primary" size="sm">{c.label}</Badge>
+                <p className="text-title font-bold text-primary mt-1.5">{c.discount}</p>
+                <p className="text-label text-ink-tertiary mt-0.5">{c.condition}</p>
               </div>
             ))}
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
-      {/* ── 3. 수업 시간표 ── */}
+      <div className="h-2 bg-surface-muted" />
+
+      {/* ── 2. 수업 시간표 ── */}
       {Object.keys(data.schedule).length > 0 && (
-        <div className="px-page py-section border-b border-border-light">
-          <h3 className="text-title font-bold text-ink mb-3">수업 시간표</h3>
+        <div className="px-page py-section">
+          <h3 className="text-heading font-bold text-ink mb-4">수업 시간표</h3>
           <div className="flex gap-2 overflow-x-auto hide-scrollbar mb-4">
             {scheduleDays.map((d, i) => (
               <button key={i} onClick={() => setSelectedDateIdx(i)} className={`flex-shrink-0 w-[52px] py-2 rounded-xl text-center transition-colors ${selectedDateIdx === i ? 'bg-primary text-white' : 'bg-surface-muted text-ink-secondary hover:bg-surface-subtle'}`}>
@@ -444,29 +437,29 @@ export const GymDetailPage = () => {
         </div>
       )}
 
-      {/* ── 5. 개인 레슨 ── */}
-      <div className="py-section border-b border-border-light">
+      <div className="h-2 bg-surface-muted" />
+
+      {/* ── 3. 개인 레슨 ── */}
+      <div className="py-section">
         <div className="flex items-center justify-between mb-4 px-page">
-          <h2 className="text-title font-bold text-ink">개인 레슨</h2>
+          <h2 className="text-heading font-bold text-ink">개인 레슨</h2>
           <button className="text-label text-primary font-medium">전체보기</button>
         </div>
         {data.trainers.length > 0 ? (
           <div className="flex gap-3 overflow-x-auto hide-scrollbar px-page">
             {data.trainers.map((t) => (
-              <button key={t.id} onClick={() => navigate(`/trainer/${t.id}`)} className="flex-shrink-0 w-[200px] p-card border border-border rounded-xl hover:border-ink-disabled transition-colors text-left">
-                <div className="flex items-center gap-2.5 mb-2">
-                  <img src={t.avatar} alt={t.name} className="w-11 h-11 rounded-full object-cover flex-shrink-0" />
-                  <div className="min-w-0">
-                    <p className="text-body font-bold text-ink truncate">{t.name}</p>
-                    <p className="text-caption text-ink-tertiary truncate">{t.specialty}</p>
+              <button key={t.id} onClick={() => navigate(`/trainer/${t.id}`)} className="flex-shrink-0 w-[160px] border border-border rounded-card overflow-hidden hover:border-ink-disabled transition-colors text-left">
+                <img src={t.avatar} alt={t.name} className="w-full h-[120px] object-cover" />
+                <div className="p-card">
+                  <p className="text-body font-bold text-ink mb-0.5 truncate">{t.name}</p>
+                  <p className="text-caption text-ink-tertiary mb-2 truncate">{t.specialty}</p>
+                  <div className="flex items-center gap-1 mb-2">
+                    <StarIcon className="text-semantic-star" style={{ width: 12, height: 12 }} />
+                    <span className="text-label font-semibold">{t.rating}</span>
+                    <span className="text-label text-ink-tertiary">({t.reviewCount})</span>
                   </div>
+                  <span className="text-body font-bold text-primary">1회 {t.perSession}원</span>
                 </div>
-                <div className="flex items-center gap-1 mb-1.5">
-                  <StarIcon className="text-semantic-star" style={{ width: 11, height: 11 }} />
-                  <span className="text-label font-semibold">{t.rating}</span>
-                  <span className="text-label text-ink-tertiary">({t.reviewCount})</span>
-                </div>
-                <span className="text-body font-bold text-ink">1회 {t.perSession}원</span>
               </button>
             ))}
           </div>
@@ -475,33 +468,33 @@ export const GymDetailPage = () => {
         )}
       </div>
 
-      {/* ── 6. 공지사항 / 이용안내 / 환불정책 ── */}
-      <div className="px-page py-section border-b border-border-light">
+      <div className="h-2 bg-surface-muted" />
+
+      {/* ── 4. 공지사항 + 편의시설 ── */}
+      <div className="px-page py-section">
         {data.notices.length > 0 && (
           <div className="mb-section">
             <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-primary stroke-2 flex-shrink-0" fill="none"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>
-                <span className="text-body font-bold text-ink">공지사항</span>
-              </div>
+              <h3 className="text-heading font-bold text-ink">공지사항</h3>
               <button className="text-label text-primary font-medium">전체보기</button>
             </div>
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               {data.notices.map((n, i) => (
-                <button key={i} className="w-full flex items-center gap-2 p-2.5 bg-surface-subtle rounded-lg text-left hover:bg-surface-muted transition-colors">
-                  {n.isNew && <span className="px-1 py-0.5 bg-red-500 text-white text-[9px] font-bold rounded flex-shrink-0">NEW</span>}
-                  <span className="text-label text-ink-secondary flex-1 truncate">{n.title}</span>
-                  <span className="text-caption text-ink-tertiary flex-shrink-0">{n.date}</span>
+                <button key={i} className="w-full flex items-center gap-2.5 p-card bg-surface-subtle rounded-card text-left hover:bg-surface-muted transition-colors">
+                  {n.isNew && <Badge variant="danger" size="sm">NEW</Badge>}
+                  <span className="text-body text-ink flex-1 truncate">{n.title}</span>
+                  <span className="text-label text-ink-tertiary flex-shrink-0">{n.date}</span>
                 </button>
               ))}
             </div>
           </div>
         )}
-        <div className="mb-section">
-          <h3 className="text-body font-bold text-ink mb-3">편의시설</h3>
+
+        <div>
+          <h3 className="text-heading font-bold text-ink mb-4">편의시설</h3>
           <div className="grid grid-cols-4 gap-3">
             {data.facilities.map((f, i) => (
-              <div key={i} className="flex flex-col items-center gap-1.5 py-3 bg-surface-subtle rounded-xl">
+              <div key={i} className="flex flex-col items-center gap-1.5 py-3 bg-surface-subtle rounded-card">
                 <span className="text-display">{f.icon}</span>
                 <span className="text-label text-ink-secondary font-medium">{f.label}</span>
               </div>
@@ -510,10 +503,12 @@ export const GymDetailPage = () => {
         </div>
       </div>
 
-      {/* ── 7. 비포&애프터 ── */}
-      <div className="py-section border-b border-border-light">
+      <div className="h-2 bg-surface-muted" />
+
+      {/* ── 5. 비포&애프터 ── */}
+      <div className="py-section">
         <div className="flex items-center justify-between mb-4 px-page">
-          <h2 className="text-title font-bold text-ink">Before & After</h2>
+          <h2 className="text-heading font-bold text-ink">Before & After</h2>
           <button className="text-label text-primary font-medium">전체보기</button>
         </div>
         <div className="flex gap-3 overflow-x-auto hide-scrollbar px-page">
@@ -545,16 +540,18 @@ export const GymDetailPage = () => {
         </div>
       </div>
 
-      {/* ── 8. 후기 ── */}
-      <div className="px-page py-section border-b border-border-light">
-        <div className="flex items-center justify-between mb-5">
-          <h2 className="text-title font-bold text-ink">방문자 후기</h2>
+      <div className="h-2 bg-surface-muted" />
+
+      {/* ── 6. 후기 ── */}
+      <div className="px-page py-section">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-heading font-bold text-ink">방문자 후기</h2>
           <span className="text-label text-ink-tertiary">{data.reviewCount}개</span>
         </div>
-        <RatingSummary rating={data.rating} reviewCount={data.reviewCount} />
-
+        <div className="mb-4">
+          <RatingSummary rating={data.rating} reviewCount={data.reviewCount} />
+        </div>
         <ReviewSort value={reviewSort} onChange={(v) => setReviewSort(v as 'latest' | 'high' | 'low')} onWrite={() => {}} />
-
         <div className="space-y-4">
           {sortedReviews.map((review, i) => (
             <ReviewItem
@@ -569,11 +566,13 @@ export const GymDetailPage = () => {
             />
           ))}
         </div>
-        {data.reviews.length > 0 && <button className="w-full py-3 mt-4 border border-border rounded-lg text-body font-semibold text-ink hover:bg-surface-subtle">후기 더보기</button>}
+        {data.reviews.length > 0 && <button className="w-full py-3 mt-4 border border-border rounded-card text-body font-semibold text-ink hover:bg-surface-subtle transition-colors">후기 더보기</button>}
       </div>
 
-      {/* ── 8. 혼잡도 + 지도 ── */}
-      <div className="px-page py-section border-b border-border-light">
+      <div className="h-2 bg-surface-muted" />
+
+      {/* ── 7. 혼잡도 + 지도 ── */}
+      <div className="px-page py-section">
         {data.congestion.length > 0 && (() => {
           const congestionDate = new Date()
           congestionDate.setDate(congestionDate.getDate() + congestionDayOffset)
@@ -621,7 +620,7 @@ export const GymDetailPage = () => {
             </div>
           )
         })()}
-        <h3 className="text-title font-bold text-ink mb-3">위치</h3>
+        <h3 className="text-heading font-bold text-ink mb-3">위치</h3>
         <div className="w-full h-[180px] bg-surface-muted rounded-xl overflow-hidden">
           <iframe
             title="지도"
