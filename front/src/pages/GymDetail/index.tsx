@@ -279,6 +279,7 @@ export const GymDetailPage = () => {
   const data = gymsData[id || ''] || defaultGym
   const [liked, setLiked] = useState(false)
   const [heroIdx, setHeroIdx] = useState(0)
+  const [congestionDayOffset, setCongestionDayOffset] = useState(0) // -6 ~ 0 (과거 1주일 ~ 오늘)
   const dayLabels = ['일', '월', '화', '수', '목', '금', '토'] as const
   const scheduleDays = (() => {
     const result: { date: Date; label: string; dayKey: string; isToday: boolean }[] = []
@@ -507,32 +508,6 @@ export const GymDetailPage = () => {
             ))}
           </div>
         </div>
-        {data.usageGuide.length > 0 && (
-          <div className="mb-4">
-            <span className="text-body font-bold text-ink block mb-2">이용 안내</span>
-            <ul className="space-y-2">
-              {data.usageGuide.map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-label text-ink-secondary leading-relaxed">
-                  <span className="text-ink-tertiary mt-0.5 flex-shrink-0">{'•'}</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {data.refundPolicy.length > 0 && (
-          <div>
-            <span className="text-body font-bold text-ink block mb-2">환불 정책</span>
-            <ul className="space-y-2">
-              {data.refundPolicy.map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-label text-ink-secondary leading-relaxed">
-                  <span className="text-ink-tertiary mt-0.5 flex-shrink-0">{'•'}</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
 
       {/* ── 7. 비포&애프터 ── */}
@@ -599,35 +574,53 @@ export const GymDetailPage = () => {
 
       {/* ── 8. 혼잡도 + 지도 ── */}
       <div className="px-page py-section border-b border-border-light">
-        {currentCongestion && (
-          <div className="mb-section p-card bg-surface-subtle rounded-xl">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <span className="text-body font-bold text-ink">실시간 혼잡도</span>
-                <span className={`px-1.5 py-0.5 text-caption font-bold rounded ${currentCongestion.level >= 7 ? 'bg-red-100 text-red-600' : currentCongestion.level >= 4 ? 'bg-yellow-100 text-yellow-700' : 'bg-green-100 text-green-600'}`}>
-                  {currentCongestion.level >= 7 ? '혼잡' : currentCongestion.level >= 4 ? '보통' : '여유'}
-                </span>
-              </div>
-              <span className="text-label text-ink-tertiary">현재 {currentHour}시 기준</span>
-            </div>
-            <div className="flex items-end gap-[3px] h-[40px]">
-              {data.congestion.map((c, i) => (
-                <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
-                  <div
-                    className={`w-full rounded-sm transition-colors ${parseInt(c.time) === currentHour ? 'bg-primary' : c.level >= 7 ? 'bg-red-300' : c.level >= 4 ? 'bg-yellow-300' : 'bg-green-300'}`}
-                    style={{ height: `${(c.level / 10) * 36}px` }}
-                  />
+        {data.congestion.length > 0 && (() => {
+          const congestionDate = new Date()
+          congestionDate.setDate(congestionDate.getDate() + congestionDayOffset)
+          const dayName = ['일', '월', '화', '수', '목', '금', '토'][congestionDate.getDay()]
+          const dateLabel = congestionDayOffset === 0 ? '오늘' : `${congestionDate.getMonth() + 1}/${congestionDate.getDate()}(${dayName})`
+          const isToday = congestionDayOffset === 0
+          const activeCongestion = isToday ? data.congestion.find(c => parseInt(c.time) === currentHour) : null
+          return (
+            <div className="mb-section p-card bg-surface-subtle rounded-xl">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <span className="text-body font-bold text-ink">혼잡도</span>
+                  {isToday && activeCongestion && (
+                    <span className={`px-1.5 py-0.5 text-caption font-bold rounded ${activeCongestion.level >= 7 ? 'bg-red-100 text-red-600' : activeCongestion.level >= 4 ? 'bg-yellow-100 text-yellow-700' : 'bg-green-100 text-green-600'}`}>
+                      {activeCongestion.level >= 7 ? '혼잡' : activeCongestion.level >= 4 ? '보통' : '여유'}
+                    </span>
+                  )}
                 </div>
-              ))}
+                <div className="flex items-center gap-2">
+                  <button onClick={() => setCongestionDayOffset(Math.max(-6, congestionDayOffset - 1))} className={`w-6 h-6 rounded-full flex items-center justify-center ${congestionDayOffset === -6 ? 'text-ink-disabled' : 'text-ink hover:bg-surface-muted'}`} disabled={congestionDayOffset === -6}>
+                    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 stroke-current stroke-2 fill-none"><path d="M15 18l-6-6 6-6" /></svg>
+                  </button>
+                  <span className="text-label font-medium text-ink min-w-[60px] text-center">{dateLabel}</span>
+                  <button onClick={() => setCongestionDayOffset(Math.min(0, congestionDayOffset + 1))} className={`w-6 h-6 rounded-full flex items-center justify-center ${congestionDayOffset === 0 ? 'text-ink-disabled' : 'text-ink hover:bg-surface-muted'}`} disabled={congestionDayOffset === 0}>
+                    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 stroke-current stroke-2 fill-none"><path d="M9 18l6-6-6-6" /></svg>
+                  </button>
+                </div>
+              </div>
+              <div className="flex items-end gap-[3px] h-[40px]">
+                {data.congestion.map((c, i) => (
+                  <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
+                    <div
+                      className={`w-full rounded-sm transition-colors ${isToday && parseInt(c.time) === currentHour ? 'bg-primary' : c.level >= 7 ? 'bg-red-300' : c.level >= 4 ? 'bg-yellow-300' : 'bg-green-300'}`}
+                      style={{ height: `${(c.level / 10) * 36}px` }}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-between mt-1">
+                <span className="text-[9px] text-ink-tertiary">6시</span>
+                <span className="text-[9px] text-ink-tertiary">12시</span>
+                <span className="text-[9px] text-ink-tertiary">18시</span>
+                <span className="text-[9px] text-ink-tertiary">23시</span>
+              </div>
             </div>
-            <div className="flex justify-between mt-1">
-              <span className="text-[9px] text-ink-tertiary">6시</span>
-              <span className="text-[9px] text-ink-tertiary">12시</span>
-              <span className="text-[9px] text-ink-tertiary">18시</span>
-              <span className="text-[9px] text-ink-tertiary">23시</span>
-            </div>
-          </div>
-        )}
+          )
+        })()}
         <h3 className="text-title font-bold text-ink mb-3">위치</h3>
         <div className="w-full h-[180px] bg-surface-muted rounded-xl overflow-hidden">
           <iframe

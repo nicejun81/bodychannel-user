@@ -23,7 +23,7 @@ export const RatingSummary = ({ rating, reviewCount, distribution = [75, 18, 5, 
           <div key={star} className="flex items-center gap-2">
             <span className="text-caption text-ink-tertiary w-3">{star}</span>
             <div className="flex-1 h-[6px] bg-ink-disabled rounded-full overflow-hidden">
-              <div className="h-full bg-semantic-star rounded-full" style={{ width: `${distribution[idx]}%` }} />
+              <div className="h-full rounded-full" style={{ width: `${distribution[idx]}%`, backgroundColor: '#FF6B35' }} />
             </div>
           </div>
         ))}
