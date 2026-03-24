@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { PageLayout, SubPageHeader } from '../../components'
+import { PageLayout, SubPageHeader, BottomCTA } from '../../components'
 import { IconHeart, IconShare, IconUsers, IconMapPin, IconCalendar } from '../../components/Icons'
 
 const meetupsData: Record<string, {
@@ -151,11 +151,11 @@ export const MeetupDetailPage = () => {
       </main>
 
       {/* Bottom CTA */}
-      <div className="fixed bottom-[80px] left-0 right-0 p-5 bg-white border-t border-border">
+      <BottomCTA>
         <button className="w-full py-4 bg-primary text-white font-semibold rounded-xl hover:opacity-90 transition-opacity">
           모임 참여하기
         </button>
-      </div>
+      </BottomCTA>
     </PageLayout>
   )
 }

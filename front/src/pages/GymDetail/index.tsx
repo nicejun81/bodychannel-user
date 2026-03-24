@@ -1,15 +1,16 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { PageLayout, SubPageHeader } from '../../components'
+import { PageLayout, SubPageHeader, RatingSummary, ReviewItem, ReviewSort, BottomCTA, Badge, InfoRow, EmptyState } from '../../components'
 import { IconShare, IconClock, IconMapPin } from '../../components/Icons'
 
 /* ── types ── */
 interface Facility { icon: string; label: string }
 interface PricePlan { name: string; duration: string; price: string; original?: string; tag?: string; installment?: string }
-interface ReviewItem { name: string; avatar: string; rating: number; date: string; text: string; photos?: string[]; membershipType?: string }
+interface ReviewData { name: string; avatar: string; rating: number; date: string; text: string; photos?: string[]; membershipType?: string }
 interface GymPhoto { url: string; label: string }
 interface Trainer { id: number; name: string; avatar: string; specialty: string; rating: number; reviewCount: number; perSession: string }
-interface ScheduleItem { time: string; name: string; instructor: string; spots: string }
+interface ScheduleItem { time: string; name: string; instructor: string; avatar: string; category: string; categoryColor: 'bareton' | 'hit35' | 'gymground' | 'pt' }
+type WeekSchedule = Record<string, ScheduleItem[]>
 interface Coupon { label: string; discount: string; condition: string }
 interface PTplan { sessions: string; pricePerSession: string; totalPrice: string; tag?: string }
 interface Notice { date: string; title: string; isNew?: boolean }
@@ -31,12 +32,12 @@ interface GymInfo {
   facilities: Facility[]
   plans: PricePlan[]
   ptPlans: PTplan[]
-  reviews: ReviewItem[]
+  reviews: ReviewData[]
   tags: string[]
   badge?: string
   badgeType?: string
   trainers: Trainer[]
-  schedule: ScheduleItem[]
+  schedule: WeekSchedule
   coupons: Coupon[]
   nearbyGyms: { id: string; name: string; distance: string; price: string }[]
   notices: Notice[]
@@ -87,13 +88,41 @@ export const gymsData: Record<string, GymInfo> = {
       { id: 2, name: '김민수', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face', specialty: 'PT · 다이어트', rating: 4.8, reviewCount: 89, perSession: '60,000' },
       { id: 3, name: '박지영', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face', specialty: '필라테스 · 바레톤', rating: 4.7, reviewCount: 64, perSession: '65,000' },
     ],
-    schedule: [
-      { time: '07:00', name: '모닝 요가', instructor: '이수진', spots: '3/15' },
-      { time: '09:00', name: '바디펌프', instructor: '한동훈', spots: '8/20' },
-      { time: '12:00', name: '점심 필라테스', instructor: '박지영', spots: '2/12' },
-      { time: '18:30', name: 'HIIT 클래스', instructor: '최강민', spots: '12/20' },
-      { time: '20:00', name: '스피닝', instructor: '김민수', spots: '5/15' },
-    ],
+    schedule: {
+      '월': [
+        { time: '07:00', name: '모닝 요가', instructor: '이수진', avatar: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=200&h=200&fit=crop&crop=face', category: '요가', categoryColor: 'gymground' as const },
+        { time: '09:00', name: '바디펌프', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop&crop=face', category: '히트35', categoryColor: 'hit35' as const },
+        { time: '18:30', name: 'HIIT 클래스', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop&crop=face', category: 'PT', categoryColor: 'pt' as const },
+      ],
+      '화': [
+        { time: '07:00', name: '모닝 요가', instructor: '이수진', avatar: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=200&h=200&fit=crop&crop=face', category: '요가', categoryColor: 'gymground' as const },
+        { time: '12:00', name: '점심 필라테스', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face', category: '바레톤', categoryColor: 'bareton' as const },
+        { time: '18:30', name: 'HIIT 클래스', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop&crop=face', category: 'PT', categoryColor: 'pt' as const },
+        { time: '20:00', name: '스피닝', instructor: '김민수', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face', category: '짐그라운드', categoryColor: 'gymground' as const },
+      ],
+      '수': [
+        { time: '09:00', name: '바디펌프', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop&crop=face', category: '히트35', categoryColor: 'hit35' as const },
+        { time: '12:00', name: '점심 필라테스', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face', category: '바레톤', categoryColor: 'bareton' as const },
+        { time: '20:00', name: '스피닝', instructor: '김민수', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face', category: '짐그라운드', categoryColor: 'gymground' as const },
+      ],
+      '목': [
+        { time: '07:00', name: '모닝 요가', instructor: '이수진', avatar: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=200&h=200&fit=crop&crop=face', category: '요가', categoryColor: 'gymground' as const },
+        { time: '09:00', name: '바디펌프', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop&crop=face', category: '히트35', categoryColor: 'hit35' as const },
+        { time: '18:30', name: 'HIIT 클래스', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop&crop=face', category: 'PT', categoryColor: 'pt' as const },
+      ],
+      '금': [
+        { time: '12:00', name: '점심 필라테스', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face', category: '바레톤', categoryColor: 'bareton' as const },
+        { time: '18:30', name: 'HIIT 클래스', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop&crop=face', category: 'PT', categoryColor: 'pt' as const },
+        { time: '20:00', name: '스피닝', instructor: '김민수', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face', category: '짐그라운드', categoryColor: 'gymground' as const },
+      ],
+      '토': [
+        { time: '10:00', name: '주말 요가', instructor: '이수진', avatar: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=200&h=200&fit=crop&crop=face', category: '요가', categoryColor: 'gymground' as const },
+        { time: '14:00', name: '바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face', category: '바레톤', categoryColor: 'bareton' as const },
+      ],
+      '일': [
+        { time: '10:00', name: '주말 요가', instructor: '이수진', avatar: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=200&h=200&fit=crop&crop=face', category: '요가', categoryColor: 'gymground' as const },
+      ],
+    },
     coupons: [
       { label: '신규 가입', discount: '첫 달 80% OFF', condition: '첫 결제 시' },
       { label: '친구 추천', discount: '1개월 무료', condition: '추천인과 함께 등록 시' },
@@ -163,7 +192,7 @@ export const gymsData: Record<string, GymInfo> = {
     trainers: [
       { id: 2, name: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop&crop=face', specialty: 'PT · HIIT', rating: 4.9, reviewCount: 93, perSession: '65,000' },
     ],
-    schedule: [{ time: '10:00', name: 'GX 바디컴뱃', instructor: '한동훈', spots: '6/20' }],
+    schedule: { '월': [{ time: '10:00', name: 'GX 바디컴뱃', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop&crop=face', category: '히트35', categoryColor: 'hit35' as const }], '수': [{ time: '10:00', name: 'GX 바디컴뱃', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop&crop=face', category: '히트35', categoryColor: 'hit35' as const }], '금': [{ time: '10:00', name: 'GX 바디컴뱃', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop&crop=face', category: '히트35', categoryColor: 'hit35' as const }] },
     coupons: [{ label: '반값 이벤트', discount: '첫 달 50% OFF', condition: '이번 달 한정' }],
     plans: [
       { name: '첫결제 특가', duration: '1개월', price: '9,900', original: '79,000', tag: '87% OFF' },
@@ -185,7 +214,7 @@ export const gymsData: Record<string, GymInfo> = {
     galleryImages: [],
     description: '서초역 인근의 깔끔한 무인 피트니스 센터입니다.', tags: ['24시간', '무인', '락커'],
     facilities: [{ icon: '🏋️', label: '프리웨이트' }, { icon: '🚿', label: '샤워실' }, { icon: '🔒', label: '개인 락커' }],
-    trainers: [], schedule: [], coupons: [],
+    trainers: [], schedule: {}, coupons: [],
     plans: [{ name: '월 회원권', duration: '1개월', price: '49,000' }, { name: '3개월권', duration: '3개월', price: '129,000', original: '147,000', tag: '12% OFF' }],
     ptPlans: [],
     reviews: [{ name: '가성비왕', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.10', text: '이 가격에 이 시설이면 가성비 최고입니다.' }],
@@ -201,7 +230,7 @@ export const gymsData: Record<string, GymInfo> = {
     description: '판교 테크노밸리 직장인을 위한 프리미엄 피트니스.', tags: ['크로스핏', 'PT', '그룹운동'], badge: 'NEW', badgeType: 'new',
     facilities: [{ icon: '🏋️', label: '프리웨이트' }, { icon: '🤸', label: '크로스핏존' }, { icon: '💪', label: 'GX룸' }, { icon: '🅿️', label: '주차장' }],
     trainers: [{ id: 4, name: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face', specialty: '크로스핏 · 체력', rating: 4.6, reviewCount: 58, perSession: '80,000' }],
-    schedule: [{ time: '19:00', name: '크로스핏 WOD', instructor: '이준혁', spots: '10/15' }],
+    schedule: { '월': [{ time: '19:00', name: '크로스핏 WOD', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face', category: '짐그라운드', categoryColor: 'gymground' as const }], '화': [{ time: '19:00', name: '크로스핏 WOD', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face', category: '짐그라운드', categoryColor: 'gymground' as const }], '목': [{ time: '19:00', name: '크로스핏 WOD', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face', category: '짐그라운드', categoryColor: 'gymground' as const }] },
     coupons: [{ label: '오픈 기념', discount: '80% OFF', condition: '신규 회원 한정' }],
     plans: [{ name: '첫결제 특가', duration: '1개월', price: '29,900', original: '150,000', tag: '80% OFF' }, { name: '월 회원권', duration: '1개월', price: '150,000' }],
     ptPlans: [],
@@ -217,7 +246,7 @@ export const gymsData: Record<string, GymInfo> = {
     galleryImages: [],
     description: '선릉역 도보 3분 거리의 피트니스 센터. 사우나 시설까지 완비.', tags: ['웨이트', '유산소', '사우나'],
     facilities: [{ icon: '🏋️', label: '프리웨이트' }, { icon: '🚴', label: '유산소존' }, { icon: '🧖', label: '사우나' }, { icon: '🚿', label: '샤워실' }],
-    trainers: [], schedule: [], coupons: [],
+    trainers: [], schedule: {}, coupons: [],
     plans: [{ name: '월 회원권', duration: '1개월', price: '89,000' }, { name: '3개월권', duration: '3개월', price: '239,000', original: '267,000', tag: '10% OFF' }],
     ptPlans: [],
     reviews: [{ name: '사우나매니아', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.08', text: '운동 후 사우나가 진짜 최고입니다.' }],
@@ -231,7 +260,7 @@ export const defaultGym: GymInfo = {
   hoursDetail: [{ day: '평일', time: '06:00 - 23:00' }, { day: '주말', time: '08:00 - 20:00' }], rating: 4.5, reviewCount: 10,
   heroImages: [{ url: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=450&fit=crop', label: '메인' }],
   galleryImages: [],
-  description: '바디채널 피트니스 센터입니다.', tags: [], facilities: [], trainers: [], schedule: [], coupons: [],
+  description: '바디채널 피트니스 센터입니다.', tags: [], facilities: [], trainers: [], schedule: {}, coupons: [],
   plans: [{ name: '월 회원권', duration: '1개월', price: '99,000' }], ptPlans: [], reviews: [], nearbyGyms: [],
   notices: [], congestion: [], usageGuide: [], refundPolicy: [],
 }
@@ -250,6 +279,24 @@ export const GymDetailPage = () => {
   const data = gymsData[id || ''] || defaultGym
   const [liked, setLiked] = useState(false)
   const [heroIdx, setHeroIdx] = useState(0)
+  const dayLabels = ['일', '월', '화', '수', '목', '금', '토'] as const
+  const scheduleDays = (() => {
+    const result: { date: Date; label: string; dayKey: string; isToday: boolean }[] = []
+    const now = new Date()
+    for (let i = 0; i < 14; i++) {
+      const d = new Date(now)
+      d.setDate(now.getDate() + i)
+      result.push({
+        date: d,
+        label: `${d.getMonth() + 1}/${d.getDate()}`,
+        dayKey: ['일', '월', '화', '수', '목', '금', '토'][d.getDay()],
+        isToday: i === 0,
+      })
+    }
+    return result
+  })()
+  const [selectedDateIdx, setSelectedDateIdx] = useState(0)
+  const selectedDay = scheduleDays[selectedDateIdx].dayKey
   const [reviewSort, setReviewSort] = useState<'latest' | 'high' | 'low'>('latest')
 
 
@@ -296,7 +343,7 @@ export const GymDetailPage = () => {
 
       {/* ── 1. 기본정보 + 소개 ── */}
       <div className="px-page pt-5 pb-4 border-b border-border-light">
-        {data.badge && <span className={`inline-block px-2 py-0.5 text-label font-bold rounded mb-2 ${data.badgeType === 'sale' ? 'bg-red-500 text-white' : data.badgeType === 'new' ? 'bg-green-500 text-white' : 'bg-primary text-white'}`}>{data.badge}</span>}
+        {data.badge && <Badge variant={data.badgeType === 'sale' ? 'danger' : data.badgeType === 'new' ? 'success' : 'primary'} size="md">{data.badge}</Badge>}
         <h1 className="text-display font-bold text-ink mb-1.5">{data.name}</h1>
         <div className="flex items-center gap-1 mb-3">
           <StarIcon className="text-semantic-star" style={{ width: 14, height: 14 }} />
@@ -305,11 +352,8 @@ export const GymDetailPage = () => {
         </div>
         <p className="text-body text-ink-secondary leading-relaxed mb-4">{data.description}</p>
         <div className="space-y-1.5">
-          <div className="flex items-center gap-2 text-body text-ink-secondary"><IconMapPin className="w-4 h-4 stroke-ink-tertiary stroke-2 flex-shrink-0" /><span>{data.address}</span></div>
-          <div className="flex items-center gap-2 text-body text-ink-secondary">
-            <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-ink-tertiary stroke-2 flex-shrink-0" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-            <span>{data.phone}</span>
-          </div>
+          <InfoRow icon={<IconMapPin className="w-4 h-4 stroke-ink-tertiary stroke-2" />} href={`https://map.naver.com/v5/search/${encodeURIComponent(data.name + ' ' + data.address)}`}>{data.address}</InfoRow>
+          <InfoRow icon={<svg viewBox="0 0 24 24" className="w-4 h-4 stroke-ink-tertiary stroke-2" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>}>{data.phone}</InfoRow>
           <div className="flex items-start gap-2 text-body text-ink-secondary">
             <IconClock className="w-4 h-4 stroke-ink-tertiary stroke-2 flex-shrink-0 mt-0.5" />
             <div className="flex-1">
@@ -353,69 +397,80 @@ export const GymDetailPage = () => {
         </div>
       )}
 
-      {/* ── 3. 편의시설 ── */}
-      <div className="px-page py-section border-b border-border-light">
-        <h3 className="text-title font-bold text-ink mb-4">편의시설</h3>
-        <div className="grid grid-cols-4 gap-3">
-          {data.facilities.map((f, i) => (
-            <div key={i} className="flex flex-col items-center gap-1.5 py-3 bg-surface-subtle rounded-xl">
-              <span className="text-display">{f.icon}</span>
-              <span className="text-label text-ink-secondary font-medium">{f.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── 4. 오늘의 수업 ── */}
-      {data.schedule.length > 0 && (
+      {/* ── 3. 수업 시간표 ── */}
+      {Object.keys(data.schedule).length > 0 && (
         <div className="px-page py-section border-b border-border-light">
-          <h3 className="text-title font-bold text-ink mb-3">오늘의 수업</h3>
-          <div className="space-y-2">
-            {data.schedule.map((s, i) => (
-              <div key={i} className="flex items-center justify-between p-card bg-surface-subtle rounded-xl">
-                <div className="flex items-center gap-3">
-                  <span className="text-body font-bold text-primary w-[42px]">{s.time}</span>
-                  <div>
-                    <p className="text-body font-semibold text-ink">{s.name}</p>
-                    <p className="text-label text-ink-tertiary">{s.instructor} 강사</p>
+          <h3 className="text-title font-bold text-ink mb-3">수업 시간표</h3>
+          <div className="flex gap-2 overflow-x-auto hide-scrollbar mb-4">
+            {scheduleDays.map((d, i) => (
+              <button key={i} onClick={() => setSelectedDateIdx(i)} className={`flex-shrink-0 w-[52px] py-2 rounded-xl text-center transition-colors ${selectedDateIdx === i ? 'bg-primary text-white' : 'bg-surface-muted text-ink-secondary hover:bg-surface-subtle'}`}>
+                <span className="text-caption block">{d.isToday ? '오늘' : d.label}</span>
+                <span className="text-label font-bold block">{d.dayKey}</span>
+              </button>
+            ))}
+          </div>
+          <div>
+            {(data.schedule[selectedDay] || []).length > 0 ? (data.schedule[selectedDay] || []).map((s, i) => {
+              const catStyle = s.categoryColor === 'bareton' ? 'bg-category-bareton-bg text-category-bareton-text'
+                : s.categoryColor === 'hit35' ? 'bg-category-hit35-bg text-category-hit35-text'
+                : s.categoryColor === 'gymground' ? 'bg-category-gymground-bg text-category-gymground-text'
+                : 'bg-primary-50 text-primary'
+              return (
+                <div key={i} className="flex gap-4 py-4 border-b border-border-light last:border-b-0">
+                  <div className="relative flex-shrink-0 w-16">
+                    <div className="w-16 h-16 rounded-card overflow-hidden">
+                      <img src={s.avatar} alt={s.instructor} className="w-full h-full object-cover" />
+                    </div>
+                    <span className={`absolute -bottom-1.5 left-1/2 -translate-x-1/2 badge whitespace-nowrap ${catStyle}`}>{s.category}</span>
+                  </div>
+                  <div className="flex-1 flex flex-col justify-center gap-1 min-w-0">
+                    <div className="flex items-center justify-between">
+                      <span className="text-title text-ink leading-tight">{s.instructor} 강사</span>
+                      <button className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg">예약</button>
+                    </div>
+                    <p className="text-label text-ink-secondary truncate">{s.name}</p>
+                    <div className="flex items-center gap-1 mt-0.5">
+                      <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 stroke-primary stroke-[1.5] fill-none"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
+                      <span className="text-label font-medium text-primary">{scheduleDays[selectedDateIdx].isToday ? '오늘' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')'} {s.time}</span>
+                    </div>
                   </div>
                 </div>
-                <span className={`text-label font-medium px-2 py-0.5 rounded ${parseInt(s.spots.split('/')[0]) / parseInt(s.spots.split('/')[1]) > 0.8 ? 'bg-red-50 text-red-500' : 'bg-green-50 text-green-600'}`}>
-                  {s.spots}
-                </span>
-              </div>
-            ))}
+              )
+            }) : (
+              <p className="text-body text-ink-tertiary text-center py-8">{scheduleDays[selectedDateIdx].isToday ? '오늘은' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')은'} 수업이 없습니다</p>
+            )}
           </div>
         </div>
       )}
 
-      {/* ── 5. 트레이너 ── */}
-      <div className="px-page py-section border-b border-border-light">
-        <h2 className="text-title font-bold text-ink mb-4">트레이너</h2>
+      {/* ── 5. 개인 레슨 ── */}
+      <div className="py-section border-b border-border-light">
+        <div className="flex items-center justify-between mb-4 px-page">
+          <h2 className="text-title font-bold text-ink">개인 레슨</h2>
+          <button className="text-label text-primary font-medium">전체보기</button>
+        </div>
         {data.trainers.length > 0 ? (
-          <div className="space-y-3">
+          <div className="flex gap-3 overflow-x-auto hide-scrollbar px-page">
             {data.trainers.map((t) => (
-              <button key={t.id} onClick={() => navigate(`/trainer/${t.id}`)} className="w-full flex items-center gap-3 p-card border border-border rounded-xl hover:border-ink-disabled transition-colors text-left">
-                <img src={t.avatar} alt={t.name} className="w-14 h-14 rounded-full object-cover flex-shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <p className="text-body font-bold text-ink">{t.name} 트레이너</p>
-                  <p className="text-label text-ink-secondary mb-1">{t.specialty}</p>
-                  <div className="flex items-center gap-2">
-                    <div className="flex items-center gap-0.5">
-                      <StarIcon className="text-semantic-star" style={{ width: 11, height: 11 }} />
-                      <span className="text-label font-semibold">{t.rating}</span>
-                      <span className="text-label text-ink-tertiary">({t.reviewCount})</span>
-                    </div>
-                    <span className="text-ink-disabled">|</span>
-                    <span className="text-label text-ink-secondary">1회 {t.perSession}원</span>
+              <button key={t.id} onClick={() => navigate(`/trainer/${t.id}`)} className="flex-shrink-0 w-[200px] p-card border border-border rounded-xl hover:border-ink-disabled transition-colors text-left">
+                <div className="flex items-center gap-2.5 mb-2">
+                  <img src={t.avatar} alt={t.name} className="w-11 h-11 rounded-full object-cover flex-shrink-0" />
+                  <div className="min-w-0">
+                    <p className="text-body font-bold text-ink truncate">{t.name}</p>
+                    <p className="text-caption text-ink-tertiary truncate">{t.specialty}</p>
                   </div>
                 </div>
-                <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-ink-disabled stroke-2 flex-shrink-0" fill="none"><path d="M9 18l6-6-6-6" /></svg>
+                <div className="flex items-center gap-1 mb-1.5">
+                  <StarIcon className="text-semantic-star" style={{ width: 11, height: 11 }} />
+                  <span className="text-label font-semibold">{t.rating}</span>
+                  <span className="text-label text-ink-tertiary">({t.reviewCount})</span>
+                </div>
+                <span className="text-body font-bold text-ink">1회 {t.perSession}원</span>
               </button>
             ))}
           </div>
         ) : (
-          <p className="text-body text-ink-tertiary text-center py-8">등록된 트레이너가 없습니다</p>
+          <EmptyState message="등록된 트레이너가 없습니다" />
         )}
       </div>
 
@@ -423,9 +478,12 @@ export const GymDetailPage = () => {
       <div className="px-page py-section border-b border-border-light">
         {data.notices.length > 0 && (
           <div className="mb-section">
-            <div className="flex items-center gap-2 mb-3">
-              <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-primary stroke-2 flex-shrink-0" fill="none"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>
-              <span className="text-body font-bold text-ink">공지사항</span>
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-primary stroke-2 flex-shrink-0" fill="none"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>
+                <span className="text-body font-bold text-ink">공지사항</span>
+              </div>
+              <button className="text-label text-primary font-medium">전체보기</button>
             </div>
             <div className="space-y-1.5">
               {data.notices.map((n, i) => (
@@ -438,6 +496,17 @@ export const GymDetailPage = () => {
             </div>
           </div>
         )}
+        <div className="mb-section">
+          <h3 className="text-body font-bold text-ink mb-3">편의시설</h3>
+          <div className="grid grid-cols-4 gap-3">
+            {data.facilities.map((f, i) => (
+              <div key={i} className="flex flex-col items-center gap-1.5 py-3 bg-surface-subtle rounded-xl">
+                <span className="text-display">{f.icon}</span>
+                <span className="text-label text-ink-secondary font-medium">{f.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
         {data.usageGuide.length > 0 && (
           <div className="mb-4">
             <span className="text-body font-bold text-ink block mb-2">이용 안내</span>
@@ -466,69 +535,63 @@ export const GymDetailPage = () => {
         )}
       </div>
 
-      {/* ── 7. 후기 ── */}
+      {/* ── 7. 비포&애프터 ── */}
+      <div className="py-section border-b border-border-light">
+        <div className="flex items-center justify-between mb-4 px-page">
+          <h2 className="text-title font-bold text-ink">Before & After</h2>
+          <button className="text-label text-primary font-medium">전체보기</button>
+        </div>
+        <div className="flex gap-3 overflow-x-auto hide-scrollbar px-page">
+          {[
+            { before: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=300&h=400&fit=crop', after: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=300&h=400&fit=crop', name: '김○○ 회원', result: '-12kg / 3개월', tag: '다이어트' },
+            { before: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=300&h=400&fit=crop', after: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=300&h=400&fit=crop', name: '이○○ 회원', result: '+5kg 근육 / 4개월', tag: '벌크업' },
+            { before: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=300&h=400&fit=crop', after: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=300&h=400&fit=crop', name: '박○○ 회원', result: '체형교정 / 6개월', tag: '체형교정' },
+          ].map((item, i) => (
+            <div key={i} className="flex-shrink-0 w-[180px]">
+              <div className="flex gap-1 mb-2 rounded-xl overflow-hidden">
+                <div className="relative flex-1">
+                  <img src={item.before} alt="Before" className="w-full aspect-[3/4] object-cover" />
+                  <span className="absolute bottom-1 left-1 px-1.5 py-0.5 bg-black/60 text-white text-caption font-bold rounded">BEFORE</span>
+                </div>
+                <div className="relative flex-1">
+                  <img src={item.after} alt="After" className="w-full aspect-[3/4] object-cover" />
+                  <span className="absolute bottom-1 left-1 px-1.5 py-0.5 bg-primary text-white text-caption font-bold rounded">AFTER</span>
+                </div>
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-body font-bold text-ink">{item.name}</p>
+                  <p className="text-label text-primary font-medium">{item.result}</p>
+                </div>
+                <span className="px-2 py-0.5 bg-surface-muted text-caption text-ink-secondary font-medium rounded-full">{item.tag}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── 8. 후기 ── */}
       <div className="px-page py-section border-b border-border-light">
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-title font-bold text-ink">방문자 후기</h2>
           <span className="text-label text-ink-tertiary">{data.reviewCount}개</span>
         </div>
-        <div className="flex items-center gap-4 mb-4 p-card-lg bg-surface-subtle rounded-xl">
-          <div className="text-center">
-            <p className="text-[28px] font-bold text-ink">{data.rating}</p>
-            <div className="flex gap-0.5 justify-center mb-0.5">
-              {[1, 2, 3, 4, 5].map((i) => <StarIcon key={i} className={i <= Math.round(data.rating) ? 'text-semantic-star' : 'text-ink-disabled'} style={{ width: 12, height: 12 }} />)}
-            </div>
-            <p className="text-label text-ink-tertiary">{data.reviewCount}개 평가</p>
-          </div>
-          <div className="flex-1 space-y-1">
-            {[5, 4, 3, 2, 1].map((star) => {
-              const pct = star === 5 ? 75 : star === 4 ? 18 : star === 3 ? 5 : star === 2 ? 1 : 1
-              return (
-                <div key={star} className="flex items-center gap-2">
-                  <span className="text-caption text-ink-tertiary w-3">{star}</span>
-                  <div className="flex-1 h-[6px] bg-ink-disabled rounded-full overflow-hidden"><div className="h-full bg-semantic-star rounded-full" style={{ width: `${pct}%` }} /></div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
+        <RatingSummary rating={data.rating} reviewCount={data.reviewCount} />
 
-        {/* Review sort & write */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex gap-1.5">
-            {([['latest', '최신순'], ['high', '평점 높은순'], ['low', '평점 낮은순']] as const).map(([key, label]) => (
-              <button key={key} onClick={() => setReviewSort(key)} className={`px-2.5 py-1 rounded-full text-label font-medium transition-colors ${reviewSort === key ? 'bg-ink text-white' : 'bg-surface-muted text-ink-secondary'}`}>{label}</button>
-            ))}
-          </div>
-          <button className="flex items-center gap-1 px-3 py-1.5 border border-primary rounded-full text-label font-semibold text-primary">
-            <svg viewBox="0 0 24 24" className="w-3 h-3 stroke-primary stroke-2" fill="none"><path d="M12 5v14M5 12h14" /></svg>
-            후기 작성
-          </button>
-        </div>
+        <ReviewSort value={reviewSort} onChange={(v) => setReviewSort(v as 'latest' | 'high' | 'low')} onWrite={() => {}} />
 
         <div className="space-y-4">
           {sortedReviews.map((review, i) => (
-            <div key={i} className="pb-4 border-b border-border-light last:border-0 last:pb-0">
-              <div className="flex items-center gap-2.5 mb-2">
-                <img src={review.avatar} alt={review.name} className="w-8 h-8 rounded-full object-cover" />
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-body font-semibold text-ink">{review.name}</span>
-                    {review.membershipType && <span className="px-1.5 py-0.5 bg-surface-muted text-caption text-ink-secondary rounded">{review.membershipType}</span>}
-                    <span className="text-label text-ink-tertiary ml-auto">{review.date}</span>
-                  </div>
-                  <div className="flex gap-0.5 mt-0.5">{[1, 2, 3, 4, 5].map((s) => <StarIcon key={s} className={s <= review.rating ? 'text-semantic-star' : 'text-ink-disabled'} style={{ width: 10, height: 10 }} />)}</div>
-                </div>
-              </div>
-              <p className="text-body text-ink-secondary leading-relaxed">{review.text}</p>
-              {review.photos && review.photos.length > 0 && (
-                <div className="flex gap-1.5 mt-2">
-                  {review.photos.map((photo, pi) => (
-                    <img key={pi} src={photo} alt="리뷰 사진" className="w-[72px] h-[72px] rounded-lg object-cover" />
-                  ))}
-                </div>
-              )}
-            </div>
+            <ReviewItem
+              key={i}
+              avatar={review.avatar}
+              name={review.name}
+              rating={review.rating}
+              date={review.date}
+              text={review.text}
+              badge={review.membershipType}
+              photos={review.photos}
+            />
           ))}
         </div>
         {data.reviews.length > 0 && <button className="w-full py-3 mt-4 border border-border rounded-lg text-body font-semibold text-ink hover:bg-surface-subtle">후기 더보기</button>}
@@ -581,9 +644,9 @@ export const GymDetailPage = () => {
 
 
       {/* ── Bottom CTA ── */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border px-page py-3 flex gap-3">
+      <BottomCTA hideBottomNav>
         <button onClick={() => navigate(`/gym/${id}/products`)} className="flex-1 py-3.5 bg-primary text-white text-body font-bold rounded-xl hover:bg-primary-dark transition-colors">상품선택</button>
-      </div>
+      </BottomCTA>
     </PageLayout>
   )
 }

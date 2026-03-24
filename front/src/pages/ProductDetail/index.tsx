@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { PageLayout, SubPageHeader } from '../../components'
+import { PageLayout, SubPageHeader, BottomCTA } from '../../components'
 import { IconHeart, IconShare, IconShoppingBag } from '../../components/Icons'
 
 const productsData: Record<string, {
@@ -108,16 +108,14 @@ export const ProductDetailPage = () => {
       </main>
 
       {/* Bottom CTA */}
-      <div className="fixed bottom-[80px] left-0 right-0 p-5 bg-white border-t border-border">
-        <div className="flex gap-3">
-          <button className="w-14 h-14 flex items-center justify-center border border-border rounded-xl hover:bg-surface-subtle transition-colors">
-            <IconHeart className="w-6 h-6 stroke-ink-tertiary stroke-2" />
-          </button>
-          <button className="flex-1 py-4 bg-primary text-white font-semibold rounded-xl hover:opacity-90 transition-opacity">
-            구매하기
-          </button>
-        </div>
-      </div>
+      <BottomCTA>
+        <button className="w-14 h-14 flex items-center justify-center border border-border rounded-xl hover:bg-surface-subtle transition-colors">
+          <IconHeart className="w-6 h-6 stroke-ink-tertiary stroke-2" />
+        </button>
+        <button className="flex-1 py-4 bg-primary text-white font-semibold rounded-xl hover:opacity-90 transition-opacity">
+          구매하기
+        </button>
+      </BottomCTA>
     </PageLayout>
   )
 }

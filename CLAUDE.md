@@ -238,6 +238,55 @@ npm run preview    # 빌드 결과 미리보기
   - GymDetail 탭 바(시설소개/트레이너/이용권/후기) 삭제
   - "이용권" → "회원권" 전체 용어 통일
 
+## 공통 컴포넌트 맵 (components/ 디렉토리)
+
+### 레이아웃
+| 컴포넌트 | 파일 | 용도 | 사용 페이지 |
+|---------|------|------|-----------|
+| `PageLayout` | PageLayout.tsx | 메인 레이아웃 (헤더+콘텐츠+바텀내비) | 전체 |
+| `SubPageHeader` | SubPageHeader.tsx | 서브페이지 헤더 (←뒤로가기+제목+우측) | 전체 서브페이지 |
+| `Header` | Header.tsx | 홈 전용 헤더 (로고, QR, 알림) | Home |
+| `BottomNav` | BottomNav.tsx | 하단 네비 5탭 | 자동 (PageLayout) |
+| `BottomCTA` | BottomCTA.tsx | 하단 고정 CTA 바 | GymDetail, ClassDetail, TrainerDetail, ProductDetail, MeetupDetail |
+
+### 후기/평점 (공통)
+| 컴포넌트 | 파일 | 용도 | 사용 페이지 |
+|---------|------|------|-----------|
+| `RatingSummary` | RatingSummary.tsx | 평점 요약 (큰 숫자+별+분포바) | GymDetail, ClassDetail, TrainerDetail |
+| `ReviewItem` | ReviewItem.tsx | 후기 아이템 (아바타+별점+텍스트+사진) | GymDetail, ClassDetail, TrainerDetail |
+| `ReviewSort` | ReviewSort.tsx | 정렬 버튼+후기작성 | GymDetail, TrainerDetail |
+
+### UI 요소 (공통)
+| 컴포넌트 | 파일 | 용도 | 사용 페이지 |
+|---------|------|------|-----------|
+| `Badge` | Badge.tsx | 컬러 배지 (variant: primary/secondary/success/danger/warning/muted, size: sm/md) | GymDetail, ClassDetail |
+| `InfoRow` | InfoRow.tsx | 아이콘+텍스트 정보 행 (일반/링크/버튼) | GymDetail |
+| `PlanCard` | PlanCard.tsx | 요금제 카드 (이름+기간+가격+태그+할부) | GymProducts |
+| `EmptyState` | EmptyState.tsx | 빈 상태 메시지 | GymDetail, GymProducts |
+
+### 홈 전용
+| 컴포넌트 | 파일 | 용도 |
+|---------|------|------|
+| `HeroSlider` | HeroSlider.tsx | 히어로 배너 슬라이더 |
+| `CategoryGrid` | CategoryGrid.tsx | 8칸 카테고리 그리드 |
+| `QuickTabs` | QuickTabs.tsx | 빠른 액션 탭 (쿠폰/한정특가/이벤트) |
+| `RecentChat` | RecentChat.tsx | 최근 메시지 |
+| `SectionHeader` | SectionHeader.tsx | 섹션 제목+전체보기 링크 |
+| `ScrollRow` | ScrollRow.tsx | 가로 스크롤 컨테이너 |
+| `OnlineClassCard` | OnlineClassCard.tsx | 온라인 강의 카드 |
+| `TrainerListItem` | TrainerListItem.tsx | 트레이너 목록 아이템 |
+| `PTTrainerCard` | PTTrainerCard.tsx | PT 트레이너 카드 (그리드) |
+| `TrainerRecommendBanner` | TrainerRecommendBanner.tsx | 트레이너 추천 배너 |
+| `MeetupCard` | MeetupCard.tsx | 모임 카드 |
+| `FeedCard` | FeedCard.tsx | 피드 카드 (2열 그리드) |
+| `FilterTabs` | FilterTabs.tsx | 필터 탭 |
+
+### 디자인 수정 작업 규칙 (반드시 준수)
+1. **UI 수정 시 공통 컴포넌트 우선 확인** → 해당 UI가 위 컴포넌트에 해당하면 컴포넌트 파일을 수정 (개별 페이지 X)
+2. **컴포넌트 수정 = 전체 페이지 자동 반영** → 한 곳만 고치면 모든 페이지에 적용됨
+3. **새 공통 패턴 발견 시** → 컴포넌트로 추출 후 이 테이블에 추가
+4. **페이지별 개별 스타일 금지** → 반드시 컴포넌트 또는 디자인 토큰 사용
+
 ## 작업 시 주의사항
 - 한국어 UI (모든 텍스트는 한국어)
 - 모바일 앱 스타일 (390px 뷰포트 기준)
@@ -248,3 +297,4 @@ npm run preview    # 빌드 결과 미리보기
 - 새 색상이 필요하면 tailwind.config.js에 토큰으로 먼저 등록 후 사용
 - `gray-*` 직접 사용 금지 → `ink-*`, `surface-*`, `border-*` 토큰 사용
 - 아이덴티티 3색(primary, accent-purple, accent-green) 일관성 유지
+- **디자인 수정 요청 시 공통 컴포넌트를 먼저 수정하여 전체 페이지에 일괄 반영**

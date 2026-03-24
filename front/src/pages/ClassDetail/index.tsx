@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { PageLayout, SubPageHeader } from '../../components'
-import { IconHeart, IconShare, IconPlay, IconClock, IconChevronDown } from '../../components/Icons'
+import { PageLayout, SubPageHeader, RatingSummary, ReviewItem, BottomCTA, Badge } from '../../components'
+import { IconHeart, IconShare, IconPlay, IconClock, IconChevronDown, IconStarFilled } from '../../components/Icons'
 
 /* ── data types ─────────────────────────────────────── */
 interface Lesson {
@@ -183,14 +183,6 @@ const defaultClass: ClassInfo = {
 const tabs = ['클래스 소개', '커리큘럼', '크리에이터', '후기'] as const
 type Tab = typeof tabs[number]
 
-function IconStarFilledStyled({ className, style }: { className?: string; style?: React.CSSProperties }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} style={style} fill="currentColor" stroke="none">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-  )
-}
-
 /* ── component ──────────────────────────────────────── */
 export const ClassDetailPage = () => {
   const { id } = useParams()
@@ -278,8 +270,8 @@ export const ClassDetailPage = () => {
       {/* ── Class Info ── */}
       <div className="px-page pt-5 pb-4">
         <div className="flex items-center gap-1.5 mb-2">
-          <span className="px-2 py-0.5 bg-primary-50 text-primary text-label font-bold rounded">{data.level}</span>
-          <span className="px-2 py-0.5 bg-surface-muted text-ink-secondary text-label font-bold rounded">{data.lessonCount}강</span>
+          <Badge variant="secondary" size="md">{data.level}</Badge>
+          <Badge variant="muted" size="md">{data.lessonCount}강</Badge>
         </div>
         <h1 className="text-display font-bold leading-tight text-ink mb-1">{data.title}</h1>
         <p className="text-body text-ink-secondary mb-4">{data.subtitle}</p>
@@ -293,7 +285,7 @@ export const ClassDetailPage = () => {
         {/* Rating + stats */}
         <div className="flex items-center gap-3 text-body">
           <div className="flex items-center gap-1">
-            <IconStarFilledStyled className="text-primary" style={{ width: 14, height: 14 }} />
+            <IconStarFilled className="w-3.5 h-3.5 text-semantic-star" />
             <span className="font-bold text-ink">{data.rating}</span>
             <span className="text-ink-tertiary">({data.reviewCount})</span>
           </div>
@@ -423,59 +415,19 @@ export const ClassDetailPage = () => {
         </div>
 
         {/* rating summary */}
-        <div className="flex items-center gap-4 mb-section p-card-lg bg-surface-subtle rounded-xl">
-          <div className="text-center">
-            <p className="text-[28px] font-bold text-ink">{data.rating}</p>
-            <div className="flex gap-0.5 justify-center mb-0.5">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <IconStarFilledStyled
-                  key={i}
-                  className={i <= Math.round(data.rating) ? 'text-primary' : 'text-ink-disabled'}
-                  style={{ width: 12, height: 12 }}
-                />
-              ))}
-            </div>
-            <p className="text-label text-ink-tertiary">{data.reviewCount}개 평가</p>
-          </div>
-          <div className="flex-1 space-y-1">
-            {[5, 4, 3, 2, 1].map((star) => {
-              const pct = star === 5 ? 82 : star === 4 ? 14 : star === 3 ? 3 : star === 2 ? 1 : 0
-              return (
-                <div key={star} className="flex items-center gap-2">
-                  <span className="text-caption text-ink-tertiary w-3">{star}</span>
-                  <div className="flex-1 h-[6px] bg-ink-disabled rounded-full overflow-hidden">
-                    <div className="h-full bg-primary rounded-full" style={{ width: `${pct}%` }} />
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
+        <RatingSummary rating={data.rating} reviewCount={data.reviewCount} distribution={[82, 14, 3, 1, 0]} />
 
         {/* review list */}
         <div className="space-y-4">
           {data.reviews.map((review, i) => (
-            <div key={i} className="pb-4 border-b border-border-light last:border-0 last:pb-0">
-              <div className="flex items-center gap-2.5 mb-2">
-                <img src={review.avatar} alt={review.name} className="w-8 h-8 rounded-full object-cover" />
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-body font-semibold text-ink">{review.name}</span>
-                    <span className="text-label text-ink-tertiary">{review.date}</span>
-                  </div>
-                  <div className="flex gap-0.5 mt-0.5">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <IconStarFilledStyled
-                        key={s}
-                        className={s <= review.rating ? 'text-primary' : 'text-ink-disabled'}
-                        style={{ width: 10, height: 10 }}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <p className="text-body text-ink-secondary leading-relaxed">{review.text}</p>
-            </div>
+            <ReviewItem
+              key={i}
+              avatar={review.avatar}
+              name={review.name}
+              rating={review.rating}
+              date={review.date}
+              text={review.text}
+            />
           ))}
         </div>
 
@@ -485,7 +437,7 @@ export const ClassDetailPage = () => {
       </div>
 
       {/* ── Bottom CTA ── */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border px-page py-3 flex items-center gap-3">
+      <BottomCTA hideBottomNav>
         <div className="flex-1">
           <div className="flex items-center gap-1.5">
             <span className="text-body font-bold text-primary">{discount}%</span>
@@ -496,7 +448,7 @@ export const ClassDetailPage = () => {
         <button className="px-8 py-3.5 bg-primary text-white text-body font-bold rounded-xl hover:bg-primary-dark transition-colors">
           바로 수강하기
         </button>
-      </div>
+      </BottomCTA>
     </PageLayout>
   )
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { PageLayout, SubPageHeader } from '../../components'
+import { PageLayout, SubPageHeader, RatingSummary, ReviewItem, ReviewSort, BottomCTA } from '../../components'
 import { IconHeart, IconShare, IconStarFilled, IconMapPin, IconClock, IconChevronDown } from '../../components/Icons'
 
 /* ── types ── */
@@ -312,10 +312,6 @@ const defaultTrainer: TrainerData = {
 }
 
 /* ── helpers ── */
-function StarIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
-  return <svg viewBox="0 0 24 24" className={className} style={style} fill="currentColor" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
-}
-
 const tabs = ['소개', '회원권', '스케줄', '후기'] as const
 type Tab = typeof tabs[number]
 
@@ -571,62 +567,24 @@ export const TrainerDetailPage = () => {
       {activeTab === '후기' && (
         <div className="px-page py-5">
           {/* Summary */}
-          <div className="flex items-center gap-4 mb-4 p-4 bg-surface-subtle rounded-xl">
-            <div className="text-center">
-              <p className="text-[28px] font-bold text-ink">{trainer.rating}</p>
-              <div className="flex gap-0.5 justify-center mb-0.5">
-                {[1, 2, 3, 4, 5].map((i) => <StarIcon key={i} className={i <= Math.round(trainer.rating) ? 'text-semantic-star' : 'text-ink-disabled'} style={{ width: 12, height: 12 }} />)}
-              </div>
-              <p className="text-label text-ink-tertiary">{trainer.reviewCount}개 평가</p>
-            </div>
-            <div className="flex-1 space-y-1">
-              {[5, 4, 3, 2, 1].map((star) => {
-                const pct = star === 5 ? 78 : star === 4 ? 15 : star === 3 ? 5 : star === 2 ? 1 : 1
-                return (
-                  <div key={star} className="flex items-center gap-2">
-                    <span className="text-caption text-ink-tertiary w-3">{star}</span>
-                    <div className="flex-1 h-[6px] bg-ink-disabled rounded-full overflow-hidden"><div className="h-full bg-semantic-star rounded-full" style={{ width: `${pct}%` }} /></div>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
+          <RatingSummary rating={trainer.rating} reviewCount={trainer.reviewCount} distribution={[78, 15, 5, 1, 1]} />
 
           {/* Sort */}
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex gap-1.5">
-              {([['latest', '최신순'], ['high', '평점순']] as const).map(([key, label]) => (
-                <button key={key} onClick={() => setReviewSort(key)} className={`px-2.5 py-1 rounded-full text-label font-medium transition-colors ${reviewSort === key ? 'bg-ink text-white' : 'bg-surface-muted text-ink-secondary'}`}>{label}</button>
-              ))}
-            </div>
-            <button className="flex items-center gap-1 px-3 py-1.5 border border-primary rounded-full text-label font-semibold text-primary">
-              <svg viewBox="0 0 24 24" className="w-3 h-3 stroke-primary stroke-2" fill="none"><path d="M12 5v14M5 12h14" /></svg>
-              후기 작성
-            </button>
-          </div>
+          <ReviewSort value={reviewSort} onChange={(v) => setReviewSort(v as 'latest' | 'high')} options={[{ key: 'latest', label: '최신순' }, { key: 'high', label: '평점순' }]} />
 
           {/* Reviews list */}
           <div className="space-y-4">
             {sortedReviews.map((review, i) => (
-              <div key={i} className="pb-4 border-b border-border-light last:border-0 last:pb-0">
-                <div className="flex items-center gap-2.5 mb-2">
-                  <img src={review.avatar} alt={review.name} className="w-8 h-8 rounded-full object-cover" />
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-body font-semibold text-ink">{review.name}</span>
-                      {review.program && <span className="px-1.5 py-0.5 bg-surface-muted text-caption text-ink-secondary rounded">{review.program}</span>}
-                      <span className="text-label text-ink-tertiary ml-auto">{review.date}</span>
-                    </div>
-                    <div className="flex gap-0.5 mt-0.5">{[1, 2, 3, 4, 5].map((s) => <StarIcon key={s} className={s <= review.rating ? 'text-semantic-star' : 'text-ink-disabled'} style={{ width: 10, height: 10 }} />)}</div>
-                  </div>
-                </div>
-                <p className="text-body text-ink-secondary leading-relaxed">{review.text}</p>
-                {review.photos && review.photos.length > 0 && (
-                  <div className="flex gap-1.5 mt-2">
-                    {review.photos.map((photo, pi) => <img key={pi} src={photo} alt="리뷰 사진" className="w-[72px] h-[72px] rounded-lg object-cover" />)}
-                  </div>
-                )}
-              </div>
+              <ReviewItem
+                key={i}
+                avatar={review.avatar}
+                name={review.name}
+                rating={review.rating}
+                date={review.date}
+                text={review.text}
+                badge={review.program}
+                photos={review.photos}
+              />
             ))}
           </div>
           {trainer.reviews.length > 3 && <button className="w-full py-3 mt-4 border border-border rounded-lg text-body font-semibold text-ink hover:bg-surface-subtle">후기 더보기</button>}
@@ -652,8 +610,8 @@ export const TrainerDetailPage = () => {
       )}
 
       {/* Bottom CTA */}
-      <div className="fixed bottom-[80px] left-0 right-0 z-50 bg-white border-t border-border px-page py-3">
-        <div className="flex items-center gap-3">
+      <BottomCTA>
+        <div className="flex items-center gap-3 w-full">
           <div className="flex-1">
             {trainer.prices[0] && (
               <>
@@ -665,7 +623,7 @@ export const TrainerDetailPage = () => {
           <button className="px-5 py-3 bg-surface-muted text-ink text-body font-semibold rounded-xl hover:bg-ink-disabled transition-colors">채팅 문의</button>
           <button className="px-5 py-3 bg-primary text-white text-body font-bold rounded-xl hover:opacity-90 transition-opacity">예약하기</button>
         </div>
-      </div>
+      </BottomCTA>
     </PageLayout>
   )
 }

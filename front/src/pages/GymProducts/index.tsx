@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { PageLayout, SubPageHeader } from '../../components'
+import { PageLayout, SubPageHeader, PlanCard, EmptyState } from '../../components'
 import { gymsData, defaultGym } from '../GymDetail'
 
 type Tab = 'membership' | 'lesson' | 'extra'
@@ -43,20 +43,16 @@ export const GymProductsPage = () => {
         {tab === 'membership' && (
           <div className="space-y-3">
             {data.plans.map((plan, i) => (
-              <button key={i} className={`w-full p-card-lg rounded-card border text-left transition-colors hover:border-primary ${i === 0 ? 'border-primary bg-primary-50' : 'border-border'}`}>
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="text-body font-bold text-ink">{plan.name}</span>
-                    {plan.tag && <span className="px-1.5 py-0.5 bg-primary text-white text-caption font-bold rounded">{plan.tag}</span>}
-                  </div>
-                  <span className="text-label text-ink-tertiary">{plan.duration}</span>
-                </div>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-display font-bold text-ink">{plan.price}<span className="text-body">원</span></span>
-                  {plan.original && <span className="text-body text-ink-tertiary line-through">{plan.original}원</span>}
-                </div>
-                {plan.installment && <p className="text-label text-primary mt-1.5">{plan.installment}</p>}
-              </button>
+              <PlanCard
+                key={i}
+                name={plan.name}
+                duration={plan.duration}
+                price={plan.price}
+                original={plan.original}
+                tag={plan.tag}
+                installment={plan.installment}
+                highlighted={i === 0}
+              />
             ))}
             <p className="text-label text-ink-tertiary text-center pt-2 pb-4">카드사별 무이자 할부 혜택이 제공됩니다</p>
           </div>
@@ -65,23 +61,17 @@ export const GymProductsPage = () => {
         {tab === 'lesson' && (
           <div className="space-y-3">
             {data.ptPlans.length > 0 ? data.ptPlans.map((pt, i) => (
-              <button key={i} className={`w-full p-card-lg rounded-card border text-left transition-colors hover:border-primary ${pt.tag === '인기' ? 'border-primary bg-primary-50' : 'border-border'}`}>
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="text-body font-bold text-ink">{pt.sessions}회</span>
-                    {pt.tag && <span className="px-1.5 py-0.5 bg-primary text-white text-caption font-bold rounded">{pt.tag}</span>}
-                  </div>
-                  <span className="text-label text-ink-tertiary">1회 {pt.perSession}원</span>
-                </div>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-display font-bold text-ink">{pt.price}<span className="text-body">원</span></span>
-                  {pt.original && <span className="text-body text-ink-tertiary line-through">{pt.original}원</span>}
-                </div>
-              </button>
+              <PlanCard
+                key={i}
+                name={`${pt.sessions}회`}
+                price={pt.price}
+                original={pt.original}
+                tag={pt.tag}
+                perSession={pt.perSession}
+                highlighted={pt.tag === '인기'}
+              />
             )) : (
-              <div className="text-center py-16">
-                <p className="text-body text-ink-tertiary">등록된 레슨권이 없습니다</p>
-              </div>
+              <EmptyState message="등록된 레슨권이 없습니다" />
             )}
           </div>
         )}
