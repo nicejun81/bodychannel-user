@@ -55,7 +55,7 @@ export const ProductDetailPage = () => {
           </button>
           <button className="icon-btn relative">
             <IconShoppingBag className="w-5 h-5 stroke-ink stroke-2" />
-            <span className="absolute top-1 right-1 w-4 h-4 bg-primary text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+            <span className="absolute top-1 right-1 w-4 h-4 bg-primary text-white text-caption font-bold rounded-full flex items-center justify-center">
               2
             </span>
           </button>
@@ -74,27 +74,27 @@ export const ProductDetailPage = () => {
       <main className="px-5 py-6">
         {/* Title & Price */}
         <div className="mb-6">
-          <h1 className="text-xl font-bold mb-3">{product.name}</h1>
+          <h1 className="text-display font-bold mb-3">{product.name}</h1>
           <div className="flex items-center gap-3">
-            <span className="text-primary font-bold text-lg">{product.discount}%</span>
-            <span className="text-2xl font-bold">{product.price.toLocaleString()}원</span>
+            <span className="text-primary font-bold text-heading">{product.discount}%</span>
+            <span className="text-display font-bold">{product.price.toLocaleString()}원</span>
           </div>
-          <span className="text-gray-400 line-through">{product.originalPrice.toLocaleString()}원</span>
+          <span className="text-ink-tertiary line-through">{product.originalPrice.toLocaleString()}원</span>
         </div>
 
         {/* Description */}
         <section className="mb-6">
-          <h2 className="font-bold text-lg mb-3">상품 설명</h2>
-          <p className="text-gray-600 text-sm leading-relaxed">{product.description}</p>
+          <h2 className="font-bold text-heading mb-3">상품 설명</h2>
+          <p className="text-ink-secondary text-body leading-relaxed">{product.description}</p>
         </section>
 
         {/* Details */}
         <section className="mb-6">
-          <h2 className="font-bold text-lg mb-3">상세 정보</h2>
+          <h2 className="font-bold text-heading mb-3">상세 정보</h2>
           <ul className="space-y-2">
             {product.details.map((detail, i) => (
-              <li key={i} className="flex items-center gap-2 text-sm text-gray-600">
-                <span className="w-1.5 h-1.5 bg-gray-400 rounded-full" />
+              <li key={i} className="flex items-center gap-2 text-body text-ink-secondary">
+                <span className="w-1.5 h-1.5 bg-ink-tertiary rounded-full" />
                 {detail}
               </li>
             ))}
@@ -102,16 +102,16 @@ export const ProductDetailPage = () => {
         </section>
 
         {/* Delivery Info */}
-        <section className="p-4 bg-gray-50 rounded-xl">
-          <p className="text-sm text-gray-600">📦 무료배송 | 평균 2-3일 내 도착</p>
+        <section className="p-4 bg-surface-subtle rounded-xl">
+          <p className="text-body text-ink-secondary">📦 무료배송 | 평균 2-3일 내 도착</p>
         </section>
       </main>
 
       {/* Bottom CTA */}
-      <div className="fixed bottom-[80px] left-0 right-0 p-5 bg-white border-t border-gray-200">
+      <div className="fixed bottom-[80px] left-0 right-0 p-5 bg-white border-t border-border">
         <div className="flex gap-3">
-          <button className="w-14 h-14 flex items-center justify-center border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
-            <IconHeart className="w-6 h-6 stroke-gray-400 stroke-2" />
+          <button className="w-14 h-14 flex items-center justify-center border border-border rounded-xl hover:bg-surface-subtle transition-colors">
+            <IconHeart className="w-6 h-6 stroke-ink-tertiary stroke-2" />
           </button>
           <button className="flex-1 py-4 bg-primary text-white font-semibold rounded-xl hover:opacity-90 transition-opacity">
             구매하기

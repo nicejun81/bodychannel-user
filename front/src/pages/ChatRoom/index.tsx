@@ -139,12 +139,12 @@ export const ChatRoomPage = () => {
         <div className="relative">
           <img src={room.avatarUrl} alt={room.name} className="w-8 h-8 rounded-full object-cover" />
           {room.isOnline && (
-            <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-[#22c55e] border-[1.5px] border-white rounded-full" />
+            <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-semantic-online border-[1.5px] border-white rounded-full" />
           )}
         </div>
         <div>
-          <div className="text-[15px] font-semibold text-ink leading-tight">{room.name}</div>
-          <div className="text-[11px] text-ink-placeholder">{room.isOnline ? '온라인' : '오프라인'}</div>
+          <div className="text-title font-semibold text-ink leading-tight">{room.name}</div>
+          <div className="text-label text-ink-placeholder">{room.isOnline ? '온라인' : '오프라인'}</div>
         </div>
       </div>
     </SubPageHeader>
@@ -169,7 +169,7 @@ export const ChatRoomPage = () => {
                 )}
                 <div>
                   <div
-                    className={`px-4 py-3 text-[14px] leading-relaxed whitespace-pre-wrap ${
+                    className={`px-4 py-3 text-body leading-relaxed whitespace-pre-wrap ${
                       msg.sender === 'me'
                         ? 'bg-ink text-white rounded-[16px] rounded-br-[4px]'
                         : 'bg-white text-ink border border-border rounded-[16px] rounded-bl-[4px]'
@@ -177,7 +177,7 @@ export const ChatRoomPage = () => {
                   >
                     {msg.text}
                   </div>
-                  <div className={`text-[11px] text-ink-placeholder mt-1 ${msg.sender === 'me' ? 'text-right' : ''}`}>
+                  <div className={`text-label text-ink-placeholder mt-1 ${msg.sender === 'me' ? 'text-right' : ''}`}>
                     {msg.time}
                   </div>
                 </div>
@@ -191,7 +191,7 @@ export const ChatRoomPage = () => {
       {/* Input Bar */}
       <div className="border-t border-border bg-white px-page py-3 pb-safe">
         <div className="flex items-center gap-2.5">
-          <button className="flex-shrink-0 w-10 h-10 rounded-full bg-surface-muted flex items-center justify-center hover:bg-gray-200 transition-colors">
+          <button className="flex-shrink-0 w-10 h-10 rounded-full bg-surface-muted flex items-center justify-center hover:bg-surface-muted transition-colors">
             <svg viewBox="0 0 24 24" className="w-5 h-5 stroke-ink-tertiary stroke-[1.5] fill-none">
               <path d="M12 5v14M5 12h14" />
             </svg>
@@ -202,7 +202,7 @@ export const ChatRoomPage = () => {
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             placeholder="메시지를 입력하세요"
-            className="flex-1 px-4 py-3 border border-border rounded-[12px] text-[14px] outline-none focus:border-ink transition-colors"
+            className="flex-1 px-4 py-3 border border-border rounded-[12px] text-body outline-none focus:border-ink transition-colors"
           />
           <button
             onClick={handleSend}

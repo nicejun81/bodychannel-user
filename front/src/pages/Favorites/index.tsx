@@ -116,21 +116,11 @@ export const FavoritesPage = () => {
               {/* Info */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2 mb-1">
-                  <h3 className="text-[15px] font-bold text-ink">{gym.name}</h3>
+                  <h3 className="text-title font-bold text-ink">{gym.name}</h3>
                   <IconHeart className="w-5 h-5 fill-primary stroke-primary flex-shrink-0" />
                 </div>
-                <p className="text-[13px] text-ink-placeholder mb-2">{gym.address}</p>
-                <div className="flex flex-wrap gap-1.5 mb-2.5">
-                  {gym.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[11px] text-ink-secondary border border-border rounded-[4px] px-2 py-0.5"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div className="text-[15px] font-bold text-ink">{gym.price}</div>
+                <p className="text-body text-ink-placeholder mb-2">{gym.address}</p>
+                <div className="text-title font-bold text-ink">{gym.price}</div>
               </div>
             </button>
           ))}
@@ -154,20 +144,20 @@ export const FavoritesPage = () => {
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2 mb-0.5">
                   <div className="flex items-baseline gap-2">
-                    <h3 className="text-[15px] font-bold text-ink">{trainer.name}</h3>
-                    <span className="text-[12px] text-ink-placeholder">{trainer.gym}</span>
+                    <h3 className="text-title font-bold text-ink">{trainer.name}</h3>
+                    <span className="text-label text-ink-placeholder">{trainer.gym}</span>
                   </div>
                   <IconHeart className="w-5 h-5 fill-primary stroke-primary flex-shrink-0" />
                 </div>
-                <p className="text-[13px] text-ink-placeholder mb-1.5">{trainer.address}</p>
+                <p className="text-body text-ink-placeholder mb-1.5">{trainer.address}</p>
                 <div className="flex items-center gap-1 mb-3">
-                  <IconStarFilled className="w-3.5 h-3.5 text-[#fbbf24]" />
-                  <span className="text-[13px] font-medium text-ink">{trainer.rating}</span>
-                  <span className="text-[13px] text-ink-placeholder">({trainer.reviewCount})</span>
+                  <IconStarFilled className="w-3.5 h-3.5 text-semantic-star" />
+                  <span className="text-body font-medium text-ink">{trainer.rating}</span>
+                  <span className="text-body text-ink-placeholder">({trainer.reviewCount})</span>
                 </div>
                 <div className="text-right">
-                  <span className="text-[16px] font-bold text-ink">{trainer.price}</span>
-                  <span className="text-[12px] text-ink-placeholder ml-0.5">/회</span>
+                  <span className="text-title font-bold text-ink">{trainer.price}</span>
+                  <span className="text-label text-ink-placeholder ml-0.5">/회</span>
                 </div>
               </div>
             </button>

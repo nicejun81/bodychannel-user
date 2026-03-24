@@ -197,7 +197,7 @@ export const ActivityPage = () => {
                       />
                     </div>
                   )}
-                  <span className="text-[11px] text-ink-secondary w-[60px] text-center truncate">{story.name}</span>
+                  <span className="text-label text-ink-secondary w-[60px] text-center truncate">{story.name}</span>
                 </button>
               ))}
             </div>
@@ -219,8 +219,8 @@ export const ActivityPage = () => {
                       className="w-9 h-9 rounded-full object-cover"
                     />
                     <div className="text-left">
-                      <div className="text-[14px] font-semibold text-ink leading-tight">{feed.authorName}</div>
-                      <div className="text-[12px] text-ink-placeholder">{feed.location}</div>
+                      <div className="text-body font-semibold text-ink leading-tight">{feed.authorName}</div>
+                      <div className="text-label text-ink-placeholder">{feed.location}</div>
                     </div>
                   </button>
                   <button className="p-2">
@@ -248,21 +248,21 @@ export const ActivityPage = () => {
                 <div className="px-page py-3">
                   <div className="flex items-center gap-4 mb-2.5">
                     <button className="flex items-center gap-1.5">
-                      <IconHeart className={`w-[22px] h-[22px] ${feed.isLiked ? 'fill-[#ff3040] stroke-[#ff3040]' : 'fill-none stroke-ink'} stroke-2`} />
+                      <IconHeart className={`w-[22px] h-[22px] ${feed.isLiked ? 'fill-semantic-like stroke-semantic-like' : 'fill-none stroke-ink'} stroke-2`} />
                     </button>
                     <button className="flex items-center gap-1.5">
                       <IconMessage className="w-[22px] h-[22px] fill-none stroke-ink stroke-2" />
                     </button>
                   </div>
-                  <div className="text-[13px] font-semibold text-ink mb-1.5">좋아요 {feed.likeCount}개</div>
-                  <div className="text-[13px] text-ink leading-relaxed mb-1">
+                  <div className="text-body font-semibold text-ink mb-1.5">좋아요 {feed.likeCount}개</div>
+                  <div className="text-body text-ink leading-relaxed mb-1">
                     <span className="font-semibold">{feed.authorName}</span>{' '}
                     <span className="text-ink-secondary">{feed.text}</span>
                   </div>
-                  <button className="text-[12px] text-ink-placeholder mt-1">
+                  <button className="text-label text-ink-placeholder mt-1">
                     댓글 {feed.commentCount}개 모두 보기
                   </button>
-                  <div className="text-[11px] text-ink-placeholder mt-1">{feed.timeAgo}</div>
+                  <div className="text-label text-ink-placeholder mt-1">{feed.timeAgo}</div>
                 </div>
               </div>
             ))}
@@ -295,8 +295,8 @@ export const ActivityPage = () => {
                     className="w-full h-[200px] object-cover rounded-[16px]"
                   />
                   {meetup.badge && (
-                    <span className={`absolute top-3 left-3 text-[11px] font-bold text-white px-2.5 py-1 rounded-md ${
-                      meetup.badge === 'HOT' ? 'bg-primary' : 'bg-[#22c55e]'
+                    <span className={`absolute top-3 left-3 text-label font-bold text-white px-2.5 py-1 rounded-md ${
+                      meetup.badge === 'HOT' ? 'bg-primary' : 'bg-semantic-online'
                     }`}>
                       {meetup.badge}
                     </span>
@@ -305,17 +305,17 @@ export const ActivityPage = () => {
 
                 {/* Info */}
                 <div className="px-1">
-                  <span className="inline-block text-[12px] text-ink-secondary bg-surface-muted px-2.5 py-1 rounded-md font-medium mb-2">
+                  <span className="inline-block text-label text-ink-secondary bg-surface-muted px-2.5 py-1 rounded-md font-medium mb-2">
                     {meetup.category}
                   </span>
-                  <h3 className="text-[15px] font-bold text-ink mb-3 leading-snug">{meetup.title}</h3>
+                  <h3 className="text-title font-bold text-ink mb-3 leading-snug">{meetup.title}</h3>
 
                   <div className="flex flex-col gap-2 mb-4">
-                    <div className="flex items-center gap-2 text-[13px] text-ink-secondary">
+                    <div className="flex items-center gap-2 text-body text-ink-secondary">
                       <IconCalendar className="w-4 h-4 stroke-ink-tertiary stroke-[1.5] fill-none" />
                       {meetup.schedule}
                     </div>
-                    <div className="flex items-center gap-2 text-[13px] text-ink-secondary">
+                    <div className="flex items-center gap-2 text-body text-ink-secondary">
                       <IconMapPin className="w-4 h-4 stroke-ink-tertiary stroke-[1.5] fill-none" />
                       {meetup.location}
                     </div>
@@ -333,15 +333,15 @@ export const ActivityPage = () => {
                             className="w-7 h-7 rounded-full object-cover border-2 border-white"
                           />
                         ))}
-                        <div className="w-7 h-7 rounded-full bg-primary text-white text-[10px] font-bold flex items-center justify-center border-2 border-white">
+                        <div className="w-7 h-7 rounded-full bg-primary text-white text-caption font-bold flex items-center justify-center border-2 border-white">
                           +{meetup.memberCount - 3}
                         </div>
                       </div>
-                      <span className="text-[13px] text-ink-placeholder">
+                      <span className="text-body text-ink-placeholder">
                         <span className="font-semibold text-primary">{meetup.memberCount}</span>/{meetup.maxMembers}명
                       </span>
                     </div>
-                    <div className="bg-ink text-white text-[13px] font-semibold px-5 py-2.5 rounded-[10px] hover:bg-primary transition-colors">
+                    <div className="bg-ink text-white text-body font-semibold px-5 py-2.5 rounded-[10px] hover:bg-primary transition-colors">
                       참여하기
                     </div>
                   </div>

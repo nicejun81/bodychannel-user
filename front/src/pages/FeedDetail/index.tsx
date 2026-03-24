@@ -76,7 +76,7 @@ export const FeedDetailPage = () => {
         <img src={feed.authorImageUrl} alt={feed.authorName} className="w-10 h-10 rounded-full object-cover" />
         <div>
           <p className="font-semibold">{feed.authorName}</p>
-          <p className="text-xs text-gray-500">{feed.createdAt}</p>
+          <p className="text-caption text-ink-secondary">{feed.createdAt}</p>
         </div>
       </div>
 
@@ -87,11 +87,11 @@ export const FeedDetailPage = () => {
 
       {/* Actions */}
       <div className="flex items-center gap-4 px-5 py-3">
-        <button className={`flex items-center gap-1.5 ${feed.isLiked ? 'text-red-500' : 'text-gray-600'}`}>
-          <IconHeart className={`w-6 h-6 ${feed.isLiked ? 'fill-red-500 stroke-red-500' : 'stroke-current stroke-2'}`} />
+        <button className={`flex items-center gap-1.5 ${feed.isLiked ? 'text-semantic-like' : 'text-ink-secondary'}`}>
+          <IconHeart className={`w-6 h-6 ${feed.isLiked ? 'fill-semantic-like stroke-semantic-like' : 'stroke-current stroke-2'}`} />
           <span className="font-semibold">{feed.likeCount}</span>
         </button>
-        <button className="flex items-center gap-1.5 text-gray-600">
+        <button className="flex items-center gap-1.5 text-ink-secondary">
           <IconMessage className="w-6 h-6 stroke-current stroke-2" />
           <span className="font-semibold">{feed.commentCount}</span>
         </button>
@@ -99,25 +99,25 @@ export const FeedDetailPage = () => {
 
       {/* Text */}
       <div className="px-5 pb-4">
-        <p className="text-sm leading-relaxed">
+        <p className="text-body leading-relaxed">
           <span className="font-semibold">{feed.authorName}</span>{' '}
           {feed.text}
         </p>
       </div>
 
       {/* Comments */}
-      <div className="px-5 border-t border-gray-100">
+      <div className="px-5 border-t border-border-light">
         <h3 className="font-semibold py-3">댓글 {feed.comments.length}개</h3>
         <div className="space-y-4">
           {feed.comments.map((comment, i) => (
             <div key={i} className="flex gap-3">
-              <div className="w-8 h-8 bg-gray-200 rounded-full flex-shrink-0" />
+              <div className="w-8 h-8 bg-ink-disabled rounded-full flex-shrink-0" />
               <div>
-                <p className="text-sm">
+                <p className="text-body">
                   <span className="font-semibold">{comment.author}</span>{' '}
                   {comment.text}
                 </p>
-                <p className="text-xs text-gray-400 mt-1">{comment.createdAt}</p>
+                <p className="text-caption text-ink-tertiary mt-1">{comment.createdAt}</p>
               </div>
             </div>
           ))}
@@ -125,12 +125,12 @@ export const FeedDetailPage = () => {
       </div>
 
       {/* Comment Input */}
-      <div className="fixed bottom-[80px] left-0 right-0 p-4 bg-white border-t border-gray-200">
+      <div className="fixed bottom-[80px] left-0 right-0 p-4 bg-white border-t border-border">
         <div className="flex gap-3">
           <input
             type="text"
             placeholder="댓글을 입력하세요..."
-            className="flex-1 px-4 py-3 bg-gray-100 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+            className="flex-1 px-4 py-3 bg-surface-muted rounded-full text-body focus:outline-none focus:ring-2 focus:ring-primary"
           />
           <button className="px-5 py-3 bg-primary text-white font-semibold rounded-full hover:opacity-90 transition-opacity">
             게시

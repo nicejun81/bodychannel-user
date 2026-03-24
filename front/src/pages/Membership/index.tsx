@@ -118,7 +118,7 @@ export const MembershipPage = () => {
               membership.variant === 'waiting'
                 ? 'bg-surface border-2 border-ink-disabled'
                 : membership.variant === 'secondary'
-                ? 'bg-gray-600'
+                ? 'bg-ink-secondary'
                 : 'bg-ink'
             }`}
           >
@@ -172,18 +172,11 @@ export const MembershipPage = () => {
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-title">{gym.name}</h3>
                   <div className="flex items-center gap-1">
-                    <IconStarFilled className="w-4 h-4 text-[#FFD700]" />
+                    <IconStarFilled className="w-4 h-4 text-semantic-star" />
                     <span className="text-body font-semibold">{gym.rating}</span>
                   </div>
                 </div>
                 <p className="text-body text-ink-placeholder mb-3">{gym.address}</p>
-                <div className="flex gap-2 mb-3">
-                  {gym.tags.map((tag) => (
-                    <span key={tag} className="px-2.5 py-1 bg-surface-muted text-label font-medium rounded-md">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
                 <div className="flex justify-between items-center">
                   {gym.firstPay && (
                     <span className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary-50 rounded-lg">

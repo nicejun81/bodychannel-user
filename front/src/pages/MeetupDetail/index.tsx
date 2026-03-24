@@ -87,51 +87,51 @@ export const MeetupDetailPage = () => {
         <img src={meetup.imageUrl} alt={meetup.title} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div className="absolute bottom-5 left-5 right-5 text-white">
-          <span className="inline-block px-2.5 py-1 bg-primary text-white text-xs font-bold rounded mb-2">
+          <span className="inline-block px-2.5 py-1 bg-primary text-white text-caption font-bold rounded mb-2">
             {meetup.category}
           </span>
-          <h1 className="text-2xl font-bold">{meetup.title}</h1>
+          <h1 className="text-display font-bold">{meetup.title}</h1>
         </div>
       </div>
 
       <main className="px-5 py-6">
         {/* Info */}
         <div className="space-y-3 mb-6">
-          <div className="flex items-center gap-3 text-sm text-gray-600">
-            <IconCalendar className="w-5 h-5 stroke-gray-400 stroke-2" />
+          <div className="flex items-center gap-3 text-body text-ink-secondary">
+            <IconCalendar className="w-5 h-5 stroke-ink-tertiary stroke-2" />
             <span>{meetup.schedule}</span>
           </div>
-          <div className="flex items-center gap-3 text-sm text-gray-600">
-            <IconMapPin className="w-5 h-5 stroke-gray-400 stroke-2" />
+          <div className="flex items-center gap-3 text-body text-ink-secondary">
+            <IconMapPin className="w-5 h-5 stroke-ink-tertiary stroke-2" />
             <span>{meetup.location}</span>
           </div>
-          <div className="flex items-center gap-3 text-sm text-gray-600">
-            <IconUsers className="w-5 h-5 stroke-gray-400 stroke-2" />
+          <div className="flex items-center gap-3 text-body text-ink-secondary">
+            <IconUsers className="w-5 h-5 stroke-ink-tertiary stroke-2" />
             <span>{meetup.memberCount}/{meetup.maxMembers}명</span>
           </div>
         </div>
 
         {/* Host */}
         <section className="mb-6">
-          <h2 className="font-bold text-lg mb-3">모임장</h2>
-          <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
+          <h2 className="font-bold text-heading mb-3">모임장</h2>
+          <div className="flex items-center gap-3 p-4 bg-surface-subtle rounded-xl">
             <img src={meetup.host.imageUrl} alt={meetup.host.name} className="w-12 h-12 rounded-full object-cover" />
             <div>
               <p className="font-semibold">{meetup.host.name}</p>
-              <p className="text-xs text-gray-500">모임장</p>
+              <p className="text-caption text-ink-secondary">모임장</p>
             </div>
           </div>
         </section>
 
         {/* Description */}
         <section className="mb-6">
-          <h2 className="font-bold text-lg mb-3">모임 소개</h2>
-          <p className="text-gray-600 text-sm leading-relaxed">{meetup.description}</p>
+          <h2 className="font-bold text-heading mb-3">모임 소개</h2>
+          <p className="text-ink-secondary text-sm leading-relaxed">{meetup.description}</p>
         </section>
 
         {/* Members */}
         <section>
-          <h2 className="font-bold text-lg mb-3">참여 멤버</h2>
+          <h2 className="font-bold text-heading mb-3">참여 멤버</h2>
           <div className="flex -space-x-2">
             {meetup.members.map((member, i) => (
               <img
@@ -142,7 +142,7 @@ export const MeetupDetailPage = () => {
               />
             ))}
             {meetup.memberCount > meetup.members.length && (
-              <div className="w-10 h-10 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center text-xs font-semibold text-gray-600">
+              <div className="w-10 h-10 rounded-full bg-ink-disabled border-2 border-white flex items-center justify-center text-caption font-semibold text-ink-secondary">
                 +{meetup.memberCount - meetup.members.length}
               </div>
             )}
@@ -151,7 +151,7 @@ export const MeetupDetailPage = () => {
       </main>
 
       {/* Bottom CTA */}
-      <div className="fixed bottom-[80px] left-0 right-0 p-5 bg-white border-t border-gray-200">
+      <div className="fixed bottom-[80px] left-0 right-0 p-5 bg-white border-t border-border">
         <button className="w-full py-4 bg-primary text-white font-semibold rounded-xl hover:opacity-90 transition-opacity">
           모임 참여하기
         </button>

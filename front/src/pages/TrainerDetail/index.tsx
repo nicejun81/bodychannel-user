@@ -344,7 +344,7 @@ export const TrainerDetailPage = () => {
             <IconShare className="w-[18px] h-[18px] stroke-ink stroke-2" />
           </button>
           <button onClick={() => setLiked(!liked)} className="icon-btn">
-            <IconHeart className={`w-[18px] h-[18px] stroke-2 ${liked ? 'fill-red-500 stroke-red-500' : 'fill-none stroke-ink'}`} />
+            <IconHeart className={`w-[18px] h-[18px] stroke-2 ${liked ? 'fill-semantic-like stroke-semantic-like' : 'fill-none stroke-ink'}`} />
           </button>
         </div>
       }
@@ -358,9 +358,9 @@ export const TrainerDetailPage = () => {
         <img src={trainer.imageUrl} alt={trainer.name} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
         <div className="absolute bottom-5 left-5 right-5 text-white">
-          <span className="inline-block px-2 py-0.5 bg-primary text-white text-[11px] font-bold rounded mb-2">{trainer.category}</span>
+          <span className="inline-block px-2 py-0.5 bg-primary text-white text-label font-bold rounded mb-2">{trainer.category}</span>
           <h1 className="text-[22px] font-bold mb-1">{trainer.name}</h1>
-          <div className="flex items-center gap-3 text-[13px]">
+          <div className="flex items-center gap-3 text-body">
             <button onClick={() => navigate(`/gym/${trainer.gymId}`)} className="flex items-center gap-1 hover:underline">
               <IconMapPin className="w-3.5 h-3.5" />
               {trainer.gym}
@@ -374,7 +374,7 @@ export const TrainerDetailPage = () => {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-4 border-b border-gray-100">
+      <div className="grid grid-cols-4 border-b border-border-light">
         {[
           { label: '총 회원', value: `${trainer.stats.totalClients}명` },
           { label: '누적 세션', value: `${trainer.stats.totalSessions.toLocaleString()}회` },
@@ -382,17 +382,17 @@ export const TrainerDetailPage = () => {
           { label: '만족도', value: `${trainer.stats.satisfaction}%` },
         ].map((stat, i) => (
           <div key={i} className="flex flex-col items-center py-4">
-            <span className="text-[16px] font-bold text-ink">{stat.value}</span>
-            <span className="text-[11px] text-gray-400 mt-0.5">{stat.label}</span>
+            <span className="text-title font-bold text-ink">{stat.value}</span>
+            <span className="text-label text-ink-tertiary mt-0.5">{stat.label}</span>
           </div>
         ))}
       </div>
 
       {/* Sticky Tabs */}
-      <div className="sticky top-0 z-40 bg-white border-b border-gray-200">
+      <div className="sticky top-0 z-40 bg-white border-b border-border">
         <div className="flex">
           {tabs.map((tab) => (
-            <button key={tab} onClick={() => setActiveTab(tab)} className={`flex-1 py-3 text-[13px] font-semibold text-center relative ${activeTab === tab ? 'text-ink' : 'text-gray-400'}`}>
+            <button key={tab} onClick={() => setActiveTab(tab)} className={`flex-1 py-3 text-body font-semibold text-center relative ${activeTab === tab ? 'text-ink' : 'text-ink-tertiary'}`}>
               {tab}
               {activeTab === tab && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-[2px] bg-ink rounded-full" />}
             </button>
@@ -404,33 +404,33 @@ export const TrainerDetailPage = () => {
       {activeTab === '소개' && (
         <div>
           {/* Intro */}
-          <section className="px-5 py-5 border-b border-gray-100">
-            <h2 className="text-[15px] font-bold text-ink mb-3">소개</h2>
-            <p className="text-[13px] text-[#373737] leading-relaxed">{trainer.intro}</p>
+          <section className="px-5 py-5 border-b border-border-light">
+            <h2 className="text-title font-bold text-ink mb-3">소개</h2>
+            <p className="text-body text-ink-secondary leading-relaxed">{trainer.intro}</p>
           </section>
 
           {/* Specialties */}
-          <section className="px-5 py-5 border-b border-gray-100">
-            <h2 className="text-[15px] font-bold text-ink mb-3">전문 분야</h2>
+          <section className="px-5 py-5 border-b border-border-light">
+            <h2 className="text-title font-bold text-ink mb-3">전문 분야</h2>
             <div className="flex flex-wrap gap-2">
               {trainer.specialties.map((item, i) => (
-                <span key={i} className="px-3 py-1.5 bg-[#fff8f5] text-primary text-[12px] font-medium rounded-full border border-primary/20">{item}</span>
+                <span key={i} className="px-3 py-1.5 bg-[#fff8f5] text-primary text-label font-medium rounded-full border border-primary/20">{item}</span>
               ))}
             </div>
           </section>
 
           {/* Training Style */}
           {trainer.trainingStyle.length > 0 && (
-            <section className="px-5 py-5 border-b border-gray-100">
+            <section className="px-5 py-5 border-b border-border-light">
               <button onClick={() => setStyleOpen(!styleOpen)} className="w-full flex items-center justify-between">
-                <h2 className="text-[15px] font-bold text-ink">트레이닝 스타일</h2>
-                <IconChevronDown className={`w-4 h-4 stroke-gray-400 stroke-2 transition-transform ${styleOpen ? 'rotate-180' : ''}`} />
+                <h2 className="text-title font-bold text-ink">트레이닝 스타일</h2>
+                <IconChevronDown className={`w-4 h-4 stroke-ink-tertiary stroke-2 transition-transform ${styleOpen ? 'rotate-180' : ''}`} />
               </button>
               {styleOpen && (
                 <ul className="mt-3 space-y-2.5">
                   {trainer.trainingStyle.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-[12px] text-[#373737] leading-relaxed">
-                      <span className="w-5 h-5 flex items-center justify-center bg-primary/10 text-primary text-[10px] font-bold rounded-full flex-shrink-0 mt-0.5">{i + 1}</span>
+                    <li key={i} className="flex items-start gap-2 text-label text-ink-secondary leading-relaxed">
+                      <span className="w-5 h-5 flex items-center justify-center bg-primary/10 text-primary text-caption font-bold rounded-full flex-shrink-0 mt-0.5">{i + 1}</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -440,11 +440,11 @@ export const TrainerDetailPage = () => {
           )}
 
           {/* Career */}
-          <section className="px-5 py-5 border-b border-gray-100">
-            <h2 className="text-[15px] font-bold text-ink mb-3">경력 및 자격</h2>
+          <section className="px-5 py-5 border-b border-border-light">
+            <h2 className="text-title font-bold text-ink mb-3">경력 및 자격</h2>
             <ul className="space-y-2">
               {trainer.career.map((item, i) => (
-                <li key={i} className="flex items-center gap-2.5 text-[13px] text-[#373737]">
+                <li key={i} className="flex items-center gap-2.5 text-body text-ink-secondary">
                   <span className="w-1.5 h-1.5 bg-primary rounded-full flex-shrink-0" />
                   {item}
                 </li>
@@ -454,11 +454,11 @@ export const TrainerDetailPage = () => {
 
           {/* Gallery */}
           {trainer.galleryPhotos.length > 0 && (
-            <section className="px-5 py-5 border-b border-gray-100">
+            <section className="px-5 py-5 border-b border-border-light">
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-[15px] font-bold text-ink">트레이닝 사진</h2>
+                <h2 className="text-title font-bold text-ink">트레이닝 사진</h2>
                 {trainer.galleryPhotos.length > 4 && (
-                  <button onClick={() => setGalleryOpen(true)} className="text-[12px] text-primary font-medium">전체보기 ({trainer.galleryPhotos.length})</button>
+                  <button onClick={() => setGalleryOpen(true)} className="text-label text-primary font-medium">전체보기 ({trainer.galleryPhotos.length})</button>
                 )}
               </div>
               <div className="grid grid-cols-3 gap-1.5 rounded-xl overflow-hidden">
@@ -467,7 +467,7 @@ export const TrainerDetailPage = () => {
                     <img src={photo} alt={`트레이닝 ${i + 1}`} className="w-full aspect-square object-cover" />
                     {i === 5 && trainer.galleryPhotos.length > 6 && (
                       <button onClick={() => setGalleryOpen(true)} className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                        <span className="text-white text-[14px] font-bold">+{trainer.galleryPhotos.length - 6}</span>
+                        <span className="text-white text-body font-bold">+{trainer.galleryPhotos.length - 6}</span>
                       </button>
                     )}
                   </div>
@@ -478,24 +478,24 @@ export const TrainerDetailPage = () => {
 
           {/* Transformations */}
           {trainer.transformations.length > 0 && (
-            <section className="px-5 py-5 border-b border-gray-100">
-              <h2 className="text-[15px] font-bold text-ink mb-3">Before & After</h2>
+            <section className="px-5 py-5 border-b border-border-light">
+              <h2 className="text-title font-bold text-ink mb-3">Before & After</h2>
               <div className="space-y-4">
                 {trainer.transformations.map((t, i) => (
-                  <div key={i} className="bg-[#fafafa] rounded-xl p-3">
+                  <div key={i} className="bg-surface-subtle rounded-xl p-3">
                     <div className="flex gap-2 mb-2">
                       <div className="flex-1 relative">
                         <img src={t.before} alt="Before" className="w-full aspect-[3/4] object-cover rounded-lg" />
-                        <span className="absolute top-2 left-2 px-1.5 py-0.5 bg-black/60 text-white text-[10px] font-bold rounded">BEFORE</span>
+                        <span className="absolute top-2 left-2 px-1.5 py-0.5 bg-black/60 text-white text-caption font-bold rounded">BEFORE</span>
                       </div>
                       <div className="flex-1 relative">
                         <img src={t.after} alt="After" className="w-full aspect-[3/4] object-cover rounded-lg" />
-                        <span className="absolute top-2 left-2 px-1.5 py-0.5 bg-primary text-white text-[10px] font-bold rounded">AFTER</span>
+                        <span className="absolute top-2 left-2 px-1.5 py-0.5 bg-primary text-white text-caption font-bold rounded">AFTER</span>
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-[13px] font-bold text-ink">{t.caption}</span>
-                      <span className="text-[11px] text-gray-400">{t.duration}</span>
+                      <span className="text-body font-bold text-ink">{t.caption}</span>
+                      <span className="text-label text-ink-tertiary">{t.duration}</span>
                     </div>
                   </div>
                 ))}
@@ -510,59 +510,59 @@ export const TrainerDetailPage = () => {
         <div className="px-5 py-5">
           <div className="space-y-3">
             {trainer.prices.map((price, i) => (
-              <div key={i} className={`p-4 rounded-xl border ${price.tag === '인기' ? 'border-primary bg-[#fff8f5]' : 'border-gray-200'}`}>
+              <div key={i} className={`p-4 rounded-xl border ${price.tag === '인기' ? 'border-primary bg-[#fff8f5]' : 'border-border'}`}>
                 <div className="flex items-center justify-between mb-1.5">
                   <div className="flex items-center gap-2">
-                    <span className="text-[14px] font-bold text-ink">{price.name}</span>
-                    {price.tag && <span className={`px-1.5 py-0.5 text-[10px] font-bold rounded ${price.tag === '인기' ? 'bg-primary text-white' : price.tag === '체험특가' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>{price.tag}</span>}
+                    <span className="text-body font-bold text-ink">{price.name}</span>
+                    {price.tag && <span className={`px-1.5 py-0.5 text-caption font-bold rounded ${price.tag === '인기' ? 'bg-primary text-white' : price.tag === '체험특가' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>{price.tag}</span>}
                   </div>
-                  <span className="text-[12px] text-gray-400">{price.sessions}</span>
+                  <span className="text-label text-ink-tertiary">{price.sessions}</span>
                 </div>
                 <div className="flex items-baseline justify-between">
-                  <span className="text-[20px] font-bold text-ink">{price.price}</span>
-                  {price.perSession && <span className="text-[12px] text-gray-500">회당 {price.perSession}</span>}
+                  <span className="text-display font-bold text-ink">{price.price}</span>
+                  {price.perSession && <span className="text-label text-ink-secondary">회당 {price.perSession}</span>}
                 </div>
               </div>
             ))}
           </div>
 
           {/* Schedule info */}
-          <div className="mt-4 p-3.5 bg-gray-100 rounded-xl flex items-center gap-2">
-            <IconClock className="w-4 h-4 stroke-gray-500 stroke-2 flex-shrink-0" />
-            <span className="text-[12px] text-gray-600">예약 가능 시간: 평일 06:00 - 22:00 / 주말 09:00 - 18:00</span>
+          <div className="mt-4 p-3.5 bg-surface-muted rounded-xl flex items-center gap-2">
+            <IconClock className="w-4 h-4 stroke-ink-tertiary stroke-2 flex-shrink-0" />
+            <span className="text-label text-ink-secondary">예약 가능 시간: 평일 06:00 - 22:00 / 주말 09:00 - 18:00</span>
           </div>
 
-          <p className="text-[11px] text-gray-400 text-center mt-3">상담 후 맞춤 이용권 안내도 가능합니다</p>
+          <p className="text-label text-ink-tertiary text-center mt-3">상담 후 맞춤 이용권 안내도 가능합니다</p>
         </div>
       )}
 
       {/* ── 스케줄 탭 ── */}
       {activeTab === '스케줄' && (
         <div className="px-5 py-5">
-          <h2 className="text-[15px] font-bold text-ink mb-1">주간 예약 가능 시간</h2>
-          <p className="text-[11px] text-gray-400 mb-4">원하는 시간을 선택하여 예약하세요</p>
+          <h2 className="text-title font-bold text-ink mb-1">주간 예약 가능 시간</h2>
+          <p className="text-label text-ink-tertiary mb-4">원하는 시간을 선택하여 예약하세요</p>
 
           {trainer.schedule.length > 0 ? (
             <div className="space-y-3">
               {trainer.schedule.map((day, i) => (
                 <div key={i} className="flex items-start gap-3">
-                  <span className={`w-8 h-8 flex items-center justify-center rounded-full text-[12px] font-bold flex-shrink-0 ${day.day === '일' ? 'bg-gray-100 text-gray-400' : 'bg-primary/10 text-primary'}`}>{day.day}</span>
+                  <span className={`w-8 h-8 flex items-center justify-center rounded-full text-label font-bold flex-shrink-0 ${day.day === '일' ? 'bg-surface-muted text-ink-tertiary' : 'bg-primary/10 text-primary'}`}>{day.day}</span>
                   <div className="flex-1">
                     {day.slots.length > 0 ? (
                       <div className="flex flex-wrap gap-1.5">
                         {day.slots.map((slot, si) => (
-                          <button key={si} className="px-2.5 py-1.5 border border-gray-200 rounded-lg text-[11px] font-medium text-[#373737] hover:border-primary hover:text-primary transition-colors">{slot}</button>
+                          <button key={si} className="px-2.5 py-1.5 border border-border rounded-lg text-label font-medium text-ink-secondary hover:border-primary hover:text-primary transition-colors">{slot}</button>
                         ))}
                       </div>
                     ) : (
-                      <span className="text-[12px] text-gray-400 leading-8">휴무</span>
+                      <span className="text-label text-ink-tertiary leading-8">휴무</span>
                     )}
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-[13px] text-gray-400 text-center py-8">스케줄 정보가 없습니다</p>
+            <p className="text-body text-ink-tertiary text-center py-8">스케줄 정보가 없습니다</p>
           )}
         </div>
       )}
@@ -571,21 +571,21 @@ export const TrainerDetailPage = () => {
       {activeTab === '후기' && (
         <div className="px-5 py-5">
           {/* Summary */}
-          <div className="flex items-center gap-4 mb-4 p-4 bg-[#fafafa] rounded-xl">
+          <div className="flex items-center gap-4 mb-4 p-4 bg-surface-subtle rounded-xl">
             <div className="text-center">
               <p className="text-[28px] font-bold text-ink">{trainer.rating}</p>
               <div className="flex gap-0.5 justify-center mb-0.5">
-                {[1, 2, 3, 4, 5].map((i) => <StarIcon key={i} className={i <= Math.round(trainer.rating) ? 'text-[#FFD700]' : 'text-gray-200'} style={{ width: 12, height: 12 }} />)}
+                {[1, 2, 3, 4, 5].map((i) => <StarIcon key={i} className={i <= Math.round(trainer.rating) ? 'text-semantic-star' : 'text-ink-disabled'} style={{ width: 12, height: 12 }} />)}
               </div>
-              <p className="text-[11px] text-gray-400">{trainer.reviewCount}개 평가</p>
+              <p className="text-label text-ink-tertiary">{trainer.reviewCount}개 평가</p>
             </div>
             <div className="flex-1 space-y-1">
               {[5, 4, 3, 2, 1].map((star) => {
                 const pct = star === 5 ? 78 : star === 4 ? 15 : star === 3 ? 5 : star === 2 ? 1 : 1
                 return (
                   <div key={star} className="flex items-center gap-2">
-                    <span className="text-[10px] text-gray-400 w-3">{star}</span>
-                    <div className="flex-1 h-[6px] bg-gray-200 rounded-full overflow-hidden"><div className="h-full bg-[#FFD700] rounded-full" style={{ width: `${pct}%` }} /></div>
+                    <span className="text-caption text-ink-tertiary w-3">{star}</span>
+                    <div className="flex-1 h-[6px] bg-ink-disabled rounded-full overflow-hidden"><div className="h-full bg-semantic-star rounded-full" style={{ width: `${pct}%` }} /></div>
                   </div>
                 )
               })}
@@ -596,10 +596,10 @@ export const TrainerDetailPage = () => {
           <div className="flex items-center justify-between mb-4">
             <div className="flex gap-1.5">
               {([['latest', '최신순'], ['high', '평점순']] as const).map(([key, label]) => (
-                <button key={key} onClick={() => setReviewSort(key)} className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-colors ${reviewSort === key ? 'bg-ink text-white' : 'bg-gray-100 text-gray-500'}`}>{label}</button>
+                <button key={key} onClick={() => setReviewSort(key)} className={`px-2.5 py-1 rounded-full text-label font-medium transition-colors ${reviewSort === key ? 'bg-ink text-white' : 'bg-surface-muted text-ink-secondary'}`}>{label}</button>
               ))}
             </div>
-            <button className="flex items-center gap-1 px-3 py-1.5 border border-primary rounded-full text-[11px] font-semibold text-primary">
+            <button className="flex items-center gap-1 px-3 py-1.5 border border-primary rounded-full text-label font-semibold text-primary">
               <svg viewBox="0 0 24 24" className="w-3 h-3 stroke-primary stroke-2" fill="none"><path d="M12 5v14M5 12h14" /></svg>
               후기 작성
             </button>
@@ -608,19 +608,19 @@ export const TrainerDetailPage = () => {
           {/* Reviews list */}
           <div className="space-y-4">
             {sortedReviews.map((review, i) => (
-              <div key={i} className="pb-4 border-b border-gray-100 last:border-0 last:pb-0">
+              <div key={i} className="pb-4 border-b border-border-light last:border-0 last:pb-0">
                 <div className="flex items-center gap-2.5 mb-2">
                   <img src={review.avatar} alt={review.name} className="w-8 h-8 rounded-full object-cover" />
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-[13px] font-semibold text-ink">{review.name}</span>
-                      {review.program && <span className="px-1.5 py-0.5 bg-gray-100 text-[10px] text-gray-500 rounded">{review.program}</span>}
-                      <span className="text-[11px] text-gray-400 ml-auto">{review.date}</span>
+                      <span className="text-body font-semibold text-ink">{review.name}</span>
+                      {review.program && <span className="px-1.5 py-0.5 bg-surface-muted text-caption text-ink-secondary rounded">{review.program}</span>}
+                      <span className="text-label text-ink-tertiary ml-auto">{review.date}</span>
                     </div>
-                    <div className="flex gap-0.5 mt-0.5">{[1, 2, 3, 4, 5].map((s) => <StarIcon key={s} className={s <= review.rating ? 'text-[#FFD700]' : 'text-gray-200'} style={{ width: 10, height: 10 }} />)}</div>
+                    <div className="flex gap-0.5 mt-0.5">{[1, 2, 3, 4, 5].map((s) => <StarIcon key={s} className={s <= review.rating ? 'text-semantic-star' : 'text-ink-disabled'} style={{ width: 10, height: 10 }} />)}</div>
                   </div>
                 </div>
-                <p className="text-[13px] text-[#373737] leading-relaxed">{review.text}</p>
+                <p className="text-body text-ink-secondary leading-relaxed">{review.text}</p>
                 {review.photos && review.photos.length > 0 && (
                   <div className="flex gap-1.5 mt-2">
                     {review.photos.map((photo, pi) => <img key={pi} src={photo} alt="리뷰 사진" className="w-[72px] h-[72px] rounded-lg object-cover" />)}
@@ -629,7 +629,7 @@ export const TrainerDetailPage = () => {
               </div>
             ))}
           </div>
-          {trainer.reviews.length > 3 && <button className="w-full py-3 mt-4 border border-gray-300 rounded-lg text-[13px] font-semibold text-ink hover:bg-gray-50">후기 더보기</button>}
+          {trainer.reviews.length > 3 && <button className="w-full py-3 mt-4 border border-border rounded-lg text-body font-semibold text-ink hover:bg-surface-subtle">후기 더보기</button>}
         </div>
       )}
 
@@ -640,7 +640,7 @@ export const TrainerDetailPage = () => {
             <button onClick={() => setGalleryOpen(false)} className="icon-btn">
               <svg viewBox="0 0 24 24" className="w-5 h-5 stroke-white stroke-2 fill-none"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
             </button>
-            <span className="text-white text-[14px] font-semibold">트레이닝 사진 ({trainer.galleryPhotos.length})</span>
+            <span className="text-white text-body font-semibold">트레이닝 사진 ({trainer.galleryPhotos.length})</span>
             <div className="w-9" />
           </div>
           <div className="flex-1 overflow-y-auto px-2 pb-4">
@@ -652,18 +652,18 @@ export const TrainerDetailPage = () => {
       )}
 
       {/* Bottom CTA */}
-      <div className="fixed bottom-[80px] left-0 right-0 z-50 bg-white border-t border-gray-200 px-5 py-3">
+      <div className="fixed bottom-[80px] left-0 right-0 z-50 bg-white border-t border-border px-5 py-3">
         <div className="flex items-center gap-3">
           <div className="flex-1">
             {trainer.prices[0] && (
               <>
-                <p className="text-[11px] text-gray-400">체험권</p>
-                <span className="text-[16px] font-bold text-ink">{trainer.prices[0].price}</span>
+                <p className="text-label text-ink-tertiary">체험권</p>
+                <span className="text-title font-bold text-ink">{trainer.prices[0].price}</span>
               </>
             )}
           </div>
-          <button className="px-5 py-3 bg-gray-100 text-ink text-[13px] font-semibold rounded-xl hover:bg-gray-200 transition-colors">채팅 문의</button>
-          <button className="px-5 py-3 bg-primary text-white text-[13px] font-bold rounded-xl hover:opacity-90 transition-opacity">예약하기</button>
+          <button className="px-5 py-3 bg-surface-muted text-ink text-body font-semibold rounded-xl hover:bg-ink-disabled transition-colors">채팅 문의</button>
+          <button className="px-5 py-3 bg-primary text-white text-body font-bold rounded-xl hover:opacity-90 transition-opacity">예약하기</button>
         </div>
       </div>
     </PageLayout>

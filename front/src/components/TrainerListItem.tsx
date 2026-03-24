@@ -5,7 +5,8 @@ interface TrainerListItemProps {
   name: string
   category: string
   categoryColor: 'bareton' | 'hit35' | 'gymground'
-  gym: string
+  description: string
+  todayTime: string
   rating: number
   reviewCount: number
   trialInfo: string
@@ -23,7 +24,8 @@ export const TrainerListItem = ({
   name,
   category,
   categoryColor,
-  gym,
+  description,
+  todayTime,
   rating,
   reviewCount,
   trialInfo,
@@ -49,15 +51,21 @@ export const TrainerListItem = ({
         <div className="flex items-center justify-between">
           <span className="text-title text-ink leading-tight">{name}</span>
           <div className="flex items-center gap-1">
-            <IconStarFilled className="w-3.5 h-3.5 text-[#FFD700]" />
+            <IconStarFilled className="w-3.5 h-3.5 text-semantic-star" />
             <span className="text-body font-semibold text-ink-tertiary">
               {rating} ({reviewCount})
             </span>
           </div>
         </div>
-        <span className="text-body text-ink-placeholder">{gym}</span>
-        <div className="flex items-center gap-1.5 mt-0.5">
-          <span className="text-body font-semibold text-primary">체험권</span>
+        <p className="text-label text-ink-secondary truncate">{description}</p>
+        <div className="flex items-center justify-between mt-0.5">
+          <div className="flex items-center gap-1">
+            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 stroke-primary stroke-[1.5] fill-none">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg>
+            <span className="text-label font-medium text-primary">{todayTime}</span>
+          </div>
           <span className="text-body font-bold text-ink">{trialInfo}</span>
         </div>
       </div>

@@ -24,7 +24,8 @@ const trainers = [
     name: '최강민 강사',
     category: 'PT',
     categoryColor: 'gymground' as const,
-    gym: '바디채널 강남점',
+    description: '체계적인 1:1 맞춤 웨이트 & 체형 관리',
+    todayTime: '오늘 09:00, 15:00, 20:00',
     rating: 4.9,
     reviewCount: 127,
     trialInfo: '10회 / 66,000원',
@@ -35,7 +36,8 @@ const trainers = [
     name: '박지영 강사',
     category: '바레톤',
     categoryColor: 'bareton' as const,
-    gym: '바디채널 강남점',
+    description: '발레 동작 기반 체형 교정 & 코어 강화 프로그램',
+    todayTime: '오늘 14:00, 19:30',
     rating: 4.7,
     reviewCount: 64,
     trialInfo: '10회 / 66,000원',
@@ -46,7 +48,8 @@ const trainers = [
     name: '한동훈 강사',
     category: '히트35',
     categoryColor: 'hit35' as const,
-    gym: '바디채널 역삼점',
+    description: '35분 고강도 인터벌 트레이닝으로 칼로리 폭발',
+    todayTime: '오늘 10:00, 18:00',
     rating: 4.9,
     reviewCount: 93,
     trialInfo: '10회 / 66,000원',
@@ -57,7 +60,8 @@ const trainers = [
     name: '이준혁 강사',
     category: '짐그라운드',
     categoryColor: 'gymground' as const,
-    gym: '바디채널 판교점',
+    description: '소도구 활용 전신 근력 & 체력 향상 서킷',
+    todayTime: '오늘 11:00, 20:00',
     rating: 4.6,
     reviewCount: 58,
     trialInfo: '10회 / 66,000원',
@@ -68,7 +72,8 @@ const trainers = [
     name: '정서연 강사',
     category: '필라테스',
     categoryColor: 'bareton' as const,
-    gym: '바디채널 서초점',
+    description: '코어 안정성과 유연성 향상 필라테스',
+    todayTime: '오늘 13:00, 17:00',
     rating: 4.8,
     reviewCount: 89,
     trialInfo: '10회 / 66,000원',
@@ -79,7 +84,8 @@ const trainers = [
     name: '김태현 강사',
     category: 'PT',
     categoryColor: 'gymground' as const,
-    gym: '바디채널 선릉점',
+    description: '다이어트 특화 근력 트레이닝 & 식단 코칭',
+    todayTime: '오늘 10:00, 16:00, 21:00',
     rating: 4.7,
     reviewCount: 72,
     trialInfo: '10회 / 66,000원',
@@ -121,7 +127,7 @@ export const LessonPage = () => {
               lesson.variant === 'waiting'
                 ? 'bg-surface border-2 border-ink-disabled'
                 : lesson.variant === 'secondary'
-                ? 'bg-gray-600'
+                ? 'bg-ink-secondary'
                 : 'bg-ink'
             }`}
           >
@@ -155,7 +161,8 @@ export const LessonPage = () => {
             name={trainer.name}
             category={trainer.category}
             categoryColor={trainer.categoryColor}
-            gym={trainer.gym}
+            description={trainer.description}
+            todayTime={trainer.todayTime}
             rating={trainer.rating}
             reviewCount={trainer.reviewCount}
             trialInfo={trainer.trialInfo}

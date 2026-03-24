@@ -256,7 +256,7 @@ export const ClassDetailPage = () => {
             <IconShare className="w-[18px] h-[18px] stroke-ink stroke-2" />
           </button>
           <button onClick={() => setLiked(!liked)} className="icon-btn">
-            <IconHeart className={`w-[18px] h-[18px] stroke-2 ${liked ? 'fill-red-500 stroke-red-500' : 'fill-none stroke-ink'}`} />
+            <IconHeart className={`w-[18px] h-[18px] stroke-2 ${liked ? 'fill-semantic-like stroke-semantic-like' : 'fill-none stroke-ink'}`} />
           </button>
         </div>
       }
@@ -278,44 +278,44 @@ export const ClassDetailPage = () => {
       {/* ── Class Info ── */}
       <div className="px-5 pt-5 pb-4">
         <div className="flex items-center gap-1.5 mb-2">
-          <span className="px-2 py-0.5 bg-[#fff0e6] text-[#ff6b00] text-[11px] font-bold rounded">{data.level}</span>
-          <span className="px-2 py-0.5 bg-gray-100 text-gray-500 text-[11px] font-bold rounded">{data.lessonCount}강</span>
+          <span className="px-2 py-0.5 bg-primary-50 text-primary text-label font-bold rounded">{data.level}</span>
+          <span className="px-2 py-0.5 bg-surface-muted text-ink-secondary text-label font-bold rounded">{data.lessonCount}강</span>
         </div>
-        <h1 className="text-[20px] font-bold leading-tight text-ink mb-1">{data.title}</h1>
-        <p className="text-[13px] text-gray-500 mb-4">{data.subtitle}</p>
+        <h1 className="text-display font-bold leading-tight text-ink mb-1">{data.title}</h1>
+        <p className="text-body text-ink-secondary mb-4">{data.subtitle}</p>
 
         {/* Instructor row */}
         <div className="flex items-center gap-2 mb-4">
           <img src={data.instructorAvatar} alt={data.instructor} className="w-7 h-7 rounded-full object-cover" />
-          <span className="text-[13px] font-medium text-ink">{data.instructor}</span>
+          <span className="text-body font-medium text-ink">{data.instructor}</span>
         </div>
 
         {/* Rating + stats */}
-        <div className="flex items-center gap-3 text-[13px]">
+        <div className="flex items-center gap-3 text-body">
           <div className="flex items-center gap-1">
-            <IconStarFilledStyled className="text-[#ff6b00]" style={{ width: 14, height: 14 }} />
+            <IconStarFilledStyled className="text-primary" style={{ width: 14, height: 14 }} />
             <span className="font-bold text-ink">{data.rating}</span>
-            <span className="text-gray-400">({data.reviewCount})</span>
+            <span className="text-ink-tertiary">({data.reviewCount})</span>
           </div>
-          <span className="text-gray-300">|</span>
-          <div className="flex items-center gap-1 text-gray-500">
-            <IconClock className="w-3.5 h-3.5 stroke-gray-400 stroke-2" />
+          <span className="text-ink-disabled">|</span>
+          <div className="flex items-center gap-1 text-ink-secondary">
+            <IconClock className="w-3.5 h-3.5 stroke-ink-tertiary stroke-2" />
             <span>{data.duration}</span>
           </div>
-          <span className="text-gray-300">|</span>
-          <span className="text-gray-500">{data.studentCount}명 수강</span>
+          <span className="text-ink-disabled">|</span>
+          <span className="text-ink-secondary">{data.studentCount}명 수강</span>
         </div>
       </div>
 
       {/* ── Sticky Tabs ── */}
-      <div ref={tabBarRef} className="sticky top-[48px] z-40 bg-white border-b border-gray-200">
+      <div ref={tabBarRef} className="sticky top-[48px] z-40 bg-white border-b border-border">
         <div className="flex">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => scrollToSection(tab)}
-              className={`flex-1 py-3 text-[13px] font-semibold text-center transition-colors relative ${
-                activeTab === tab ? 'text-ink' : 'text-gray-400'
+              className={`flex-1 py-3 text-body font-semibold text-center transition-colors relative ${
+                activeTab === tab ? 'text-ink' : 'text-ink-tertiary'
               }`}
             >
               {tab}
@@ -328,15 +328,15 @@ export const ClassDetailPage = () => {
       </div>
 
       {/* ── 클래스 소개 ── */}
-      <div ref={(el) => { sectionRefs.current['클래스 소개'] = el }} className="px-5 py-6 border-b border-gray-100">
-        <p className="text-[14px] text-[#373737] leading-relaxed mb-6">{data.description}</p>
+      <div ref={(el) => { sectionRefs.current['클래스 소개'] = el }} className="px-5 py-6 border-b border-border-light">
+        <p className="text-body text-ink-secondary leading-relaxed mb-6">{data.description}</p>
 
-        <div className="bg-[#fafafa] rounded-xl p-4">
-          <h3 className="text-[13px] font-bold text-ink mb-3">이런 걸 배워요</h3>
+        <div className="bg-surface-subtle rounded-xl p-4">
+          <h3 className="text-body font-bold text-ink mb-3">이런 걸 배워요</h3>
           <ul className="space-y-2.5">
             {data.highlights.map((h, i) => (
-              <li key={i} className="flex items-start gap-2.5 text-[13px] text-[#373737]">
-                <span className="w-5 h-5 bg-[#ff6b00] rounded-full flex items-center justify-center flex-shrink-0 mt-px">
+              <li key={i} className="flex items-start gap-2.5 text-body text-ink-secondary">
+                <span className="w-5 h-5 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-px">
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><polyline points="20 6 9 17 4 12" /></svg>
                 </span>
                 {h}
@@ -347,48 +347,48 @@ export const ClassDetailPage = () => {
       </div>
 
       {/* ── 커리큘럼 ── */}
-      <div ref={(el) => { sectionRefs.current['커리큘럼'] = el }} className="px-5 py-6 border-b border-gray-100">
+      <div ref={(el) => { sectionRefs.current['커리큘럼'] = el }} className="px-5 py-6 border-b border-border-light">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-[16px] font-bold text-ink">커리큘럼</h2>
-          <span className="text-[12px] text-gray-400">{data.chapters.reduce((a, c) => a + c.lessons.length, 0)}개 강의 · {data.duration}</span>
+          <h2 className="text-title font-bold text-ink">커리큘럼</h2>
+          <span className="text-label text-ink-tertiary">{data.chapters.reduce((a, c) => a + c.lessons.length, 0)}개 강의 · {data.duration}</span>
         </div>
 
         <div className="space-y-0">
           {data.chapters.map((chapter, ci) => {
             const isOpen = openChapters.has(ci)
             return (
-              <div key={ci} className="border border-gray-200 rounded-xl mb-2 overflow-hidden">
+              <div key={ci} className="border border-border rounded-xl mb-2 overflow-hidden">
                 {/* chapter header */}
                 <button
                   onClick={() => toggleChapter(ci)}
-                  className="w-full flex items-center justify-between px-4 py-3.5 bg-[#fafafa] hover:bg-gray-100 transition-colors"
+                  className="w-full flex items-center justify-between px-4 py-3.5 bg-surface-subtle hover:bg-surface-muted transition-colors"
                 >
                   <div className="flex items-center gap-2 text-left">
-                    <span className="text-[11px] font-bold text-[#ff6b00]">섹션 {ci + 1}</span>
-                    <span className="text-[13px] font-semibold text-ink">{chapter.title}</span>
-                    <span className="text-[11px] text-gray-400">{chapter.lessons.length}강</span>
+                    <span className="text-label font-bold text-primary">섹션 {ci + 1}</span>
+                    <span className="text-body font-semibold text-ink">{chapter.title}</span>
+                    <span className="text-label text-ink-tertiary">{chapter.lessons.length}강</span>
                   </div>
-                  <IconChevronDown className={`w-4 h-4 stroke-gray-400 stroke-2 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+                  <IconChevronDown className={`w-4 h-4 stroke-ink-tertiary stroke-2 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* lessons */}
                 <div className={`transition-all duration-200 ${isOpen ? 'max-h-[500px]' : 'max-h-0'} overflow-hidden`}>
                   {chapter.lessons.map((lesson, li) => (
-                    <div key={li} className="flex items-center justify-between px-4 py-3 border-t border-gray-100">
+                    <div key={li} className="flex items-center justify-between px-4 py-3 border-t border-border-light">
                       <div className="flex items-center gap-3">
-                        <div className="relative w-[60px] h-[34px] rounded-md overflow-hidden flex-shrink-0 bg-gray-100">
+                        <div className="relative w-[60px] h-[34px] rounded-md overflow-hidden flex-shrink-0 bg-surface-muted">
                           <img src={lesson.thumb} alt={lesson.title} className="w-full h-full object-cover" />
                           <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                             <IconPlay className="w-3 h-3 fill-white stroke-white ml-px" />
                           </div>
                         </div>
                         <div>
-                          <p className="text-[13px] text-ink">{lesson.title}</p>
-                          <p className="text-[11px] text-gray-400">{lesson.duration}</p>
+                          <p className="text-body text-ink">{lesson.title}</p>
+                          <p className="text-label text-ink-tertiary">{lesson.duration}</p>
                         </div>
                       </div>
                       {lesson.preview && (
-                        <span className="px-2 py-0.5 border border-[#ff6b00] text-[#ff6b00] text-[10px] font-bold rounded flex-shrink-0">미리보기</span>
+                        <span className="px-2 py-0.5 border border-primary text-primary text-caption font-bold rounded flex-shrink-0">미리보기</span>
                       )}
                     </div>
                   ))}
@@ -400,17 +400,17 @@ export const ClassDetailPage = () => {
       </div>
 
       {/* ── 크리에이터 ── */}
-      <div ref={(el) => { sectionRefs.current['크리에이터'] = el }} className="px-5 py-6 border-b border-gray-100">
-        <h2 className="text-[16px] font-bold text-ink mb-4">크리에이터</h2>
+      <div ref={(el) => { sectionRefs.current['크리에이터'] = el }} className="px-5 py-6 border-b border-border-light">
+        <h2 className="text-title font-bold text-ink mb-4">크리에이터</h2>
         <div className="flex items-center gap-3 mb-4">
           <img src={data.instructorAvatar} alt={data.instructor} className="w-14 h-14 rounded-full object-cover" />
           <div>
-            <p className="text-[15px] font-bold text-ink">{data.instructor}</p>
-            <p className="text-[12px] text-gray-400">팔로워 {data.instructorFollowers}명</p>
+            <p className="text-title font-bold text-ink">{data.instructor}</p>
+            <p className="text-label text-ink-tertiary">팔로워 {data.instructorFollowers}명</p>
           </div>
         </div>
-        <p className="text-[13px] text-[#373737] leading-relaxed mb-4">{data.instructorBio}</p>
-        <button className="w-full py-2.5 border border-gray-300 rounded-lg text-[13px] font-semibold text-ink hover:bg-gray-50 transition-colors">
+        <p className="text-body text-ink-secondary leading-relaxed mb-4">{data.instructorBio}</p>
+        <button className="w-full py-2.5 border border-border rounded-lg text-body font-semibold text-ink hover:bg-surface-subtle transition-colors">
           크리에이터 프로필
         </button>
       </div>
@@ -418,33 +418,33 @@ export const ClassDetailPage = () => {
       {/* ── 후기 ── */}
       <div ref={(el) => { sectionRefs.current['후기'] = el }} className="px-5 py-6">
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-[16px] font-bold text-ink">수강생 후기</h2>
-          <span className="text-[12px] text-gray-400">{data.reviewCount}개</span>
+          <h2 className="text-title font-bold text-ink">수강생 후기</h2>
+          <span className="text-label text-ink-tertiary">{data.reviewCount}개</span>
         </div>
 
         {/* rating summary */}
-        <div className="flex items-center gap-4 mb-6 p-4 bg-[#fafafa] rounded-xl">
+        <div className="flex items-center gap-4 mb-6 p-4 bg-surface-subtle rounded-xl">
           <div className="text-center">
             <p className="text-[28px] font-bold text-ink">{data.rating}</p>
             <div className="flex gap-0.5 justify-center mb-0.5">
               {[1, 2, 3, 4, 5].map((i) => (
                 <IconStarFilledStyled
                   key={i}
-                  className={i <= Math.round(data.rating) ? 'text-[#ff6b00]' : 'text-gray-200'}
+                  className={i <= Math.round(data.rating) ? 'text-primary' : 'text-ink-disabled'}
                   style={{ width: 12, height: 12 }}
                 />
               ))}
             </div>
-            <p className="text-[11px] text-gray-400">{data.reviewCount}개 평가</p>
+            <p className="text-label text-ink-tertiary">{data.reviewCount}개 평가</p>
           </div>
           <div className="flex-1 space-y-1">
             {[5, 4, 3, 2, 1].map((star) => {
               const pct = star === 5 ? 82 : star === 4 ? 14 : star === 3 ? 3 : star === 2 ? 1 : 0
               return (
                 <div key={star} className="flex items-center gap-2">
-                  <span className="text-[10px] text-gray-400 w-3">{star}</span>
-                  <div className="flex-1 h-[6px] bg-gray-200 rounded-full overflow-hidden">
-                    <div className="h-full bg-[#ff6b00] rounded-full" style={{ width: `${pct}%` }} />
+                  <span className="text-caption text-ink-tertiary w-3">{star}</span>
+                  <div className="flex-1 h-[6px] bg-ink-disabled rounded-full overflow-hidden">
+                    <div className="h-full bg-primary rounded-full" style={{ width: `${pct}%` }} />
                   </div>
                 </div>
               )
@@ -455,45 +455,45 @@ export const ClassDetailPage = () => {
         {/* review list */}
         <div className="space-y-4">
           {data.reviews.map((review, i) => (
-            <div key={i} className="pb-4 border-b border-gray-100 last:border-0 last:pb-0">
+            <div key={i} className="pb-4 border-b border-border-light last:border-0 last:pb-0">
               <div className="flex items-center gap-2.5 mb-2">
                 <img src={review.avatar} alt={review.name} className="w-8 h-8 rounded-full object-cover" />
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-[13px] font-semibold text-ink">{review.name}</span>
-                    <span className="text-[11px] text-gray-400">{review.date}</span>
+                    <span className="text-body font-semibold text-ink">{review.name}</span>
+                    <span className="text-label text-ink-tertiary">{review.date}</span>
                   </div>
                   <div className="flex gap-0.5 mt-0.5">
                     {[1, 2, 3, 4, 5].map((s) => (
                       <IconStarFilledStyled
                         key={s}
-                        className={s <= review.rating ? 'text-[#ff6b00]' : 'text-gray-200'}
+                        className={s <= review.rating ? 'text-primary' : 'text-ink-disabled'}
                         style={{ width: 10, height: 10 }}
                       />
                     ))}
                   </div>
                 </div>
               </div>
-              <p className="text-[13px] text-[#373737] leading-relaxed">{review.text}</p>
+              <p className="text-body text-ink-secondary leading-relaxed">{review.text}</p>
             </div>
           ))}
         </div>
 
-        <button className="w-full py-3 mt-4 border border-gray-300 rounded-lg text-[13px] font-semibold text-ink hover:bg-gray-50 transition-colors">
+        <button className="w-full py-3 mt-4 border border-border rounded-lg text-body font-semibold text-ink hover:bg-surface-subtle transition-colors">
           후기 더보기
         </button>
       </div>
 
       {/* ── Bottom CTA ── */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 px-5 py-3 flex items-center gap-3">
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border px-5 py-3 flex items-center gap-3">
         <div className="flex-1">
           <div className="flex items-center gap-1.5">
-            <span className="text-[14px] font-bold text-[#ff6b00]">{discount}%</span>
-            <span className="text-[11px] text-gray-400 line-through">{data.originalPrice.toLocaleString()}원</span>
+            <span className="text-body font-bold text-primary">{discount}%</span>
+            <span className="text-label text-ink-tertiary line-through">{data.originalPrice.toLocaleString()}원</span>
           </div>
-          <p className="text-[18px] font-bold text-ink">{data.price.toLocaleString()}원</p>
+          <p className="text-heading font-bold text-ink">{data.price.toLocaleString()}원</p>
         </div>
-        <button className="px-8 py-3.5 bg-[#ff6b00] text-white text-[14px] font-bold rounded-xl hover:bg-[#e55d00] transition-colors">
+        <button className="px-8 py-3.5 bg-primary text-white text-body font-bold rounded-xl hover:bg-primary-dark transition-colors">
           바로 수강하기
         </button>
       </div>

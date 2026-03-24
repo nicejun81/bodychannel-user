@@ -112,7 +112,7 @@ export const ChatPage = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="이름 또는 메시지 검색"
-            className="w-full px-4 py-3 border border-border rounded-[12px] text-[14px] outline-none focus:border-ink transition-colors"
+            className="w-full px-4 py-3 border border-border rounded-[12px] text-body outline-none focus:border-ink transition-colors"
             autoFocus
           />
         </div>
@@ -139,7 +139,7 @@ export const ChatPage = () => {
             <svg viewBox="0 0 24 24" className="w-12 h-12 stroke-current stroke-[1.5] fill-none mb-4">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
             </svg>
-            <p className="text-[14px]">채팅 내역이 없습니다</p>
+            <p className="text-body">채팅 내역이 없습니다</p>
           </div>
         ) : (
           filtered.map((room) => (
@@ -156,7 +156,7 @@ export const ChatPage = () => {
                   className="w-[52px] h-[52px] rounded-full object-cover"
                 />
                 {room.isOnline && (
-                  <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#22c55e] border-2 border-white rounded-full" />
+                  <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-semantic-online border-2 border-white rounded-full" />
                 )}
               </div>
 
@@ -164,25 +164,25 @@ export const ChatPage = () => {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-[15px] font-semibold text-ink">{room.name}</span>
+                    <span className="text-title font-semibold text-ink">{room.name}</span>
                     {room.type === 'trainer' && (
-                      <span className="text-[10px] font-semibold text-primary bg-primary-50 px-1.5 py-0.5 rounded">트레이너</span>
+                      <span className="text-caption font-semibold text-primary bg-primary-50 px-1.5 py-0.5 rounded">트레이너</span>
                     )}
                     {room.type === 'group' && (
-                      <span className="text-[10px] font-semibold text-ink-secondary bg-surface-muted px-1.5 py-0.5 rounded">모임</span>
+                      <span className="text-caption font-semibold text-ink-secondary bg-surface-muted px-1.5 py-0.5 rounded">모임</span>
                     )}
                   </div>
-                  <span className="text-[12px] text-ink-placeholder flex-shrink-0">{room.time}</span>
+                  <span className="text-label text-ink-placeholder flex-shrink-0">{room.time}</span>
                 </div>
                 {'gym' in room && room.gym && (
-                  <p className="text-[11px] text-ink-placeholder mb-0.5">{room.gym}</p>
+                  <p className="text-label text-ink-placeholder mb-0.5">{room.gym}</p>
                 )}
-                <p className="text-[13px] text-ink-secondary truncate">{room.lastMessage}</p>
+                <p className="text-body text-ink-secondary truncate">{room.lastMessage}</p>
               </div>
 
               {/* Unread Badge */}
               {room.unreadCount > 0 && (
-                <span className="flex-shrink-0 min-w-[22px] h-[22px] bg-primary text-white text-[11px] font-bold rounded-full flex items-center justify-center px-1.5">
+                <span className="flex-shrink-0 min-w-[22px] h-[22px] bg-primary text-white text-label font-bold rounded-full flex items-center justify-center px-1.5">
                   {room.unreadCount}
                 </span>
               )}

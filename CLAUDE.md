@@ -73,24 +73,67 @@ D:/dev/user/
 └── .playwright-mcp/                # 스크린샷 저장 폴더
 ```
 
-## 디자인 시스템
+## 디자인 시스템 (tailwind.config.js 기준)
 
-### 색상
-- **Primary**: `#FF6B35` (오렌지) / dark: `#e55a2b` / light: `#ff8f6a`
-- **Surface**: white, muted(`#f5f5f5`), subtle(`#fafafa`)
-- **Ink**: default(`#0a0a0a`), secondary(`#525252`), tertiary(`#737373`)
-- **카테고리 색상**: 바레톤(핑크), 히트35(블루), 짐그라운드(그린)
+### 아이덴티티 색상 (브랜드 3색)
+| 이름 | HEX | Tailwind 클래스 | 용도 |
+|------|------|-----------------|------|
+| 분홍/오렌지 | `#FF6B35` | `primary` | 메인 CTA, 활성 탭, 가격, 배지 |
+| 보라색 | `#7F56D9` | `accent-purple` | 보조 강조, 프리미엄 요소 |
+| 그린 | `#00FF63` | `accent-green` | 보조 강조, 성공/활성 강조 |
+
+### 전체 색상 토큰 맵
+```
+primary:     DEFAULT(#FF6B35), dark(#e55a2b), light(#ff8f6a), 50(#fff5f0), 100(#ffe8db)
+accent:      purple(#7F56D9), green(#00FF63)
+surface:     DEFAULT(#ffffff), muted(#f5f5f5), subtle(#fafafa)
+ink:         DEFAULT(#0a0a0a), secondary(#525252), tertiary(#737373), placeholder(#a3a3a3), disabled(#d4d4d4)
+border:      DEFAULT(#e5e5e5), light(#f5f5f5)
+category:    bareton(핑크), hit35(블루), gymground(그린)
+semantic:    star(#FFD700), online(#22c55e), like(#ff3040), kakao(#FEE500)
+```
+
+### 색상 사용 규칙 (반드시 준수)
+| 용도 | 올바른 클래스 | 금지 (하드코딩) |
+|------|--------------|----------------|
+| 메인 텍스트 | `text-ink` | ~~text-gray-800, text-black, text-[#333]~~ |
+| 보조 텍스트 | `text-ink-secondary` | ~~text-gray-500, text-gray-600, text-[#373737]~~ |
+| 힌트/비활성 텍스트 | `text-ink-tertiary` | ~~text-gray-400~~ |
+| 비활성 요소 | `text-ink-disabled` / `bg-ink-disabled` | ~~text-gray-300, bg-gray-200~~ |
+| 오렌지 강조 | `text-primary` / `bg-primary` | ~~text-[#ff6b00], bg-[#FF6B35]~~ |
+| 오렌지 호버 | `hover:bg-primary-dark` | ~~hover:bg-[#e55d00]~~ |
+| 연한 오렌지 배경 | `bg-primary-50` | ~~bg-[#fff0e6], bg-[#fff8f5]~~ |
+| 배경(흰색) | `bg-surface` | ~~bg-white~~ (기본 리셋에서 적용됨) |
+| 배경(연회색) | `bg-surface-muted` | ~~bg-gray-100~~ |
+| 배경(미세회색) | `bg-surface-subtle` | ~~bg-[#fafafa], bg-gray-50~~ |
+| 테두리(기본) | `border-border` | ~~border-gray-200, border-gray-300~~ |
+| 테두리(연한) | `border-border-light` | ~~border-gray-100~~ |
+| 별점 | `text-semantic-star` | ~~text-[#FFD700], text-[#fbbf24]~~ |
+| 온라인 상태 | `bg-semantic-online` | ~~bg-[#22c55e], bg-green-500~~ |
+| 좋아요/하트 | `fill-semantic-like` / `text-semantic-like` | ~~fill-red-500, text-red-500~~ |
+| 카카오 버튼 | `bg-semantic-kakao` | ~~bg-[#FEE500]~~ |
+| stroke 회색 | `stroke-ink-tertiary` | ~~stroke-gray-400~~ |
+| hover 배경 | `hover:bg-surface-subtle` / `hover:bg-surface-muted` | ~~hover:bg-gray-50, hover:bg-gray-100~~ |
 
 ### 타이포그래피
-- 폰트: Poppins (시스템 폰트 폴백)
-- 스케일: caption(10px) → label(12px) → body(14px) → title(16px) → heading(18px) → display(20px)
+- 폰트: Poppins (Google Fonts, 시스템 폰트 폴백)
+- 스케일 (Tailwind 클래스명):
+  - `text-caption`: 10px / 14px line-height / 0.02em tracking
+  - `text-label`: 12px / 16px
+  - `text-body`: 14px / 20px
+  - `text-title`: 16px / 22px / bold
+  - `text-heading`: 18px / 24px / bold
+  - `text-display`: 20px / 26px / extrabold
 
 ### 간격 토큰
-- `page`: 20px (좌우 패딩), `section`: 24px, `card`: 12px, `card-lg`: 16px
+- `page`: 20px (좌우 패딩 → `px-page`)
+- `section`: 24px (섹션 간격 → `mb-section`)
+- `card`: 12px (카드 내부 → `p-card`)
+- `card-lg`: 16px (큰 카드 → `p-card-lg`)
 
 ### 모서리/그림자
-- 모서리: `card`(12px), `card-lg`(16px), `pill`(100px)
-- 그림자: `card`, `card-hover`, `elevated`
+- 모서리: `rounded-card`(12px), `rounded-card-lg`(16px), `rounded-pill`(100px)
+- 그림자: `shadow-card`, `shadow-card-hover`, `shadow-elevated`
 
 ## 코딩 패턴 & 규칙
 
@@ -113,6 +156,9 @@ export const PageName = () => {
 - tailwind.config.js의 커스텀 토큰 활용 (색상, 간격, 폰트)
 - 그라데이션 배경, hover/active 트랜지션 적극 사용
 - 모바일 퍼스트 반응형 디자인
+- **절대 금지**: Tailwind 기본 `gray-*` 팔레트 사용 → 반드시 `ink-*`, `surface-*`, `border-*` 토큰 사용
+- **절대 금지**: 하드코딩 HEX 색상 (`text-[#ff6b00]` 등) → 반드시 디자인 토큰 클래스 사용
+- **예외**: CategoryGrid의 카테고리별 그라데이션, 카카오 브랜드 색상(`#3C1E1E`)은 하드코딩 허용
 
 ### 네비게이션
 - `useNavigate()` 훅으로 프로그래매틱 네비 (react-router-dom)
@@ -159,6 +205,13 @@ npm run preview    # 빌드 결과 미리보기
 - Favorites 페이지: 운동시설/트레이너 탭 리스트형 레이아웃 (스크린샷 기준 리디자인 완료)
 - Header/icon-btn: HTML 모노크롬 디자인 기준으로 보더 스타일 적용
 - Chat 페이지 신규 추가: 채팅 목록(/chat) + 채팅방(/chat/:id), 홈 RecentChat에서 연결
+- **아이덴티티 스타일 통합 작업 완료 (2026-03-24)**:
+  - tailwind.config.js에 accent(보라/그린), semantic(star/online/like/kakao) 색상 토큰 추가
+  - 전체 18개 파일에서 하드코딩 HEX → 디자인 토큰으로 마이그레이션 완료
+  - 수정 파일: ClassDetail, GymDetail, TrainerDetail, Activity, Chat, ChatRoom, Favorites, Ambassador, Membership, ProductDetail, FeedDetail, MeetupDetail, Lesson, PTTrainerCard, TrainerListItem
+  - CategoryGrid의 카테고리별 그라데이션은 예외로 유지
+  - 기존 TS 에러 (ComponentsShowcase/PTTrainerCard의 gym prop) 미수정 (기존 이슈)
+  - GymDetail gym4에 누락된 lat/lng 추가 수정
 
 ## 작업 시 주의사항
 - 한국어 UI (모든 텍스트는 한국어)
@@ -166,3 +219,7 @@ npm run preview    # 빌드 결과 미리보기
 - 새 페이지 추가 시 App.tsx 라우트 등록 필요
 - 새 컴포넌트 추가 시 components/index.ts에 export 등록
 - Tailwind v3 문법 사용 (v4 문법 사용 금지)
+- **색상은 반드시 디자인 토큰만 사용** (위 "색상 사용 규칙" 테이블 참조)
+- 새 색상이 필요하면 tailwind.config.js에 토큰으로 먼저 등록 후 사용
+- `gray-*` 직접 사용 금지 → `ink-*`, `surface-*`, `border-*` 토큰 사용
+- 아이덴티티 3색(primary, accent-purple, accent-green) 일관성 유지
