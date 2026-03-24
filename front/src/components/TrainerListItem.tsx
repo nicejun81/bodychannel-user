@@ -1,22 +1,25 @@
+import type { ReactNode } from 'react'
 import { IconStarFilled } from './Icons'
 
 interface TrainerListItemProps {
   imageUrl: string
   name: string
   category: string
-  categoryColor: 'bareton' | 'hit35' | 'gymground'
+  categoryColor: 'bareton' | 'hit35' | 'gymground' | 'pt'
   description: string
   todayTime: string
   rating: number
   reviewCount: number
-  trialInfo: string
+  trialInfo?: string
+  rightAction?: ReactNode
   onClick?: () => void
 }
 
-const categoryStyles = {
+const categoryStyles: Record<string, string> = {
   bareton: 'bg-category-bareton-bg text-category-bareton-text',
   hit35: 'bg-category-hit35-bg text-category-hit35-text',
   gymground: 'bg-category-gymground-bg text-category-gymground-text',
+  pt: 'bg-primary-50 text-primary',
 }
 
 export const TrainerListItem = ({
@@ -29,6 +32,7 @@ export const TrainerListItem = ({
   rating,
   reviewCount,
   trialInfo,
+  rightAction,
   onClick,
 }: TrainerListItemProps) => {
   return (
@@ -40,9 +44,7 @@ export const TrainerListItem = ({
         <div className="w-16 h-16 rounded-card overflow-hidden">
           <img src={imageUrl} alt={name} className="w-full h-full object-cover" />
         </div>
-        <span
-          className={`absolute -bottom-1.5 left-1/2 -translate-x-1/2 badge whitespace-nowrap ${categoryStyles[categoryColor]}`}
-        >
+        <span className={`absolute -bottom-1.5 left-1/2 -translate-x-1/2 badge whitespace-nowrap ${categoryStyles[categoryColor] || categoryStyles.pt}`}>
           {category}
         </span>
       </div>
@@ -50,12 +52,14 @@ export const TrainerListItem = ({
       <div className="flex-1 flex flex-col justify-center gap-1 min-w-0">
         <div className="flex items-center justify-between">
           <span className="text-title text-ink leading-tight">{name}</span>
-          <div className="flex items-center gap-1">
-            <IconStarFilled className="w-3.5 h-3.5 text-semantic-star" />
-            <span className="text-body font-semibold text-ink-tertiary">
-              {rating} ({reviewCount})
-            </span>
-          </div>
+          {rightAction || (
+            <div className="flex items-center gap-1">
+              <IconStarFilled className="w-3.5 h-3.5 text-semantic-star" />
+              <span className="text-body font-semibold text-ink-tertiary">
+                {rating} ({reviewCount})
+              </span>
+            </div>
+          )}
         </div>
         <p className="text-label text-ink-secondary truncate">{description}</p>
         <div className="flex items-center justify-between mt-0.5">
@@ -66,7 +70,7 @@ export const TrainerListItem = ({
             </svg>
             <span className="text-label font-medium text-primary">{todayTime}</span>
           </div>
-          <span className="text-body font-bold text-ink">{trialInfo}</span>
+          {trialInfo && <span className="text-body font-bold text-ink">{trialInfo}</span>}
         </div>
       </div>
     </button>

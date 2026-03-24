@@ -279,29 +279,27 @@ export const HomePage = () => {
         ))}
       </section>
 
-      {/* Trainer Recommend Banner */}
-      <div className="mb-section">
+      {/* Trainer Recommend + PT Trainers */}
+      <section className="mb-section">
         <TrainerRecommendBanner />
-      </div>
-
-      {/* PT Trainers */}
-      <section className="section">
-        <SectionHeader title="개인 레슨" href="/lesson" />
-        <ScrollRow>
-          {ptTrainers.map((trainer) => (
-            <PTTrainerCard
-              key={trainer.id}
-              imageUrl={trainer.imageUrl}
-              name={trainer.name}
-              description={trainer.description}
-              todayTime={trainer.todayTime}
-              rating={trainer.rating}
-              reviewCount={trainer.reviewCount}
-              trialInfo={trainer.trialInfo}
-              onClick={() => navigate(`/trainer/${trainer.id}`)}
-            />
-          ))}
-        </ScrollRow>
+        <div className="mt-4">
+          <SectionHeader title="개인 레슨" href="/lesson" />
+          <ScrollRow>
+            {ptTrainers.map((trainer) => (
+              <PTTrainerCard
+                key={trainer.id}
+                imageUrl={trainer.imageUrl}
+                name={trainer.name}
+                description={trainer.description}
+                todayTime={trainer.todayTime}
+                rating={trainer.rating}
+                reviewCount={trainer.reviewCount}
+                trialInfo={trainer.trialInfo}
+                onClick={() => navigate(`/trainer/${trainer.id}`)}
+              />
+            ))}
+          </ScrollRow>
+        </div>
       </section>
 
       {/* Meetups */}
