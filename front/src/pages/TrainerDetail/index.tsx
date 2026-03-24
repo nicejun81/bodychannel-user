@@ -316,7 +316,7 @@ function StarIcon({ className, style }: { className?: string; style?: React.CSSP
   return <svg viewBox="0 0 24 24" className={className} style={style} fill="currentColor" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
 }
 
-const tabs = ['소개', '이용권', '스케줄', '후기'] as const
+const tabs = ['소개', '회원권', '스케줄', '후기'] as const
 type Tab = typeof tabs[number]
 
 /* ── component ── */
@@ -404,13 +404,13 @@ export const TrainerDetailPage = () => {
       {activeTab === '소개' && (
         <div>
           {/* Intro */}
-          <section className="px-5 py-5 border-b border-border-light">
+          <section className="px-page py-5 border-b border-border-light">
             <h2 className="text-title font-bold text-ink mb-3">소개</h2>
             <p className="text-body text-ink-secondary leading-relaxed">{trainer.intro}</p>
           </section>
 
           {/* Specialties */}
-          <section className="px-5 py-5 border-b border-border-light">
+          <section className="px-page py-5 border-b border-border-light">
             <h2 className="text-title font-bold text-ink mb-3">전문 분야</h2>
             <div className="flex flex-wrap gap-2">
               {trainer.specialties.map((item, i) => (
@@ -421,7 +421,7 @@ export const TrainerDetailPage = () => {
 
           {/* Training Style */}
           {trainer.trainingStyle.length > 0 && (
-            <section className="px-5 py-5 border-b border-border-light">
+            <section className="px-page py-5 border-b border-border-light">
               <button onClick={() => setStyleOpen(!styleOpen)} className="w-full flex items-center justify-between">
                 <h2 className="text-title font-bold text-ink">트레이닝 스타일</h2>
                 <IconChevronDown className={`w-4 h-4 stroke-ink-tertiary stroke-2 transition-transform ${styleOpen ? 'rotate-180' : ''}`} />
@@ -440,7 +440,7 @@ export const TrainerDetailPage = () => {
           )}
 
           {/* Career */}
-          <section className="px-5 py-5 border-b border-border-light">
+          <section className="px-page py-5 border-b border-border-light">
             <h2 className="text-title font-bold text-ink mb-3">경력 및 자격</h2>
             <ul className="space-y-2">
               {trainer.career.map((item, i) => (
@@ -454,7 +454,7 @@ export const TrainerDetailPage = () => {
 
           {/* Gallery */}
           {trainer.galleryPhotos.length > 0 && (
-            <section className="px-5 py-5 border-b border-border-light">
+            <section className="px-page py-5 border-b border-border-light">
               <div className="flex items-center justify-between mb-3">
                 <h2 className="text-title font-bold text-ink">트레이닝 사진</h2>
                 {trainer.galleryPhotos.length > 4 && (
@@ -478,7 +478,7 @@ export const TrainerDetailPage = () => {
 
           {/* Transformations */}
           {trainer.transformations.length > 0 && (
-            <section className="px-5 py-5 border-b border-border-light">
+            <section className="px-page py-5 border-b border-border-light">
               <h2 className="text-title font-bold text-ink mb-3">Before & After</h2>
               <div className="space-y-4">
                 {trainer.transformations.map((t, i) => (
@@ -505,9 +505,9 @@ export const TrainerDetailPage = () => {
         </div>
       )}
 
-      {/* ── 이용권 탭 ── */}
-      {activeTab === '이용권' && (
-        <div className="px-5 py-5">
+      {/* ── 회원권 탭 ── */}
+      {activeTab === '회원권' && (
+        <div className="px-page py-5">
           <div className="space-y-3">
             {trainer.prices.map((price, i) => (
               <div key={i} className={`p-4 rounded-xl border ${price.tag === '인기' ? 'border-primary bg-[#fff8f5]' : 'border-border'}`}>
@@ -532,13 +532,13 @@ export const TrainerDetailPage = () => {
             <span className="text-label text-ink-secondary">예약 가능 시간: 평일 06:00 - 22:00 / 주말 09:00 - 18:00</span>
           </div>
 
-          <p className="text-label text-ink-tertiary text-center mt-3">상담 후 맞춤 이용권 안내도 가능합니다</p>
+          <p className="text-label text-ink-tertiary text-center mt-3">상담 후 맞춤 회원권 안내도 가능합니다</p>
         </div>
       )}
 
       {/* ── 스케줄 탭 ── */}
       {activeTab === '스케줄' && (
-        <div className="px-5 py-5">
+        <div className="px-page py-5">
           <h2 className="text-title font-bold text-ink mb-1">주간 예약 가능 시간</h2>
           <p className="text-label text-ink-tertiary mb-4">원하는 시간을 선택하여 예약하세요</p>
 
@@ -569,7 +569,7 @@ export const TrainerDetailPage = () => {
 
       {/* ── 후기 탭 ── */}
       {activeTab === '후기' && (
-        <div className="px-5 py-5">
+        <div className="px-page py-5">
           {/* Summary */}
           <div className="flex items-center gap-4 mb-4 p-4 bg-surface-subtle rounded-xl">
             <div className="text-center">
@@ -652,7 +652,7 @@ export const TrainerDetailPage = () => {
       )}
 
       {/* Bottom CTA */}
-      <div className="fixed bottom-[80px] left-0 right-0 z-50 bg-white border-t border-border px-5 py-3">
+      <div className="fixed bottom-[80px] left-0 right-0 z-50 bg-white border-t border-border px-page py-3">
         <div className="flex items-center gap-3">
           <div className="flex-1">
             {trainer.prices[0] && (

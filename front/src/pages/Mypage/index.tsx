@@ -44,7 +44,7 @@ const memberships = [
     id: 3,
     status: 'paused',
     statusLabel: '일시정지',
-    name: 'GX 무제한 이용권',
+    name: 'GX 무제한 회원권',
     gym: '바디채널 강남점',
     info: [
       { label: '정지기간', value: '14일' },
@@ -99,11 +99,11 @@ export const MyPage = () => {
   return (
     <PageLayout header={header} className="py-8">
       {/* Profile Section */}
-      <div className="text-center mb-8">
+      <div className="text-center mb-section">
         <div className="w-[100px] h-[100px] bg-surface-muted rounded-full flex items-center justify-center mx-auto mb-4 border-[3px] border-primary">
           <IconUser className="w-[50px] h-[50px] stroke-ink-placeholder stroke-[1.5]" />
         </div>
-        <h2 className="text-2xl font-bold mb-1">김피트</h2>
+        <h2 className="text-display font-bold mb-1">김피트</h2>
         <p className="text-ink-placeholder text-body mb-4">fitkim@email.com</p>
         <button className="bg-ink text-white px-6 py-2.5 rounded-card text-body font-semibold hover:bg-primary transition-colors">
           프로필 수정
@@ -111,7 +111,7 @@ export const MyPage = () => {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-3 gap-3 mb-8">
+      <div className="grid grid-cols-3 gap-3 mb-section">
         {stats.map((stat) => (
           <div key={stat.label} className="bg-surface-muted rounded-card-lg p-5 text-center">
             <div className="text-heading text-primary mb-1">{stat.value}</div>
@@ -121,8 +121,8 @@ export const MyPage = () => {
       </div>
 
       {/* My Memberships */}
-      <div className="mb-8">
-        <h3 className="text-title uppercase tracking-wider mb-4">내 이용권</h3>
+      <div className="mb-section">
+        <h3 className="text-title uppercase tracking-wider mb-4">내 회원권</h3>
         <div className="flex gap-3 overflow-x-auto pb-2 hide-scrollbar">
           {memberships.map((membership) => (
             <div

@@ -127,9 +127,24 @@ semantic:    star(#FFD700), online(#22c55e), like(#ff3040), kakao(#FEE500)
 
 ### 간격 토큰
 - `page`: 20px (좌우 패딩 → `px-page`)
-- `section`: 24px (섹션 간격 → `mb-section`)
+- `section`: 24px (섹션 간격 → `mb-section`, `py-section`)
 - `card`: 12px (카드 내부 → `p-card`)
 - `card-lg`: 16px (큰 카드 → `p-card-lg`)
+
+### 간격 사용 규칙 (반드시 준수)
+| 용도 | 올바른 클래스 | 금지 (하드코딩) |
+|------|--------------|----------------|
+| 페이지 좌우 패딩 | `px-page` | ~~px-5, px-4, px-6~~ |
+| 섹션 세로 패딩 | `py-section` | ~~py-6, py-8~~ |
+| 섹션 하단 간격 | `mb-section` | ~~mb-6, mb-8~~ |
+| 카드 내부 패딩 | `p-card` (12px) | ~~p-3~~ |
+| 큰 카드 패딩 | `p-card-lg` (16px) | ~~p-4~~ (카드 컨테이너) |
+| 카드 모서리 | `rounded-card` / `rounded-card-lg` | ~~rounded-xl, rounded-lg~~ |
+
+**예외 (하드코딩 허용)**:
+- 버튼 내부 패딩 (`px-4 py-2`, `px-3 py-1` 등)
+- 배지/태그 패딩 (`px-1.5 py-0.5` 등)
+- 입력 필드, 고정 하단 바 (`py-3`)
 
 ### 모서리/그림자
 - 모서리: `rounded-card`(12px), `rounded-card-lg`(16px), `rounded-pill`(100px)
@@ -212,6 +227,16 @@ npm run preview    # 빌드 결과 미리보기
   - CategoryGrid의 카테고리별 그라데이션은 예외로 유지
   - 기존 TS 에러 (ComponentsShowcase/PTTrainerCard의 gym prop) 미수정 (기존 이슈)
   - GymDetail gym4에 누락된 lat/lng 추가 수정
+- **간격 토큰 통합 작업 완료 (2026-03-24)**:
+  - 전체 페이지에서 px-5→px-page, py-6→py-section, mb-6/mb-8→mb-section, p-4→p-card-lg 교체
+  - 수정 파일: ClassDetail, GymDetail, TrainerDetail, FeedDetail, MeetupDetail, ProductDetail, Invite, Mypage
+  - 버튼/배지/입력필드의 내부 패딩은 예외로 유지
+- **GymDetail 상품선택 페이지 분리 (2026-03-24)**:
+  - /gym/:id/products 별도 페이지 (GymProducts) 생성
+  - 회원권/레슨권/부가상품 탭 구분
+  - GymDetail 상단 헤더 제거 → 히어로 이미지 위 뒤로가기/공유 버튼 배치
+  - GymDetail 탭 바(시설소개/트레이너/이용권/후기) 삭제
+  - "이용권" → "회원권" 전체 용어 통일
 
 ## 작업 시 주의사항
 - 한국어 UI (모든 텍스트는 한국어)

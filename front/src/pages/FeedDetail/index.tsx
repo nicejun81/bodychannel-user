@@ -72,7 +72,7 @@ export const FeedDetailPage = () => {
   return (
     <PageLayout header={header} className="!px-0 !py-0 !pb-[160px]">
       {/* Author */}
-      <div className="flex items-center gap-3 px-5 py-4">
+      <div className="flex items-center gap-3 px-page py-4">
         <img src={feed.authorImageUrl} alt={feed.authorName} className="w-10 h-10 rounded-full object-cover" />
         <div>
           <p className="font-semibold">{feed.authorName}</p>
@@ -86,7 +86,7 @@ export const FeedDetailPage = () => {
       </div>
 
       {/* Actions */}
-      <div className="flex items-center gap-4 px-5 py-3">
+      <div className="flex items-center gap-4 px-page py-3">
         <button className={`flex items-center gap-1.5 ${feed.isLiked ? 'text-semantic-like' : 'text-ink-secondary'}`}>
           <IconHeart className={`w-6 h-6 ${feed.isLiked ? 'fill-semantic-like stroke-semantic-like' : 'stroke-current stroke-2'}`} />
           <span className="font-semibold">{feed.likeCount}</span>
@@ -98,7 +98,7 @@ export const FeedDetailPage = () => {
       </div>
 
       {/* Text */}
-      <div className="px-5 pb-4">
+      <div className="px-page pb-4">
         <p className="text-body leading-relaxed">
           <span className="font-semibold">{feed.authorName}</span>{' '}
           {feed.text}
@@ -106,7 +106,7 @@ export const FeedDetailPage = () => {
       </div>
 
       {/* Comments */}
-      <div className="px-5 border-t border-border-light">
+      <div className="px-page border-t border-border-light">
         <h3 className="font-semibold py-3">댓글 {feed.comments.length}개</h3>
         <div className="space-y-4">
           {feed.comments.map((comment, i) => (

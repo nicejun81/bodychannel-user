@@ -94,9 +94,9 @@ export const MeetupDetailPage = () => {
         </div>
       </div>
 
-      <main className="px-5 py-6">
+      <main className="px-page py-section">
         {/* Info */}
-        <div className="space-y-3 mb-6">
+        <div className="space-y-3 mb-section">
           <div className="flex items-center gap-3 text-body text-ink-secondary">
             <IconCalendar className="w-5 h-5 stroke-ink-tertiary stroke-2" />
             <span>{meetup.schedule}</span>
@@ -112,7 +112,7 @@ export const MeetupDetailPage = () => {
         </div>
 
         {/* Host */}
-        <section className="mb-6">
+        <section className="mb-section">
           <h2 className="font-bold text-heading mb-3">모임장</h2>
           <div className="flex items-center gap-3 p-4 bg-surface-subtle rounded-xl">
             <img src={meetup.host.imageUrl} alt={meetup.host.name} className="w-12 h-12 rounded-full object-cover" />
@@ -124,7 +124,7 @@ export const MeetupDetailPage = () => {
         </section>
 
         {/* Description */}
-        <section className="mb-6">
+        <section className="mb-section">
           <h2 className="font-bold text-heading mb-3">모임 소개</h2>
           <p className="text-ink-secondary text-sm leading-relaxed">{meetup.description}</p>
         </section>

@@ -71,9 +71,9 @@ export const ProductDetailPage = () => {
         <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
       </div>
 
-      <main className="px-5 py-6">
+      <main className="px-page py-section">
         {/* Title & Price */}
-        <div className="mb-6">
+        <div className="mb-section">
           <h1 className="text-display font-bold mb-3">{product.name}</h1>
           <div className="flex items-center gap-3">
             <span className="text-primary font-bold text-heading">{product.discount}%</span>
@@ -83,13 +83,13 @@ export const ProductDetailPage = () => {
         </div>
 
         {/* Description */}
-        <section className="mb-6">
+        <section className="mb-section">
           <h2 className="font-bold text-heading mb-3">상품 설명</h2>
           <p className="text-ink-secondary text-body leading-relaxed">{product.description}</p>
         </section>
 
         {/* Details */}
-        <section className="mb-6">
+        <section className="mb-section">
           <h2 className="font-bold text-heading mb-3">상세 정보</h2>
           <ul className="space-y-2">
             {product.details.map((detail, i) => (

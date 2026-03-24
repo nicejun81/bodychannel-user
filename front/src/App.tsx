@@ -19,6 +19,7 @@ import {
   ProductDetailPage,
   FeedDetailPage,
   GymDetailPage,
+  GymProductsPage,
   ChatPage,
   ChatRoomPage,
 } from './pages'
@@ -46,6 +47,7 @@ export const App = () => {
         <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/feed/:id" element={<FeedDetailPage />} />
         <Route path="/gym/:id" element={<GymDetailPage />} />
+        <Route path="/gym/:id/products" element={<GymProductsPage />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/chat/:id" element={<ChatRoomPage />} />
       </Routes>

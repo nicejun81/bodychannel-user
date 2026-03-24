@@ -5,8 +5,8 @@ const events = [
   {
     id: 1,
     title: '이달의 베스트 리뷰어',
-    description: '가장 많은 좋아요를 받은 리뷰어에게 1개월 무료 이용권!',
-    reward: '1개월 무료 이용권',
+    description: '가장 많은 좋아요를 받은 리뷰어에게 1개월 무료 회원권!',
+    reward: '1개월 무료 회원권',
     endDate: '2025.01.31',
     status: 'active',
   },
@@ -40,15 +40,15 @@ export const ReviewEventPage = () => {
         </div>
         <div className="flex justify-around mt-4">
           <div className="text-center">
-            <p className="text-3xl font-bold">12</p>
+            <p className="text-display font-bold">12</p>
             <p className="text-body opacity-80">작성한 리뷰</p>
           </div>
           <div className="text-center">
-            <p className="text-3xl font-bold">89</p>
+            <p className="text-display font-bold">89</p>
             <p className="text-body opacity-80">받은 좋아요</p>
           </div>
           <div className="text-center">
-            <p className="text-3xl font-bold">24,000P</p>
+            <p className="text-display font-bold">24,000P</p>
             <p className="text-body opacity-80">적립 포인트</p>
           </div>
         </div>

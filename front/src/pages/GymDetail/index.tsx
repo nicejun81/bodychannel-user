@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { PageLayout, SubPageHeader } from '../../components'
-import { IconHeart, IconShare, IconClock, IconMapPin, IconChevronDown } from '../../components/Icons'
+import { IconShare, IconClock, IconMapPin } from '../../components/Icons'
 
 /* ── types ── */
 interface Facility { icon: string; label: string }
@@ -46,18 +46,17 @@ interface GymInfo {
 }
 
 /* ── data (gym1 full, others abbreviated) ── */
-const gymsData: Record<string, GymInfo> = {
+export const gymsData: Record<string, GymInfo> = {
   gym1: {
     name: '바디채널 강남점',
     address: '서울 강남구 테헤란로 123 4층',
     lat: 37.4980, lng: 127.0276,
     phone: '02-1234-5678',
-    hours: '24시간 연중무휴',
+    hours: '06:00 - 24:00',
     hoursDetail: [
-      { day: '평일', time: '00:00 - 24:00' },
-      { day: '토요일', time: '00:00 - 24:00' },
-      { day: '일요일·공휴일', time: '00:00 - 24:00' },
-      { day: '무인 운영', time: '22:00 - 06:00' },
+      { day: '평일', time: '06:00 - 24:00' },
+      { day: '토요일', time: '08:00 - 22:00' },
+      { day: '일요일·공휴일', time: '09:00 - 20:00' },
     ],
     rating: 4.8, reviewCount: 412,
     heroImages: [
@@ -101,7 +100,7 @@ const gymsData: Record<string, GymInfo> = {
     ],
     plans: [
       { name: '첫결제 특가', duration: '1개월', price: '19,900', original: '99,000', tag: 'BEST' },
-      { name: '월 이용권', duration: '1개월', price: '99,000' },
+      { name: '월 회원권', duration: '1개월', price: '99,000' },
       { name: '3개월권', duration: '3개월', price: '249,000', original: '297,000', tag: '16% OFF', installment: '월 83,000원 (3개월 무이자)' },
       { name: '6개월권', duration: '6개월', price: '449,000', original: '594,000', tag: '24% OFF', installment: '월 74,833원 (6개월 무이자)' },
       { name: '12개월권', duration: '12개월', price: '790,000', original: '1,188,000', tag: '33% OFF', installment: '월 65,833원 (12개월 무이자)' },
@@ -147,12 +146,12 @@ const gymsData: Record<string, GymInfo> = {
       '이용 시작 후 1/3 경과 전: 이용일수 차감 후 2/3 환불',
       '이용 시작 후 1/2 경과 전: 이용일수 차감 후 1/2 환불',
       '이용 시작 후 1/2 경과 후: 환불 불가',
-      'PT 이용권: 잔여 횟수 기준 환불 (위약금 10%)',
+      'PT 회원권: 잔여 횟수 기준 환불 (위약금 10%)',
     ],
   },
   gym2: {
-    name: '바디채널 역삼점', address: '서울 강남구 역삼로 789 2층', lat: 37.5007, lng: 127.0365, phone: '02-2345-6789', hours: '24시간 연중무휴',
-    hoursDetail: [{ day: '매일', time: '00:00 - 24:00' }],
+    name: '바디채널 역삼점', address: '서울 강남구 역삼로 789 2층', lat: 37.5007, lng: 127.0365, phone: '02-2345-6789', hours: '05:00 - 23:00',
+    hoursDetail: [{ day: '평일', time: '05:00 - 23:00' }, { day: '주말', time: '07:00 - 21:00' }],
     rating: 4.6, reviewCount: 287,
     heroImages: [
       { url: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&h=450&fit=crop', label: '메인' },
@@ -168,7 +167,7 @@ const gymsData: Record<string, GymInfo> = {
     coupons: [{ label: '반값 이벤트', discount: '첫 달 50% OFF', condition: '이번 달 한정' }],
     plans: [
       { name: '첫결제 특가', duration: '1개월', price: '9,900', original: '79,000', tag: '87% OFF' },
-      { name: '월 이용권', duration: '1개월', price: '79,000' },
+      { name: '월 회원권', duration: '1개월', price: '79,000' },
       { name: '3개월권', duration: '3개월', price: '199,000', original: '237,000', tag: '16% OFF' },
     ],
     ptPlans: [],
@@ -179,15 +178,15 @@ const gymsData: Record<string, GymInfo> = {
     notices: [], congestion: [], usageGuide: [], refundPolicy: [],
   },
   gym3: {
-    name: '바디채널 서초점', address: '서울 서초구 서초대로 456 3층', lat: 37.4917, lng: 127.0078, phone: '02-3456-7890', hours: '24시간 연중무휴',
-    hoursDetail: [{ day: '매일', time: '00:00 - 24:00 (무인)' }],
+    name: '바디채널 서초점', address: '서울 서초구 서초대로 456 3층', lat: 37.4917, lng: 127.0078, phone: '02-3456-7890', hours: '06:00 - 22:00',
+    hoursDetail: [{ day: '평일', time: '06:00 - 22:00' }, { day: '주말', time: '09:00 - 18:00' }],
     rating: 4.7, reviewCount: 195,
     heroImages: [{ url: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=450&fit=crop', label: '메인' }],
     galleryImages: [],
     description: '서초역 인근의 깔끔한 무인 피트니스 센터입니다.', tags: ['24시간', '무인', '락커'],
     facilities: [{ icon: '🏋️', label: '프리웨이트' }, { icon: '🚿', label: '샤워실' }, { icon: '🔒', label: '개인 락커' }],
     trainers: [], schedule: [], coupons: [],
-    plans: [{ name: '월 이용권', duration: '1개월', price: '49,000' }, { name: '3개월권', duration: '3개월', price: '129,000', original: '147,000', tag: '12% OFF' }],
+    plans: [{ name: '월 회원권', duration: '1개월', price: '49,000' }, { name: '3개월권', duration: '3개월', price: '129,000', original: '147,000', tag: '12% OFF' }],
     ptPlans: [],
     reviews: [{ name: '가성비왕', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.10', text: '이 가격에 이 시설이면 가성비 최고입니다.' }],
     nearbyGyms: [{ id: 'gym1', name: '바디채널 강남점', distance: '2.1km', price: '99,000' }],
@@ -204,7 +203,7 @@ const gymsData: Record<string, GymInfo> = {
     trainers: [{ id: 4, name: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face', specialty: '크로스핏 · 체력', rating: 4.6, reviewCount: 58, perSession: '80,000' }],
     schedule: [{ time: '19:00', name: '크로스핏 WOD', instructor: '이준혁', spots: '10/15' }],
     coupons: [{ label: '오픈 기념', discount: '80% OFF', condition: '신규 회원 한정' }],
-    plans: [{ name: '첫결제 특가', duration: '1개월', price: '29,900', original: '150,000', tag: '80% OFF' }, { name: '월 이용권', duration: '1개월', price: '150,000' }],
+    plans: [{ name: '첫결제 특가', duration: '1개월', price: '29,900', original: '150,000', tag: '80% OFF' }, { name: '월 회원권', duration: '1개월', price: '150,000' }],
     ptPlans: [],
     reviews: [{ name: '판교직장인', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.18', text: '크로스핏 프로그램이 체계적이고 재미있어요.' }],
     nearbyGyms: [],
@@ -219,7 +218,7 @@ const gymsData: Record<string, GymInfo> = {
     description: '선릉역 도보 3분 거리의 피트니스 센터. 사우나 시설까지 완비.', tags: ['웨이트', '유산소', '사우나'],
     facilities: [{ icon: '🏋️', label: '프리웨이트' }, { icon: '🚴', label: '유산소존' }, { icon: '🧖', label: '사우나' }, { icon: '🚿', label: '샤워실' }],
     trainers: [], schedule: [], coupons: [],
-    plans: [{ name: '월 이용권', duration: '1개월', price: '89,000' }, { name: '3개월권', duration: '3개월', price: '239,000', original: '267,000', tag: '10% OFF' }],
+    plans: [{ name: '월 회원권', duration: '1개월', price: '89,000' }, { name: '3개월권', duration: '3개월', price: '239,000', original: '267,000', tag: '10% OFF' }],
     ptPlans: [],
     reviews: [{ name: '사우나매니아', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.08', text: '운동 후 사우나가 진짜 최고입니다.' }],
     nearbyGyms: [{ id: 'gym2', name: '바디채널 역삼점', distance: '0.8km', price: '79,000' }],
@@ -227,19 +226,18 @@ const gymsData: Record<string, GymInfo> = {
   },
 }
 
-const defaultGym: GymInfo = {
-  name: '바디채널', address: '서울', lat: 37.4980, lng: 127.0276, phone: '02-0000-0000', hours: '24시간',
-  hoursDetail: [{ day: '매일', time: '24시간' }], rating: 4.5, reviewCount: 10,
+export const defaultGym: GymInfo = {
+  name: '바디채널', address: '서울', lat: 37.4980, lng: 127.0276, phone: '02-0000-0000', hours: '06:00 - 23:00',
+  hoursDetail: [{ day: '평일', time: '06:00 - 23:00' }, { day: '주말', time: '08:00 - 20:00' }], rating: 4.5, reviewCount: 10,
   heroImages: [{ url: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=450&fit=crop', label: '메인' }],
   galleryImages: [],
   description: '바디채널 피트니스 센터입니다.', tags: [], facilities: [], trainers: [], schedule: [], coupons: [],
-  plans: [{ name: '월 이용권', duration: '1개월', price: '99,000' }], ptPlans: [], reviews: [], nearbyGyms: [],
+  plans: [{ name: '월 회원권', duration: '1개월', price: '99,000' }], ptPlans: [], reviews: [], nearbyGyms: [],
   notices: [], congestion: [], usageGuide: [], refundPolicy: [],
 }
 
 /* ── helpers ── */
-const tabs = ['시설소개', '트레이너', '이용권', '후기'] as const
-type Tab = typeof tabs[number]
+/* tabs removed */
 
 function StarIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return <svg viewBox="0 0 24 24" className={className} style={style} fill="currentColor" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
@@ -250,39 +248,10 @@ export const GymDetailPage = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const data = gymsData[id || ''] || defaultGym
-  const [activeTab, setActiveTab] = useState<Tab>('시설소개')
   const [liked, setLiked] = useState(false)
   const [heroIdx, setHeroIdx] = useState(0)
-  const [hoursOpen, setHoursOpen] = useState(false)
   const [reviewSort, setReviewSort] = useState<'latest' | 'high' | 'low'>('latest')
-  const [galleryOpen, setGalleryOpen] = useState(false)
-  const [pricingTab, setPricingTab] = useState<'membership' | 'pt'>('membership')
-  const [guideOpen, setGuideOpen] = useState(false)
-  const [refundOpen, setRefundOpen] = useState(false)
 
-  const sectionRefs = useRef<Record<Tab, HTMLDivElement | null>>({ '시설소개': null, '트레이너': null, '이용권': null, '후기': null })
-  const tabBarRef = useRef<HTMLDivElement>(null)
-
-  const scrollToSection = (tab: Tab) => {
-    setActiveTab(tab)
-    const el = sectionRefs.current[tab]
-    if (el) {
-      const offset = (tabBarRef.current?.getBoundingClientRect().height || 48) + 56
-      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' })
-    }
-  }
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const offset = (tabBarRef.current?.getBoundingClientRect().height || 48) + 60
-      for (const tab of [...tabs].reverse()) {
-        const el = sectionRefs.current[tab]
-        if (el && el.getBoundingClientRect().top <= offset) { setActiveTab(tab); return }
-      }
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   const sortedReviews = [...data.reviews].sort((a, b) => {
     if (reviewSort === 'high') return b.rating - a.rating
@@ -293,24 +262,22 @@ export const GymDetailPage = () => {
   const currentHour = new Date().getHours()
   const currentCongestion = data.congestion.find(c => parseInt(c.time) === currentHour)
 
-  const header = (
-    <SubPageHeader
-      title={data.name}
-      right={
-        <div className="flex gap-1">
-          <button className="icon-btn">
-            <IconShare className="w-[18px] h-[18px] stroke-ink stroke-2" />
-          </button>
-          <button onClick={() => setLiked(!liked)} className="icon-btn">
-            <IconHeart className={`w-[18px] h-[18px] stroke-2 ${liked ? 'fill-semantic-like stroke-semantic-like' : 'fill-none stroke-ink'}`} />
-          </button>
-        </div>
-      }
-    />
-  )
-
   return (
-    <PageLayout header={header} hideBottomNav className="!px-0 !py-0 !pb-[70px]">
+    <PageLayout
+      header={
+        <SubPageHeader
+          title={data.name}
+          right={
+            <button className="icon-btn">
+              <IconShare className="w-[18px] h-[18px] stroke-ink stroke-2" />
+            </button>
+          }
+          showChat
+        />
+      }
+      hideBottomNav
+      className="!px-0 !py-0 !pb-[70px]"
+    >
       {/* ── Hero Carousel ── */}
       <div className="relative">
         <div className="overflow-hidden">
@@ -327,8 +294,8 @@ export const GymDetailPage = () => {
         )}
       </div>
 
-      {/* ── Gym Info ── */}
-      <div className="px-5 pt-5 pb-4">
+      {/* ── 1. 기본정보 + 소개 ── */}
+      <div className="px-page pt-5 pb-4 border-b border-border-light">
         {data.badge && <span className={`inline-block px-2 py-0.5 text-label font-bold rounded mb-2 ${data.badgeType === 'sale' ? 'bg-red-500 text-white' : data.badgeType === 'new' ? 'bg-green-500 text-white' : 'bg-primary text-white'}`}>{data.badge}</span>}
         <h1 className="text-display font-bold text-ink mb-1.5">{data.name}</h1>
         <div className="flex items-center gap-1 mb-3">
@@ -336,79 +303,45 @@ export const GymDetailPage = () => {
           <span className="text-body font-bold text-ink">{data.rating}</span>
           <span className="text-body text-ink-tertiary">({data.reviewCount})</span>
         </div>
-
-        {/* info rows */}
-        <div className="space-y-1.5 mb-3">
+        <p className="text-body text-ink-secondary leading-relaxed mb-4">{data.description}</p>
+        <div className="space-y-1.5">
           <div className="flex items-center gap-2 text-body text-ink-secondary"><IconMapPin className="w-4 h-4 stroke-ink-tertiary stroke-2 flex-shrink-0" /><span>{data.address}</span></div>
-          <button onClick={() => setHoursOpen(!hoursOpen)} className="flex items-center gap-2 text-body text-ink-secondary w-full">
-            <IconClock className="w-4 h-4 stroke-ink-tertiary stroke-2 flex-shrink-0" />
-            <span className="flex-1 text-left">{data.hours}</span>
-            <IconChevronDown className={`w-3.5 h-3.5 stroke-ink-tertiary stroke-2 transition-transform ${hoursOpen ? 'rotate-180' : ''}`} />
-          </button>
-          {hoursOpen && (
-            <div className="ml-6 space-y-1 pb-1">
-              {data.hoursDetail.map((h, i) => (
-                <div key={i} className="flex justify-between text-label"><span className="text-ink-secondary">{h.day}</span><span className="text-ink font-medium">{h.time}</span></div>
-              ))}
-            </div>
-          )}
           <div className="flex items-center gap-2 text-body text-ink-secondary">
             <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-ink-tertiary stroke-2 flex-shrink-0" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
             <span>{data.phone}</span>
           </div>
-        </div>
-
-        {/* Real-time congestion */}
-        {currentCongestion && (
-          <div className="mb-4 p-3 bg-surface-subtle rounded-xl">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <span className="text-body font-bold text-ink">실시간 혼잡도</span>
-                <span className={`px-1.5 py-0.5 text-caption font-bold rounded ${currentCongestion.level >= 7 ? 'bg-red-100 text-red-600' : currentCongestion.level >= 4 ? 'bg-yellow-100 text-yellow-700' : 'bg-green-100 text-green-600'}`}>
-                  {currentCongestion.level >= 7 ? '혼잡' : currentCongestion.level >= 4 ? '보통' : '여유'}
-                </span>
+          <div className="flex items-start gap-2 text-body text-ink-secondary">
+            <IconClock className="w-4 h-4 stroke-ink-tertiary stroke-2 flex-shrink-0 mt-0.5" />
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-1">
+                <span>{data.hours}</span>
+                {(() => {
+                  const h = currentHour
+                  const match = data.hours.match(/(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})/)
+                  const isOpen = match && h >= parseInt(match[1]) && h < parseInt(match[3])
+                  return (
+                    <span className={`px-1.5 py-0.5 text-caption font-bold rounded ${isOpen ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-500'}`}>
+                      {isOpen ? '영업중' : '영업종료'}
+                    </span>
+                  )
+                })()}
               </div>
-              <span className="text-label text-ink-tertiary">현재 {currentHour}시 기준</span>
-            </div>
-            <div className="flex items-end gap-[3px] h-[40px]">
-              {data.congestion.map((c, i) => (
-                <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
-                  <div
-                    className={`w-full rounded-sm transition-colors ${parseInt(c.time) === currentHour ? 'bg-primary' : c.level >= 7 ? 'bg-red-300' : c.level >= 4 ? 'bg-yellow-300' : 'bg-green-300'}`}
-                    style={{ height: `${(c.level / 10) * 36}px` }}
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="flex justify-between mt-1">
-              <span className="text-[9px] text-ink-tertiary">6시</span>
-              <span className="text-[9px] text-ink-tertiary">12시</span>
-              <span className="text-[9px] text-ink-tertiary">18시</span>
-              <span className="text-[9px] text-ink-tertiary">23시</span>
+              <div className="space-y-0.5">
+                {data.hoursDetail.map((h, i) => (
+                  <div key={i} className="flex justify-between text-label"><span className="text-ink-tertiary">{h.day}</span><span className="text-ink font-medium">{h.time}</span></div>
+                ))}
+              </div>
             </div>
           </div>
-        )}
-
-        {/* Map */}
-        <div className="w-full h-[180px] bg-surface-muted rounded-xl mb-4 overflow-hidden relative">
-          <iframe
-            title="지도"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            loading="lazy"
-            src={`https://www.openstreetmap.org/export/embed.html?bbox=${data.lng - 0.005}%2C${data.lat - 0.003}%2C${data.lng + 0.005}%2C${data.lat + 0.003}&layer=mapnik&marker=${data.lat}%2C${data.lng}`}
-          />
         </div>
-
       </div>
 
-      {/* ── Coupons ── */}
+      {/* ── 2. 쿠폰 (프로모션 상단 노출) ── */}
       {data.coupons.length > 0 && (
-        <div className="px-5 pb-4">
+        <div className="px-page py-section border-b border-border-light">
           <div className="flex gap-2 overflow-x-auto hide-scrollbar">
             {data.coupons.map((c, i) => (
-              <div key={i} className="min-w-[200px] flex-shrink-0 p-3 bg-gradient-to-r from-[#fff4f0] to-[#fff9f7] border border-primary/20 rounded-xl">
+              <div key={i} className="min-w-[200px] flex-shrink-0 p-card bg-gradient-to-r from-[#fff4f0] to-[#fff9f7] border border-primary/20 rounded-xl">
                 <div className="flex items-center gap-1.5 mb-1">
                   <span className="px-1.5 py-0.5 bg-primary text-white text-[9px] font-bold rounded">{c.label}</span>
                 </div>
@@ -420,43 +353,10 @@ export const GymDetailPage = () => {
         </div>
       )}
 
-      {/* ── Notices ── */}
-      {data.notices.length > 0 && (
-        <div className="px-5 pb-4">
-          <div className="flex items-center gap-2 mb-2.5">
-            <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-primary stroke-2 flex-shrink-0" fill="none"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>
-            <span className="text-body font-bold text-ink">공지사항</span>
-          </div>
-          <div className="space-y-1.5">
-            {data.notices.map((n, i) => (
-              <button key={i} className="w-full flex items-center gap-2 p-2.5 bg-surface-subtle rounded-lg text-left hover:bg-surface-muted transition-colors">
-                {n.isNew && <span className="px-1 py-0.5 bg-red-500 text-white text-[9px] font-bold rounded flex-shrink-0">NEW</span>}
-                <span className="text-label text-ink-secondary flex-1 truncate">{n.title}</span>
-                <span className="text-caption text-ink-tertiary flex-shrink-0">{n.date}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* ── Sticky Tabs ── */}
-      <div ref={tabBarRef} className="sticky top-[48px] z-40 bg-white border-b border-border">
-        <div className="flex">
-          {tabs.map((tab) => (
-            <button key={tab} onClick={() => scrollToSection(tab)} className={`flex-1 py-3 text-body font-semibold text-center relative ${activeTab === tab ? 'text-ink' : 'text-ink-tertiary'}`}>
-              {tab}
-              {activeTab === tab && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-[2px] bg-ink rounded-full" />}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* ── 시설소개 ── */}
-      <div ref={(el) => { sectionRefs.current['시설소개'] = el }} className="px-5 py-6 border-b border-border-light">
-        <p className="text-body text-ink-secondary leading-relaxed mb-6">{data.description}</p>
-
+      {/* ── 3. 편의시설 ── */}
+      <div className="px-page py-section border-b border-border-light">
         <h3 className="text-title font-bold text-ink mb-4">편의시설</h3>
-        <div className="grid grid-cols-4 gap-3 mb-6">
+        <div className="grid grid-cols-4 gap-3">
           {data.facilities.map((f, i) => (
             <div key={i} className="flex flex-col items-center gap-1.5 py-3 bg-surface-subtle rounded-xl">
               <span className="text-display">{f.icon}</span>
@@ -464,65 +364,38 @@ export const GymDetailPage = () => {
             </div>
           ))}
         </div>
-
-        {/* Today's schedule */}
-        {data.schedule.length > 0 && (
-          <>
-            <h3 className="text-title font-bold text-ink mb-3">오늘의 수업</h3>
-            <div className="space-y-2 mb-6">
-              {data.schedule.map((s, i) => (
-                <div key={i} className="flex items-center justify-between p-3 bg-surface-subtle rounded-xl">
-                  <div className="flex items-center gap-3">
-                    <span className="text-body font-bold text-primary w-[42px]">{s.time}</span>
-                    <div>
-                      <p className="text-body font-semibold text-ink">{s.name}</p>
-                      <p className="text-label text-ink-tertiary">{s.instructor} 강사</p>
-                    </div>
-                  </div>
-                  <span className={`text-label font-medium px-2 py-0.5 rounded ${parseInt(s.spots.split('/')[0]) / parseInt(s.spots.split('/')[1]) > 0.8 ? 'bg-red-50 text-red-500' : 'bg-green-50 text-green-600'}`}>
-                    {s.spots}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-
-        {/* Photo grid */}
-        {(data.galleryImages.length > 0 || data.heroImages.length > 1) && (() => {
-          const photos = data.galleryImages.length > 0 ? data.galleryImages : data.heroImages
-          const displayPhotos = photos.slice(0, 6)
-          const remainingCount = photos.length - 6
-          return (
-            <>
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-title font-bold text-ink">시설 사진</h3>
-                {photos.length > 6 && <button onClick={() => setGalleryOpen(true)} className="text-label text-primary font-medium">전체보기 ({photos.length})</button>}
-              </div>
-              <div className="grid grid-cols-3 gap-1.5 rounded-xl overflow-hidden relative">
-                {displayPhotos.map((img, i) => (
-                  <div key={i} className="relative">
-                    <img src={img.url} alt={img.label} className="w-full aspect-square object-cover" />
-                    {i === 5 && remainingCount > 0 && (
-                      <button onClick={() => setGalleryOpen(true)} className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                        <span className="text-white text-body font-bold">+{remainingCount}</span>
-                      </button>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </>
-          )
-        })()}
       </div>
 
-      {/* ── 트레이너 ── */}
-      <div ref={(el) => { sectionRefs.current['트레이너'] = el }} className="px-5 py-6 border-b border-border-light">
+      {/* ── 4. 오늘의 수업 ── */}
+      {data.schedule.length > 0 && (
+        <div className="px-page py-section border-b border-border-light">
+          <h3 className="text-title font-bold text-ink mb-3">오늘의 수업</h3>
+          <div className="space-y-2">
+            {data.schedule.map((s, i) => (
+              <div key={i} className="flex items-center justify-between p-card bg-surface-subtle rounded-xl">
+                <div className="flex items-center gap-3">
+                  <span className="text-body font-bold text-primary w-[42px]">{s.time}</span>
+                  <div>
+                    <p className="text-body font-semibold text-ink">{s.name}</p>
+                    <p className="text-label text-ink-tertiary">{s.instructor} 강사</p>
+                  </div>
+                </div>
+                <span className={`text-label font-medium px-2 py-0.5 rounded ${parseInt(s.spots.split('/')[0]) / parseInt(s.spots.split('/')[1]) > 0.8 ? 'bg-red-50 text-red-500' : 'bg-green-50 text-green-600'}`}>
+                  {s.spots}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ── 5. 트레이너 ── */}
+      <div className="px-page py-section border-b border-border-light">
         <h2 className="text-title font-bold text-ink mb-4">트레이너</h2>
         {data.trainers.length > 0 ? (
           <div className="space-y-3">
             {data.trainers.map((t) => (
-              <button key={t.id} onClick={() => navigate(`/trainer/${t.id}`)} className="w-full flex items-center gap-3 p-3 border border-border rounded-xl hover:border-ink-disabled transition-colors text-left">
+              <button key={t.id} onClick={() => navigate(`/trainer/${t.id}`)} className="w-full flex items-center gap-3 p-card border border-border rounded-xl hover:border-ink-disabled transition-colors text-left">
                 <img src={t.avatar} alt={t.name} className="w-14 h-14 rounded-full object-cover flex-shrink-0" />
                 <div className="flex-1 min-w-0">
                   <p className="text-body font-bold text-ink">{t.name} 트레이너</p>
@@ -546,63 +419,60 @@ export const GymDetailPage = () => {
         )}
       </div>
 
-      {/* ── 이용권 ── */}
-      <div ref={(el) => { sectionRefs.current['이용권'] = el }} className="px-5 py-6 border-b border-border-light">
-        <h2 className="text-title font-bold text-ink mb-4">이용권</h2>
-
-        {/* Pricing sub-tabs */}
-        {data.ptPlans.length > 0 && (
-          <div className="flex gap-2 mb-4">
-            <button onClick={() => setPricingTab('membership')} className={`px-4 py-2 rounded-full text-label font-semibold transition-colors ${pricingTab === 'membership' ? 'bg-ink text-white' : 'bg-surface-muted text-ink-secondary'}`}>헬스 이용권</button>
-            <button onClick={() => setPricingTab('pt')} className={`px-4 py-2 rounded-full text-label font-semibold transition-colors ${pricingTab === 'pt' ? 'bg-ink text-white' : 'bg-surface-muted text-ink-secondary'}`}>PT 이용권</button>
+      {/* ── 6. 공지사항 / 이용안내 / 환불정책 ── */}
+      <div className="px-page py-section border-b border-border-light">
+        {data.notices.length > 0 && (
+          <div className="mb-section">
+            <div className="flex items-center gap-2 mb-3">
+              <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-primary stroke-2 flex-shrink-0" fill="none"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>
+              <span className="text-body font-bold text-ink">공지사항</span>
+            </div>
+            <div className="space-y-1.5">
+              {data.notices.map((n, i) => (
+                <button key={i} className="w-full flex items-center gap-2 p-2.5 bg-surface-subtle rounded-lg text-left hover:bg-surface-muted transition-colors">
+                  {n.isNew && <span className="px-1 py-0.5 bg-red-500 text-white text-[9px] font-bold rounded flex-shrink-0">NEW</span>}
+                  <span className="text-label text-ink-secondary flex-1 truncate">{n.title}</span>
+                  <span className="text-caption text-ink-tertiary flex-shrink-0">{n.date}</span>
+                </button>
+              ))}
+            </div>
           </div>
         )}
-
-        {pricingTab === 'membership' ? (
-          <div className="space-y-3">
-            {data.plans.map((plan, i) => (
-              <div key={i} className={`p-4 rounded-xl border ${i === 0 ? 'border-primary bg-primary-50' : 'border-border'}`}>
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="text-body font-bold text-ink">{plan.name}</span>
-                    {plan.tag && <span className={`px-1.5 py-0.5 text-caption font-bold rounded ${i === 0 ? 'bg-primary text-white' : 'bg-red-500 text-white'}`}>{plan.tag}</span>}
-                  </div>
-                  <span className="text-label text-ink-tertiary">{plan.duration}</span>
-                </div>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-display font-bold text-ink">{plan.price}<span className="text-body">원</span></span>
-                  {plan.original && <span className="text-body text-ink-tertiary line-through">{plan.original}원</span>}
-                </div>
-                {plan.installment && <p className="text-label text-primary mt-1.5">{plan.installment}</p>}
-              </div>
-            ))}
-            <p className="text-label text-ink-tertiary text-center pt-1">카드사별 무이자 할부 혜택이 제공됩니다</p>
+        {data.usageGuide.length > 0 && (
+          <div className="mb-4">
+            <span className="text-body font-bold text-ink block mb-2">이용 안내</span>
+            <ul className="space-y-2">
+              {data.usageGuide.map((item, i) => (
+                <li key={i} className="flex items-start gap-2 text-label text-ink-secondary leading-relaxed">
+                  <span className="text-ink-tertiary mt-0.5 flex-shrink-0">{'•'}</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-        ) : (
-          <div className="space-y-3">
-            {data.ptPlans.map((pt, i) => (
-              <div key={i} className={`p-4 rounded-xl border ${pt.tag === '인기' ? 'border-primary bg-primary-50' : 'border-border'}`}>
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="text-body font-bold text-ink">{pt.sessions}</span>
-                    {pt.tag && <span className={`px-1.5 py-0.5 text-caption font-bold rounded ${pt.tag === '인기' ? 'bg-primary text-white' : pt.tag === '체험특가' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>{pt.tag}</span>}
-                  </div>
-                  <span className="text-label text-ink-tertiary">회당 {pt.pricePerSession}원</span>
-                </div>
-                <span className="text-display font-bold text-ink">{pt.totalPrice}<span className="text-body">원</span></span>
-              </div>
-            ))}
+        )}
+        {data.refundPolicy.length > 0 && (
+          <div>
+            <span className="text-body font-bold text-ink block mb-2">환불 정책</span>
+            <ul className="space-y-2">
+              {data.refundPolicy.map((item, i) => (
+                <li key={i} className="flex items-start gap-2 text-label text-ink-secondary leading-relaxed">
+                  <span className="text-ink-tertiary mt-0.5 flex-shrink-0">{'•'}</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
       </div>
 
-      {/* ── 후기 ── */}
-      <div ref={(el) => { sectionRefs.current['후기'] = el }} className="px-5 py-6 border-b border-border-light">
+      {/* ── 7. 후기 ── */}
+      <div className="px-page py-section border-b border-border-light">
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-title font-bold text-ink">방문자 후기</h2>
           <span className="text-label text-ink-tertiary">{data.reviewCount}개</span>
         </div>
-        <div className="flex items-center gap-4 mb-4 p-4 bg-surface-subtle rounded-xl">
+        <div className="flex items-center gap-4 mb-4 p-card-lg bg-surface-subtle rounded-xl">
           <div className="text-center">
             <p className="text-[28px] font-bold text-ink">{data.rating}</p>
             <div className="flex gap-0.5 justify-center mb-0.5">
@@ -664,100 +534,55 @@ export const GymDetailPage = () => {
         {data.reviews.length > 0 && <button className="w-full py-3 mt-4 border border-border rounded-lg text-body font-semibold text-ink hover:bg-surface-subtle">후기 더보기</button>}
       </div>
 
-      {/* ── Nearby Gyms ── */}
-      {data.nearbyGyms.length > 0 && (
-        <div className="px-5 py-6">
-          <h2 className="text-title font-bold text-ink mb-4">주변 다른 지점</h2>
-          <div className="space-y-2">
-            {data.nearbyGyms.map((g) => (
-              <button key={g.id} onClick={() => navigate(`/gym/${g.id}`)} className="w-full flex items-center justify-between p-3 border border-border rounded-xl hover:border-ink-disabled transition-colors text-left">
-                <div>
-                  <p className="text-body font-semibold text-ink">{g.name}</p>
-                  <p className="text-label text-ink-tertiary">{g.distance}</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-body font-bold text-ink">월 {g.price}원~</span>
-                  <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-ink-disabled stroke-2 flex-shrink-0" fill="none"><path d="M9 18l6-6-6-6" /></svg>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* ── Usage Guide & Refund Policy ── */}
-      {(data.usageGuide.length > 0 || data.refundPolicy.length > 0) && (
-        <div className="px-5 py-6 border-b border-border-light">
-          {data.usageGuide.length > 0 && (
-            <div className="mb-4">
-              <button onClick={() => setGuideOpen(!guideOpen)} className="w-full flex items-center justify-between py-2">
-                <span className="text-body font-bold text-ink">이용 안내</span>
-                <IconChevronDown className={`w-4 h-4 stroke-ink-tertiary stroke-2 transition-transform ${guideOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {guideOpen && (
-                <ul className="mt-2 space-y-2">
-                  {data.usageGuide.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-label text-ink-secondary leading-relaxed">
-                      <span className="text-ink-tertiary mt-0.5 flex-shrink-0">{'•'}</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
+      {/* ── 8. 혼잡도 + 지도 ── */}
+      <div className="px-page py-section border-b border-border-light">
+        {currentCongestion && (
+          <div className="mb-section p-card bg-surface-subtle rounded-xl">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <span className="text-body font-bold text-ink">실시간 혼잡도</span>
+                <span className={`px-1.5 py-0.5 text-caption font-bold rounded ${currentCongestion.level >= 7 ? 'bg-red-100 text-red-600' : currentCongestion.level >= 4 ? 'bg-yellow-100 text-yellow-700' : 'bg-green-100 text-green-600'}`}>
+                  {currentCongestion.level >= 7 ? '혼잡' : currentCongestion.level >= 4 ? '보통' : '여유'}
+                </span>
+              </div>
+              <span className="text-label text-ink-tertiary">현재 {currentHour}시 기준</span>
             </div>
-          )}
-          {data.refundPolicy.length > 0 && (
-            <div>
-              <button onClick={() => setRefundOpen(!refundOpen)} className="w-full flex items-center justify-between py-2">
-                <span className="text-body font-bold text-ink">환불 정책</span>
-                <IconChevronDown className={`w-4 h-4 stroke-ink-tertiary stroke-2 transition-transform ${refundOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {refundOpen && (
-                <ul className="mt-2 space-y-2">
-                  {data.refundPolicy.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-label text-ink-secondary leading-relaxed">
-                      <span className="text-ink-tertiary mt-0.5 flex-shrink-0">{'•'}</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* ── Gallery Modal ── */}
-      {galleryOpen && (
-        <div className="fixed inset-0 z-[60] bg-black/90 flex flex-col">
-          <div className="flex items-center justify-between px-4 py-3">
-            <button onClick={() => setGalleryOpen(false)} className="icon-btn">
-              <svg viewBox="0 0 24 24" className="w-5 h-5 stroke-white stroke-2 fill-none"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
-            </button>
-            <span className="text-white text-body font-semibold">시설 사진 ({(data.galleryImages.length > 0 ? data.galleryImages : data.heroImages).length})</span>
-            <div className="w-9" />
-          </div>
-          <div className="flex-1 overflow-y-auto px-2 pb-4">
-            <div className="grid grid-cols-3 gap-1">
-              {(data.galleryImages.length > 0 ? data.galleryImages : data.heroImages).map((img, i) => (
-                <img key={i} src={img.url} alt={img.label} className="w-full aspect-square object-cover rounded" />
+            <div className="flex items-end gap-[3px] h-[40px]">
+              {data.congestion.map((c, i) => (
+                <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
+                  <div
+                    className={`w-full rounded-sm transition-colors ${parseInt(c.time) === currentHour ? 'bg-primary' : c.level >= 7 ? 'bg-red-300' : c.level >= 4 ? 'bg-yellow-300' : 'bg-green-300'}`}
+                    style={{ height: `${(c.level / 10) * 36}px` }}
+                  />
+                </div>
               ))}
             </div>
+            <div className="flex justify-between mt-1">
+              <span className="text-[9px] text-ink-tertiary">6시</span>
+              <span className="text-[9px] text-ink-tertiary">12시</span>
+              <span className="text-[9px] text-ink-tertiary">18시</span>
+              <span className="text-[9px] text-ink-tertiary">23시</span>
+            </div>
           </div>
+        )}
+        <h3 className="text-title font-bold text-ink mb-3">위치</h3>
+        <div className="w-full h-[180px] bg-surface-muted rounded-xl overflow-hidden">
+          <iframe
+            title="지도"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            loading="lazy"
+            src={`https://www.openstreetmap.org/export/embed.html?bbox=${data.lng - 0.005}%2C${data.lat - 0.003}%2C${data.lng + 0.005}%2C${data.lat + 0.003}&layer=mapnik&marker=${data.lat}%2C${data.lng}`}
+          />
         </div>
-      )}
+      </div>
+
+
 
       {/* ── Bottom CTA ── */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border px-5 py-3 flex items-center gap-3">
-        <div className="flex-1">
-          {data.plans[0]?.original && <p className="text-label text-ink-tertiary line-through">{data.plans[0].original}원</p>}
-          <div className="flex items-baseline gap-1">
-            <span className="text-label text-ink-secondary">월</span>
-            <span className="text-heading font-bold text-ink">{data.plans[0]?.price}</span>
-            <span className="text-body text-ink-secondary">원~</span>
-          </div>
-        </div>
-        <button className="px-8 py-3.5 bg-primary text-white text-body font-bold rounded-xl hover:opacity-90 transition-opacity">등록하기</button>
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border px-page py-3 flex gap-3">
+        <button onClick={() => navigate(`/gym/${id}/products`)} className="flex-1 py-3.5 bg-primary text-white text-body font-bold rounded-xl hover:bg-primary-dark transition-colors">상품선택</button>
       </div>
     </PageLayout>
   )
