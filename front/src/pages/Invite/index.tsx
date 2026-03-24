@@ -14,6 +14,8 @@ export const InvitePage = () => {
         <p className="text-ink-tertiary text-body">친구가 가입하면 서로 5,000포인트씩 적립</p>
       </div>
 
+      <div className="h-2 bg-surface-muted -mx-page" />
+
       <div className="bg-surface-muted rounded-card-lg p-card-lg mb-section">
         <p className="text-body text-ink-secondary mb-2">내 초대 코드</p>
         <div className="flex items-center justify-between bg-surface rounded-card p-card">
@@ -24,6 +26,8 @@ export const InvitePage = () => {
         </div>
       </div>
 
+      <div className="h-2 bg-surface-muted -mx-page" />
+
       <div className="space-y-3">
         <button className="w-full py-4 bg-[#FEE500] text-[#3C1E1E] font-semibold rounded-card hover:opacity-90 transition-opacity">
           카카오톡으로 공유하기
@@ -32,6 +36,8 @@ export const InvitePage = () => {
           링크 복사하기
         </button>
       </div>
+
+      <div className="h-2 bg-surface-muted -mx-page" />
 
       <div className="mt-8 p-card-lg bg-surface-muted rounded-card-lg">
         <h3 className="text-title mb-3">초대 현황</h3>

@@ -24,6 +24,8 @@ export const AmbassadorPage = () => {
         </button>
       </div>
 
+      <div className="h-2 bg-surface-muted -mx-page" />
+
       <h3 className="text-heading mb-4">앰버서더 혜택</h3>
       <div className="grid grid-cols-2 gap-3 mb-section">
         {benefits.map((benefit, index) => (
@@ -33,6 +35,8 @@ export const AmbassadorPage = () => {
           </div>
         ))}
       </div>
+
+      <div className="h-2 bg-surface-muted -mx-page" />
 
       <h3 className="text-heading mb-4">신청 자격</h3>
       <ul className="space-y-3 text-body text-ink-secondary">

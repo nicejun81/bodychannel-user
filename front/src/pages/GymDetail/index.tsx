@@ -391,10 +391,10 @@ export const GymDetailPage = () => {
 
       <div className="h-2 bg-surface-muted" />
 
-      {/* ── 2. 수업 시간표 ── */}
+      {/* ── 2. 그룹 수업 ── */}
       {Object.keys(data.schedule).length > 0 && (
         <div className="px-page py-section">
-          <h3 className="text-heading font-bold text-ink mb-4">수업 시간표</h3>
+          <h3 className="text-heading font-bold text-ink mb-4">그룹 수업</h3>
           <div className="flex gap-2 overflow-x-auto hide-scrollbar mb-4">
             {scheduleDays.map((d, i) => (
               <button key={i} onClick={() => setSelectedDateIdx(i)} className={`flex-shrink-0 w-[52px] py-2 rounded-xl text-center transition-colors ${selectedDateIdx === i ? 'bg-primary text-white' : 'bg-surface-muted text-ink-secondary hover:bg-surface-subtle'}`}>

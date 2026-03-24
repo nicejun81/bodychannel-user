@@ -151,6 +151,8 @@ export const LessonPage = () => {
         ))}
       </ScrollRow>
 
+      <div className="h-2 bg-surface-muted -mx-page" />
+
       {/* Trainer List */}
       <section>
         <SectionHeader title="강사 목록" showMore={false} />

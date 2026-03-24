@@ -110,6 +110,8 @@ export const MyPage = () => {
         </button>
       </div>
 
+      <div className="h-2 bg-surface-muted -mx-page" />
+
       {/* Stats Cards */}
       <div className="grid grid-cols-3 gap-3 mb-section">
         {stats.map((stat) => (
@@ -119,6 +121,8 @@ export const MyPage = () => {
           </div>
         ))}
       </div>
+
+      <div className="h-2 bg-surface-muted -mx-page" />
 
       {/* My Memberships */}
       <div className="mb-section">
@@ -154,6 +158,8 @@ export const MyPage = () => {
           ))}
         </div>
       </div>
+
+      <div className="h-2 bg-surface-muted -mx-page" />
 
       {/* Menu List */}
       <h3 className="text-title uppercase tracking-wider mb-4">내 정보</h3>

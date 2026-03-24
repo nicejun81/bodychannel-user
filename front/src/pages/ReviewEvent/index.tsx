@@ -54,6 +54,8 @@ export const ReviewEventPage = () => {
         </div>
       </div>
 
+      <div className="h-2 bg-surface-muted -mx-page" />
+
       <h2 className="text-heading mb-4">진행중인 이벤트</h2>
       <div className="space-y-4">
         {events.map((event) => (

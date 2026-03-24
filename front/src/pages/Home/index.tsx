@@ -66,6 +66,7 @@ const groupTrainers = [
     rating: 4.7,
     reviewCount: 64,
     trialInfo: '10회 / 66,000원',
+    hasTicket: true,
   },
   {
     id: 2,
@@ -78,6 +79,7 @@ const groupTrainers = [
     rating: 4.9,
     reviewCount: 93,
     trialInfo: '10회 / 66,000원',
+    hasTicket: false,
   },
   {
     id: 3,
@@ -90,6 +92,7 @@ const groupTrainers = [
     rating: 4.6,
     reviewCount: 58,
     trialInfo: '10회 / 66,000원',
+    hasTicket: false,
   },
 ]
 
@@ -273,7 +276,10 @@ export const HomePage = () => {
             todayTime={trainer.todayTime}
             rating={trainer.rating}
             reviewCount={trainer.reviewCount}
-            trialInfo={trainer.trialInfo}
+            rightAction={trainer.hasTicket
+              ? <span className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg">예약</span>
+              : <span className="px-3 py-1 border border-primary text-primary text-label font-bold rounded-lg">구매</span>
+            }
             onClick={() => navigate(`/trainer/${trainer.id}`)}
           />
         ))}

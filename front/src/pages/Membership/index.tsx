@@ -130,6 +130,8 @@ export const MembershipPage = () => {
         ))}
       </ScrollRow>
 
+      <div className="h-2 bg-surface-muted -mx-page" />
+
       {/* Gym List */}
       <section>
         <div className="flex justify-between items-center mb-4">
