@@ -234,9 +234,25 @@ npm run preview    # 빌드 결과 미리보기
 - **GymDetail 상품선택 페이지 분리 (2026-03-24)**:
   - /gym/:id/products 별도 페이지 (GymProducts) 생성
   - 회원권/레슨권/부가상품 탭 구분
-  - GymDetail 상단 헤더 제거 → 히어로 이미지 위 뒤로가기/공유 버튼 배치
-  - GymDetail 탭 바(시설소개/트레이너/이용권/후기) 삭제
   - "이용권" → "회원권" 전체 용어 통일
+- **공통 컴포넌트 추출 및 전체 페이지 통일 (2026-03-24)**:
+  - 신규 컴포넌트 8개: RatingSummary, ReviewItem, ReviewSort, BottomCTA, Badge, InfoRow, PlanCard, EmptyState
+  - GymDetail, ClassDetail, TrainerDetail, ProductDetail, MeetupDetail, GymProducts에 적용
+  - TrainerListItem: rightAction prop 추가 (예약/구매 버튼 분기), categoryColor에 'pt' 추가
+  - PTTrainerCard: 이미지 상단+하단 정보 레이아웃으로 변경
+  - icon-btn: 전체 보더 제거하여 통일
+  - 전체 상세 페이지 섹션 구분: border-b → h-2 bg-surface-muted 두꺼운 회색 밴드로 통일
+  - 전체 섹션 제목: text-heading font-bold text-ink로 통일
+  - RatingSummary 바 색상: primary(#FF6B35)
+- **GymDetail 최종 구조 (2026-03-24)**:
+  - 순서: 히어로 → 기본정보+쿠폰 → 그룹수업(2주 날짜탭, 예약/구매 분기) → 개인레슨(스크롤카드) → 공지+편의시설 → B&A → 후기 → 혼잡도+지도 → 피드
+  - 영업시간: 항상 펼침, 영업중/종료 Badge, 실제 시간 데이터
+  - 혼잡도: 좌우 날짜 탐색 (오늘~과거 1주일)
+  - 주소 클릭 → 네이버 지도 연결
+  - FeedCard 공통 컴포넌트 사용 (2열 그리드)
+- **전체 페이지 섹션 구분선 통일 (2026-03-24)**:
+  - Mypage, Membership, Lesson, Invite, ReviewEvent, Ambassador에 h-2 bg-surface-muted 구분선 추가
+  - 홈 그룹 수업: hasTicket 기반 예약/구매 버튼 분기
 
 ## 공통 컴포넌트 맵 (components/ 디렉토리)
 
