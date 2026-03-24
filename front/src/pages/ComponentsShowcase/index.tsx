@@ -159,7 +159,8 @@ export const ComponentsShowcasePage = () => {
               name="박지영 강사"
               category="바레톤"
               categoryColor="bareton"
-              gym="바디채널 강남점"
+              description="바디채널 강남점"
+              todayTime="오늘 14:00, 19:30"
               rating={4.7}
               reviewCount={64}
               trialInfo="10회 / 66,000원"
@@ -169,7 +170,8 @@ export const ComponentsShowcasePage = () => {
               name="한동훈 강사"
               category="히트35"
               categoryColor="hit35"
-              gym="바디채널 역삼점"
+              description="바디채널 역삼점"
+              todayTime="오늘 10:00, 18:00"
               rating={4.9}
               reviewCount={93}
               trialInfo="10회 / 66,000원"
@@ -191,7 +193,8 @@ export const ComponentsShowcasePage = () => {
               <PTTrainerCard
                 imageUrl="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=240&fit=crop"
                 name="최강민 강사"
-                gym="바디채널 강남점"
+                description="바디채널 강남점"
+                todayTime="오늘 09:00, 15:00"
                 rating={4.9}
                 reviewCount={127}
                 trialInfo="10회 / 66,000원"
@@ -199,7 +202,8 @@ export const ComponentsShowcasePage = () => {
               <PTTrainerCard
                 imageUrl="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=240&fit=crop"
                 name="정서연 강사"
-                gym="바디채널 서초점"
+                description="바디채널 서초점"
+                todayTime="오늘 13:00, 17:00"
                 rating={4.8}
                 reviewCount={89}
                 trialInfo="10회 / 66,000원"

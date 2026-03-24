@@ -1,14 +1,7 @@
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { PageLayout, SubPageHeader, ScrollRow, FilterTabs } from '../../components'
-import { IconStarFilled, IconChevronRight, IconSearch, IconFilter } from '../../components/Icons'
+import { PageLayout, SubPageHeader, ScrollRow } from '../../components'
+import { IconStarFilled, IconChevronRight, IconSearch } from '../../components/Icons'
 
-const filterTabs = [
-  { id: 'filter', label: '필터', icon: IconFilter },
-  { id: 'trial', label: '체험권' },
-  { id: 'bodychannel', label: '바디채널' },
-  { id: 'coupon', label: '선착순쿠폰' },
-]
 
 const myMemberships = [
   { id: 1, status: '이용중', gym: '바디채널 강남점', days: '67일 남음', variant: 'primary' },
@@ -75,13 +68,6 @@ const gyms = [
 
 export const MembershipPage = () => {
   const navigate = useNavigate()
-  const [activeFilters, setActiveFilters] = useState<string[]>([])
-
-  const toggleFilter = (id: string) => {
-    setActiveFilters(prev =>
-      prev.includes(id) ? prev.filter(f => f !== id) : [...prev, id]
-    )
-  }
 
   const header = (
     <SubPageHeader

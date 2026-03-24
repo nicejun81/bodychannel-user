@@ -63,11 +63,10 @@ export const GymProductsPage = () => {
             {data.ptPlans.length > 0 ? data.ptPlans.map((pt, i) => (
               <PlanCard
                 key={i}
-                name={`${pt.sessions}회`}
-                price={pt.price}
-                original={pt.original}
+                name={`${pt.sessions}`}
+                price={pt.totalPrice}
                 tag={pt.tag}
-                perSession={pt.perSession}
+                perSession={pt.pricePerSession}
                 highlighted={pt.tag === '인기'}
               />
             )) : (

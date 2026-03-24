@@ -277,10 +277,10 @@ export const GymDetailPage = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const data = gymsData[id || ''] || defaultGym
-  const [liked, setLiked] = useState(false)
+  const [_liked, _setLiked] = useState(false)
   const [heroIdx, setHeroIdx] = useState(0)
   const [congestionDayOffset, setCongestionDayOffset] = useState(0) // -6 ~ 0 (과거 1주일 ~ 오늘)
-  const dayLabels = ['일', '월', '화', '수', '목', '금', '토'] as const
+  void _liked; void _setLiked
   const scheduleDays = (() => {
     const result: { date: Date; label: string; dayKey: string; isToday: boolean }[] = []
     const now = new Date()
@@ -308,7 +308,8 @@ export const GymDetailPage = () => {
   })
 
   const currentHour = new Date().getHours()
-  const currentCongestion = data.congestion.find(c => parseInt(c.time) === currentHour)
+  const _currentCongestion = data.congestion.find(c => parseInt(c.time) === currentHour)
+  void _currentCongestion
 
   return (
     <PageLayout
