@@ -1,13 +1,15 @@
+import type { ReactNode } from 'react'
 import { IconStarFilled } from './Icons'
 
 interface PTTrainerCardProps {
   imageUrl: string
   name: string
   description: string
-  todayTime: string
+  todayTime?: string
   rating: number
   reviewCount: number
   trialInfo: string
+  action?: ReactNode
   onClick?: () => void
 }
 
@@ -18,6 +20,7 @@ export const PTTrainerCard = ({
   rating,
   reviewCount,
   trialInfo,
+  action,
   onClick,
 }: PTTrainerCardProps) => {
   return (
@@ -35,7 +38,8 @@ export const PTTrainerCard = ({
           <span className="text-label font-semibold">{rating}</span>
           <span className="text-label text-ink-tertiary">({reviewCount})</span>
         </div>
-        <span className="text-body font-bold text-primary">{trialInfo}</span>
+        <span className="text-body font-bold text-primary mb-2 block">{trialInfo}</span>
+        {action && <div onClick={(e) => e.stopPropagation()}>{action}</div>}
       </div>
     </button>
   )

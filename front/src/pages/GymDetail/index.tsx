@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { PageLayout, SubPageHeader, RatingSummary, ReviewItem, ReviewSort, BottomCTA, Badge, InfoRow, EmptyState, FeedCard, TrainerListItem, PlanCard } from '../../components'
+import { PageLayout, SubPageHeader, RatingSummary, ReviewItem, ReviewSort, BottomCTA, Badge, InfoRow, EmptyState, FeedCard, TrainerListItem, PlanCard, PTTrainerCard } from '../../components'
 import { IconShare, IconClock, IconMapPin } from '../../components/Icons'
 
 /* ── types ── */
@@ -478,19 +478,20 @@ export const GymDetailPage = () => {
         {data.trainers.length > 0 ? (
           <div className="flex gap-3 overflow-x-auto hide-scrollbar px-page">
             {data.trainers.map((t) => (
-              <button key={t.id} onClick={() => navigate(`/trainer/${t.id}`)} className="flex-shrink-0 w-[160px] border border-border rounded-card overflow-hidden hover:border-ink-disabled transition-colors text-left">
-                <img src={t.avatar} alt={t.name} className="w-full h-[120px] object-cover" />
-                <div className="p-card">
-                  <p className="text-body font-bold text-ink mb-0.5 truncate">{t.name}</p>
-                  <p className="text-label text-ink-tertiary mb-2 truncate">{t.specialty}</p>
-                  <div className="flex items-center gap-1 mb-2">
-                    <StarIcon className="text-semantic-star" style={{ width: 12, height: 12 }} />
-                    <span className="text-label font-semibold">{t.rating}</span>
-                    <span className="text-label text-ink-tertiary">({t.reviewCount})</span>
-                  </div>
-                  <span className="text-body font-bold text-primary">1회 {t.perSession}원</span>
-                </div>
-              </button>
+              <PTTrainerCard
+                key={t.id}
+                imageUrl={t.avatar}
+                name={t.name}
+                description={t.specialty}
+                rating={t.rating}
+                reviewCount={t.reviewCount}
+                trialInfo={`1회 ${t.perSession}원`}
+                action={t.id === 1
+                  ? <span onClick={() => navigate('/reservation')} className="w-full block text-center px-3 py-1.5 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
+                  : <span onClick={() => navigate(`/gym/${id}/products`)} className="w-full block text-center px-3 py-1.5 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
+                }
+                onClick={() => navigate(`/trainer/${t.id}`)}
+              />
             ))}
           </div>
         ) : (
