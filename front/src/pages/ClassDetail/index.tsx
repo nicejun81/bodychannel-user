@@ -148,7 +148,7 @@ const classesData: Record<string, ClassInfo> = {
       },
     ],
     reviews: [
-      { name: '요가러버', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.20', text: '호흡법 설명이 정말 자세해서 좋았어요. 필라테스 처음인데 잘 따라갈 수 있었습니다.' },
+      { name: '바레톤러버', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.20', text: '호흡법 설명이 정말 자세해서 좋았어요. 필라테스 처음인데 잘 따라갈 수 있었습니다.' },
       { name: '체형교정중', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.01', text: '거북목이 심했는데 2주 만에 확실히 나아진 느낌이에요!' },
       { name: '필라입문', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face', rating: 4, date: '2025.11.15', text: '동작 하나하나 천천히 알려주셔서 초보자한테 딱이에요.' },
     ],

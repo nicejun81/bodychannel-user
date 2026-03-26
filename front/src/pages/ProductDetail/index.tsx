@@ -21,12 +21,12 @@ const productsData: Record<string, {
     details: ['용량: 2kg', '맛: 초코/바닐라/딸기', '1회 제공량: 30g', '단백질 함량: 24g/1회'],
   },
   '2': {
-    name: '요가 매트 프리미엄',
+    name: '바레톤 매트 프리미엄',
     price: 35000,
     originalPrice: 45000,
     discount: 22,
     imageUrl: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800&h=800&fit=crop',
-    description: '미끄럼 방지 기능이 있는 프리미엄 요가 매트입니다. 두꺼운 쿠션감으로 관절을 보호합니다.',
+    description: '미끄럼 방지 기능이 있는 프리미엄 바레톤 매트입니다. 두꺼운 쿠션감으로 관절을 보호합니다.',
     details: ['크기: 183cm x 61cm', '두께: 6mm', '재질: TPE', '색상: 블랙/그레이/퍼플'],
   },
 }

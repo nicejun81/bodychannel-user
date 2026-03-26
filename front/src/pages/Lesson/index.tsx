@@ -7,7 +7,7 @@ const filterTabs = [
   { id: 'pt', label: 'PT' },
   { id: 'group', label: '그룹수업' },
   { id: 'pilates', label: '필라테스' },
-  { id: 'yoga', label: '요가' },
+  { id: 'bareton', label: '바레톤' },
 ]
 
 const myLessons = [

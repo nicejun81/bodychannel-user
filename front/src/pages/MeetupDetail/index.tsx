@@ -31,14 +31,14 @@ const meetupsData: Record<string, {
     ],
   },
   '2': {
-    title: '모닝 요가 클럽',
-    category: '요가',
+    title: '모닝 바레톤 클럽',
+    category: '바레톤',
     schedule: '매주 수/금 오전 6시',
     location: '바디채널 강남점',
     memberCount: 18,
     maxMembers: 20,
     imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=450&fit=crop',
-    description: '아침을 여는 상쾌한 요가! 하루를 활기차게 시작해보세요.',
+    description: '아침을 여는 상쾌한 바레톤! 하루를 활기차게 시작해보세요.',
     host: { name: '박요기', imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop&crop=face' },
     members: [
       { imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop&crop=face' },

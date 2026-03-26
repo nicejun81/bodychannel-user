@@ -51,7 +51,7 @@ const classes = [
   {
     id: 6,
     imageUrl: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400&h=300&fit=crop',
-    title: '요가 기초반',
+    title: '바레톤 기초반',
     instructor: '이수진 강사',
     lessonCount: 10,
     level: '초급',

@@ -141,8 +141,8 @@ const meetups = [
   {
     id: 2,
     imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=200&fit=crop',
-    category: '요가',
-    title: '모닝 요가 클럽',
+    category: '바레톤',
+    title: '모닝 바레톤 클럽',
     schedule: '매주 수/금 오전 6시',
     memberCount: 18,
   },

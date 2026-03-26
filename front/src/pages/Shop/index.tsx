@@ -14,7 +14,7 @@ const products = [
   {
     id: 2,
     imageUrl: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&h=400&fit=crop',
-    name: '요가 매트 프리미엄',
+    name: '바레톤 매트 프리미엄',
     price: 35000,
     originalPrice: 45000,
     discount: 22,

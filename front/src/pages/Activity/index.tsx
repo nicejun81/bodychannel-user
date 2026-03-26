@@ -67,7 +67,7 @@ const feeds = [
 ]
 
 /* ── Meetup Categories ── */
-const meetupCategories = ['전체', '러닝', '헬스', '크로스핏', '요가', '등산', '자전거']
+const meetupCategories = ['전체', '러닝', '헬스', '크로스핏', '바레톤', '등산', '자전거']
 
 /* ── Meetup Data ── */
 const meetups = [
@@ -107,8 +107,8 @@ const meetups = [
     id: 3,
     imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=400&fit=crop',
     badge: '',
-    category: '요가',
-    title: '모닝 요가 클럽 🧘 아침을 여는 습관',
+    category: '바레톤',
+    title: '모닝 바레톤 클럽 🧘 아침을 여는 습관',
     schedule: '매주 수/금 06:00',
     location: '바디채널 서초점',
     memberCount: 18,
