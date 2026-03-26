@@ -2,12 +2,14 @@ import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { PageLayout, SubPageHeader, BottomCTA } from '../../components'
 
-type PaymentMethod = 'kakao' | 'naver' | 'card' | 'transfer'
+type PaymentMethod = 'kakao' | 'naver' | 'toss' | 'payco' | 'card' | 'transfer'
 
 const PAYMENTS: { key: PaymentMethod; label: string; sub?: string }[] = [
   { key: 'kakao', label: '카카오페이' },
   { key: 'naver', label: '네이버페이' },
-  { key: 'card', label: '신용/체크카드', sub: '일시불 · 할부' },
+  { key: 'toss', label: '토스페이' },
+  { key: 'payco', label: '페이코' },
+  { key: 'card', label: '신용/체크카드' },
   { key: 'transfer', label: '계좌이체' },
 ]
 
@@ -24,11 +26,19 @@ const CardIcon = () => (
 const BankIcon = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5 stroke-ink stroke-[1.5] fill-none"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3" /></svg>
 )
+const TossLogo = () => (
+  <svg viewBox="0 0 24 24" className="w-5 h-5"><path fill="#fff" d="M12 4c-1.66 0-3 1.34-3 3v2H7v8h10v-8h-2V7c0-1.66-1.34-3-3-3zm-1 3c0-.55.45-1 1-1s1 .45 1 1v2h-2V7zm-2 4h6v4H9v-4z" /></svg>
+)
+const PaycoLogo = () => (
+  <svg viewBox="0 0 24 24" className="w-5 h-5"><path fill="#fff" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2c2.21 0 4 1.79 4 4s-1.79 4-4 4zm0-6v4c1.1 0 2-.9 2-2s-.9-2-2-2z" /></svg>
+)
 
 const PaymentIcon = ({ method }: { method: PaymentMethod }) => {
   const map: Record<PaymentMethod, { bg: string; icon: JSX.Element }> = {
     kakao: { bg: 'bg-semantic-kakao', icon: <KakaoLogo /> },
     naver: { bg: 'bg-semantic-online', icon: <NaverLogo /> },
+    toss: { bg: 'bg-[#0064FF]', icon: <TossLogo /> },
+    payco: { bg: 'bg-[#FA2828]', icon: <PaycoLogo /> },
     card: { bg: 'bg-surface-muted', icon: <CardIcon /> },
     transfer: { bg: 'bg-surface-muted', icon: <BankIcon /> },
   }
@@ -43,7 +53,7 @@ const Check = ({ on }: { on: boolean }) => (
 )
 
 const SectionTitle = ({ children }: { children: string }) => (
-  <h3 className="text-body font-bold text-ink mb-3">{children}</h3>
+  <h3 className="text-title text-ink mb-3">{children}</h3>
 )
 
 const Divider = () => <div className="h-2 bg-surface-muted" />
@@ -69,16 +79,12 @@ export const CheckoutPage = () => {
   const [selectedCoupon, setSelectedCoupon] = useState<number | null>(null)
   const [showCouponSheet, setShowCouponSheet] = useState(false)
   const [pointInput, setPointInput] = useState(0)
-  const [cashInput, setCashInput] = useState(0)
 
   const POINT_BALANCE = 2500
-  const CASH_BALANCE = 15000
   const couponDiscount = selectedCoupon !== null ? coupons.find(c => c.id === selectedCoupon)?.discount || 0 : 0
   const maxPoint = Math.min(POINT_BALANCE, priceNum - couponDiscount)
   const pointUsed = Math.min(pointInput, maxPoint)
-  const maxCash = Math.min(CASH_BALANCE, priceNum - couponDiscount - pointUsed)
-  const cashUsed = Math.min(cashInput, maxCash)
-  const totalDiscount = couponDiscount + pointUsed + cashUsed
+  const totalDiscount = couponDiscount + pointUsed
   const finalPrice = Math.max(0, priceNum - totalDiscount)
 
   const toggleAll = () => {
@@ -101,13 +107,13 @@ export const CheckoutPage = () => {
               <span className="text-[26px]">🏋️</span>
             </div>
             <div className="flex-1 min-w-0 py-0.5">
-              <p className="text-label text-ink-tertiary">{gymName}</p>
-              <p className="text-body font-bold text-ink mt-0.5 leading-snug">{productName}</p>
+              <p className="text-caption text-ink-tertiary">{gymName}</p>
+              <p className="text-body font-bold text-ink mt-1 leading-snug">{productName}</p>
             </div>
           </div>
           {/* 가격 요약 바 */}
-          <div className="mt-3 bg-surface-muted rounded-card px-card py-2.5 flex items-center justify-between">
-            <span className="text-label text-ink-tertiary">결제 예정 금액</span>
+          <div className="mt-3 bg-surface-muted rounded-card px-card py-3 flex items-center justify-between">
+            <span className="text-body text-ink-secondary">결제 예정 금액</span>
             <span className="text-title text-primary">{finalPrice.toLocaleString()}원</span>
           </div>
         </div>
@@ -118,16 +124,16 @@ export const CheckoutPage = () => {
         <div className="bg-surface px-page pt-4 pb-3">
           <div className="flex items-center justify-between mb-2.5">
             <SectionTitle>구매자 정보</SectionTitle>
-            <button className="text-caption text-primary font-bold">변경</button>
+            <button className="text-label text-primary font-bold">변경</button>
           </div>
           {[
             ['이름', '김피트'],
             ['연락처', '010-1234-5678'],
             ['이메일', 'fitkim@email.com'],
           ].map(([label, value]) => (
-            <div key={label} className="flex justify-between py-[9px]">
-              <span className="text-label text-ink-tertiary">{label}</span>
-              <span className="text-label font-semibold text-ink">{value}</span>
+            <div key={label} className="flex justify-between py-2.5">
+              <span className="text-body text-ink-tertiary">{label}</span>
+              <span className="text-body font-semibold text-ink">{value}</span>
             </div>
           ))}
         </div>
@@ -143,20 +149,20 @@ export const CheckoutPage = () => {
               <div className="flex items-center gap-2.5">
                 <svg viewBox="0 0 20 20" className="w-[18px] h-[18px] fill-primary flex-shrink-0"><path d="M15 5H5a2 2 0 00-2 2v1a2 2 0 010 4v1a2 2 0 002 2h10a2 2 0 002-2v-1a2 2 0 010-4V7a2 2 0 00-2-2zm-5 8a3 3 0 110-6 3 3 0 010 6z" /></svg>
                 <div>
-                  <span className="text-label font-semibold text-ink">쿠폰</span>
-                  <span className="text-caption text-primary font-bold ml-1.5">{coupons.length}장 보유</span>
+                  <span className="text-body font-semibold text-ink">쿠폰</span>
+                  <span className="text-label text-primary font-bold ml-1.5">{coupons.length}장 보유</span>
                 </div>
               </div>
               {selectedCoupon !== null ? (
-                <button onClick={() => setSelectedCoupon(null)} className="text-label font-bold text-primary">취소</button>
+                <button onClick={() => setSelectedCoupon(null)} className="text-body font-bold text-primary">취소</button>
               ) : (
-                <button onClick={() => setShowCouponSheet(true)} className="text-label font-bold text-ink-secondary bg-surface-muted px-3 py-1.5 rounded-pill hover:bg-ink hover:text-surface transition-colors">선택</button>
+                <button onClick={() => setShowCouponSheet(true)} className="text-body font-bold text-ink-secondary bg-surface-muted px-3 py-1.5 rounded-pill hover:bg-ink hover:text-surface transition-colors">선택</button>
               )}
             </div>
             {selectedCoupon !== null && (
               <div className="mt-2 bg-primary-50 rounded-card px-card py-2 flex items-center justify-between">
-                <span className="text-caption font-bold text-primary">{coupons.find(c => c.id === selectedCoupon)?.name}</span>
-                <span className="text-label font-bold text-primary">-{couponDiscount.toLocaleString()}원</span>
+                <span className="text-label font-bold text-primary">{coupons.find(c => c.id === selectedCoupon)?.name}</span>
+                <span className="text-body font-bold text-primary">-{couponDiscount.toLocaleString()}원</span>
               </div>
             )}
           </div>
@@ -166,13 +172,13 @@ export const CheckoutPage = () => {
               <div className="flex items-center gap-2.5">
                 <svg viewBox="0 0 20 20" className="w-[18px] h-[18px] fill-primary flex-shrink-0"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm.75 4.75a.75.75 0 00-1.5 0v3.5a.75.75 0 00.37.65l2.5 1.5a.75.75 0 10.76-1.3L10.75 9.6V6.75z" /></svg>
                 <div>
-                  <span className="text-label font-semibold text-ink">포인트</span>
-                  <span className="text-caption text-ink-tertiary ml-1.5">{POINT_BALANCE.toLocaleString()}P 보유</span>
+                  <span className="text-body font-semibold text-ink">포인트</span>
+                  <span className="text-label text-ink-tertiary ml-1.5">{POINT_BALANCE.toLocaleString()}P 보유</span>
                 </div>
               </div>
               <button
                 onClick={() => setPointInput(pointInput > 0 ? 0 : maxPoint)}
-                className={`text-label font-bold px-3 py-1.5 rounded-pill transition-colors ${
+                className={`text-label font-bold px-3.5 py-2 rounded-pill transition-colors ${
                   pointUsed > 0 ? 'bg-primary text-white' : 'bg-surface-muted text-ink-secondary hover:bg-ink hover:text-surface'
                 }`}
               >
@@ -186,48 +192,13 @@ export const CheckoutPage = () => {
                   value={pointInput || ''}
                   onChange={e => setPointInput(Math.min(maxPoint, Math.max(0, parseInt(e.target.value) || 0)))}
                   placeholder="사용할 포인트 입력"
-                  className="w-full border border-border rounded-card px-3 py-2 text-label text-ink text-right pr-8 focus:outline-none focus:border-primary transition-colors"
+                  className="w-full border border-border rounded-card px-3.5 py-2.5 text-body text-ink text-right pr-9 focus:outline-none focus:border-primary transition-colors [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-label text-ink-tertiary">P</span>
+                <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-body text-ink-tertiary">P</span>
               </div>
             </div>
             {pointUsed > 0 && (
-              <p className="text-caption text-primary font-semibold mt-1 text-right">-{pointUsed.toLocaleString()}P 적용</p>
-            )}
-          </div>
-          {/* 캐시 */}
-          <div className="py-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <svg viewBox="0 0 20 20" className="w-[18px] h-[18px] fill-primary flex-shrink-0"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.736 6.979A.75.75 0 007.5 7.5v2h-.25a.75.75 0 000 1.5h.25v.382a2.25 2.25 0 002.25 2.25h.868a.75.75 0 000-1.5h-.868a.75.75 0 01-.75-.75V11h1.618a.75.75 0 000-1.5H9.25V8.093l1.361.681A.75.75 0 0011.283 7.5L8.736 6.979z" /></svg>
-                <div>
-                  <span className="text-label font-semibold text-ink">캐시</span>
-                  <span className="text-caption text-ink-tertiary ml-1.5">{CASH_BALANCE.toLocaleString()}원 보유</span>
-                </div>
-              </div>
-              <button
-                onClick={() => setCashInput(cashInput > 0 ? 0 : maxCash)}
-                className={`text-label font-bold px-3 py-1.5 rounded-pill transition-colors ${
-                  cashUsed > 0 ? 'bg-primary text-white' : 'bg-surface-muted text-ink-secondary hover:bg-ink hover:text-surface'
-                }`}
-              >
-                {cashUsed > 0 ? '취소' : '전액 사용'}
-              </button>
-            </div>
-            <div className="flex items-center gap-2 mt-2">
-              <div className="flex-1 relative">
-                <input
-                  type="number"
-                  value={cashInput || ''}
-                  onChange={e => setCashInput(Math.min(maxCash, Math.max(0, parseInt(e.target.value) || 0)))}
-                  placeholder="사용할 캐시 입력"
-                  className="w-full border border-border rounded-card px-3 py-2 text-label text-ink text-right pr-8 focus:outline-none focus:border-primary transition-colors"
-                />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-label text-ink-tertiary">원</span>
-              </div>
-            </div>
-            {cashUsed > 0 && (
-              <p className="text-caption text-primary font-semibold mt-1 text-right">-{cashUsed.toLocaleString()}원 적용</p>
+              <p className="text-label text-primary font-semibold mt-1.5 text-right">-{pointUsed.toLocaleString()}P 적용</p>
             )}
           </div>
         </div>
@@ -251,7 +222,7 @@ export const CheckoutPage = () => {
                   }`}
                 >
                   <PaymentIcon method={m.key} />
-                  <span className={`text-caption font-bold ${active ? 'text-primary' : 'text-ink-secondary'}`}>{m.label}</span>
+                  <span className={`text-label font-bold ${active ? 'text-primary' : 'text-ink-secondary'}`}>{m.label}</span>
                 </button>
               )
             })}
@@ -309,35 +280,29 @@ export const CheckoutPage = () => {
         <div className="bg-surface px-page pt-4 pb-4">
           <SectionTitle>결제 금액</SectionTitle>
           <div className="flex justify-between py-1.5">
-            <span className="text-label text-ink-tertiary">상품 금액</span>
-            <span className="text-label text-ink">{priceNum.toLocaleString()}원</span>
+            <span className="text-body text-ink-tertiary">상품 금액</span>
+            <span className="text-body text-ink">{priceNum.toLocaleString()}원</span>
           </div>
           {couponDiscount > 0 && (
             <div className="flex justify-between py-1.5">
-              <span className="text-label text-ink-tertiary">쿠폰 할인</span>
-              <span className="text-label text-primary font-semibold">-{couponDiscount.toLocaleString()}원</span>
+              <span className="text-body text-ink-tertiary">쿠폰 할인</span>
+              <span className="text-body text-primary font-semibold">-{couponDiscount.toLocaleString()}원</span>
             </div>
           )}
           {pointUsed > 0 && (
             <div className="flex justify-between py-1.5">
-              <span className="text-label text-ink-tertiary">포인트 사용</span>
-              <span className="text-label text-primary font-semibold">-{pointUsed.toLocaleString()}원</span>
-            </div>
-          )}
-          {cashUsed > 0 && (
-            <div className="flex justify-between py-1.5">
-              <span className="text-label text-ink-tertiary">캐시 사용</span>
-              <span className="text-label text-primary font-semibold">-{cashUsed.toLocaleString()}원</span>
+              <span className="text-body text-ink-tertiary">포인트 사용</span>
+              <span className="text-body text-primary font-semibold">-{pointUsed.toLocaleString()}원</span>
             </div>
           )}
           {totalDiscount === 0 && (
             <div className="flex justify-between py-1.5">
-              <span className="text-label text-ink-tertiary">할인</span>
-              <span className="text-label text-ink-disabled">없음</span>
+              <span className="text-body text-ink-tertiary">할인</span>
+              <span className="text-body text-ink-disabled">없음</span>
             </div>
           )}
-          <div className="border-t border-border mt-2 pt-3 flex justify-between items-baseline">
-            <span className="text-body font-bold text-ink">총 결제 금액</span>
+          <div className="border-t border-border mt-3 pt-4 flex justify-between items-baseline">
+            <span className="text-title text-ink">총 결제 금액</span>
             <div className="text-right">
               <span className="text-heading text-primary">{finalPrice.toLocaleString()}</span>
               <span className="text-body text-primary font-semibold">원</span>
@@ -354,7 +319,7 @@ export const CheckoutPage = () => {
             <div className={`w-[22px] h-[22px] rounded-[6px] flex items-center justify-center flex-shrink-0 transition-colors ${allAgreed ? 'bg-primary' : 'border-2 border-ink-disabled'}`}>
               {allAgreed && <svg viewBox="0 0 16 16" className="w-3 h-3 fill-white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z" /></svg>}
             </div>
-            <span className="text-body font-bold text-ink">전체 동의</span>
+            <span className="text-body font-bold text-ink">전체 동의하기</span>
           </button>
           {/* 개별 항목 */}
           {[
@@ -372,7 +337,7 @@ export const CheckoutPage = () => {
               }`}>
                 {(item.required ? agreed : allAgreed) && <svg viewBox="0 0 16 16" className="w-2.5 h-2.5 fill-white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z" /></svg>}
               </div>
-              <span className="text-caption text-ink-secondary">{item.label}</span>
+              <span className="text-label text-ink-secondary">{item.label}</span>
             </button>
           ))}
         </div>
@@ -382,7 +347,7 @@ export const CheckoutPage = () => {
       {/* ━━ Bottom CTA ━━ */}
       <BottomCTA hideBottomNav>
         <div className="flex-1 min-w-0">
-          <p className="text-caption text-ink-tertiary">{selectedMethod?.label}</p>
+          <p className="text-label text-ink-tertiary">{selectedMethod?.label}</p>
           <p className="text-title text-ink">{finalPrice.toLocaleString()}원</p>
         </div>
         <button

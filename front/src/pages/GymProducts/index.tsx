@@ -25,6 +25,14 @@ const membershipProducts = [
 ]
 
 const lessonCategories = [
+  { name: 'PT', categoryColor: 'pt' as const, icon: '💪', img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=80&h=80&fit=crop', desc: '1:1 맞춤 퍼스널 트레이닝', plans: [
+    { group: '회수권' as const, label: '1회 체험', price: '50,000', tag: '체험특가', per: '50,000' },
+    { group: '회수권' as const, label: '10회', price: '700,000', per: '70,000' },
+    { group: '회수권' as const, label: '20회', price: '1,300,000', tag: '5만원 할인', per: '65,000' },
+    { group: '회수권' as const, label: '30회', price: '1,800,000', tag: '인기', per: '60,000' },
+    { group: '무제한 이용권' as const, label: '1개월', price: '299,000' },
+    { group: '무제한 이용권' as const, label: '3개월', price: '799,000', original: '897,000', tag: '11% OFF', installment: '월 266,333원' },
+  ] as Duration[] },
   { name: '바레톤', categoryColor: 'bareton' as const, icon: '🩰', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=80&h=80&fit=crop', desc: '발레 + 필라테스 기반 전신 토닝', plans: [
     { group: '회수권' as const, label: '1회 체험', price: '30,000', tag: '체험특가', per: '30,000' },
     { group: '회수권' as const, label: '10회', price: '250,000', per: '25,000' },
@@ -47,12 +55,6 @@ const lessonCategories = [
     { group: '회수권' as const, label: '20회', price: '380,000', tag: '14% OFF', per: '19,000' },
     { group: '무제한 이용권' as const, label: '1개월', price: '79,000' },
     { group: '무제한 이용권' as const, label: '3개월', price: '213,000', original: '237,000', tag: '10% OFF', installment: '월 71,000원' },
-  ] as Duration[] },
-  { name: 'PT', categoryColor: 'pt' as const, icon: '💪', img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=80&h=80&fit=crop', desc: '1:1 맞춤 퍼스널 트레이닝', plans: [
-    { group: '회수권' as const, label: '1회 체험', price: '50,000', tag: '체험특가', per: '50,000' },
-    { group: '회수권' as const, label: '10회', price: '700,000', per: '70,000' },
-    { group: '회수권' as const, label: '20회', price: '1,300,000', tag: '5만원 할인', per: '65,000' },
-    { group: '회수권' as const, label: '30회', price: '1,800,000', tag: '인기', per: '60,000' },
   ] as Duration[] },
 ]
 
@@ -182,7 +184,7 @@ export const GymProductsPage = () => {
   const [selectedIdx, setSelectedIdx] = useState(0)
   const [selectedDurIdx, setSelectedDurIdx] = useState(0)
 
-  const reset = (t: Tab) => { setTab(t); setSelectedIdx(0); setSelectedDurIdx(0) }
+  const reset = (t: Tab) => { setTab(t); setSelectedIdx(t === 'membership' ? 0 : -1); setSelectedDurIdx(0) }
   const safeIdx = selectedIdx >= 0 ? selectedIdx : 0
   const durations = getDurations(tab, safeIdx)
   const selectedDur = durations[selectedDurIdx]
@@ -323,7 +325,7 @@ export const GymProductsPage = () => {
                         return groups.map((group, gi) => (
                           <div key={gi}>
                             {group && (
-                              <div className={`px-1 ${gi > 0 ? 'pt-4 mt-1 border-t border-border' : 'pt-1'} pb-2`}>
+                              <div className={`px-1 ${gi > 0 ? 'pt-5 mt-3 border-t border-border' : 'pt-4'} pb-2`}>
                                 <span className="text-label font-bold text-ink-tertiary tracking-wide">{group}</span>
                               </div>
                             )}
