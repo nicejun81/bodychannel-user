@@ -166,10 +166,10 @@ export const ChatPage = () => {
                   <div className="flex items-center gap-2">
                     <span className="text-title font-semibold text-ink">{room.name}</span>
                     {room.type === 'trainer' && (
-                      <span className="text-caption font-semibold text-primary bg-primary-50 px-1.5 py-0.5 rounded">트레이너</span>
+                      <span className="text-label font-semibold text-primary bg-primary-50 px-1.5 py-0.5 rounded">트레이너</span>
                     )}
                     {room.type === 'group' && (
-                      <span className="text-caption font-semibold text-ink-secondary bg-surface-muted px-1.5 py-0.5 rounded">모임</span>
+                      <span className="text-label font-semibold text-ink-secondary bg-surface-muted px-1.5 py-0.5 rounded">모임</span>
                     )}
                   </div>
                   <span className="text-label text-ink-placeholder flex-shrink-0">{room.time}</span>

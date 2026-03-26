@@ -145,7 +145,7 @@ export const LessonPage = () => {
         <div className="flex gap-2 overflow-x-auto hide-scrollbar mb-4">
           {scheduleDays.map((d, i) => (
             <button key={i} onClick={() => setSelectedDateIdx(i)} className={`flex-shrink-0 w-[52px] py-2 rounded-xl text-center transition-colors ${selectedDateIdx === i ? 'bg-primary text-white' : 'bg-surface-muted text-ink-secondary hover:bg-surface-subtle'}`}>
-              <span className="text-caption block">{d.isToday ? '오늘' : d.label}</span>
+              <span className="text-label block">{d.isToday ? '오늘' : d.label}</span>
               <span className="text-label font-bold block">{d.dayKey}</span>
             </button>
           ))}

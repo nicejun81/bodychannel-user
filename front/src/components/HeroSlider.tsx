@@ -66,7 +66,7 @@ export const HeroSlider = () => {
             className={`min-w-full px-page py-5 pb-8 relative overflow-hidden min-h-[100px] flex flex-col justify-center ${slideBackgrounds[slide.variant]}`}
           >
             <div className="absolute -top-[50%] -right-[20%] w-[150px] h-[150px] bg-primary rounded-full opacity-15" />
-            <p className={`text-caption mb-1 relative z-10 ${slide.variant === 'event' ? 'text-white/80' : 'text-ink-placeholder'}`}>
+            <p className={`text-label mb-1 relative z-10 ${slide.variant === 'event' ? 'text-white/80' : 'text-ink-placeholder'}`}>
               {slide.greeting}
             </p>
             <h1 className="text-white text-body font-bold leading-snug relative z-10">

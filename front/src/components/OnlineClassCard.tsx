@@ -26,7 +26,7 @@ export const OnlineClassCard = ({
       <h3 className="text-label font-semibold text-ink mb-0.5 whitespace-nowrap overflow-hidden text-ellipsis">
         {title}
       </h3>
-      <p className="text-caption text-ink-placeholder">
+      <p className="text-label text-ink-placeholder">
         {lessonCount}강 · {level}
       </p>
     </button>

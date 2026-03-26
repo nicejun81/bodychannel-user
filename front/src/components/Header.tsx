@@ -193,7 +193,7 @@ export const Header = () => {
                   </svg>
                   <span className="text-body font-semibold text-ink">입장이 확인되었습니다</span>
                 </div>
-                <p className="text-caption text-ink-secondary">바디채널 강남점</p>
+                <p className="text-label text-ink-secondary">바디채널 강남점</p>
               </div>
             ) : (
               <p className="text-body text-white/80 mb-5">헬스장 QR코드를 스캔해주세요</p>

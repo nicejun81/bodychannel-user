@@ -17,7 +17,7 @@ export const AmbassadorPage = () => {
         <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
           <IconBarChart className="w-8 h-8 stroke-white stroke-[1.5]" />
         </div>
-        <h2 className="text-xl font-bold mb-2">BODYCHANNEL 앰버서더</h2>
+        <h2 className="text-display font-bold mb-2">BODYCHANNEL 앰버서더</h2>
         <p className="text-body text-ink-disabled mb-4">운동을 사랑하는 당신을 위한 특별한 기회</p>
         <button className="px-6 py-3 bg-primary text-white font-semibold rounded-card hover:opacity-90 transition-opacity">
           앰버서더 신청하기

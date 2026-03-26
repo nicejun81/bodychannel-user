@@ -28,7 +28,7 @@ export const RecentChat = ({
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between mb-0.5">
           <span className="text-label font-semibold text-ink">{name}</span>
-          <span className="text-caption text-ink-placeholder">{time}</span>
+          <span className="text-label text-ink-placeholder">{time}</span>
         </div>
         <p className="text-label text-ink-secondary truncate">{message}</p>
       </div>

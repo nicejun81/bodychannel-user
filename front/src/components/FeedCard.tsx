@@ -41,7 +41,7 @@ export const FeedCard = ({
           <span className="text-label font-semibold text-ink">{authorName}</span>
         </div>
         <p className="text-label text-ink-secondary leading-snug line-clamp-2 mb-2">{text}</p>
-        <div className="flex items-center gap-3 text-caption text-ink-placeholder">
+        <div className="flex items-center gap-3 text-label text-ink-placeholder">
           <span className={`flex items-center gap-1 ${isLiked ? 'text-[#ff5252]' : ''}`}>
             <IconHeart className={`w-3.5 h-3.5 ${isLiked ? 'fill-[#ff5252] stroke-[#ff5252]' : 'stroke-current'} stroke-2`} />
             {likeCount}

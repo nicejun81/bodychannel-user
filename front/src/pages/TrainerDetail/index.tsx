@@ -355,7 +355,7 @@ export const TrainerDetailPage = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
         <div className="absolute bottom-5 left-5 right-5 text-white">
           <span className="inline-block px-2 py-0.5 bg-primary text-white text-label font-bold rounded mb-2">{trainer.category}</span>
-          <h1 className="text-[22px] font-bold mb-1">{trainer.name}</h1>
+          <h1 className="text-display font-bold mb-1">{trainer.name}</h1>
           <div className="flex items-center gap-3 text-body">
             <button onClick={() => navigate(`/gym/${trainer.gymId}`)} className="flex items-center gap-1 hover:underline">
               <IconMapPin className="w-3.5 h-3.5" />

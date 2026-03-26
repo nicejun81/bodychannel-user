@@ -121,7 +121,7 @@ export const MeetupDetailPage = () => {
           <img src={meetup.host.imageUrl} alt={meetup.host.name} className="w-12 h-12 rounded-full object-cover" />
           <div>
             <p className="font-semibold">{meetup.host.name}</p>
-            <p className="text-caption text-ink-secondary">모임장</p>
+            <p className="text-label text-ink-secondary">모임장</p>
           </div>
         </div>
       </div>
@@ -131,7 +131,7 @@ export const MeetupDetailPage = () => {
       {/* Description */}
       <div className="px-page py-section">
         <h2 className="text-heading font-bold text-ink mb-3">모임 소개</h2>
-        <p className="text-ink-secondary text-sm leading-relaxed">{meetup.description}</p>
+        <p className="text-ink-secondary text-body leading-relaxed">{meetup.description}</p>
       </div>
 
       <div className="h-2 bg-surface-muted" />
@@ -149,7 +149,7 @@ export const MeetupDetailPage = () => {
             />
           ))}
           {meetup.memberCount > meetup.members.length && (
-            <div className="w-10 h-10 rounded-full bg-ink-disabled border-2 border-white flex items-center justify-center text-caption font-semibold text-ink-secondary">
+            <div className="w-10 h-10 rounded-full bg-ink-disabled border-2 border-white flex items-center justify-center text-label font-semibold text-ink-secondary">
               +{meetup.memberCount - meetup.members.length}
             </div>
           )}

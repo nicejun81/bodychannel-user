@@ -145,7 +145,7 @@ export const MyPage = () => {
               <div className="flex gap-4">
                 {membership.info.map((item) => (
                   <div key={item.label} className="flex flex-col">
-                    <span className={`text-caption mb-0.5 ${membership.status === 'active' ? 'opacity-70' : 'text-ink-placeholder'}`}>
+                    <span className={`text-label mb-0.5 ${membership.status === 'active' ? 'opacity-70' : 'text-ink-placeholder'}`}>
                       {item.label}
                     </span>
                     <span className={`text-body font-bold ${membership.status === 'expired' ? 'text-ink-secondary' : ''}`}>

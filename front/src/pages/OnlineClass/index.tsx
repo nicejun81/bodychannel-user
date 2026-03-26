@@ -88,7 +88,7 @@ export const OnlineClassPage = () => {
               className="w-[120px] h-[90px] rounded-card object-cover flex-shrink-0"
             />
             <div className="flex-1 flex flex-col justify-center">
-              <span className="inline-block w-fit px-2 py-0.5 bg-surface-muted text-ink-secondary text-caption font-semibold rounded mb-1.5">
+              <span className="inline-block w-fit px-2 py-0.5 bg-surface-muted text-ink-secondary text-label font-semibold rounded mb-1.5">
                 {item.level}
               </span>
               <h3 className="text-title text-ink mb-1">{item.title}</h3>

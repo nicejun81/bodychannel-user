@@ -76,7 +76,7 @@ export const FeedDetailPage = () => {
         <img src={feed.authorImageUrl} alt={feed.authorName} className="w-10 h-10 rounded-full object-cover" />
         <div>
           <p className="font-semibold">{feed.authorName}</p>
-          <p className="text-caption text-ink-secondary">{feed.createdAt}</p>
+          <p className="text-label text-ink-secondary">{feed.createdAt}</p>
         </div>
       </div>
 
@@ -119,7 +119,7 @@ export const FeedDetailPage = () => {
                   <span className="font-semibold">{comment.author}</span>{' '}
                   {comment.text}
                 </p>
-                <p className="text-caption text-ink-tertiary mt-1">{comment.createdAt}</p>
+                <p className="text-label text-ink-tertiary mt-1">{comment.createdAt}</p>
               </div>
             </div>
           ))}

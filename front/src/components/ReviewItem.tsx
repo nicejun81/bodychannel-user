@@ -18,7 +18,7 @@ export const ReviewItem = ({ avatar, name, rating, date, text, badge, photos }: 
         <div className="flex-1">
           <div className="flex items-center gap-2">
             <span className="text-body font-semibold text-ink">{name}</span>
-            {badge && <span className="px-1.5 py-0.5 bg-surface-muted text-caption text-ink-secondary rounded">{badge}</span>}
+            {badge && <span className="px-1.5 py-0.5 bg-surface-muted text-label text-ink-secondary rounded">{badge}</span>}
             <span className="text-label text-ink-tertiary ml-auto">{date}</span>
           </div>
           <div className="flex gap-0.5 mt-0.5">

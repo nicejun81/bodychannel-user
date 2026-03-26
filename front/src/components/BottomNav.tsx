@@ -41,7 +41,7 @@ export const BottomNav = () => {
                   }`}
                 />
               </span>
-              <span className="text-caption font-medium tracking-wider">{item.label}</span>
+              <span className="text-label font-medium tracking-wider">{item.label}</span>
             </Link>
           )
         })}

@@ -10,7 +10,7 @@ export const RatingSummary = ({ rating, reviewCount, distribution = [75, 18, 5, 
   return (
     <div className="flex items-center gap-4 p-card-lg bg-surface-subtle rounded-card">
       <div className="text-center">
-        <p className="text-[28px] font-bold text-ink">{rating}</p>
+        <p className="text-[28px] font-extrabold text-ink">{rating}</p>
         <div className="flex gap-0.5 justify-center mb-0.5">
           {[1, 2, 3, 4, 5].map((i) => (
             <IconStarFilled key={i} className={`w-3 h-3 ${i <= Math.round(rating) ? 'text-semantic-star' : 'text-ink-disabled'}`} />
@@ -21,7 +21,7 @@ export const RatingSummary = ({ rating, reviewCount, distribution = [75, 18, 5, 
       <div className="flex-1 space-y-1">
         {[5, 4, 3, 2, 1].map((star, idx) => (
           <div key={star} className="flex items-center gap-2">
-            <span className="text-caption text-ink-tertiary w-3">{star}</span>
+            <span className="text-label text-ink-tertiary w-3">{star}</span>
             <div className="flex-1 h-[6px] bg-ink-disabled rounded-full overflow-hidden">
               <div className="h-full rounded-full" style={{ width: `${distribution[idx]}%`, backgroundColor: '#FF6B35' }} />
             </div>

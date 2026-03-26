@@ -438,7 +438,7 @@ export const GymDetailPage = () => {
           <div className="flex gap-2 overflow-x-auto hide-scrollbar mb-4">
             {scheduleDays.map((d, i) => (
               <button key={i} onClick={() => setSelectedDateIdx(i)} className={`flex-shrink-0 w-[52px] py-2 rounded-xl text-center transition-colors ${selectedDateIdx === i ? 'bg-primary text-white' : 'bg-surface-muted text-ink-secondary hover:bg-surface-subtle'}`}>
-                <span className="text-caption block">{d.isToday ? '오늘' : d.label}</span>
+                <span className="text-label block">{d.isToday ? '오늘' : d.label}</span>
                 <span className="text-label font-bold block">{d.dayKey}</span>
               </button>
             ))}
@@ -482,7 +482,7 @@ export const GymDetailPage = () => {
                 <img src={t.avatar} alt={t.name} className="w-full h-[120px] object-cover" />
                 <div className="p-card">
                   <p className="text-body font-bold text-ink mb-0.5 truncate">{t.name}</p>
-                  <p className="text-caption text-ink-tertiary mb-2 truncate">{t.specialty}</p>
+                  <p className="text-label text-ink-tertiary mb-2 truncate">{t.specialty}</p>
                   <div className="flex items-center gap-1 mb-2">
                     <StarIcon className="text-semantic-star" style={{ width: 12, height: 12 }} />
                     <span className="text-label font-semibold">{t.rating}</span>
@@ -609,10 +609,10 @@ export const GymDetailPage = () => {
                 ))}
               </div>
               <div className="flex justify-between mt-1">
-                <span className="text-[9px] text-ink-tertiary">6시</span>
-                <span className="text-[9px] text-ink-tertiary">12시</span>
-                <span className="text-[9px] text-ink-tertiary">18시</span>
-                <span className="text-[9px] text-ink-tertiary">23시</span>
+                <span className="text-caption text-ink-tertiary">6시</span>
+                <span className="text-caption text-ink-tertiary">12시</span>
+                <span className="text-caption text-ink-tertiary">18시</span>
+                <span className="text-caption text-ink-tertiary">23시</span>
               </div>
             </div>
           )
