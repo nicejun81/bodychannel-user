@@ -83,6 +83,53 @@ const tabConfig = [
   { key: 'extra' as Tab, label: '부가상품', icon: '🎒' },
 ]
 
+function PlanCardButton({ dur, selected, isBestValue, onClick }: { dur: Duration; selected: boolean; isBestValue: boolean; onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`w-full text-left rounded-card border-2 transition-all ${
+        selected
+          ? 'border-primary bg-primary-50 shadow-card'
+          : 'border-border bg-surface hover:border-ink-disabled'
+      }`}
+    >
+      <div className="px-card-lg py-3">
+        <div className="flex items-center gap-3">
+          <div className="flex-shrink-0">
+            {selected ? (
+              <div className="w-[22px] h-[22px] rounded-full bg-primary flex items-center justify-center">
+                <svg viewBox="0 0 16 16" className="w-3.5 h-3.5 text-white fill-current">
+                  <path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z" />
+                </svg>
+              </div>
+            ) : (
+              <div className="w-[22px] h-[22px] rounded-full border-2 border-ink-disabled" />
+            )}
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-0.5">
+              <span className={`text-body font-bold ${selected ? 'text-ink' : 'text-ink-secondary'}`}>{dur.label}</span>
+              {isBestValue && <span className="px-1.5 py-0.5 bg-primary text-white text-caption font-bold rounded">추천</span>}
+              {dur.tag && <span className="px-1.5 py-0.5 bg-primary/10 text-primary text-caption font-bold rounded">{dur.tag}</span>}
+            </div>
+            {(dur.original || dur.per || dur.installment) && (
+              <div className="flex items-center gap-2 mt-1">
+                {dur.original && <span className="text-label text-ink-disabled line-through">{dur.original}원</span>}
+                {dur.installment && <span className="text-label text-primary font-semibold">{dur.installment}</span>}
+                {dur.per && <span className="text-label text-ink-tertiary">1회 {dur.per}원</span>}
+              </div>
+            )}
+          </div>
+          <div className="flex-shrink-0 text-right">
+            <span className={`text-title font-bold ${selected ? 'text-primary' : 'text-ink'}`}>{dur.price}</span>
+            <span className={`text-label ${selected ? 'text-primary' : 'text-ink-secondary'}`}>원</span>
+          </div>
+        </div>
+      </div>
+    </button>
+  )
+}
+
 export const GymProductsPage = () => {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -170,108 +217,57 @@ export const GymProductsPage = () => {
         </div>
       </div>
 
-      {/* ── Product Sub-tabs (for lesson/extra with multiple items) ── */}
-      {products.length > 1 && (
-        <div className="pb-3">
-          <div className="grid grid-cols-3 gap-2">
-            {products.map((item, i) => {
-              const isLesson = tab === 'lesson'
-              const cat = isLesson ? lessonCategories[i] : null
-              const isSelected = selectedIdx === i
+      {/* ── Plan Cards (single product) or Accordion (multiple products) ── */}
+      <div className="pt-1 pb-[120px]">
+        {products.length <= 1 ? (
+          <>
+            <div className="flex flex-col gap-3">
+              {durations.map((dur, di) => (
+                <PlanCardButton key={di} dur={dur} selected={selectedDurIdx === di} isBestValue={bestValueIdx === di} onClick={() => setSelectedDurIdx(di)} />
+              ))}
+            </div>
+            {tab === 'membership' && (
+              <p className="text-label text-ink-tertiary text-center mt-4">카드사별 무이자 할부 혜택이 제공됩니다</p>
+            )}
+          </>
+        ) : (
+          <div className="flex flex-col gap-2">
+            {products.map((item, pi) => {
+              const isOpen = selectedIdx === pi
+              const itemDurations = getDurations(tab, pi)
+              const itemBestIdx = itemDurations.reduce((best, dur, i) => {
+                if (dur.tag?.includes('인기') || dur.tag?.includes('33%')) return i
+                if (dur.tag && !itemDurations[best]?.tag) return i
+                return best
+              }, -1)
+
               return (
-                <button key={i} onClick={() => { setSelectedIdx(i); setSelectedDurIdx(0) }}
-                  className={`flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-card border-2 text-label font-bold transition-all truncate ${
-                    isSelected
-                      ? isLesson && cat ? `${categoryStyles[cat.categoryColor]} border-current` : 'bg-ink text-white border-ink'
-                      : 'bg-surface-subtle text-ink-secondary border-transparent hover:border-border'
-                  }`}>
-                  <span className="flex-shrink-0">{item.icon}</span>
-                  <span className="truncate">{item.name}</span>
-                </button>
+                <div key={pi} className={`rounded-card-lg border overflow-hidden transition-all ${isOpen ? 'border-border' : 'border-border'}`}>
+                  <button
+                    onClick={() => { setSelectedIdx(pi); setSelectedDurIdx(0) }}
+                    className={`w-full flex items-center justify-between px-card-lg py-3.5 transition-colors ${
+                      isOpen ? 'bg-surface-muted' : 'bg-surface hover:bg-surface-subtle'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-title">{item.icon}</span>
+                      <span className={`text-body font-bold ${isOpen ? 'text-ink' : 'text-ink-secondary'}`}>{item.name}</span>
+                    </div>
+                    <svg viewBox="0 0 20 20" className={`w-5 h-5 text-ink-tertiary transition-transform ${isOpen ? 'rotate-180' : ''}`}>
+                      <path fill="currentColor" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
+                    </svg>
+                  </button>
+                  {isOpen && (
+                    <div className="px-3 pb-3 flex flex-col gap-2">
+                      {itemDurations.map((dur, di) => (
+                        <PlanCardButton key={di} dur={dur} selected={selectedDurIdx === di} isBestValue={itemBestIdx === di} onClick={() => setSelectedDurIdx(di)} />
+                      ))}
+                    </div>
+                  )}
+                </div>
               )
             })}
           </div>
-        </div>
-      )}
-
-      {/* ── Plan Cards ── */}
-      <div className="pt-1 pb-[120px]">
-        <div className="flex flex-col gap-3">
-          {durations.map((dur, di) => {
-            const selected = selectedDurIdx === di
-            const isBestValue = bestValueIdx === di
-
-            return (
-              <button
-                key={di}
-                onClick={() => setSelectedDurIdx(di)}
-                className={`w-full text-left rounded-card-lg border-2 transition-all overflow-hidden ${
-                  selected
-                    ? 'border-primary bg-primary-50 shadow-card'
-                    : 'border-border bg-surface hover:border-ink-disabled hover:shadow-card'
-                }`}
-              >
-                <div className="px-card-lg py-3.5">
-                  <div className="flex items-center gap-3">
-                    {/* Selection indicator */}
-                    <div className="flex-shrink-0">
-                      {selected ? (
-                        <div className="w-[22px] h-[22px] rounded-full bg-primary flex items-center justify-center">
-                          <svg viewBox="0 0 16 16" className="w-3.5 h-3.5 text-white fill-current">
-                            <path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z" />
-                          </svg>
-                        </div>
-                      ) : (
-                        <div className="w-[22px] h-[22px] rounded-full border-2 border-ink-disabled" />
-                      )}
-                    </div>
-
-                    {/* Plan info */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-0.5">
-                        <span className={`text-body font-bold ${selected ? 'text-ink' : 'text-ink-secondary'}`}>
-                          {dur.label}
-                        </span>
-                        {isBestValue && (
-                          <span className="px-1.5 py-0.5 bg-primary text-white text-caption font-bold rounded">추천</span>
-                        )}
-                        {dur.tag && (
-                          <span className="px-1.5 py-0.5 bg-primary/10 text-primary text-caption font-bold rounded">
-                            {dur.tag}
-                          </span>
-                        )}
-                      </div>
-                      {(dur.original || dur.per || dur.installment) && (
-                        <div className="flex items-center gap-2 mt-1">
-                          {dur.original && (
-                            <span className="text-label text-ink-disabled line-through">{dur.original}원</span>
-                          )}
-                          {dur.installment && (
-                            <span className="text-label text-primary font-semibold">{dur.installment}</span>
-                          )}
-                          {dur.per && (
-                            <span className="text-label text-ink-tertiary">1회 {dur.per}원</span>
-                          )}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Price */}
-                    <div className="flex-shrink-0 text-right">
-                      <span className={`text-title font-bold ${selected ? 'text-primary' : 'text-ink'}`}>
-                        {dur.price}
-                      </span>
-                      <span className={`text-label ${selected ? 'text-primary' : 'text-ink-secondary'}`}>원</span>
-                    </div>
-                  </div>
-                </div>
-              </button>
-            )
-          })}
-        </div>
-
-        {tab === 'membership' && (
-          <p className="text-label text-ink-tertiary text-center mt-4">카드사별 무이자 할부 혜택이 제공됩니다</p>
         )}
       </div>
 
