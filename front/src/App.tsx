@@ -22,6 +22,7 @@ import {
   GymProductsPage,
   ChatPage,
   ChatRoomPage,
+  CheckoutPage,
 } from './pages'
 
 export const App = () => {
@@ -50,6 +51,7 @@ export const App = () => {
         <Route path="/gym/:id/products" element={<GymProductsPage />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/chat/:id" element={<ChatRoomPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
     </BrowserRouter>
   )
