@@ -13,7 +13,7 @@ const categoryStyles: Record<string, string> = {
   pt: 'bg-primary-50 text-primary',
 }
 
-interface Duration { label: string; price: string; original?: string; tag?: string; installment?: string; per?: string }
+interface Duration { label: string; price: string; original?: string; tag?: string; installment?: string; per?: string; group?: '회수권' | '기간권' }
 
 const membershipProducts = [
   { name: '헬스 이용권', icon: '🏋️', durations: [
@@ -26,27 +26,33 @@ const membershipProducts = [
 
 const lessonCategories = [
   { name: '바레톤', categoryColor: 'bareton' as const, icon: '🩰', plans: [
-    { label: '1회 체험', price: '30,000', tag: '체험특가', per: '30,000' },
-    { label: '10회', price: '250,000', per: '25,000' },
-    { label: '20회', price: '440,000', tag: '12% OFF', per: '22,000' },
-    { label: '30회', price: '600,000', tag: '인기', per: '20,000' },
+    { group: '회수권' as const, label: '1회 체험', price: '30,000', tag: '체험특가', per: '30,000' },
+    { group: '회수권' as const, label: '10회', price: '250,000', per: '25,000' },
+    { group: '회수권' as const, label: '20회', price: '440,000', tag: '12% OFF', per: '22,000' },
+    { group: '회수권' as const, label: '30회', price: '600,000', tag: '인기', per: '20,000' },
+    { group: '기간권' as const, label: '1개월', price: '89,000' },
+    { group: '기간권' as const, label: '3개월', price: '239,000', original: '267,000', tag: '10% OFF', installment: '월 79,667원' },
   ] as Duration[] },
   { name: '히트35', categoryColor: 'hit35' as const, icon: '🔥', plans: [
-    { label: '1회 체험', price: '25,000', tag: '체험특가', per: '25,000' },
-    { label: '10회', price: '200,000', per: '20,000' },
-    { label: '20회', price: '360,000', tag: '10% OFF', per: '18,000' },
-    { label: '30회', price: '480,000', tag: '인기', per: '16,000' },
+    { group: '회수권' as const, label: '1회 체험', price: '25,000', tag: '체험특가', per: '25,000' },
+    { group: '회수권' as const, label: '10회', price: '200,000', per: '20,000' },
+    { group: '회수권' as const, label: '20회', price: '360,000', tag: '10% OFF', per: '18,000' },
+    { group: '회수권' as const, label: '30회', price: '480,000', tag: '인기', per: '16,000' },
+    { group: '기간권' as const, label: '1개월', price: '79,000' },
+    { group: '기간권' as const, label: '3개월', price: '213,000', original: '237,000', tag: '10% OFF', installment: '월 71,000원' },
   ] as Duration[] },
   { name: '짐그라운드', categoryColor: 'gymground' as const, icon: '🚴', plans: [
-    { label: '1회 체험', price: '25,000', tag: '체험특가', per: '25,000' },
-    { label: '10회', price: '220,000', per: '22,000' },
-    { label: '20회', price: '380,000', tag: '14% OFF', per: '19,000' },
+    { group: '회수권' as const, label: '1회 체험', price: '25,000', tag: '체험특가', per: '25,000' },
+    { group: '회수권' as const, label: '10회', price: '220,000', per: '22,000' },
+    { group: '회수권' as const, label: '20회', price: '380,000', tag: '14% OFF', per: '19,000' },
+    { group: '기간권' as const, label: '1개월', price: '79,000' },
+    { group: '기간권' as const, label: '3개월', price: '213,000', original: '237,000', tag: '10% OFF', installment: '월 71,000원' },
   ] as Duration[] },
   { name: 'PT', categoryColor: 'pt' as const, icon: '💪', plans: [
-    { label: '1회 체험', price: '50,000', tag: '체험특가', per: '50,000' },
-    { label: '10회', price: '700,000', per: '70,000' },
-    { label: '20회', price: '1,300,000', tag: '5만원 할인', per: '65,000' },
-    { label: '30회', price: '1,800,000', tag: '인기', per: '60,000' },
+    { group: '회수권' as const, label: '1회 체험', price: '50,000', tag: '체험특가', per: '50,000' },
+    { group: '회수권' as const, label: '10회', price: '700,000', per: '70,000' },
+    { group: '회수권' as const, label: '20회', price: '1,300,000', tag: '5만원 할인', per: '65,000' },
+    { group: '회수권' as const, label: '30회', price: '1,800,000', tag: '인기', per: '60,000' },
   ] as Duration[] },
 ]
 
@@ -83,47 +89,45 @@ const tabConfig = [
   { key: 'extra' as Tab, label: '부가상품', icon: '🎒' },
 ]
 
-function PlanCardButton({ dur, selected, isBestValue, onClick }: { dur: Duration; selected: boolean; isBestValue: boolean; onClick: () => void }) {
+function PlanCardButton({ dur, selected, isBestValue, onClick, nested }: { dur: Duration; selected: boolean; isBestValue: boolean; onClick: () => void; nested?: boolean }) {
   return (
     <button
       onClick={onClick}
-      className={`w-full text-left rounded-card border-2 transition-all ${
-        selected
-          ? 'border-primary bg-primary-50 shadow-card'
-          : 'border-border bg-surface hover:border-ink-disabled'
+      className={`w-full text-left transition-all ${
+        nested
+          ? `rounded-card px-card-lg py-3 ${selected ? 'bg-surface shadow-card' : 'bg-transparent hover:bg-surface/60'}`
+          : `rounded-card-lg border-2 px-card-lg py-3.5 ${selected ? 'border-primary bg-primary-50 shadow-card' : 'border-border bg-surface hover:border-ink-disabled'}`
       }`}
     >
-      <div className="px-card-lg py-3">
-        <div className="flex items-center gap-3">
-          <div className="flex-shrink-0">
-            {selected ? (
-              <div className="w-[22px] h-[22px] rounded-full bg-primary flex items-center justify-center">
-                <svg viewBox="0 0 16 16" className="w-3.5 h-3.5 text-white fill-current">
-                  <path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z" />
-                </svg>
-              </div>
-            ) : (
-              <div className="w-[22px] h-[22px] rounded-full border-2 border-ink-disabled" />
-            )}
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-0.5">
-              <span className={`text-body font-bold ${selected ? 'text-ink' : 'text-ink-secondary'}`}>{dur.label}</span>
-              {isBestValue && <span className="px-1.5 py-0.5 bg-primary text-white text-caption font-bold rounded">추천</span>}
-              {dur.tag && <span className="px-1.5 py-0.5 bg-primary/10 text-primary text-caption font-bold rounded">{dur.tag}</span>}
+      <div className="flex items-center gap-3">
+        <div className="flex-shrink-0">
+          {selected ? (
+            <div className="w-[22px] h-[22px] rounded-full bg-primary flex items-center justify-center">
+              <svg viewBox="0 0 16 16" className="w-3.5 h-3.5 text-white fill-current">
+                <path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z" />
+              </svg>
             </div>
-            {(dur.original || dur.per || dur.installment) && (
-              <div className="flex items-center gap-2 mt-1">
-                {dur.original && <span className="text-label text-ink-disabled line-through">{dur.original}원</span>}
-                {dur.installment && <span className="text-label text-primary font-semibold">{dur.installment}</span>}
-                {dur.per && <span className="text-label text-ink-tertiary">1회 {dur.per}원</span>}
-              </div>
-            )}
+          ) : (
+            <div className="w-[22px] h-[22px] rounded-full border-2 border-ink-disabled" />
+          )}
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2">
+            <span className={`text-body font-bold ${selected ? 'text-ink' : 'text-ink-secondary'}`}>{dur.label}</span>
+            {isBestValue && <span className="px-1.5 py-0.5 bg-primary text-white text-caption font-bold rounded">추천</span>}
+            {dur.tag && <span className="px-1.5 py-0.5 bg-primary/10 text-primary text-caption font-bold rounded">{dur.tag}</span>}
           </div>
-          <div className="flex-shrink-0 text-right">
-            <span className={`text-title font-bold ${selected ? 'text-primary' : 'text-ink'}`}>{dur.price}</span>
-            <span className={`text-label ${selected ? 'text-primary' : 'text-ink-secondary'}`}>원</span>
-          </div>
+          {(dur.original || dur.per || dur.installment) && (
+            <div className="flex items-center gap-2 mt-0.5">
+              {dur.original && <span className="text-label text-ink-disabled line-through">{dur.original}원</span>}
+              {dur.installment && <span className="text-label text-primary font-semibold">{dur.installment}</span>}
+              {dur.per && <span className="text-label text-ink-tertiary">1회 {dur.per}원</span>}
+            </div>
+          )}
+        </div>
+        <div className="flex-shrink-0 text-right">
+          <span className={`text-title font-bold ${selected ? 'text-primary' : 'text-ink'}`}>{dur.price}</span>
+          <span className={`text-label ${selected ? 'text-primary' : 'text-ink-secondary'}`}>원</span>
         </div>
       </div>
     </button>
@@ -231,7 +235,7 @@ export const GymProductsPage = () => {
             )}
           </>
         ) : (
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1.5">
             {products.map((item, pi) => {
               const isOpen = selectedIdx === pi
               const itemDurations = getDurations(tab, pi)
@@ -242,26 +246,44 @@ export const GymProductsPage = () => {
               }, -1)
 
               return (
-                <div key={pi} className={`rounded-card-lg border overflow-hidden transition-all ${isOpen ? 'border-border' : 'border-border'}`}>
+                <div key={pi} className={`rounded-card-lg overflow-hidden transition-all ${
+                  isOpen ? 'border-2 border-primary/30 bg-primary-50/30' : 'border border-border bg-surface'
+                }`}>
                   <button
                     onClick={() => { setSelectedIdx(pi); setSelectedDurIdx(0) }}
-                    className={`w-full flex items-center justify-between px-card-lg py-3.5 transition-colors ${
-                      isOpen ? 'bg-surface-muted' : 'bg-surface hover:bg-surface-subtle'
+                    className={`w-full flex items-center justify-between px-card-lg py-3 transition-colors ${
+                      isOpen ? 'bg-primary-50' : 'hover:bg-surface-subtle'
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
                       <span className="text-title">{item.icon}</span>
-                      <span className={`text-body font-bold ${isOpen ? 'text-ink' : 'text-ink-secondary'}`}>{item.name}</span>
+                      <span className={`text-body font-bold ${isOpen ? 'text-primary' : 'text-ink-secondary'}`}>{item.name}</span>
                     </div>
-                    <svg viewBox="0 0 20 20" className={`w-5 h-5 text-ink-tertiary transition-transform ${isOpen ? 'rotate-180' : ''}`}>
+                    <svg viewBox="0 0 20 20" className={`w-5 h-5 transition-transform ${isOpen ? 'text-primary rotate-180' : 'text-ink-tertiary'}`}>
                       <path fill="currentColor" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
                     </svg>
                   </button>
                   {isOpen && (
-                    <div className="px-3 pb-3 flex flex-col gap-2">
-                      {itemDurations.map((dur, di) => (
-                        <PlanCardButton key={di} dur={dur} selected={selectedDurIdx === di} isBestValue={itemBestIdx === di} onClick={() => setSelectedDurIdx(di)} />
-                      ))}
+                    <div className="px-1 pb-1.5">
+                      {(() => {
+                        const hasGroups = itemDurations.some(d => d.group)
+                        let lastGroup = ''
+                        return itemDurations.map((dur, di) => {
+                          const showHeader = hasGroups && dur.group && dur.group !== lastGroup
+                          if (dur.group) lastGroup = dur.group
+                          return (
+                            <div key={di}>
+                              {showHeader && (
+                                <div className="flex items-center gap-2 px-card-lg pt-3 pb-1">
+                                  <span className="text-label font-bold text-ink-tertiary">{dur.group}</span>
+                                  <div className="flex-1 h-px bg-border" />
+                                </div>
+                              )}
+                              <PlanCardButton dur={dur} selected={selectedDurIdx === di} isBestValue={itemBestIdx === di} onClick={() => setSelectedDurIdx(di)} nested />
+                            </div>
+                          )
+                        })
+                      })()}
                     </div>
                   )}
                 </div>
