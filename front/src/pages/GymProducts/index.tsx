@@ -356,7 +356,10 @@ export const GymProductsPage = () => {
           <p className="text-title font-bold text-ink">{selectedDur.price}원</p>
         </div>
         <button
-          onClick={() => navigate(`/checkout?name=${encodeURIComponent(ctaLabel)}&price=${encodeURIComponent(selectedDur.price)}&gym=${encodeURIComponent(data.name)}`)}
+          onClick={() => tab === 'extra'
+            ? navigate(`/checkout?name=${encodeURIComponent(ctaLabel)}&price=${encodeURIComponent(selectedDur.price)}&gym=${encodeURIComponent(data.name)}`)
+            : navigate(`/gym/${id}/addons?name=${encodeURIComponent(ctaLabel)}&price=${encodeURIComponent(selectedDur.price)}&gym=${encodeURIComponent(data.name)}&dur=${encodeURIComponent(selectedDur.label)}`)
+          }
           className="px-8 py-3.5 bg-primary text-white text-body font-bold rounded-card hover:bg-primary-dark transition-colors flex-shrink-0"
         >
           구매하기
