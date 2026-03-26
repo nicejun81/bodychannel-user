@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { PageLayout, SubPageHeader, ScrollRow, TrainerListItem, SectionHeader, FilterTabs } from '../../components'
+import { PageLayout, SubPageHeader, ScrollRow, TrainerListItem, SectionHeader, FilterTabs, EmptyState } from '../../components'
 import { IconSearch, IconChevronRight } from '../../components/Icons'
 
 const filterTabs = [
@@ -17,84 +17,70 @@ const myLessons = [
   { id: 3, status: '대기중', trainer: '정서연 강사', remain: '10회권', variant: 'waiting' },
 ]
 
-const trainers = [
-  {
-    id: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop',
-    name: '최강민 강사',
-    category: 'PT',
-    categoryColor: 'gymground' as const,
-    description: '체계적인 1:1 맞춤 웨이트 & 체형 관리',
-    todayTime: '오늘 09:00, 15:00, 20:00',
-    rating: 4.9,
-    reviewCount: 127,
-    trialInfo: '10회 / 66,000원',
-  },
-  {
-    id: 2,
-    imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop',
-    name: '박지영 강사',
-    category: '바레톤',
-    categoryColor: 'bareton' as const,
-    description: '발레 동작 기반 체형 교정 & 코어 강화 프로그램',
-    todayTime: '오늘 14:00, 19:30',
-    rating: 4.7,
-    reviewCount: 64,
-    trialInfo: '10회 / 66,000원',
-  },
-  {
-    id: 3,
-    imageUrl: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop',
-    name: '한동훈 강사',
-    category: '히트35',
-    categoryColor: 'hit35' as const,
-    description: '35분 고강도 인터벌 트레이닝으로 칼로리 폭발',
-    todayTime: '오늘 10:00, 18:00',
-    rating: 4.9,
-    reviewCount: 93,
-    trialInfo: '10회 / 66,000원',
-  },
-  {
-    id: 4,
-    imageUrl: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop',
-    name: '이준혁 강사',
-    category: '짐그라운드',
-    categoryColor: 'gymground' as const,
-    description: '소도구 활용 전신 근력 & 체력 향상 서킷',
-    todayTime: '오늘 11:00, 20:00',
-    rating: 4.6,
-    reviewCount: 58,
-    trialInfo: '10회 / 66,000원',
-  },
-  {
-    id: 5,
-    imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop',
-    name: '정서연 강사',
-    category: '필라테스',
-    categoryColor: 'bareton' as const,
-    description: '코어 안정성과 유연성 향상 필라테스',
-    todayTime: '오늘 13:00, 17:00',
-    rating: 4.8,
-    reviewCount: 89,
-    trialInfo: '10회 / 66,000원',
-  },
-  {
-    id: 6,
-    imageUrl: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop',
-    name: '김태현 강사',
-    category: 'PT',
-    categoryColor: 'gymground' as const,
-    description: '다이어트 특화 근력 트레이닝 & 식단 코칭',
-    todayTime: '오늘 10:00, 16:00, 21:00',
-    rating: 4.7,
-    reviewCount: 72,
-    trialInfo: '10회 / 66,000원',
-  },
-]
+interface LessonScheduleItem {
+  time: string; name: string; instructor: string; avatar: string; category: string
+  categoryColor: 'bareton' | 'hit35' | 'gymground' | 'pt'; hasTicket?: boolean
+}
+
+const lessonSchedule: Record<string, LessonScheduleItem[]> = {
+  '월': [
+    { time: '09:00', name: '1:1 웨이트 트레이닝', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '14:00', name: '바레톤 체형교정', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '18:00', name: 'HIIT 인터벌', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '20:00', name: '전신 서킷', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+  ],
+  '화': [
+    { time: '10:00', name: '다이어트 PT', instructor: '김태현', avatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '13:00', name: '코어 필라테스', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '필라테스', categoryColor: 'bareton', hasTicket: true },
+    { time: '15:00', name: '1:1 웨이트 트레이닝', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '19:30', name: '바레톤 체형교정', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+  ],
+  '수': [
+    { time: '09:00', name: 'HIIT 인터벌', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '12:00', name: '바레톤 체형교정', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '17:00', name: '코어 필라테스', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '필라테스', categoryColor: 'bareton', hasTicket: true },
+    { time: '20:00', name: '전신 서킷', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+  ],
+  '목': [
+    { time: '09:00', name: '1:1 웨이트 트레이닝', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '10:00', name: '다이어트 PT', instructor: '김태현', avatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '18:00', name: 'HIIT 인터벌', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+  ],
+  '금': [
+    { time: '14:00', name: '바레톤 체형교정', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '16:00', name: '다이어트 PT', instructor: '김태현', avatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '20:00', name: '1:1 웨이트 트레이닝', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+  ],
+  '토': [
+    { time: '10:00', name: '전신 서킷', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '14:00', name: '코어 필라테스', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '필라테스', categoryColor: 'bareton', hasTicket: true },
+  ],
+  '일': [
+    { time: '11:00', name: '1:1 웨이트 트레이닝', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+  ],
+}
+
+const dayNames = ['일', '월', '화', '수', '목', '금', '토']
+
+function getLessonScheduleDays() {
+  const days = []
+  const today = new Date()
+  for (let i = 0; i < 14; i++) {
+    const d = new Date(today)
+    d.setDate(today.getDate() + i)
+    const dayKey = dayNames[d.getDay()]
+    const label = `${d.getMonth() + 1}/${d.getDate()}`
+    days.push({ dayKey, label, isToday: i === 0 })
+  }
+  return days
+}
 
 export const LessonPage = () => {
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('all')
+  const [selectedDateIdx, setSelectedDateIdx] = useState(0)
+  const scheduleDays = getLessonScheduleDays()
+  const selectedDay = scheduleDays[selectedDateIdx].dayKey
 
   const header = (
     <SubPageHeader
@@ -153,24 +139,38 @@ export const LessonPage = () => {
 
       <div className="h-2 bg-surface-muted -mx-page" />
 
-      {/* Trainer List */}
-      <section>
-        <SectionHeader title="강사 목록" showMore={false} />
-        {trainers.map((trainer) => (
-          <TrainerListItem
-            key={trainer.id}
-            imageUrl={trainer.imageUrl}
-            name={trainer.name}
-            category={trainer.category}
-            categoryColor={trainer.categoryColor}
-            description={trainer.description}
-            todayTime={trainer.todayTime}
-            rating={trainer.rating}
-            reviewCount={trainer.reviewCount}
-            trialInfo={trainer.trialInfo}
-            onClick={() => navigate(`/trainer/${trainer.id}`)}
-          />
-        ))}
+      {/* Lesson Schedule */}
+      <section className="py-section">
+        <h3 className="text-heading font-bold text-ink mb-4">강사 목록</h3>
+        <div className="flex gap-2 overflow-x-auto hide-scrollbar mb-4">
+          {scheduleDays.map((d, i) => (
+            <button key={i} onClick={() => setSelectedDateIdx(i)} className={`flex-shrink-0 w-[52px] py-2 rounded-xl text-center transition-colors ${selectedDateIdx === i ? 'bg-primary text-white' : 'bg-surface-muted text-ink-secondary hover:bg-surface-subtle'}`}>
+              <span className="text-caption block">{d.isToday ? '오늘' : d.label}</span>
+              <span className="text-label font-bold block">{d.dayKey}</span>
+            </button>
+          ))}
+        </div>
+        <div>
+          {(lessonSchedule[selectedDay] || []).length > 0 ? (lessonSchedule[selectedDay] || []).map((s, i) => (
+            <TrainerListItem
+              key={i}
+              imageUrl={s.avatar}
+              name={`${s.instructor} 강사`}
+              category={s.category}
+              categoryColor={s.categoryColor}
+              description={s.name}
+              todayTime={`${scheduleDays[selectedDateIdx].isToday ? '오늘' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')'} ${s.time}`}
+              rating={0}
+              reviewCount={0}
+              rightAction={s.hasTicket
+                ? <span className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg">예약</span>
+                : <span className="px-3 py-1 border border-primary text-primary text-label font-bold rounded-lg">구매</span>
+              }
+            />
+          )) : (
+            <EmptyState message={`${scheduleDays[selectedDateIdx].isToday ? '오늘은' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')은'} 레슨이 없습니다`} />
+          )}
+        </div>
       </section>
     </PageLayout>
   )

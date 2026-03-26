@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { PageLayout, SubPageHeader, RatingSummary, ReviewItem, ReviewSort, BottomCTA, Badge, InfoRow, EmptyState, FeedCard, TrainerListItem } from '../../components'
+import { PageLayout, SubPageHeader, RatingSummary, ReviewItem, ReviewSort, BottomCTA, Badge, InfoRow, EmptyState, FeedCard, TrainerListItem, PlanCard } from '../../components'
 import { IconShare, IconClock, IconMapPin } from '../../components/Icons'
 
 /* ── types ── */
@@ -128,8 +128,7 @@ export const gymsData: Record<string, GymInfo> = {
       { label: '친구 추천', discount: '1개월 무료', condition: '추천인과 함께 등록 시' },
     ],
     plans: [
-      { name: '첫결제 특가', duration: '1개월', price: '19,900', original: '99,000', tag: 'BEST' },
-      { name: '월 회원권', duration: '1개월', price: '99,000' },
+      { name: '월 구독권', duration: '월 자동결제', price: '79,000' },
       { name: '3개월권', duration: '3개월', price: '249,000', original: '297,000', tag: '16% OFF', installment: '월 83,000원 (3개월 무이자)' },
       { name: '6개월권', duration: '6개월', price: '449,000', original: '594,000', tag: '24% OFF', installment: '월 74,833원 (6개월 무이자)' },
       { name: '12개월권', duration: '12개월', price: '790,000', original: '1,188,000', tag: '33% OFF', installment: '월 65,833원 (12개월 무이자)' },
@@ -392,10 +391,33 @@ export const GymDetailPage = () => {
 
       <div className="h-2 bg-surface-muted" />
 
-      {/* ── 2. 그룹 수업 ── */}
+      {/* ── 2. 회원권 ── */}
+      {data.plans.length > 0 && (
+        <div className="px-page py-section">
+          <h3 className="text-heading font-bold text-ink mb-4">회원권</h3>
+          <div className="flex flex-col gap-3">
+            {data.plans.map((plan, i) => (
+              <PlanCard
+                key={i}
+                name={plan.name}
+                duration={plan.duration}
+                price={plan.price}
+                original={plan.original}
+                tag={plan.tag}
+                installment={plan.installment}
+                highlighted={i === 0}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="h-2 bg-surface-muted" />
+
+      {/* ── 3. 그룹 레슨 ── */}
       {Object.keys(data.schedule).length > 0 && (
         <div className="px-page py-section">
-          <h3 className="text-heading font-bold text-ink mb-4">그룹 수업</h3>
+          <h3 className="text-heading font-bold text-ink mb-4">그룹 레슨</h3>
           <div className="flex gap-2 overflow-x-auto hide-scrollbar mb-4">
             {scheduleDays.map((d, i) => (
               <button key={i} onClick={() => setSelectedDateIdx(i)} className={`flex-shrink-0 w-[52px] py-2 rounded-xl text-center transition-colors ${selectedDateIdx === i ? 'bg-primary text-white' : 'bg-surface-muted text-ink-secondary hover:bg-surface-subtle'}`}>
@@ -646,7 +668,7 @@ export const GymDetailPage = () => {
 
       {/* ── Bottom CTA ── */}
       <BottomCTA hideBottomNav>
-        <button onClick={() => navigate(`/gym/${id}/products`)} className="flex-1 py-3.5 bg-primary text-white text-body font-bold rounded-xl hover:bg-primary-dark transition-colors">상품선택</button>
+        <button onClick={() => navigate(`/gym/${id}/products`)} className="flex-1 py-3.5 bg-primary text-white text-body font-bold rounded-xl hover:bg-primary-dark transition-colors">상품 구매</button>
       </BottomCTA>
     </PageLayout>
   )

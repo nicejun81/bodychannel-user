@@ -58,7 +58,8 @@
       "mcp__playwright__browser_network_requests",
       "Bash(timeout /t 3 /nobreak)",
       "Bash(claude config set --global autoApprove true)",
-      "Bash(claude config set:*)"
+      "Bash(claude config set:*)",
+      "mcp__playwright__browser_type"
     ]
   }
 }
