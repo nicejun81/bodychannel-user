@@ -72,7 +72,6 @@ const lessonCategories: LessonCategory[] = [
 const extraProducts = [
   { name: '개인 락커', duration: '1개월', price: '30,000', icon: '🔒', desc: '나만의 개인 보관함' },
   { name: '운동복 대여', duration: '1개월', price: '20,000', icon: '👕', desc: '매일 깨끗한 운동복 제공' },
-  { name: 'GX 무제한', duration: '1개월', price: '50,000', icon: '💪', desc: '모든 그룹 수업 무제한 참여' },
   { name: '프리미엄 타월', duration: '1개월', price: '10,000', icon: '🧖', desc: '고급 타월 무제한 이용' },
 ]
 
