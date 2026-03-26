@@ -13,85 +13,75 @@ const categoryStyles: Record<string, string> = {
   pt: 'bg-primary-50 text-primary',
 }
 
-/* ── 회원권 상품 ── */
-interface MembershipProduct { name: string; desc: string; icon: string; durations: { label: string; price: string; original?: string; tag?: string; installment?: string }[] }
-const membershipProducts: MembershipProduct[] = [
-  { name: '헬스 이용권', desc: '자유롭게 헬스장 이용', icon: '🏋️', durations: [
+interface Duration { label: string; price: string; original?: string; tag?: string; installment?: string; per?: string }
+
+const membershipProducts = [
+  { name: '헬스 이용권', icon: '🏋️', durations: [
     { label: '월 구독권', price: '79,000' },
-    { label: '3개월권', price: '249,000', original: '297,000', tag: '16% OFF', installment: '월 83,000원 (3개월 무이자)' },
-    { label: '6개월권', price: '449,000', original: '594,000', tag: '24% OFF', installment: '월 74,833원 (6개월 무이자)' },
-    { label: '12개월권', price: '790,000', original: '1,188,000', tag: '33% OFF', installment: '월 65,833원 (12개월 무이자)' },
-  ]},
+    { label: '3개월권', price: '249,000', original: '297,000', tag: '16% OFF', installment: '월 83,000원' },
+    { label: '6개월권', price: '449,000', original: '594,000', tag: '24% OFF', installment: '월 74,833원' },
+    { label: '12개월권', price: '790,000', original: '1,188,000', tag: '33% OFF', installment: '월 65,833원' },
+  ] as Duration[] },
 ]
 
-/* ── 레슨권 상품 ── */
-interface LessonCategory {
-  name: string; categoryColor: 'bareton' | 'hit35' | 'gymground' | 'pt'; desc: string; icon: string
-  plans: { sessions: string; perSession: string; total: string; tag?: string }[]
-}
-const lessonCategories: LessonCategory[] = [
-  { name: '바레톤', categoryColor: 'bareton', icon: '🩰', desc: '발레 동작 기반 체형 교정 & 코어 강화', plans: [
-    { sessions: '1회 체험', perSession: '30,000', total: '30,000', tag: '체험특가' },
-    { sessions: '10회', perSession: '25,000', total: '250,000' },
-    { sessions: '20회', perSession: '22,000', total: '440,000', tag: '12% OFF' },
-    { sessions: '30회', perSession: '20,000', total: '600,000', tag: '인기' },
-  ]},
-  { name: '히트35', categoryColor: 'hit35', icon: '🔥', desc: '고강도 전신 근력 트레이닝 35분', plans: [
-    { sessions: '1회 체험', perSession: '25,000', total: '25,000', tag: '체험특가' },
-    { sessions: '10회', perSession: '20,000', total: '200,000' },
-    { sessions: '20회', perSession: '18,000', total: '360,000', tag: '10% OFF' },
-    { sessions: '30회', perSession: '16,000', total: '480,000', tag: '인기' },
-  ]},
-  { name: '짐그라운드', categoryColor: 'gymground', icon: '🚴', desc: '스피닝 · 서킷 · 펑셔널 트레이닝', plans: [
-    { sessions: '1회 체험', perSession: '25,000', total: '25,000', tag: '체험특가' },
-    { sessions: '10회', perSession: '22,000', total: '220,000' },
-    { sessions: '20회', perSession: '19,000', total: '380,000', tag: '14% OFF' },
-  ]},
-  { name: 'PT', categoryColor: 'pt', icon: '💪', desc: '1:1 맞춤 퍼스널 트레이닝', plans: [
-    { sessions: '1회 체험', perSession: '50,000', total: '50,000', tag: '체험특가' },
-    { sessions: '10회', perSession: '70,000', total: '700,000' },
-    { sessions: '20회', perSession: '65,000', total: '1,300,000', tag: '5만원 할인' },
-    { sessions: '30회', perSession: '60,000', total: '1,800,000', tag: '인기' },
-  ]},
+const lessonCategories = [
+  { name: '바레톤', categoryColor: 'bareton' as const, icon: '🩰', plans: [
+    { label: '1회 체험', price: '30,000', tag: '체험특가', per: '30,000' },
+    { label: '10회', price: '250,000', per: '25,000' },
+    { label: '20회', price: '440,000', tag: '12% OFF', per: '22,000' },
+    { label: '30회', price: '600,000', tag: '인기', per: '20,000' },
+  ] as Duration[] },
+  { name: '히트35', categoryColor: 'hit35' as const, icon: '🔥', plans: [
+    { label: '1회 체험', price: '25,000', tag: '체험특가', per: '25,000' },
+    { label: '10회', price: '200,000', per: '20,000' },
+    { label: '20회', price: '360,000', tag: '10% OFF', per: '18,000' },
+    { label: '30회', price: '480,000', tag: '인기', per: '16,000' },
+  ] as Duration[] },
+  { name: '짐그라운드', categoryColor: 'gymground' as const, icon: '🚴', plans: [
+    { label: '1회 체험', price: '25,000', tag: '체험특가', per: '25,000' },
+    { label: '10회', price: '220,000', per: '22,000' },
+    { label: '20회', price: '380,000', tag: '14% OFF', per: '19,000' },
+  ] as Duration[] },
+  { name: 'PT', categoryColor: 'pt' as const, icon: '💪', plans: [
+    { label: '1회 체험', price: '50,000', tag: '체험특가', per: '50,000' },
+    { label: '10회', price: '700,000', per: '70,000' },
+    { label: '20회', price: '1,300,000', tag: '5만원 할인', per: '65,000' },
+    { label: '30회', price: '1,800,000', tag: '인기', per: '60,000' },
+  ] as Duration[] },
 ]
 
-/* ── 부가상품 ── */
-interface ExtraProduct { name: string; icon: string; desc: string; durations: { label: string; price: string; tag?: string }[] }
-const extraProducts: ExtraProduct[] = [
-  { name: '개인 락커', icon: '🔒', desc: '나만의 개인 보관함', durations: [
+const extraProducts = [
+  { name: '개인 락커', icon: '🔒', durations: [
     { label: '1개월', price: '30,000' }, { label: '3개월', price: '80,000', tag: '11% OFF' },
     { label: '6개월', price: '150,000', tag: '17% OFF' }, { label: '12개월', price: '270,000', tag: '25% OFF' },
-  ]},
-  { name: '운동복 대여', icon: '👕', desc: '매일 깨끗한 운동복 제공', durations: [
+  ] as Duration[] },
+  { name: '운동복 대여', icon: '👕', durations: [
     { label: '1개월', price: '20,000' }, { label: '3개월', price: '54,000', tag: '10% OFF' },
     { label: '6개월', price: '96,000', tag: '20% OFF' },
-  ]},
-  { name: '프리미엄 타월', icon: '🧖', desc: '고급 타월 무제한 이용', durations: [
+  ] as Duration[] },
+  { name: '프리미엄 타월', icon: '🧖', durations: [
     { label: '1개월', price: '10,000' }, { label: '3개월', price: '27,000', tag: '10% OFF' },
     { label: '6개월', price: '48,000', tag: '20% OFF' },
-  ]},
+  ] as Duration[] },
 ]
 
-/* ── 공통 기간 선택 카드 ── */
-function DurationCard({ label, price, original, tag, installment, selected, onClick }: {
-  label: string; price: string; original?: string; tag?: string; installment?: string; selected: boolean; onClick: () => void
-}) {
-  return (
-    <button onClick={onClick} className={`w-full p-card-lg rounded-card border text-left transition-all ${selected ? 'border-primary bg-primary-50' : 'border-border hover:border-primary'}`}>
-      <div className="flex items-center justify-between mb-1">
-        <div className="flex items-center gap-2">
-          <span className="text-body font-bold text-ink">{label}</span>
-          {tag && <span className="px-1.5 py-0.5 bg-primary text-white text-caption font-bold rounded">{tag}</span>}
-        </div>
-      </div>
-      <div className="flex items-baseline gap-2">
-        <span className="text-heading font-bold text-ink">{price}<span className="text-body font-normal">원</span></span>
-        {original && <span className="text-body text-ink-tertiary line-through">{original}원</span>}
-      </div>
-      {installment && <p className="text-label text-primary mt-1">{installment}</p>}
-    </button>
-  )
+function getDurations(tab: Tab, idx: number): Duration[] {
+  if (tab === 'membership') return membershipProducts[idx].durations
+  if (tab === 'lesson') return lessonCategories[idx].plans
+  return extraProducts[idx].durations
 }
+
+function getProductItems(tab: Tab) {
+  if (tab === 'membership') return membershipProducts.map(p => ({ name: p.name, icon: p.icon }))
+  if (tab === 'lesson') return lessonCategories.map(c => ({ name: c.name, icon: c.icon, categoryColor: c.categoryColor }))
+  return extraProducts.map(p => ({ name: p.name, icon: p.icon }))
+}
+
+const tabConfig = [
+  { key: 'membership' as Tab, label: '회원권', icon: '🏋️' },
+  { key: 'lesson' as Tab, label: '레슨권', icon: '📋' },
+  { key: 'extra' as Tab, label: '부가상품', icon: '🎒' },
+]
 
 export const GymProductsPage = () => {
   const { id } = useParams()
@@ -102,175 +92,199 @@ export const GymProductsPage = () => {
   const [selectedDurIdx, setSelectedDurIdx] = useState(0)
 
   const reset = (t: Tab) => { setTab(t); setSelectedIdx(0); setSelectedDurIdx(0) }
+  const durations = getDurations(tab, selectedIdx)
+  const selectedDur = durations[selectedDurIdx]
+  const products = getProductItems(tab)
 
-  // CTA 데이터
-  const ctaLabel = (() => {
-    if (tab === 'membership') return `${membershipProducts[selectedIdx].name} · ${membershipProducts[selectedIdx].durations[selectedDurIdx].label}`
-    if (tab === 'lesson') return `${lessonCategories[selectedIdx].name} · ${lessonCategories[selectedIdx].plans[selectedDurIdx].sessions}`
-    if (tab === 'extra') return `${extraProducts[selectedIdx].name} · ${extraProducts[selectedIdx].durations[selectedDurIdx].label}`
-    return ''
-  })()
-  const ctaPrice = (() => {
-    if (tab === 'membership') return membershipProducts[selectedIdx].durations[selectedDurIdx].price
-    if (tab === 'lesson') return lessonCategories[selectedIdx].plans[selectedDurIdx].total
-    if (tab === 'extra') return extraProducts[selectedIdx].durations[selectedDurIdx].price
-    return ''
-  })()
+  const ctaLabel = `${products[selectedIdx].name} · ${selectedDur.label}`
 
   const header = <SubPageHeader title="상품선택" />
 
+  // Find the best-value plan index (highest discount tag)
+  const bestValueIdx = durations.reduce((best, dur, i) => {
+    if (dur.tag?.includes('인기') || dur.tag?.includes('33%')) return i
+    if (dur.tag && !durations[best]?.tag) return i
+    return best
+  }, -1)
+
   return (
     <PageLayout header={header} hideBottomNav>
-      {/* Gym Info */}
-      <div className="pt-2 pb-4">
-        <div className="flex items-center gap-4">
-          <img src={data.heroImages[0]?.url || ''} alt={data.name} className="w-16 h-16 rounded-card object-cover flex-shrink-0" />
-          <div className="flex-1">
-            <div className="flex items-center gap-2 mb-0.5">
-              <h2 className="text-title font-bold text-ink">{data.name}</h2>
-              {data.badge && <Badge variant="primary" size="sm">{data.badge}</Badge>}
-            </div>
-            <div className="flex items-center gap-1">
-              <IconStarFilled className="w-3.5 h-3.5 text-semantic-star" />
-              <span className="text-label font-semibold text-ink">{data.rating}</span>
-              <span className="text-label text-ink-tertiary">({data.reviewCount})</span>
+      {/* ── Gym Hero Banner ── */}
+      <div className="-mx-page -mt-4">
+        <div className="relative h-[160px] overflow-hidden">
+          <img
+            src={data.heroImages[0]?.url || ''}
+            alt={data.name}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 px-page pb-4">
+            <div className="flex items-end justify-between">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <h2 className="text-heading font-bold text-white">{data.name}</h2>
+                  {data.badge && <Badge variant="primary" size="sm">{data.badge}</Badge>}
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <IconStarFilled className="w-3.5 h-3.5 text-semantic-star" />
+                  <span className="text-label font-semibold text-white">{data.rating}</span>
+                  <span className="text-label text-white/60">({data.reviewCount})</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Coupons */}
+      {/* ── Coupon Strip ── */}
       {data.coupons.length > 0 && (
-        <div className="pb-section">
+        <div className="py-3 -mx-page px-page">
           <div className="flex gap-2 overflow-x-auto hide-scrollbar">
             {data.coupons.map((c, i) => (
-              <div key={i} className="min-w-[160px] flex-shrink-0 p-card bg-primary-50 border border-primary/20 rounded-card">
-                <p className="text-label font-bold text-primary">{c.discount}</p>
-                <p className="text-caption text-ink-tertiary mt-0.5">{c.condition}</p>
+              <div key={i} className="min-w-0 flex-shrink-0 flex items-center gap-2 px-3 py-2 bg-primary-50 border border-primary/15 rounded-pill">
+                <span className="text-label font-bold text-primary whitespace-nowrap">{c.discount}</span>
+                <span className="text-caption text-ink-tertiary whitespace-nowrap">{c.condition}</span>
               </div>
             ))}
           </div>
         </div>
       )}
 
-      <div className="h-2 bg-surface-muted -mx-page" />
-
-      {/* Tabs */}
-      <div className="pt-section pb-4">
-        <div className="flex gap-2">
-          {([['membership', '회원권'], ['lesson', '레슨권'], ['extra', '부가상품']] as const).map(([key, label]) => (
-            <button key={key} onClick={() => reset(key)} className={`flex-1 py-2.5 rounded-pill text-body font-bold transition-colors ${tab === key ? 'bg-primary text-white' : 'bg-surface-muted text-ink-secondary hover:bg-surface-subtle'}`}>
+      {/* ── Category Tabs (회원권/레슨권/부가상품) ── */}
+      <div className="pt-2 pb-3">
+        <div className="flex bg-surface-muted rounded-card-lg p-1 gap-1">
+          {tabConfig.map(({ key, label, icon }) => (
+            <button
+              key={key}
+              onClick={() => reset(key)}
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-card text-label font-bold transition-all ${
+                tab === key
+                  ? 'bg-surface text-ink shadow-card'
+                  : 'text-ink-tertiary hover:text-ink-secondary'
+              }`}
+            >
+              <span className="text-body">{icon}</span>
               {label}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Content */}
-      <div className="pb-[100px]">
-
-        {/* ── 회원권: 상품 선택 → 기간 선택 ── */}
-        {tab === 'membership' && (
-          <>
-            <h3 className="text-heading font-bold text-ink mb-4">상품 선택</h3>
-            <div className="flex flex-col gap-3">
-              {membershipProducts.map((item, i) => (
+      {/* ── Product Sub-tabs (for lesson/extra with multiple items) ── */}
+      {products.length > 1 && (
+        <div className="pb-3">
+          <div className="grid grid-cols-3 gap-2">
+            {products.map((item, i) => {
+              const isLesson = tab === 'lesson'
+              const cat = isLesson ? lessonCategories[i] : null
+              const isSelected = selectedIdx === i
+              return (
                 <button key={i} onClick={() => { setSelectedIdx(i); setSelectedDurIdx(0) }}
-                  className={`w-full p-card-lg rounded-card border text-left transition-all ${selectedIdx === i ? 'border-primary bg-primary-50' : 'border-border hover:border-primary'}`}>
-                  <div className="flex items-center gap-3">
-                    <div className={`w-11 h-11 rounded-card flex items-center justify-center text-title ${selectedIdx === i ? 'bg-primary/10' : 'bg-surface-muted'}`}>{item.icon}</div>
-                    <div className="flex-1">
-                      <span className="text-body font-bold text-ink">{item.name}</span>
-                      <p className="text-label text-ink-tertiary mt-0.5">{item.desc}</p>
-                    </div>
-                  </div>
+                  className={`flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-card border-2 text-label font-bold transition-all truncate ${
+                    isSelected
+                      ? isLesson && cat ? `${categoryStyles[cat.categoryColor]} border-current` : 'bg-ink text-white border-ink'
+                      : 'bg-surface-subtle text-ink-secondary border-transparent hover:border-border'
+                  }`}>
+                  <span className="flex-shrink-0">{item.icon}</span>
+                  <span className="truncate">{item.name}</span>
                 </button>
-              ))}
-            </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
 
-            <div className="mt-section">
-              <h3 className="text-heading font-bold text-ink mb-4">기간 선택</h3>
-              <div className="flex flex-col gap-3">
-                {membershipProducts[selectedIdx].durations.map((dur, di) => (
-                  <DurationCard key={di} label={dur.label} price={dur.price} original={dur.original} tag={dur.tag} installment={dur.installment} selected={selectedDurIdx === di} onClick={() => setSelectedDurIdx(di)} />
-                ))}
-              </div>
-              <p className="text-label text-ink-tertiary text-center mt-4">카드사별 무이자 할부 혜택이 제공됩니다</p>
-            </div>
-          </>
-        )}
+      {/* ── Plan Cards ── */}
+      <div className="pt-1 pb-[120px]">
+        <div className="flex flex-col gap-3">
+          {durations.map((dur, di) => {
+            const selected = selectedDurIdx === di
+            const isBestValue = bestValueIdx === di
 
-        {/* ── 레슨권: 카테고리 선택 → 회차 선택 ── */}
-        {tab === 'lesson' && (
-          <>
-            <h3 className="text-heading font-bold text-ink mb-4">레슨 선택</h3>
-            <div className="flex flex-col gap-3">
-              {lessonCategories.map((cat, i) => (
-                <button key={i} onClick={() => { setSelectedIdx(i); setSelectedDurIdx(0) }}
-                  className={`w-full p-card-lg rounded-card border text-left transition-all ${selectedIdx === i ? 'border-primary bg-primary-50' : 'border-border hover:border-primary'}`}>
+            return (
+              <button
+                key={di}
+                onClick={() => setSelectedDurIdx(di)}
+                className={`w-full text-left rounded-card-lg border-2 transition-all overflow-hidden ${
+                  selected
+                    ? 'border-primary bg-primary-50 shadow-card'
+                    : 'border-border bg-surface hover:border-ink-disabled hover:shadow-card'
+                }`}
+              >
+                <div className="px-card-lg py-3.5">
                   <div className="flex items-center gap-3">
-                    <div className={`w-11 h-11 rounded-card flex items-center justify-center text-title ${selectedIdx === i ? 'bg-primary/10' : 'bg-surface-muted'}`}>{cat.icon}</div>
-                    <div className="flex-1">
+                    {/* Selection indicator */}
+                    <div className="flex-shrink-0">
+                      {selected ? (
+                        <div className="w-[22px] h-[22px] rounded-full bg-primary flex items-center justify-center">
+                          <svg viewBox="0 0 16 16" className="w-3.5 h-3.5 text-white fill-current">
+                            <path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z" />
+                          </svg>
+                        </div>
+                      ) : (
+                        <div className="w-[22px] h-[22px] rounded-full border-2 border-ink-disabled" />
+                      )}
+                    </div>
+
+                    {/* Plan info */}
+                    <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-0.5">
-                        <span className={`px-1.5 py-0.5 text-caption font-bold rounded ${categoryStyles[cat.categoryColor]}`}>{cat.name}</span>
+                        <span className={`text-body font-bold ${selected ? 'text-ink' : 'text-ink-secondary'}`}>
+                          {dur.label}
+                        </span>
+                        {isBestValue && (
+                          <span className="px-1.5 py-0.5 bg-primary text-white text-caption font-bold rounded">추천</span>
+                        )}
+                        {dur.tag && (
+                          <span className="px-1.5 py-0.5 bg-primary/10 text-primary text-caption font-bold rounded">
+                            {dur.tag}
+                          </span>
+                        )}
                       </div>
-                      <p className="text-label text-ink-tertiary">{cat.desc}</p>
+                      {(dur.original || dur.per || dur.installment) && (
+                        <div className="flex items-center gap-2 mt-1">
+                          {dur.original && (
+                            <span className="text-label text-ink-disabled line-through">{dur.original}원</span>
+                          )}
+                          {dur.installment && (
+                            <span className="text-label text-primary font-semibold">{dur.installment}</span>
+                          )}
+                          {dur.per && (
+                            <span className="text-label text-ink-tertiary">1회 {dur.per}원</span>
+                          )}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Price */}
+                    <div className="flex-shrink-0 text-right">
+                      <span className={`text-title font-bold ${selected ? 'text-primary' : 'text-ink'}`}>
+                        {dur.price}
+                      </span>
+                      <span className={`text-label ${selected ? 'text-primary' : 'text-ink-secondary'}`}>원</span>
                     </div>
                   </div>
-                </button>
-              ))}
-            </div>
+                </div>
+              </button>
+            )
+          })}
+        </div>
 
-            <div className="mt-section">
-              <h3 className="text-heading font-bold text-ink mb-4">회차 선택</h3>
-              <div className="flex flex-col gap-3">
-                {lessonCategories[selectedIdx].plans.map((plan, pi) => (
-                  <DurationCard key={pi} label={plan.sessions} price={plan.total} tag={plan.tag} selected={selectedDurIdx === pi} onClick={() => setSelectedDurIdx(pi)} />
-                ))}
-              </div>
-              <p className="text-label text-ink-tertiary text-center mt-4">1회당 {lessonCategories[selectedIdx].plans[selectedDurIdx].perSession}원</p>
-            </div>
-          </>
-        )}
-
-        {/* ── 부가상품: 상품 선택 → 기간 선택 ── */}
-        {tab === 'extra' && (
-          <>
-            <h3 className="text-heading font-bold text-ink mb-4">부가상품 선택</h3>
-            <div className="flex flex-col gap-3">
-              {extraProducts.map((item, i) => (
-                <button key={i} onClick={() => { setSelectedIdx(i); setSelectedDurIdx(0) }}
-                  className={`w-full p-card-lg rounded-card border text-left transition-all ${selectedIdx === i ? 'border-primary bg-primary-50' : 'border-border hover:border-primary'}`}>
-                  <div className="flex items-center gap-3">
-                    <div className={`w-11 h-11 rounded-card flex items-center justify-center text-title ${selectedIdx === i ? 'bg-primary/10' : 'bg-surface-muted'}`}>{item.icon}</div>
-                    <div className="flex-1">
-                      <span className="text-body font-bold text-ink">{item.name}</span>
-                      <p className="text-label text-ink-tertiary mt-0.5">{item.desc}</p>
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-
-            <div className="mt-section">
-              <h3 className="text-heading font-bold text-ink mb-4">기간 선택</h3>
-              <div className="flex flex-col gap-3">
-                {extraProducts[selectedIdx].durations.map((dur, di) => (
-                  <DurationCard key={di} label={dur.label} price={dur.price} tag={dur.tag} selected={selectedDurIdx === di} onClick={() => setSelectedDurIdx(di)} />
-                ))}
-              </div>
-            </div>
-          </>
+        {tab === 'membership' && (
+          <p className="text-label text-ink-tertiary text-center mt-4">카드사별 무이자 할부 혜택이 제공됩니다</p>
         )}
       </div>
 
-      {/* Bottom CTA */}
+      {/* ── Bottom CTA ── */}
       <BottomCTA hideBottomNav>
-        <div className="flex-1">
-          <p className="text-label text-ink-tertiary">{ctaLabel}</p>
-          <p className="text-title font-bold text-ink">{ctaPrice}원</p>
+        <div className="flex-1 min-w-0">
+          <p className="text-caption text-ink-tertiary truncate">{ctaLabel}</p>
+          <p className="text-title font-bold text-ink">{selectedDur.price}원</p>
         </div>
-        <button onClick={() => navigate('/reservation')} className="px-8 py-3.5 bg-primary text-white text-body font-bold rounded-card hover:bg-primary-dark transition-colors">
+        <button
+          onClick={() => navigate('/reservation')}
+          className="px-8 py-3.5 bg-primary text-white text-body font-bold rounded-card hover:bg-primary-dark transition-colors flex-shrink-0"
+        >
           구매하기
         </button>
       </BottomCTA>
