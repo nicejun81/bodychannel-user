@@ -196,7 +196,7 @@ export const ReservationPage = () => {
                 <div
                   key={day}
                   className={`text-center text-label font-semibold py-2 ${
-                    index === 0 ? 'text-red-500' : index === 6 ? 'text-blue-500' : 'text-ink-placeholder'
+                    index === 0 ? 'text-semantic-like' : index === 6 ? 'text-primary' : 'text-ink-placeholder'
                   }`}
                 >
                   {day}
@@ -237,8 +237,8 @@ export const ReservationPage = () => {
                     <span
                       className={`badge ${
                         res.status === 'confirmed'
-                          ? 'bg-green-100 text-green-600'
-                          : 'bg-yellow-100 text-yellow-600'
+                          ? 'bg-semantic-online/15 text-semantic-online'
+                          : 'bg-semantic-star/15 text-semantic-star'
                       }`}
                     >
                       {res.status === 'confirmed' ? '확정' : '대기'}

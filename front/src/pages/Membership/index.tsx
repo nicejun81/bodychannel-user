@@ -136,8 +136,8 @@ export const MembershipPage = () => {
                 <img src={gym.image} alt={gym.name} className="w-full h-[140px] object-cover" />
                 {gym.badge && (
                   <span className={`absolute top-3 left-3 badge ${
-                    gym.badgeType === 'sale' ? 'bg-red-500 text-white' :
-                    gym.badgeType === 'new' ? 'bg-green-500 text-white' :
+                    gym.badgeType === 'sale' ? 'bg-semantic-like text-white' :
+                    gym.badgeType === 'new' ? 'bg-semantic-online text-white' :
                     'bg-primary text-white'
                   }`}>
                     {gym.badge}

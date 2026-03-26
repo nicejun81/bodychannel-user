@@ -362,7 +362,7 @@ export const TrainerDetailPage = () => {
               {trainer.gym}
             </button>
             <span className="flex items-center gap-1">
-              <IconStarFilled className="w-3.5 h-3.5 text-yellow-400" />
+              <IconStarFilled className="w-3.5 h-3.5 text-semantic-star" />
               {trainer.rating} ({trainer.reviewCount})
             </span>
           </div>
@@ -516,16 +516,16 @@ export const TrainerDetailPage = () => {
         <div className="px-page py-section">
           <div className="space-y-3">
             {trainer.prices.map((price, i) => (
-              <div key={i} className={`p-4 rounded-xl border ${price.tag === '인기' ? 'border-primary bg-[#fff8f5]' : 'border-border'}`}>
+              <div key={i} className={`p-card-lg rounded-card border ${price.tag === '인기' ? 'border-primary bg-primary-50' : 'border-border'}`}>
                 <div className="flex items-center justify-between mb-1.5">
                   <div className="flex items-center gap-2">
                     <span className="text-body font-bold text-ink">{price.name}</span>
-                    {price.tag && <span className={`px-1.5 py-0.5 text-caption font-bold rounded ${price.tag === '인기' ? 'bg-primary text-white' : price.tag === '체험특가' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>{price.tag}</span>}
+                    {price.tag && <span className={`px-1.5 py-0.5 text-caption font-bold rounded ${price.tag === '인기' ? 'bg-primary text-white' : price.tag === '체험특가' ? 'bg-semantic-online text-white' : 'bg-semantic-like text-white'}`}>{price.tag}</span>}
                   </div>
                   <span className="text-label text-ink-tertiary">{price.sessions}</span>
                 </div>
                 <div className="flex items-baseline justify-between">
-                  <span className="text-display font-bold text-ink">{price.price}</span>
+                  <span className="text-heading font-bold text-ink">{price.price}</span>
                   {price.perSession && <span className="text-label text-ink-secondary">회당 {price.perSession}</span>}
                 </div>
               </div>

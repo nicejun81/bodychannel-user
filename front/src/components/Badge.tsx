@@ -7,9 +7,9 @@ interface BadgeProps {
 const variantStyles = {
   primary: 'bg-primary text-white',
   secondary: 'bg-primary-50 text-primary',
-  success: 'bg-green-100 text-green-600',
-  danger: 'bg-red-500 text-white',
-  warning: 'bg-yellow-100 text-yellow-700',
+  success: 'bg-semantic-online/15 text-semantic-online',
+  danger: 'bg-semantic-like text-white',
+  warning: 'bg-semantic-star/15 text-semantic-star',
   muted: 'bg-surface-muted text-ink-secondary',
 }
 

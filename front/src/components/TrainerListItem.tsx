@@ -7,7 +7,7 @@ interface TrainerListItemProps {
   category: string
   categoryColor: 'bareton' | 'hit35' | 'gymground' | 'pt'
   description: string
-  todayTime: string
+  todayTime?: string
   rating: number
   reviewCount: number
   trialInfo?: string

@@ -345,7 +345,7 @@ export const GymDetailPage = () => {
       {/* ── 1. 기본정보 + 소개 ── */}
       <div className="px-page pt-page pb-section">
         <div className="flex items-center gap-2 mb-2">
-          {data.badge && <Badge variant={data.badgeType === 'sale' ? 'danger' : data.badgeType === 'new' ? 'success' : 'primary'} size="md">{data.badge}</Badge>}
+          {data.badge && <Badge variant={data.badgeType === 'sale' ? 'danger' : data.badgeType === 'new' ? 'success' : 'primary'} size="sm">{data.badge}</Badge>}
           {(() => {
             const h = currentHour
             const match = data.hours.match(/(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})/)
@@ -456,7 +456,7 @@ export const GymDetailPage = () => {
                 rating={0}
                 reviewCount={0}
                 rightAction={s.hasTicket
-                  ? <span className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg">예약</span>
+                  ? <span onClick={() => navigate('/reservation')} className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
                   : <span className="px-3 py-1 border border-primary text-primary text-label font-bold rounded-lg">구매</span>
                 }
               />
@@ -583,7 +583,7 @@ export const GymDetailPage = () => {
                 <div className="flex items-center gap-2">
                   <span className="text-body font-bold text-ink">혼잡도</span>
                   {isToday && activeCongestion && (
-                    <span className={`px-1.5 py-0.5 text-caption font-bold rounded ${activeCongestion.level >= 7 ? 'bg-red-100 text-red-600' : activeCongestion.level >= 4 ? 'bg-yellow-100 text-yellow-700' : 'bg-green-100 text-green-600'}`}>
+                    <span className={`px-1.5 py-0.5 text-caption font-bold rounded ${activeCongestion.level >= 7 ? 'bg-semantic-like/15 text-semantic-like' : activeCongestion.level >= 4 ? 'bg-semantic-star/15 text-semantic-star' : 'bg-semantic-online/15 text-semantic-online'}`}>
                       {activeCongestion.level >= 7 ? '혼잡' : activeCongestion.level >= 4 ? '보통' : '여유'}
                     </span>
                   )}
@@ -602,7 +602,7 @@ export const GymDetailPage = () => {
                 {data.congestion.map((c, i) => (
                   <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
                     <div
-                      className={`w-full rounded-sm transition-colors ${isToday && parseInt(c.time) === currentHour ? 'bg-primary' : c.level >= 7 ? 'bg-red-300' : c.level >= 4 ? 'bg-yellow-300' : 'bg-green-300'}`}
+                      className={`w-full rounded-sm transition-colors ${isToday && parseInt(c.time) === currentHour ? 'bg-primary' : c.level >= 7 ? 'bg-semantic-like/40' : c.level >= 4 ? 'bg-semantic-star/40' : 'bg-semantic-online/40'}`}
                       style={{ height: `${(c.level / 10) * 36}px` }}
                     />
                   </div>

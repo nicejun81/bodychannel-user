@@ -25,7 +25,7 @@ export const PlanCard = ({ name, duration, price, original, tag, installment, pe
         {perSession && <span className="text-label text-ink-tertiary">1회 {perSession}원</span>}
       </div>
       <div className="flex items-baseline gap-2">
-        <span className="text-display font-bold text-ink">{price}<span className="text-body">원</span></span>
+        <span className="text-heading font-bold text-ink">{price}<span className="text-body font-normal">원</span></span>
         {original && <span className="text-body text-ink-tertiary line-through">{original}원</span>}
       </div>
       {installment && <p className="text-label text-primary mt-1.5">{installment}</p>}
