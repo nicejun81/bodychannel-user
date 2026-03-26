@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { PageLayout, SubPageHeader } from '../../components'
 import {
   IconChevronRight,
@@ -61,9 +62,23 @@ const memberships = [
   },
 ]
 
+const purchaseHistory = [
+  {
+    id: 1, name: '헬스 이용권 · 월 구독권 + 개인 락커 + 운동복 대여', price: '129,000', gym: '바디채널 강남점',
+    method: '카카오페이', order: 'BC20260326999', date: '2026.03.26 17:38', status: '이용중',
+  },
+  {
+    id: 2, name: 'PT · 10회', price: '700,000', gym: '바디채널 강남점',
+    method: '신용/체크카드', order: 'BC20260320412', date: '2026.03.20 11:20', status: '이용중',
+  },
+  {
+    id: 3, name: '바레톤 · 1회 체험', price: '30,000', gym: '바디채널 강남점',
+    method: '네이버페이', order: 'BC20260315087', date: '2026.03.15 09:45', status: '사용완료',
+  },
+]
+
 const menuItems = [
   { icon: IconHeart, label: '내 찜 목록', href: '/favorites' },
-  { icon: IconClipboard, label: '구매 내역', href: '/purchase-history' },
   { icon: IconShield, label: '개인정보 보호', href: '/privacy' },
   { icon: IconMessage, label: '고객센터', href: '/support' },
   { icon: IconInfo, label: '앱 정보', href: '/about' },
@@ -84,6 +99,9 @@ const statusBadgeStyles: Record<string, string> = {
 }
 
 export const MyPage = () => {
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const [showPurchase, setShowPurchase] = useState(searchParams.get('tab') === 'purchase')
   const header = (
     <SubPageHeader
       title="마이페이지"
@@ -164,6 +182,47 @@ export const MyPage = () => {
       {/* Menu List */}
       <h3 className="text-title uppercase tracking-wider mb-4">내 정보</h3>
       <div className="flex flex-col gap-2">
+        {/* 구매 내역 아코디언 */}
+        <div className="border border-border rounded-card overflow-hidden">
+          <button
+            onClick={() => setShowPurchase(!showPurchase)}
+            className="w-full flex justify-between items-center p-[18px] hover:bg-surface-muted transition-colors"
+          >
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 bg-surface-muted rounded-[10px] flex items-center justify-center">
+                <IconClipboard className="w-5 h-5 stroke-ink stroke-[1.5]" />
+              </div>
+              <span className="font-medium">구매 내역</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-caption text-primary font-bold">{purchaseHistory.length}건</span>
+              <svg viewBox="0 0 20 20" className={`w-5 h-5 transition-transform ${showPurchase ? 'text-primary rotate-180' : 'text-ink-tertiary'}`}>
+                <path fill="currentColor" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
+              </svg>
+            </div>
+          </button>
+          {showPurchase && (
+            <div className="px-[18px] pb-[18px] pt-0 flex flex-col gap-2.5 border-t border-border-light">
+              {purchaseHistory.map(p => (
+                <button
+                  key={p.id}
+                  onClick={() => navigate(`/purchase/docs?name=${encodeURIComponent(p.name)}&price=${encodeURIComponent(p.price)}&gym=${encodeURIComponent(p.gym)}&method=${encodeURIComponent(p.method)}&order=${encodeURIComponent(p.order)}&date=${encodeURIComponent(p.date)}`)}
+                  className="w-full text-left border border-border rounded-card-lg p-card-lg hover:border-ink-disabled transition-colors"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className={`px-2 py-0.5 text-caption font-bold rounded ${p.status === '이용중' ? 'bg-primary text-white' : 'bg-surface-muted text-ink-tertiary'}`}>{p.status}</span>
+                    <span className="text-caption text-ink-tertiary">{p.date.split(' ')[0]}</span>
+                  </div>
+                  <p className="text-body font-bold text-ink truncate">{p.name}</p>
+                  <div className="flex items-center justify-between mt-1.5">
+                    <span className="text-caption text-ink-tertiary">{p.gym}</span>
+                    <span className="text-body font-bold text-primary">{p.price}원</span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
         {menuItems.map((item) => (
           <Link
             key={item.label}

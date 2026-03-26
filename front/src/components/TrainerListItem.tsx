@@ -40,35 +40,37 @@ export const TrainerListItem = ({
       onClick={onClick}
       className="w-full flex gap-4 py-4 border-b border-border-light last:border-b-0 hover:bg-surface-subtle transition-colors text-left"
     >
-      <div className="relative flex-shrink-0 w-16">
-        <div className="w-16 h-16 rounded-card overflow-hidden">
+      <div className="flex-shrink-0">
+        <div className="w-20 h-20 rounded-card overflow-hidden">
           <img src={imageUrl} alt={name} className="w-full h-full object-cover" />
         </div>
-        <span className={`absolute -bottom-1.5 left-1/2 -translate-x-1/2 badge whitespace-nowrap ${categoryStyles[categoryColor] || categoryStyles.pt}`}>
-          {category}
-        </span>
       </div>
 
-      <div className="flex-1 flex flex-col justify-center gap-1 min-w-0">
-        <div className="flex items-center justify-between">
-          <span className="text-title text-ink leading-tight">{name}</span>
-          {rightAction || (
-            <div className="flex items-center gap-1">
-              <IconStarFilled className="w-3.5 h-3.5 text-semantic-star" />
-              <span className="text-body font-semibold text-ink-tertiary">
-                {rating} ({reviewCount})
-              </span>
+      <div className="flex-1 flex flex-col justify-center gap-1.5 min-w-0">
+        <div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-title text-ink leading-tight">{name}</span>
+              <span className={`badge whitespace-nowrap ${categoryStyles[categoryColor] || categoryStyles.pt}`}>{category}</span>
             </div>
-          )}
+            {rightAction || (
+              <div className="flex items-center gap-1">
+                <IconStarFilled className="w-3.5 h-3.5 text-semantic-star" />
+                <span className="text-body font-semibold text-ink-tertiary">
+                  {rating} ({reviewCount})
+                </span>
+              </div>
+            )}
+          </div>
+          <p className="text-label text-ink-secondary truncate mt-1">{description}</p>
         </div>
-        <p className="text-label text-ink-secondary truncate">{description}</p>
-        <div className="flex items-center justify-between mt-0.5">
-          <div className="flex items-center gap-1">
-            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 stroke-primary stroke-[1.5] fill-none">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-1.5">
+            <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-primary stroke-[1.5] fill-none">
               <circle cx="12" cy="12" r="10" />
               <path d="M12 6v6l4 2" />
             </svg>
-            <span className="text-label font-medium text-primary">{todayTime}</span>
+            <span className="text-body font-medium text-primary">{todayTime}</span>
           </div>
           {trialInfo && <span className="text-body font-bold text-ink">{trialInfo}</span>}
         </div>

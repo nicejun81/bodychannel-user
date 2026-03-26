@@ -25,6 +25,7 @@ import {
   CheckoutPage,
   AddOnsPage,
   CompletePage,
+  PurchaseDocsPage,
 } from './pages'
 
 export const App = () => {
@@ -56,6 +57,7 @@ export const App = () => {
         <Route path="/chat/:id" element={<ChatRoomPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/complete" element={<CompletePage />} />
+        <Route path="/purchase/docs" element={<PurchaseDocsPage />} />
       </Routes>
     </BrowserRouter>
   )

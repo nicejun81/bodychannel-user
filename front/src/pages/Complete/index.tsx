@@ -93,7 +93,7 @@ export const CompletePage = () => {
         {/* ── 버튼 ── */}
         <div className="w-full mt-8 flex flex-col gap-3">
           <button
-            onClick={() => navigate('/mypage')}
+            onClick={() => navigate('/mypage?tab=purchase')}
             className="w-full py-4 bg-primary text-white text-body font-bold rounded-card hover:bg-primary-dark transition-colors"
           >
             이용권 확인하기
