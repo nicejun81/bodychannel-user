@@ -391,7 +391,24 @@ export const GymDetailPage = () => {
 
       <div className="h-2 bg-surface-muted" />
 
-      {/* ── 2. 회원권 ── */}
+      {/* ── 2. 편의시설 ── */}
+      {data.facilities.length > 0 && (
+        <div className="px-page py-section">
+          <h3 className="text-heading font-bold text-ink mb-4">편의시설</h3>
+          <div className="grid grid-cols-4 gap-3">
+            {data.facilities.map((f, i) => (
+              <div key={i} className="flex flex-col items-center gap-1.5 py-3 bg-surface-subtle rounded-card">
+                <span className="text-display">{f.icon}</span>
+                <span className="text-label text-ink-secondary font-medium">{f.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="h-2 bg-surface-muted" />
+
+      {/* ── 3. 회원권 ── */}
       {data.plans.length > 0 && (
         <div className="px-page py-section">
           <h3 className="text-heading font-bold text-ink mb-4">회원권</h3>
@@ -482,39 +499,6 @@ export const GymDetailPage = () => {
       </div>
 
       <div className="h-2 bg-surface-muted" />
-
-      {/* ── 4. 공지사항 + 편의시설 ── */}
-      <div className="px-page py-section">
-        {data.notices.length > 0 && (
-          <div className="mb-section">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-heading font-bold text-ink">공지사항</h3>
-              <button className="text-label text-primary font-medium">전체보기</button>
-            </div>
-            <div className="space-y-2">
-              {data.notices.map((n, i) => (
-                <button key={i} className="w-full flex items-center gap-2.5 p-card bg-surface-subtle rounded-card text-left hover:bg-surface-muted transition-colors">
-                  {n.isNew && <Badge variant="danger" size="sm">NEW</Badge>}
-                  <span className="text-body text-ink flex-1 truncate">{n.title}</span>
-                  <span className="text-label text-ink-tertiary flex-shrink-0">{n.date}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        <div>
-          <h3 className="text-heading font-bold text-ink mb-4">편의시설</h3>
-          <div className="grid grid-cols-4 gap-3">
-            {data.facilities.map((f, i) => (
-              <div key={i} className="flex flex-col items-center gap-1.5 py-3 bg-surface-subtle rounded-card">
-                <span className="text-display">{f.icon}</span>
-                <span className="text-label text-ink-secondary font-medium">{f.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       <div className="h-2 bg-surface-muted" />
 
