@@ -13,7 +13,7 @@ const categoryStyles: Record<string, string> = {
   pt: 'bg-primary-50 text-primary',
 }
 
-interface Duration { label: string; price: string; original?: string; tag?: string; installment?: string; per?: string; group?: '회수권' | '무제한 이용권' }
+interface Duration { label: string; price: string; original?: string; tag?: string; installment?: string; per?: string; group?: '회수권' | '무제한 이용권' | '기간권' }
 
 const membershipProducts = [
   { name: '헬스 이용권', icon: '🏋️', durations: [
@@ -25,7 +25,7 @@ const membershipProducts = [
 ]
 
 const lessonCategories = [
-  { name: '바레톤', categoryColor: 'bareton' as const, icon: '🩰', plans: [
+  { name: '바레톤', categoryColor: 'bareton' as const, icon: '🩰', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=80&h=80&fit=crop', desc: '발레 + 필라테스 기반 전신 토닝', plans: [
     { group: '회수권' as const, label: '1회 체험', price: '30,000', tag: '체험특가', per: '30,000' },
     { group: '회수권' as const, label: '10회', price: '250,000', per: '25,000' },
     { group: '회수권' as const, label: '20회', price: '440,000', tag: '12% OFF', per: '22,000' },
@@ -33,7 +33,7 @@ const lessonCategories = [
     { group: '무제한 이용권' as const, label: '1개월', price: '89,000' },
     { group: '무제한 이용권' as const, label: '3개월', price: '239,000', original: '267,000', tag: '10% OFF', installment: '월 79,667원' },
   ] as Duration[] },
-  { name: '히트35', categoryColor: 'hit35' as const, icon: '🔥', plans: [
+  { name: '히트35', categoryColor: 'hit35' as const, icon: '🔥', img: 'https://images.unsplash.com/photo-1534258936925-c58bed479fcb?w=80&h=80&fit=crop', desc: '35분 고강도 인터벌 트레이닝', plans: [
     { group: '회수권' as const, label: '1회 체험', price: '25,000', tag: '체험특가', per: '25,000' },
     { group: '회수권' as const, label: '10회', price: '200,000', per: '20,000' },
     { group: '회수권' as const, label: '20회', price: '360,000', tag: '10% OFF', per: '18,000' },
@@ -41,14 +41,14 @@ const lessonCategories = [
     { group: '무제한 이용권' as const, label: '1개월', price: '79,000' },
     { group: '무제한 이용권' as const, label: '3개월', price: '213,000', original: '237,000', tag: '10% OFF', installment: '월 71,000원' },
   ] as Duration[] },
-  { name: '짐그라운드', categoryColor: 'gymground' as const, icon: '🚴', plans: [
+  { name: '짐그라운드', categoryColor: 'gymground' as const, icon: '🚴', img: 'https://images.unsplash.com/photo-1517963879433-6ad2b056d712?w=80&h=80&fit=crop', desc: '유산소 중심 그룹 서킷 운동', plans: [
     { group: '회수권' as const, label: '1회 체험', price: '25,000', tag: '체험특가', per: '25,000' },
     { group: '회수권' as const, label: '10회', price: '220,000', per: '22,000' },
     { group: '회수권' as const, label: '20회', price: '380,000', tag: '14% OFF', per: '19,000' },
     { group: '무제한 이용권' as const, label: '1개월', price: '79,000' },
     { group: '무제한 이용권' as const, label: '3개월', price: '213,000', original: '237,000', tag: '10% OFF', installment: '월 71,000원' },
   ] as Duration[] },
-  { name: 'PT', categoryColor: 'pt' as const, icon: '💪', plans: [
+  { name: 'PT', categoryColor: 'pt' as const, icon: '💪', img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=80&h=80&fit=crop', desc: '1:1 맞춤 퍼스널 트레이닝', plans: [
     { group: '회수권' as const, label: '1회 체험', price: '50,000', tag: '체험특가', per: '50,000' },
     { group: '회수권' as const, label: '10회', price: '700,000', per: '70,000' },
     { group: '회수권' as const, label: '20회', price: '1,300,000', tag: '5만원 할인', per: '65,000' },
@@ -57,17 +57,17 @@ const lessonCategories = [
 ]
 
 const extraProducts = [
-  { name: '개인 락커', icon: '🔒', durations: [
-    { label: '1개월', price: '30,000' }, { label: '3개월', price: '80,000', tag: '11% OFF' },
-    { label: '6개월', price: '150,000', tag: '17% OFF' }, { label: '12개월', price: '270,000', tag: '25% OFF' },
+  { name: '개인 락커', icon: '🔒', img: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=80&h=80&fit=crop', desc: '개인 물품 보관 전용 락커', durations: [
+    { group: '기간권' as const, label: '1개월', price: '30,000' }, { group: '기간권' as const, label: '3개월', price: '80,000', tag: '11% OFF' },
+    { group: '기간권' as const, label: '6개월', price: '150,000', tag: '17% OFF' }, { group: '기간권' as const, label: '12개월', price: '270,000', tag: '25% OFF' },
   ] as Duration[] },
-  { name: '운동복 대여', icon: '👕', durations: [
-    { label: '1개월', price: '20,000' }, { label: '3개월', price: '54,000', tag: '10% OFF' },
-    { label: '6개월', price: '96,000', tag: '20% OFF' },
+  { name: '운동복 대여', icon: '👕', img: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=80&h=80&fit=crop', desc: '매일 세탁된 운동복 제공', durations: [
+    { group: '기간권' as const, label: '1개월', price: '20,000' }, { group: '기간권' as const, label: '3개월', price: '54,000', tag: '10% OFF' },
+    { group: '기간권' as const, label: '6개월', price: '96,000', tag: '20% OFF' },
   ] as Duration[] },
-  { name: '프리미엄 타월', icon: '🧖', durations: [
-    { label: '1개월', price: '10,000' }, { label: '3개월', price: '27,000', tag: '10% OFF' },
-    { label: '6개월', price: '48,000', tag: '20% OFF' },
+  { name: '프리미엄 타월', icon: '🧖', img: 'https://images.unsplash.com/photo-1583922606661-0822ed0bd916?w=80&h=80&fit=crop', desc: '고급 대형 타월 무제한 이용', durations: [
+    { group: '기간권' as const, label: '1개월', price: '10,000' }, { group: '기간권' as const, label: '3개월', price: '27,000', tag: '10% OFF' },
+    { group: '기간권' as const, label: '6개월', price: '48,000', tag: '20% OFF' },
   ] as Duration[] },
 ]
 
@@ -79,8 +79,8 @@ function getDurations(tab: Tab, idx: number): Duration[] {
 
 function getProductItems(tab: Tab) {
   if (tab === 'membership') return membershipProducts.map(p => ({ name: p.name, icon: p.icon }))
-  if (tab === 'lesson') return lessonCategories.map(c => ({ name: c.name, icon: c.icon, categoryColor: c.categoryColor }))
-  return extraProducts.map(p => ({ name: p.name, icon: p.icon }))
+  if (tab === 'lesson') return lessonCategories.map(c => ({ name: c.name, icon: c.icon, categoryColor: c.categoryColor, desc: c.desc, img: c.img }))
+  return extraProducts.map(p => ({ name: p.name, icon: p.icon, desc: p.desc, img: p.img }))
 }
 
 const tabConfig = [
@@ -183,11 +183,12 @@ export const GymProductsPage = () => {
   const [selectedDurIdx, setSelectedDurIdx] = useState(0)
 
   const reset = (t: Tab) => { setTab(t); setSelectedIdx(0); setSelectedDurIdx(0) }
-  const durations = getDurations(tab, selectedIdx)
+  const safeIdx = selectedIdx >= 0 ? selectedIdx : 0
+  const durations = getDurations(tab, safeIdx)
   const selectedDur = durations[selectedDurIdx]
   const products = getProductItems(tab)
 
-  const ctaLabel = `${products[selectedIdx].name} · ${selectedDur.label}`
+  const ctaLabel = `${products[safeIdx].name} · ${selectedDur.label}`
 
   const header = <SubPageHeader title="상품선택" />
 
@@ -290,16 +291,25 @@ export const GymProductsPage = () => {
                   isOpen ? 'border-2 border-primary/30 bg-primary-50/30' : 'border border-border bg-surface'
                 }`}>
                   <button
-                    onClick={() => { setSelectedIdx(pi); setSelectedDurIdx(0) }}
+                    onClick={() => { if (isOpen) { setSelectedIdx(-1) } else { setSelectedIdx(pi); setSelectedDurIdx(0) } }}
                     className={`w-full flex items-center justify-between px-card-lg py-3 transition-colors ${
                       isOpen ? 'bg-primary-50' : 'hover:bg-surface-subtle'
                     }`}
                   >
-                    <div className="flex items-center gap-2.5">
-                      <span className="text-title">{item.icon}</span>
-                      <span className={`text-body font-bold ${isOpen ? 'text-primary' : 'text-ink-secondary'}`}>{item.name}</span>
+                    <div className="flex items-center gap-3 min-w-0">
+                      {'img' in item && item.img ? (
+                        <img src={item.img as string} alt={item.name} className="w-10 h-10 rounded-card object-cover flex-shrink-0" />
+                      ) : (
+                        <span className="text-title flex-shrink-0">{item.icon}</span>
+                      )}
+                      <div className="min-w-0 text-left">
+                        <p className={`text-body font-bold ${isOpen ? 'text-primary' : 'text-ink-secondary'}`}>{item.name}</p>
+                        {'desc' in item && item.desc && (
+                          <p className="text-caption text-ink-tertiary truncate mt-0.5">{item.desc as string}</p>
+                        )}
+                      </div>
                     </div>
-                    <svg viewBox="0 0 20 20" className={`w-5 h-5 transition-transform ${isOpen ? 'text-primary rotate-180' : 'text-ink-tertiary'}`}>
+                    <svg viewBox="0 0 20 20" className={`w-5 h-5 flex-shrink-0 transition-transform ${isOpen ? 'text-primary rotate-180' : 'text-ink-tertiary'}`}>
                       <path fill="currentColor" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
                     </svg>
                   </button>
