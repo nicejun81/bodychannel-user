@@ -50,12 +50,12 @@ export default {
 
       /* ── Typography Scale ── */
       fontSize: {
-        'caption': ['13px', { lineHeight: '18px', letterSpacing: '0.01em' }],
-        'label':   ['15px', { lineHeight: '22px' }],
-        'body':    ['17px', { lineHeight: '26px' }],
-        'title':   ['19px', { lineHeight: '28px', fontWeight: '700' }],
-        'heading': ['23px', { lineHeight: '32px', fontWeight: '700' }],
-        'display': ['28px', { lineHeight: '36px', fontWeight: '800' }],
+        'caption': ['12px', { lineHeight: '16px', letterSpacing: '0.01em' }],
+        'label':   ['14px', { lineHeight: '20px' }],
+        'body':    ['16px', { lineHeight: '24px' }],
+        'title':   ['18px', { lineHeight: '26px', fontWeight: '700' }],
+        'heading': ['21px', { lineHeight: '30px', fontWeight: '700' }],
+        'display': ['26px', { lineHeight: '34px', fontWeight: '800' }],
       },
 
       /* ── Font Family ── */
