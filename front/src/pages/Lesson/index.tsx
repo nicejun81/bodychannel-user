@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { PageLayout, SubPageHeader, ScrollRow, TrainerListItem, SectionHeader, FilterTabs, EmptyState } from '../../components'
+import { PageLayout, SubPageHeader, ScrollRow, TrainerListItem, FilterTabs, EmptyState } from '../../components'
 import { IconSearch, IconChevronRight } from '../../components/Icons'
 
 const filterTabs = [
@@ -76,7 +75,6 @@ function getLessonScheduleDays() {
 }
 
 export const LessonPage = () => {
-  const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('all')
   const [selectedDateIdx, setSelectedDateIdx] = useState(0)
   const scheduleDays = getLessonScheduleDays()
