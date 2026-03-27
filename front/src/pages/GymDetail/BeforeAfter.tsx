@@ -15,7 +15,7 @@ export const GymBeforeAfterPage = () => {
   const header = <SubPageHeader title="Before & After" />
 
   return (
-    <PageLayout header={header} hideNav>
+    <PageLayout header={header}>
       <div className="px-page py-section">
         <p className="text-body text-ink-secondary mb-4">
           바디채널 {id === '1' ? '강남점' : id === '2' ? '역삼점' : id === '3' ? '서초점' : '판교점'} 회원들의 변화 기록
