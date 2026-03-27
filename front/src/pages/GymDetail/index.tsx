@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { PageLayout, SubPageHeader, RatingSummary, ReviewItem, ReviewSort, BottomCTA, Badge, InfoRow, EmptyState, FeedCard, TrainerListItem, PlanCard, PTTrainerCard } from '../../components'
 import { IconShare, IconClock, IconMapPin } from '../../components/Icons'
+import { baItems } from './BeforeAfter'
 
 /* ── types ── */
 interface Facility { icon: string; label: string }
@@ -510,28 +511,21 @@ export const GymDetailPage = () => {
           <button onClick={() => navigate(`/gym/${id}/before-after`)} className="text-label text-primary font-medium">전체보기</button>
         </div>
         <div className="flex gap-3 overflow-x-auto hide-scrollbar px-page">
-          {[
-            { before: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=300&h=400&fit=crop', after: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=300&h=400&fit=crop', name: '김○○ 회원', result: '-12kg / 3개월', tag: '다이어트' },
-            { before: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=300&h=400&fit=crop', after: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=300&h=400&fit=crop', name: '이○○ 회원', result: '+5kg 근육 / 4개월', tag: '벌크업' },
-            { before: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=300&h=400&fit=crop', after: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=300&h=400&fit=crop', name: '박○○ 회원', result: '체형교정 / 6개월', tag: '체형교정' },
-          ].map((item, i) => (
-            <div key={i} className="flex-shrink-0 w-[180px]">
+          {baItems.slice(0, 3).map((item, i) => (
+            <div key={i} className="flex-shrink-0 w-[180px] cursor-pointer" onClick={() => navigate(`/gym/${id}/before-after/${i}`)}>
               <div className="flex gap-1 mb-2 rounded-xl overflow-hidden">
                 <div className="relative flex-1">
-                  <img src={item.before} alt="Before" className="w-full aspect-[3/4] object-cover" />
+                  <img src={item.before.replace('w=400&h=500', 'w=300&h=400')} alt="Before" className="w-full aspect-[3/4] object-cover" />
                   <span className="absolute bottom-1 left-1 px-1.5 py-0.5 bg-black/60 text-white text-caption font-bold rounded">BEFORE</span>
                 </div>
                 <div className="relative flex-1">
-                  <img src={item.after} alt="After" className="w-full aspect-[3/4] object-cover" />
+                  <img src={item.after.replace('w=400&h=500', 'w=300&h=400')} alt="After" className="w-full aspect-[3/4] object-cover" />
                   <span className="absolute bottom-1 left-1 px-1.5 py-0.5 bg-primary text-white text-caption font-bold rounded">AFTER</span>
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-body font-bold text-ink">{item.name}</p>
-                  <p className="text-label text-primary font-medium">{item.result}</p>
-                </div>
-                <span className="px-2 py-0.5 bg-surface-muted text-caption text-ink-secondary font-medium rounded-full">{item.tag}</span>
+                <p className="text-body font-bold text-ink truncate flex-1 mr-2">{item.title}</p>
+                <span className="px-2 py-0.5 bg-surface-muted text-caption text-ink-secondary font-medium rounded-full flex-shrink-0">{item.tag}</span>
               </div>
             </div>
           ))}

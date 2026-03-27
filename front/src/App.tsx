@@ -1,4 +1,11 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  return null
+}
 import {
   HomePage,
   ComponentsShowcasePage,
@@ -21,6 +28,7 @@ import {
   GymDetailPage,
   GymProductsPage,
   GymBeforeAfterPage,
+  GymBeforeAfterDetailPage,
   ChatPage,
   ChatRoomPage,
   CheckoutPage,
@@ -32,6 +40,7 @@ import {
 export const App = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/components" element={<ComponentsShowcasePage />} />
@@ -54,6 +63,7 @@ export const App = () => {
         <Route path="/gym/:id" element={<GymDetailPage />} />
         <Route path="/gym/:id/products" element={<GymProductsPage />} />
         <Route path="/gym/:id/before-after" element={<GymBeforeAfterPage />} />
+        <Route path="/gym/:id/before-after/:itemId" element={<GymBeforeAfterDetailPage />} />
         <Route path="/gym/:id/addons" element={<AddOnsPage />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/chat/:id" element={<ChatRoomPage />} />

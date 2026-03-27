@@ -5,6 +5,7 @@ interface PageLayoutProps {
   children: ReactNode
   header?: ReactNode
   hideBottomNav?: boolean
+  noPadding?: boolean
   className?: string
 }
 
@@ -12,12 +13,13 @@ export const PageLayout = ({
   children,
   header,
   hideBottomNav = false,
+  noPadding = false,
   className = '',
 }: PageLayoutProps) => {
   return (
     <div className="min-h-screen bg-surface">
       {header}
-      <main className={`px-page py-4 pb-28 ${className}`}>
+      <main className={`${noPadding ? 'pb-28' : 'px-page py-4 pb-28'} ${className}`}>
         {children}
       </main>
       {!hideBottomNav && <BottomNav />}
