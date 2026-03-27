@@ -6,12 +6,13 @@ import { IconStarFilled } from '../../components/Icons'
 
 type Tab = 'membership' | 'lesson' | 'extra'
 
-const categoryStyles: Record<string, string> = {
+const _categoryStyles: Record<string, string> = {
   bareton: 'bg-category-bareton-bg text-category-bareton-text',
   hit35: 'bg-category-hit35-bg text-category-hit35-text',
   gymground: 'bg-category-gymground-bg text-category-gymground-text',
   pt: 'bg-primary-50 text-primary',
 }
+void _categoryStyles
 
 interface Duration { label: string; price: string; original?: string; tag?: string; installment?: string; per?: string; group?: '회수권' | '무제한 이용권' | '기간권' }
 
@@ -306,8 +307,8 @@ export const GymProductsPage = () => {
                       )}
                       <div className="min-w-0 text-left">
                         <p className={`text-body font-bold ${isOpen ? 'text-primary' : 'text-ink-secondary'}`}>{item.name}</p>
-                        {'desc' in item && item.desc && (
-                          <p className="text-caption text-ink-tertiary truncate mt-0.5">{item.desc as string}</p>
+                        {'desc' in item && (item as Record<string, string>).desc && (
+                          <p className="text-caption text-ink-tertiary truncate mt-0.5">{(item as Record<string, string>).desc}</p>
                         )}
                       </div>
                     </div>

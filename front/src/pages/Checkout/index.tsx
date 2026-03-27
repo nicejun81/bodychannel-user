@@ -34,7 +34,7 @@ const PaycoLogo = () => (
 )
 
 const PaymentIcon = ({ method }: { method: PaymentMethod }) => {
-  const map: Record<PaymentMethod, { bg: string; icon: JSX.Element }> = {
+  const map: Record<PaymentMethod, { bg: string; icon: React.ReactNode }> = {
     kakao: { bg: 'bg-semantic-kakao', icon: <KakaoLogo /> },
     naver: { bg: 'bg-semantic-online', icon: <NaverLogo /> },
     toss: { bg: 'bg-[#0064FF]', icon: <TossLogo /> },
@@ -46,11 +46,12 @@ const PaymentIcon = ({ method }: { method: PaymentMethod }) => {
   return <div className={`w-9 h-9 rounded-[10px] flex items-center justify-center flex-shrink-0 ${bg}`}>{icon}</div>
 }
 
-const Check = ({ on }: { on: boolean }) => (
+const _Check = ({ on }: { on: boolean }) => (
   <div className={`w-[20px] h-[20px] rounded-full flex items-center justify-center flex-shrink-0 transition-all ${on ? 'bg-primary' : 'border-2 border-ink-disabled'}`}>
     {on && <svg viewBox="0 0 16 16" className="w-2.5 h-2.5 fill-white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z" /></svg>}
   </div>
 )
+void _Check
 
 const SectionTitle = ({ children }: { children: string }) => (
   <h3 className="text-title text-ink mb-3">{children}</h3>
