@@ -29,6 +29,7 @@ import {
   GymProductsPage,
   GymBeforeAfterPage,
   GymBeforeAfterDetailPage,
+  GymReviewsPage,
   ChatPage,
   ChatRoomPage,
   CheckoutPage,
@@ -64,6 +65,7 @@ export const App = () => {
         <Route path="/gym/:id/products" element={<GymProductsPage />} />
         <Route path="/gym/:id/before-after" element={<GymBeforeAfterPage />} />
         <Route path="/gym/:id/before-after/:itemId" element={<GymBeforeAfterDetailPage />} />
+        <Route path="/gym/:id/reviews" element={<GymReviewsPage />} />
         <Route path="/gym/:id/addons" element={<AddOnsPage />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/chat/:id" element={<ChatRoomPage />} />

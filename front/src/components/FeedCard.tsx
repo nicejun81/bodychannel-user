@@ -24,26 +24,26 @@ export const FeedCard = ({
   return (
     <button
       onClick={onClick}
-      className="rounded-card overflow-hidden hover:scale-[1.02] transition-transform text-left bg-surface"
+      className="flex flex-col rounded-card overflow-hidden shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all text-left bg-surface h-full"
     >
       <img
         src={imageUrl}
         alt="피드"
         className="w-full aspect-square object-cover"
       />
-      <div className="p-card">
+      <div className="flex flex-col flex-1 p-card">
         <div className="flex items-center gap-2 mb-1.5">
           <img
             src={authorImageUrl}
             alt={authorName}
-            className="w-6 h-6 rounded-full object-cover"
+            className="w-6 h-6 rounded-full object-cover flex-shrink-0"
           />
           <span className="text-label font-semibold text-ink">{authorName}</span>
         </div>
-        <p className="text-label text-ink-secondary leading-snug line-clamp-2 mb-2">{text}</p>
-        <div className="flex items-center gap-3 text-label text-ink-placeholder">
-          <span className={`flex items-center gap-1 ${isLiked ? 'text-[#ff5252]' : ''}`}>
-            <IconHeart className={`w-3.5 h-3.5 ${isLiked ? 'fill-[#ff5252] stroke-[#ff5252]' : 'stroke-current'} stroke-2`} />
+        <p className="text-label text-ink-secondary leading-snug line-clamp-2 flex-1">{text}</p>
+        <div className="flex items-center gap-3 text-label text-ink-placeholder mt-2">
+          <span className={`flex items-center gap-1 ${isLiked ? 'text-semantic-like' : ''}`}>
+            <IconHeart className={`w-3.5 h-3.5 ${isLiked ? 'fill-semantic-like stroke-semantic-like' : 'stroke-current'} stroke-2`} />
             {likeCount}
           </span>
           <span className="flex items-center gap-1">

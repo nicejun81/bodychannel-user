@@ -92,9 +92,14 @@ export default {
           '50%': { opacity: '0.6' },
           '100%': { top: 'calc(100% - 10px)', opacity: '1' },
         },
+        'slide-up': {
+          '0%': { transform: 'translateY(100%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
       },
       animation: {
         'scan-line': 'scan-line 2s ease-in-out infinite',
+        'slide-up': 'slide-up 0.3s ease-out',
       },
 
       /* ── Transitions ── */

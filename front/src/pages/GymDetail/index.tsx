@@ -299,6 +299,11 @@ export const GymDetailPage = () => {
   const [selectedDateIdx, setSelectedDateIdx] = useState(0)
   const selectedDay = scheduleDays[selectedDateIdx].dayKey
   const [reviewSort, setReviewSort] = useState<'latest' | 'high' | 'low'>('latest')
+  const [showReviewForm, setShowReviewForm] = useState(false)
+  const [reviewRating, setReviewRating] = useState(0)
+  const [reviewText, setReviewText] = useState('')
+  const [reviewSubmitted, setReviewSubmitted] = useState(false)
+  const [reviewImages, setReviewImages] = useState<string[]>([])
 
 
   const sortedReviews = [...data.reviews].sort((a, b) => {
@@ -543,7 +548,7 @@ export const GymDetailPage = () => {
         <div className="mb-4">
           <RatingSummary rating={data.rating} reviewCount={data.reviewCount} />
         </div>
-        <ReviewSort value={reviewSort} onChange={(v) => setReviewSort(v as 'latest' | 'high' | 'low')} onWrite={() => {}} />
+        <ReviewSort value={reviewSort} onChange={(v) => setReviewSort(v as 'latest' | 'high' | 'low')} onWrite={() => { setShowReviewForm(true); setReviewSubmitted(false); setReviewRating(0); setReviewText(''); setReviewImages([]) }} />
         <div className="space-y-4">
           {sortedReviews.map((review, i) => (
             <ReviewItem
@@ -558,7 +563,7 @@ export const GymDetailPage = () => {
             />
           ))}
         </div>
-        {data.reviews.length > 0 && <button className="w-full py-3 mt-4 border border-border rounded-card text-body font-semibold text-ink hover:bg-surface-subtle transition-colors">후기 더보기</button>}
+        {data.reviews.length > 0 && <button onClick={() => navigate(`/gym/${id}/reviews`)} className="w-full py-3 mt-4 border border-border rounded-card text-body font-semibold text-ink hover:bg-surface-subtle transition-colors">후기 더보기</button>}
       </div>
 
       <div className="h-2 bg-surface-muted" />
@@ -649,6 +654,165 @@ export const GymDetailPage = () => {
       <BottomCTA hideBottomNav>
         <button onClick={() => navigate(`/gym/${id}/products`)} className="flex-1 py-3.5 bg-primary text-white text-body font-bold rounded-xl hover:bg-primary-dark transition-colors">상품 구매</button>
       </BottomCTA>
+
+      {/* ── 후기 작성 풀스크린 ── */}
+      {showReviewForm && (
+        <div className="fixed inset-0 z-50 bg-surface flex flex-col">
+          {/* 헤더 */}
+          <div className="flex items-center justify-between px-page py-3 border-b border-border flex-shrink-0">
+            <button onClick={() => setShowReviewForm(false)} className="p-1">
+              <svg viewBox="0 0 24 24" className="w-6 h-6 text-ink" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h3 className="text-title font-bold text-ink">후기 작성</h3>
+            <div className="w-8" />
+          </div>
+
+          {reviewSubmitted ? (
+            /* ── 제출 완료 ── */
+            <div className="flex-1 flex flex-col items-center justify-center px-page">
+              <div className="w-16 h-16 bg-primary-50 rounded-full flex items-center justify-center mb-section">
+                <svg viewBox="0 0 24 24" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <p className="text-heading font-bold text-ink mb-2">후기가 등록되었습니다</p>
+              <p className="text-body text-ink-secondary mb-8">소중한 후기 감사합니다!</p>
+              <button onClick={() => setShowReviewForm(false)} className="w-full py-3.5 bg-primary text-white text-body font-bold rounded-xl">확인</button>
+            </div>
+          ) : (
+            /* ── 작성 폼 ── */
+            <>
+              <div className="flex-1 overflow-y-auto">
+                <div className="px-page py-section">
+
+                  {/* 1. 별점 */}
+                  <div className="mb-section">
+                    <p className="text-heading font-bold text-ink mb-4">만족도를 알려주세요</p>
+                    <div className="flex gap-3 justify-center py-2">
+                      {[1, 2, 3, 4, 5].map(star => (
+                        <button key={star} onClick={() => setReviewRating(star)} className="p-0.5">
+                          <svg viewBox="0 0 24 24" className={`w-10 h-10 transition-colors ${star <= reviewRating ? 'text-semantic-star' : 'text-ink-disabled'}`} fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                          </svg>
+                        </button>
+                      ))}
+                    </div>
+                    {reviewRating > 0 && (
+                      <p className="text-center text-body text-primary font-bold mt-2">
+                        {['', '별로예요', '그저 그래요', '보통이에요', '좋아요', '최고예요!'][reviewRating]}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="h-px bg-border mb-section" />
+
+                  {/* 3. 이용 프로그램 */}
+                  <div className="mb-section">
+                    <p className="text-heading font-bold text-ink mb-2">이용한 프로그램</p>
+                    <p className="text-label text-ink-tertiary mb-4">선택사항</p>
+                    <div className="flex gap-2 overflow-x-auto hide-scrollbar">
+                      {['PT', '바레톤', '히트35', '짐그라운드', '헬스 이용'].map(prog => (
+                        <button
+                          key={prog}
+                          onClick={(e) => {
+                            const btn = e.currentTarget
+                            btn.classList.toggle('bg-primary-50')
+                            btn.classList.toggle('text-primary')
+                            btn.classList.toggle('border-primary')
+                            btn.classList.toggle('bg-surface')
+                            btn.classList.toggle('text-ink-secondary')
+                            btn.classList.toggle('border-border')
+                          }}
+                          className="flex-shrink-0 px-4 py-2 border border-border rounded-pill text-label font-medium text-ink-secondary bg-surface transition-colors"
+                        >
+                          {prog}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="h-px bg-border mb-section" />
+
+                  {/* 4. 텍스트 입력 */}
+                  <div className="mb-section">
+                    <p className="text-heading font-bold text-ink mb-4">상세 후기</p>
+                    <textarea
+                      value={reviewText}
+                      onChange={e => { if (e.target.value.length <= 500) setReviewText(e.target.value) }}
+                      placeholder="시설, 수업, 트레이너 등 이용 경험을 자유롭게 작성해 주세요 (최소 10자)"
+                      className="w-full h-36 p-card-lg bg-surface-muted rounded-card text-body text-ink placeholder:text-ink-placeholder resize-none focus:outline-none focus:ring-2 focus:ring-primary/30"
+                    />
+                    <div className="flex justify-between mt-1.5">
+                      <p className={`text-caption ${reviewText.length > 0 && reviewText.length < 10 ? 'text-primary' : 'text-ink-tertiary'}`}>
+                        {reviewText.length > 0 && reviewText.length < 10 ? '최소 10자 이상 작성해 주세요' : ' '}
+                      </p>
+                      <p className="text-caption text-ink-tertiary">{reviewText.length}/500</p>
+                    </div>
+                  </div>
+
+                  <div className="h-px bg-border mb-section" />
+
+                  {/* 5. 사진 첨부 */}
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div>
+                        <p className="text-heading font-bold text-ink">사진 첨부</p>
+                        <p className="text-label text-ink-tertiary mt-1">최대 5장까지 등록 가능</p>
+                      </div>
+                      <span className="text-label text-ink-tertiary">{reviewImages.length}/5</span>
+                    </div>
+                    <div className="flex gap-2.5 overflow-x-auto hide-scrollbar">
+                      {/* 추가 버튼 */}
+                      {reviewImages.length < 5 && (
+                        <label className="flex-shrink-0 w-20 h-20 bg-surface-muted rounded-card border-2 border-dashed border-border flex flex-col items-center justify-center cursor-pointer hover:border-primary/50 transition-colors">
+                          <svg viewBox="0 0 24 24" className="w-6 h-6 text-ink-tertiary mb-0.5" fill="none" stroke="currentColor" strokeWidth="1.5">
+                            <path d="M12 5v14M5 12h14" />
+                          </svg>
+                          <span className="text-caption text-ink-tertiary">사진</span>
+                          <input type="file" accept="image/*" className="hidden" onChange={(e) => {
+                            const file = e.target.files?.[0]
+                            if (file && reviewImages.length < 5) {
+                              const url = URL.createObjectURL(file)
+                              setReviewImages(prev => [...prev, url])
+                            }
+                            e.target.value = ''
+                          }} />
+                        </label>
+                      )}
+                      {/* 첨부된 이미지 */}
+                      {reviewImages.map((img, i) => (
+                        <div key={i} className="flex-shrink-0 w-20 h-20 relative rounded-card overflow-hidden">
+                          <img src={img} alt={`첨부 ${i + 1}`} className="w-full h-full object-cover" />
+                          <button
+                            onClick={() => setReviewImages(prev => prev.filter((_, idx) => idx !== i))}
+                            className="absolute top-1 right-1 w-5 h-5 bg-black/60 rounded-full flex items-center justify-center"
+                          >
+                            <svg viewBox="0 0 24 24" className="w-3 h-3 text-white" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 18L18 6M6 6l12 12" /></svg>
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* 하단 고정 버튼 */}
+              <div className="flex-shrink-0 px-page py-3 border-t border-border bg-surface">
+                <button
+                  onClick={() => setReviewSubmitted(true)}
+                  disabled={reviewRating === 0 || reviewText.trim().length < 10}
+                  className={`w-full py-3.5 text-body font-bold rounded-xl transition-colors ${
+                    reviewRating > 0 && reviewText.trim().length >= 10
+                      ? 'bg-primary text-white hover:bg-primary-dark'
+                      : 'bg-ink-disabled text-white cursor-not-allowed'
+                  }`}
+                >
+                  등록하기
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      )}
     </PageLayout>
   )
 }
