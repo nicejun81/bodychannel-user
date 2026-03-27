@@ -473,7 +473,7 @@ export const GymDetailPage = () => {
       <div className="py-section">
         <div className="flex items-center justify-between mb-4 px-page">
           <h2 className="text-heading font-bold text-ink">개인 레슨</h2>
-          <button className="text-label text-primary font-medium">전체보기</button>
+          <button onClick={() => navigate('/lesson')} className="text-label text-primary font-medium">전체보기</button>
         </div>
         {data.trainers.length > 0 ? (
           <div className="flex gap-3 overflow-x-auto hide-scrollbar px-page">
@@ -507,7 +507,7 @@ export const GymDetailPage = () => {
       <div className="py-section">
         <div className="flex items-center justify-between mb-4 px-page">
           <h2 className="text-heading font-bold text-ink">Before & After</h2>
-          <button className="text-label text-primary font-medium">전체보기</button>
+          <button onClick={() => navigate(`/gym/${id}/before-after`)} className="text-label text-primary font-medium">전체보기</button>
         </div>
         <div className="flex gap-3 overflow-x-auto hide-scrollbar px-page">
           {[

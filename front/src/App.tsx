@@ -20,6 +20,7 @@ import {
   FeedDetailPage,
   GymDetailPage,
   GymProductsPage,
+  GymBeforeAfterPage,
   ChatPage,
   ChatRoomPage,
   CheckoutPage,
@@ -52,6 +53,7 @@ export const App = () => {
         <Route path="/feed/:id" element={<FeedDetailPage />} />
         <Route path="/gym/:id" element={<GymDetailPage />} />
         <Route path="/gym/:id/products" element={<GymProductsPage />} />
+        <Route path="/gym/:id/before-after" element={<GymBeforeAfterPage />} />
         <Route path="/gym/:id/addons" element={<AddOnsPage />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/chat/:id" element={<ChatRoomPage />} />
