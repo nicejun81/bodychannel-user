@@ -56,6 +56,9 @@ export const GymReviewsPage = () => {
               text={review.text}
               badge={review.membershipType}
               photos={review.photos}
+              isMine={review.name === '헬스왕'}
+              onEdit={() => {}}
+              onDelete={() => {}}
             />
           ))}
         </div>

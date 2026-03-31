@@ -36,6 +36,7 @@ import {
   AddOnsPage,
   CompletePage,
   PurchaseDocsPage,
+  GroupLessonDetailPage,
 } from './pages'
 
 export const App = () => {
@@ -67,6 +68,7 @@ export const App = () => {
         <Route path="/gym/:id/before-after/:itemId" element={<GymBeforeAfterDetailPage />} />
         <Route path="/gym/:id/reviews" element={<GymReviewsPage />} />
         <Route path="/gym/:id/addons" element={<AddOnsPage />} />
+        <Route path="/group-lesson/:id" element={<GroupLessonDetailPage />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/chat/:id" element={<ChatRoomPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />

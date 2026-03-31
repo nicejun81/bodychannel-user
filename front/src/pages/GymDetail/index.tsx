@@ -3,12 +3,13 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { PageLayout, SubPageHeader, RatingSummary, ReviewItem, ReviewSort, BottomCTA, Badge, InfoRow, EmptyState, FeedCard, TrainerListItem, PlanCard, PTTrainerCard } from '../../components'
 import { IconShare, IconClock, IconMapPin } from '../../components/Icons'
 import { baItems } from './BeforeAfter'
+import { lessonIdMap } from '../GroupLessonDetail'
 
 /* ── types ── */
 interface Facility { icon: string; label: string }
 interface PricePlan { name: string; duration: string; price: string; original?: string; tag?: string; installment?: string }
 interface ReviewData { name: string; avatar: string; rating: number; date: string; text: string; photos?: string[]; membershipType?: string }
-interface GymPhoto { url: string; label: string }
+interface GymPhoto { url: string; label: string; type?: 'image' | 'video'; videoUrl?: string }
 interface Trainer { id: number; name: string; avatar: string; specialty: string; rating: number; reviewCount: number; perSession: string }
 interface ScheduleItem { time: string; name: string; instructor: string; avatar: string; category: string; categoryColor: 'bareton' | 'hit35' | 'gymground' | 'pt'; hasTicket?: boolean }
 type WeekSchedule = Record<string, ScheduleItem[]>
@@ -69,10 +70,10 @@ export const gymsData: Record<string, GymInfo> = {
     galleryImages: [
       { url: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop', label: '메인' },
       { url: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&h=400&fit=crop', label: '웨이트존' },
-      { url: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=400&fit=crop', label: '카디오존' },
+      { url: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=400&fit=crop', label: '카디오존', type: 'video' as const, videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
       { url: 'https://images.unsplash.com/photo-1558611848-73f7eb4001a1?w=400&h=400&fit=crop', label: '러닝머신' },
       { url: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=400&fit=crop', label: '스트레칭존' },
-      { url: 'https://images.unsplash.com/photo-1576678927484-cc907957088c?w=400&h=400&fit=crop', label: 'GX룸' },
+      { url: 'https://images.unsplash.com/photo-1576678927484-cc907957088c?w=400&h=400&fit=crop', label: 'GX룸', type: 'video' as const, videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4' },
       { url: 'https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=400&h=400&fit=crop', label: '샤워실' },
       { url: 'https://images.unsplash.com/photo-1570829460005-c840387bb1ca?w=400&h=400&fit=crop', label: '락커룸' },
     ],
@@ -279,6 +280,8 @@ export const GymDetailPage = () => {
   const data = gymsData[id || ''] || defaultGym
   const [_liked, _setLiked] = useState(false)
   const [heroIdx, setHeroIdx] = useState(0)
+  const [showFullImage, setShowFullImage] = useState(false)
+  const [zoomedImage, setZoomedImage] = useState<{ url: string; label: string } | null>(null)
   const [congestionDayOffset, setCongestionDayOffset] = useState(0) // -6 ~ 0 (과거 1주일 ~ 오늘)
   void _liked; void _setLiked
   const scheduleDays = (() => {
@@ -336,7 +339,7 @@ export const GymDetailPage = () => {
       <div className="relative">
         <div className="overflow-hidden">
           <div className="flex transition-transform duration-300" style={{ transform: `translateX(-${heroIdx * 100}%)` }}>
-            {data.heroImages.map((img, i) => <img key={i} src={img.url} alt={img.label} className="w-full aspect-video object-cover flex-shrink-0" />)}
+            {data.heroImages.map((img, i) => <img key={i} src={img.url} alt={img.label} className="w-full aspect-video object-cover flex-shrink-0 cursor-pointer" onClick={() => setShowFullImage(true)} />)}
           </div>
         </div>
         {data.heroImages.length > 1 && (
@@ -462,9 +465,10 @@ export const GymDetailPage = () => {
                 rating={0}
                 reviewCount={0}
                 rightAction={s.hasTicket
-                  ? <span onClick={() => navigate('/reservation')} className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
-                  : <span onClick={() => navigate(`/gym/${id}/products`)} className="px-3 py-1 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
+                  ? <span onClick={(e) => { e.stopPropagation(); navigate('/reservation') }} className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
+                  : <span onClick={(e) => { e.stopPropagation(); navigate(`/gym/${id}/products`) }} className="px-3 py-1 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
                 }
+                onClick={() => navigate(`/group-lesson/${lessonIdMap[s.name] || s.name}`)}
               />
             )) : (
               <EmptyState message={`${scheduleDays[selectedDateIdx].isToday ? '오늘은' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')은'} 수업이 없습니다`} />
@@ -560,6 +564,9 @@ export const GymDetailPage = () => {
               text={review.text}
               badge={review.membershipType}
               photos={review.photos}
+              isMine={i === 0}
+              onEdit={() => { setShowReviewForm(true); setReviewSubmitted(false); setReviewRating(review.rating); setReviewText(review.text); setReviewImages([]) }}
+              onDelete={() => {}}
             />
           ))}
         </div>
@@ -811,6 +818,56 @@ export const GymDetailPage = () => {
               </div>
             </>
           )}
+        </div>
+      )}
+
+      {/* ── 전체 이미지 갤러리 ── */}
+      {showFullImage && (
+        <div className="fixed inset-0 z-[60] bg-black/95 flex flex-col">
+          <div className="flex items-center justify-between px-page py-3 flex-shrink-0">
+            <span className="text-body font-bold text-white">사진 {data.galleryImages.filter(g => g.type !== 'video').length}장 · 동영상 {data.galleryImages.filter(g => g.type === 'video').length}개</span>
+            <button onClick={() => setShowFullImage(false)} className="w-10 h-10 flex items-center justify-center text-white/80 hover:text-white">
+              <svg viewBox="0 0 24 24" className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
+            </button>
+          </div>
+          <div className="flex-1 overflow-y-auto px-1 pb-6">
+            <div className="grid grid-cols-2 gap-1">
+              {data.galleryImages.map((img, i) => (
+                <div key={i} className="relative aspect-square cursor-pointer" onClick={() => setZoomedImage(img)}>
+                  <img src={img.url.replace('w=400&h=400', 'w=600&h=600')} alt={img.label} className="w-full h-full object-cover" />
+                  {img.type === 'video' && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-12 h-12 bg-black/50 rounded-full flex items-center justify-center">
+                        <svg viewBox="0 0 24 24" className="w-6 h-6 text-white ml-0.5" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+                      </div>
+                    </div>
+                  )}
+                  <span className="absolute bottom-2 left-2 px-2 py-0.5 bg-black/50 rounded text-caption text-white">{img.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── 개별 이미지/동영상 확대 ── */}
+      {zoomedImage && (
+        <div className="fixed inset-0 z-[70] bg-black flex items-center justify-center" onClick={() => setZoomedImage(null)}>
+          <button className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center text-white/80 hover:text-white z-10">
+            <svg viewBox="0 0 24 24" className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
+          </button>
+          {zoomedImage.type === 'video' && zoomedImage.videoUrl ? (
+            <video
+              src={zoomedImage.videoUrl}
+              controls
+              autoPlay
+              className="w-full max-h-full object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          ) : (
+            <img src={zoomedImage.url.replace(/w=\d+&h=\d+/, 'w=1200&h=1200')} alt={zoomedImage.label} className="w-full h-auto max-h-full object-contain" onClick={(e) => e.stopPropagation()} />
+          )}
+          <span className="absolute bottom-6 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-black/50 rounded-full text-body text-white">{zoomedImage.label}</span>
         </div>
       )}
     </PageLayout>
