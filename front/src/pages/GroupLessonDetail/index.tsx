@@ -21,6 +21,7 @@ interface GroupLessonData {
   rating: number
   reviewCount: number
   imageUrl: string
+  heroImages: { url: string; label: string }[]
   description: string
   highlights: string[]
   duration: string
@@ -46,6 +47,11 @@ const lessonsData: Record<string, GroupLessonData> = {
     rating: 4.8,
     reviewCount: 86,
     imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=450&fit=crop',
+    heroImages: [
+      { url: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=450&fit=crop', label: '바레톤 수업' },
+      { url: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=450&fit=crop', label: '스트레칭' },
+      { url: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=800&h=450&fit=crop', label: '코어 운동' },
+    ],
     description: '아침 시간대에 진행되는 바레톤 수업입니다. 발레 동작을 기반으로 한 저강도 전신 운동으로, 코어 근력 강화와 유연성 향상에 효과적입니다. 은은한 음악과 함께 하루를 활기차게 시작해보세요.',
     highlights: ['코어 근력 강화', '유연성 향상', '체형 교정 효과', '스트레스 해소', '초보자도 참여 가능'],
     duration: '50분',
@@ -76,6 +82,11 @@ const lessonsData: Record<string, GroupLessonData> = {
     rating: 4.7,
     reviewCount: 62,
     imageUrl: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=450&fit=crop',
+    heroImages: [
+      { url: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=450&fit=crop', label: '바디펌프 수업' },
+      { url: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&h=450&fit=crop', label: '바벨 트레이닝' },
+      { url: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800&h=450&fit=crop', label: '그룹 운동' },
+    ],
     description: '바벨과 웨이트를 활용한 전신 근력 운동입니다. 음악에 맞춰 스쿼트, 런지, 프레스 등 다양한 동작을 반복하며, 근력과 지구력을 동시에 향상시킬 수 있습니다.',
     highlights: ['전신 근력 강화', '체지방 감소', '근지구력 향상', '바벨 기본기 학습', '에너지 소모 극대화'],
     duration: '50분',
@@ -105,6 +116,11 @@ const lessonsData: Record<string, GroupLessonData> = {
     rating: 4.9,
     reviewCount: 94,
     imageUrl: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&h=450&fit=crop',
+    heroImages: [
+      { url: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&h=450&fit=crop', label: 'HIIT 트레이닝' },
+      { url: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=450&fit=crop', label: '인터벌 운동' },
+      { url: 'https://images.unsplash.com/photo-1576678927484-cc907957088c?w=800&h=450&fit=crop', label: '고강도 서킷' },
+    ],
     description: '고강도 인터벌 트레이닝(HIIT)으로 단시간에 최대 칼로리를 소모하는 수업입니다. 30초 운동 + 10초 휴식을 반복하며, 심폐 지구력과 근력을 동시에 향상시킵니다.',
     highlights: ['최대 칼로리 소모', '심폐 지구력 향상', '애프터번 효과', '전신 근력 강화', '짧은 시간 높은 효율'],
     duration: '50분',
@@ -135,6 +151,11 @@ const lessonsData: Record<string, GroupLessonData> = {
     rating: 4.7,
     reviewCount: 58,
     imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=450&fit=crop',
+    heroImages: [
+      { url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=450&fit=crop', label: '필라테스 수업' },
+      { url: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=800&h=450&fit=crop', label: '매트 필라테스' },
+      { url: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=450&fit=crop', label: '코어 강화' },
+    ],
     description: '점심 시간을 활용한 필라테스 수업입니다. 매트 위에서 진행되는 코어 중심 운동으로, 자세 교정과 유연성 향상에 탁월합니다. 직장인들의 점심 시간 활용에 최적화된 프로그램입니다.',
     highlights: ['코어 강화', '자세 교정', '유연성 향상', '허리 통증 개선', '점심 시간 활용'],
     duration: '50분',
@@ -164,6 +185,11 @@ const lessonsData: Record<string, GroupLessonData> = {
     rating: 4.6,
     reviewCount: 45,
     imageUrl: 'https://images.unsplash.com/photo-1558611848-73f7eb4001a1?w=800&h=450&fit=crop',
+    heroImages: [
+      { url: 'https://images.unsplash.com/photo-1558611848-73f7eb4001a1?w=800&h=450&fit=crop', label: '스피닝 수업' },
+      { url: 'https://images.unsplash.com/photo-1570829460005-c840387bb1ca?w=800&h=450&fit=crop', label: '실내 사이클' },
+      { url: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&h=450&fit=crop', label: '유산소 운동' },
+    ],
     description: '실내 사이클을 활용한 고강도 유산소 운동입니다. 신나는 음악에 맞춰 페달을 밟으며, 하체 근력과 심폐 지구력을 동시에 강화할 수 있습니다.',
     highlights: ['유산소 운동 최고', '하체 근력 강화', '심폐 지구력 향상', '스트레스 해소', '칼로리 대량 소모'],
     duration: '45분',
@@ -192,6 +218,11 @@ const lessonsData: Record<string, GroupLessonData> = {
     rating: 4.8,
     reviewCount: 52,
     imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=450&fit=crop',
+    heroImages: [
+      { url: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=450&fit=crop', label: '주말 바레톤' },
+      { url: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=800&h=450&fit=crop', label: '유연성 운동' },
+      { url: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=450&fit=crop', label: '코어 강화' },
+    ],
     description: '주말 오전 시간에 여유롭게 즐기는 바레톤 수업입니다. 평일에 바쁜 분들을 위한 주말 전용 클래스로, 한 주의 피로를 풀고 활력을 되찾아보세요.',
     highlights: ['주말 전용 클래스', '여유로운 분위기', '코어 강화', '유연성 향상', '스트레스 해소'],
     duration: '50분',
@@ -219,6 +250,11 @@ const lessonsData: Record<string, GroupLessonData> = {
     rating: 4.7,
     reviewCount: 41,
     imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=450&fit=crop',
+    heroImages: [
+      { url: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=450&fit=crop', label: '바레톤 수업' },
+      { url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=450&fit=crop', label: '밸런스 운동' },
+      { url: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=800&h=450&fit=crop', label: '전신 토닝' },
+    ],
     description: '발레의 우아한 동작과 필라테스의 코어 운동을 결합한 바레톤 수업입니다. 근력, 유연성, 밸런스를 동시에 향상시킬 수 있는 종합 운동 프로그램입니다.',
     highlights: ['발레 기반 동작', '코어 강화', '밸런스 향상', '체형 교정', '전신 토닝'],
     duration: '50분',
@@ -333,16 +369,16 @@ export const GroupLessonDetailPage = () => {
       <div className="relative">
         <div className="overflow-hidden">
           <div className="flex transition-transform duration-300" style={{ transform: `translateX(-${heroIdx * 100}%)` }}>
-            {(gymData?.heroImages || [{ url: data.imageUrl, label: data.name }]).map((img, i) => (
+            {(data.heroImages).map((img, i) => (
               <img key={i} src={img.url} alt={img.label} className="w-full aspect-video object-cover flex-shrink-0 cursor-pointer" onClick={() => setShowFullImage(true)} />
             ))}
           </div>
         </div>
-        {gymData && gymData.heroImages.length > 1 && (
+        {data.heroImages.length > 1 && (
           <>
-            <div className="absolute bottom-14 right-3 px-2.5 py-1 bg-black/50 rounded-full text-white text-label font-medium">{heroIdx + 1} / {gymData.heroImages.length}</div>
+            <div className="absolute bottom-14 right-3 px-2.5 py-1 bg-black/50 rounded-full text-white text-label font-medium">{heroIdx + 1} / {data.heroImages.length}</div>
             {heroIdx > 0 && <button onClick={() => setHeroIdx(heroIdx - 1)} className="absolute left-2 top-1/3 -translate-y-1/2 w-8 h-8 bg-white/70 rounded-full flex items-center justify-center"><svg viewBox="0 0 24 24" className="w-4 h-4 stroke-ink stroke-2 fill-none"><path d="M19 12H5M12 19l-7-7 7-7" /></svg></button>}
-            {heroIdx < gymData.heroImages.length - 1 && <button onClick={() => setHeroIdx(heroIdx + 1)} className="absolute right-2 top-1/3 -translate-y-1/2 w-8 h-8 bg-white/70 rounded-full flex items-center justify-center rotate-180"><svg viewBox="0 0 24 24" className="w-4 h-4 stroke-ink stroke-2 fill-none"><path d="M19 12H5M12 19l-7-7 7-7" /></svg></button>}
+            {heroIdx < data.heroImages.length - 1 && <button onClick={() => setHeroIdx(heroIdx + 1)} className="absolute right-2 top-1/3 -translate-y-1/2 w-8 h-8 bg-white/70 rounded-full flex items-center justify-center rotate-180"><svg viewBox="0 0 24 24" className="w-4 h-4 stroke-ink stroke-2 fill-none"><path d="M19 12H5M12 19l-7-7 7-7" /></svg></button>}
           </>
         )}
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-page pt-12 cursor-pointer" onClick={() => setShowFullImage(true)}>
@@ -358,46 +394,53 @@ export const GroupLessonDetailPage = () => {
         </div>
       </div>
 
+      {/* ── 커리큘럼 소개 ── */}
+      <div className="px-page py-section">
+        <div className="flex items-center gap-3">
+          <img src={data.instructorAvatar} alt={data.instructor} className="w-12 h-12 rounded-full object-cover flex-shrink-0" />
+          <div className="flex items-center gap-2">
+            <span className="text-title text-ink">{data.instructor} 강사</span>
+            <span className={`px-2 py-0.5 text-caption font-bold rounded ${categoryBadgeClass(data.categoryColor)}`}>{data.category}</span>
+          </div>
+          <div className="ml-auto flex items-center gap-1 text-ink-secondary">
+            <IconMapPin className="w-4 h-4" />
+            <span className="text-label">{data.gym}</span>
+          </div>
+        </div>
+      </div>
+
       {/* ── 수업 정보 ── */}
       <div className="px-page py-section">
         <p className="text-body text-ink-secondary leading-relaxed">{data.description}</p>
 
-        <div className="mt-6 grid grid-cols-2 gap-3">
-          <div className="bg-surface-muted rounded-card p-card flex items-center gap-3">
-            <div className="w-9 h-9 bg-surface rounded-card flex items-center justify-center flex-shrink-0">
+        <div className="mt-6 grid grid-cols-4 gap-2">
+          <div className="flex flex-col items-center text-center">
+            <div className="w-10 h-10 bg-surface-muted rounded-full flex items-center justify-center mb-1.5">
               <IconClock className="w-5 h-5 text-primary" />
             </div>
-            <div>
-              <p className="text-label text-ink-tertiary">수업 시간</p>
-              <p className="text-body font-bold text-ink">{data.duration}</p>
-            </div>
+            <p className="text-label text-ink-tertiary">수업 시간</p>
+            <p className="text-body font-bold text-ink">{data.duration}</p>
           </div>
-          <div className="bg-surface-muted rounded-card p-card flex items-center gap-3">
-            <div className="w-9 h-9 bg-surface rounded-card flex items-center justify-center flex-shrink-0">
+          <div className="flex flex-col items-center text-center">
+            <div className="w-10 h-10 bg-surface-muted rounded-full flex items-center justify-center mb-1.5">
               <svg viewBox="0 0 24 24" className="w-5 h-5 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" /></svg>
             </div>
-            <div>
-              <p className="text-label text-ink-tertiary">정원</p>
-              <p className="text-body font-bold text-ink">{data.capacity}명</p>
-            </div>
+            <p className="text-label text-ink-tertiary">정원</p>
+            <p className="text-body font-bold text-ink">{data.capacity}명</p>
           </div>
-          <div className="bg-surface-muted rounded-card p-card flex items-center gap-3">
-            <div className="w-9 h-9 bg-surface rounded-card flex items-center justify-center flex-shrink-0">
+          <div className="flex flex-col items-center text-center">
+            <div className="w-10 h-10 bg-surface-muted rounded-full flex items-center justify-center mb-1.5">
               <svg viewBox="0 0 24 24" className="w-5 h-5 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             </div>
-            <div>
-              <p className="text-label text-ink-tertiary">난이도</p>
-              <p className="text-body font-bold text-ink">{data.difficulty}</p>
-            </div>
+            <p className="text-label text-ink-tertiary">난이도</p>
+            <p className="text-body font-bold text-ink">{data.difficulty}</p>
           </div>
-          <div className="bg-surface-muted rounded-card p-card flex items-center gap-3">
-            <div className="w-9 h-9 bg-surface rounded-card flex items-center justify-center flex-shrink-0">
+          <div className="flex flex-col items-center text-center">
+            <div className="w-10 h-10 bg-surface-muted rounded-full flex items-center justify-center mb-1.5">
               <IconMapPin className="w-5 h-5 text-primary" />
             </div>
-            <div>
-              <p className="text-label text-ink-tertiary">장소</p>
-              <p className="text-body font-bold text-ink">{data.location}</p>
-            </div>
+            <p className="text-label text-ink-tertiary">장소</p>
+            <p className="text-body font-bold text-ink">{data.location}</p>
           </div>
         </div>
       </div>
@@ -421,26 +464,38 @@ export const GroupLessonDetailPage = () => {
 
       <div className="h-2 bg-surface-muted" />
 
-      {/* ── 강사 정보 ── */}
+      {/* ── 수업 일정 ── */}
       <div className="px-page py-section">
-        <h2 className="text-heading font-bold text-ink mb-4">강사 소개</h2>
-        <button
-          onClick={() => {
-            const trainerIdMap: Record<string, number> = { '이수진': 4, '한동훈': 3, '최강민': 1, '박지영': 5, '김민수': 2 }
-            navigate(`/trainer/${trainerIdMap[data.instructor] || 1}`)
-          }}
-          className="w-full flex items-center gap-4 p-card-lg bg-surface-muted rounded-card-lg hover:bg-surface-subtle transition-colors text-left"
-        >
-          <img src={data.instructorAvatar} alt={data.instructor} className="w-16 h-16 rounded-full object-cover flex-shrink-0" />
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-title text-ink">{data.instructor} 강사</span>
-              <span className={`px-2 py-0.5 text-caption font-bold rounded ${categoryBadgeClass(data.categoryColor)}`}>{data.category}</span>
-            </div>
-            <p className="text-label text-ink-secondary line-clamp-2">{data.instructorBio}</p>
-            <span className="text-label text-primary font-medium mt-1 inline-block">프로필 보기 &rarr;</span>
-          </div>
-        </button>
+        <h2 className="text-heading font-bold text-ink mb-4">수업 일정</h2>
+        <div className="flex gap-2 overflow-x-auto hide-scrollbar mb-4">
+          {scheduleDays.map((d, i) => (
+            <button key={i} onClick={() => setSelectedDateIdx(i)} className={`flex-shrink-0 w-[52px] py-2 rounded-xl text-center transition-colors ${selectedDateIdx === i ? 'bg-primary text-white' : 'bg-surface-muted text-ink-secondary hover:bg-surface-subtle'}`}>
+              <span className="text-label block">{d.isToday ? '오늘' : d.label}</span>
+              <span className="text-label font-bold block">{d.dayKey}</span>
+            </button>
+          ))}
+        </div>
+        <div>
+          {filteredSchedule.length > 0 ? filteredSchedule.map((s, i) => (
+            <TrainerListItem
+              key={i}
+              imageUrl={s.avatar}
+              name={`${s.instructor} 강사`}
+              category={s.category}
+              categoryColor={s.categoryColor}
+              description={s.name}
+              todayTime={`${scheduleDays[selectedDateIdx].isToday ? '오늘' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')'} ${s.time}`}
+              rating={0}
+              reviewCount={0}
+              rightAction={s.hasTicket
+                ? <span onClick={(e) => { e.stopPropagation(); navigate('/reservation') }} className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
+                : <span onClick={(e) => { e.stopPropagation(); navigate(`/gym/${data.gymId}/products`) }} className="px-3 py-1 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
+              }
+            />
+          )) : (
+            <EmptyState message={`${scheduleDays[selectedDateIdx].isToday ? '오늘은' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')은'} ${data.instructor} 강사의 수업이 없습니다`} />
+          )}
+        </div>
       </div>
 
       {/* ── Before & After ── */}
@@ -478,42 +533,6 @@ export const GroupLessonDetailPage = () => {
           </div>
         </>
       )}
-
-      <div className="h-2 bg-surface-muted" />
-
-      {/* ── 수업 일정 ── */}
-      <div className="px-page py-section">
-        <h2 className="text-heading font-bold text-ink mb-4">수업 일정</h2>
-        <div className="flex gap-2 overflow-x-auto hide-scrollbar mb-4">
-          {scheduleDays.map((d, i) => (
-            <button key={i} onClick={() => setSelectedDateIdx(i)} className={`flex-shrink-0 w-[52px] py-2 rounded-xl text-center transition-colors ${selectedDateIdx === i ? 'bg-primary text-white' : 'bg-surface-muted text-ink-secondary hover:bg-surface-subtle'}`}>
-              <span className="text-label block">{d.isToday ? '오늘' : d.label}</span>
-              <span className="text-label font-bold block">{d.dayKey}</span>
-            </button>
-          ))}
-        </div>
-        <div>
-          {filteredSchedule.length > 0 ? filteredSchedule.map((s, i) => (
-            <TrainerListItem
-              key={i}
-              imageUrl={s.avatar}
-              name={`${s.instructor} 강사`}
-              category={s.category}
-              categoryColor={s.categoryColor}
-              description={s.name}
-              todayTime={`${scheduleDays[selectedDateIdx].isToday ? '오늘' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')'} ${s.time}`}
-              rating={0}
-              reviewCount={0}
-              rightAction={s.hasTicket
-                ? <span onClick={(e) => { e.stopPropagation(); navigate('/reservation') }} className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
-                : <span onClick={(e) => { e.stopPropagation(); navigate(`/gym/${data.gymId}/products`) }} className="px-3 py-1 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
-              }
-            />
-          )) : (
-            <EmptyState message={`${scheduleDays[selectedDateIdx].isToday ? '오늘은' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')은'} ${data.instructor} 강사의 수업이 없습니다`} />
-          )}
-        </div>
-      </div>
 
       <div className="h-2 bg-surface-muted" />
 
