@@ -93,9 +93,9 @@ const trainersData: Record<string, TrainerData> = {
     reviewCount: 64,
     imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&h=400&fit=crop',
     avatarUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop&crop=face',
-    intro: '바레톤과 필라테스 전문 강사입니다. 우아하고 탄력있는 몸매를 만들어드립니다.',
-    specialties: ['바레톤', '필라테스', '코어 강화', '유연성'],
-    career: ['바레톤 마스터 자격증', '필라테스 지도자 자격증', '8년 그룹수업 경력'],
+    intro: '바레톤과 바레톤 전문 강사입니다. 우아하고 탄력있는 몸매를 만들어드립니다.',
+    specialties: ['바레톤', '바레톤', '코어 강화', '유연성'],
+    career: ['바레톤 마스터 자격증', '바레톤 지도자 자격증', '8년 그룹수업 경력'],
     trainingStyle: [
       '정확한 자세와 호흡을 통한 코어 강화',
       '음악에 맞춘 즐거운 수업 분위기',
@@ -121,7 +121,7 @@ const trainersData: Record<string, TrainerData> = {
       { day: '일', slots: [] },
     ],
     reviews: [
-      { name: '필라테스러버', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.12', text: '수업이 정말 재미있어요! 몸이 유연해지는 게 느껴집니다.', program: '20회권' },
+      { name: '바레톤러버', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.12', text: '수업이 정말 재미있어요! 몸이 유연해지는 게 느껴집니다.', program: '20회권' },
     ],
     transformations: [],
   },
@@ -211,16 +211,16 @@ const trainersData: Record<string, TrainerData> = {
   },
   '5': {
     name: '정서연 강사',
-    category: '필라테스',
+    category: '바레톤',
     gym: '바디채널 서초점',
     gymId: 'gym3',
     rating: 4.8,
     reviewCount: 89,
     imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop',
     avatarUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face',
-    intro: '기구 필라테스와 매트 필라테스를 모두 가르치는 전문 강사입니다. 체형 교정과 코어 강화에 특화되어 있으며, 산전산후 관리 프로그램도 운영하고 있습니다.',
-    specialties: ['기구 필라테스', '매트 필라테스', '체형 교정', '산전산후 케어'],
-    career: ['STOTT Pilates 국제 자격증', '물리치료학과 졸업', '산전산후 필라테스 전문 과정', '6년 필라테스 지도'],
+    intro: '기구 바레톤와 매트 바레톤를 모두 가르치는 전문 강사입니다. 체형 교정과 코어 강화에 특화되어 있으며, 산전산후 관리 프로그램도 운영하고 있습니다.',
+    specialties: ['기구 바레톤', '매트 바레톤', '체형 교정', '산전산후 케어'],
+    career: ['STOTT Pilates 국제 자격증', '물리치료학과 졸업', '산전산후 바레톤 전문 과정', '6년 바레톤 지도'],
     trainingStyle: [
       '호흡과 정렬 중심 - 정확한 호흡법과 척추 정렬로 깊은 코어 근육을 활성화합니다',
       '기구 + 매트 병행 - 리포머, 캐딜락 등 기구와 매트 운동을 조합합니다',
@@ -248,8 +248,8 @@ const trainersData: Record<string, TrainerData> = {
       { day: '일', slots: [] },
     ],
     reviews: [
-      { name: '코어퀸', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.14', text: '서연 선생님 필라테스 수업 정말 좋아요. 거북목이 확실히 좋아졌고, 코어도 많이 강해진 게 느껴져요.', program: '20회권' },
-      { name: '예비맘', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.11.30', text: '산전 필라테스로 다니고 있는데, 임산부 전문이라 안심이 됩니다. 허리 통증도 많이 줄었어요!', program: '30회권' },
+      { name: '코어퀸', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.14', text: '서연 선생님 바레톤 수업 정말 좋아요. 거북목이 확실히 좋아졌고, 코어도 많이 강해진 게 느껴져요.', program: '20회권' },
+      { name: '예비맘', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.11.30', text: '산전 바레톤으로 다니고 있는데, 임산부 전문이라 안심이 됩니다. 허리 통증도 많이 줄었어요!', program: '30회권' },
       { name: '유연성제로', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face', rating: 4, date: '2025.11.20', text: '몸이 엄청 뻣뻣했는데 3개월 다니니 유연성이 확실히 좋아졌습니다. 추천합니다.', program: '10회권' },
     ],
     transformations: [

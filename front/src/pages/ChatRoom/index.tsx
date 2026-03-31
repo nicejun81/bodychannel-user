@@ -62,7 +62,7 @@ const chatData: Record<string, {
     isOnline: true,
     type: 'friend',
     messages: [
-      { id: 1, sender: 'other', text: '필라테스 수업 같이 들을래?', time: '어제 오후 3:00' },
+      { id: 1, sender: 'other', text: '바레톤 수업 같이 들을래?', time: '어제 오후 3:00' },
       { id: 2, sender: 'me', text: '오 좋아! 몇시 수업?', time: '어제 오후 3:15' },
       { id: 3, sender: 'other', text: '화요일 저녁 7시! 바디채널 서초점이야', time: '어제 오후 3:20' },
     ],

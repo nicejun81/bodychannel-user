@@ -34,7 +34,7 @@ const lessonCategories = [
     { group: '무제한 이용권' as const, label: '1개월', price: '299,000' },
     { group: '무제한 이용권' as const, label: '3개월', price: '799,000', original: '897,000', tag: '11% OFF', installment: '월 266,333원' },
   ] as Duration[] },
-  { name: '바레톤', categoryColor: 'bareton' as const, icon: '🩰', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=80&h=80&fit=crop', desc: '발레 + 필라테스 기반 전신 토닝', plans: [
+  { name: '바레톤', categoryColor: 'bareton' as const, icon: '🩰', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=80&h=80&fit=crop', desc: '발레 + 바레톤 기반 전신 토닝', plans: [
     { group: '회수권' as const, label: '1회 체험', price: '30,000', tag: '체험특가', per: '30,000' },
     { group: '회수권' as const, label: '10회', price: '250,000', per: '25,000' },
     { group: '회수권' as const, label: '20회', price: '440,000', tag: '12% OFF', per: '22,000' },

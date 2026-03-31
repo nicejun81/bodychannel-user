@@ -52,7 +52,7 @@ const chatRooms = [
     type: 'friend' as const,
     name: '박지영',
     avatarUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop&crop=face',
-    lastMessage: '필라테스 수업 같이 들을래?',
+    lastMessage: '바레톤 수업 같이 들을래?',
     time: '어제',
     unreadCount: 0,
     isOnline: true,

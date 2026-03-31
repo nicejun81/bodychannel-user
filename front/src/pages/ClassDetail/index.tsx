@@ -107,11 +107,11 @@ const classesData: Record<string, ClassInfo> = {
     originalPrice: 129000,
   },
   '2': {
-    title: '필라테스 입문',
-    subtitle: '올바른 호흡과 자세로 시작하는 필라테스',
+    title: '바레톤 입문',
+    subtitle: '올바른 호흡과 자세로 시작하는 바레톤',
     instructor: '박지영',
     instructorAvatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face',
-    instructorBio: '국제 필라테스 자격 보유. 바디채널 강남점 필라테스 전담 강사로 8년간 활동하며 체형교정 전문가로 활동 중입니다.',
+    instructorBio: '국제 바레톤 자격 보유. 바디채널 강남점 바레톤 전담 강사로 8년간 활동하며 체형교정 전문가로 활동 중입니다.',
     instructorFollowers: '4,122',
     level: '초급',
     duration: '총 2시간 16분',
@@ -120,13 +120,13 @@ const classesData: Record<string, ClassInfo> = {
     rating: 4.8,
     reviewCount: 215,
     imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=450&fit=crop',
-    description: '필라테스의 기본 원리와 동작을 배우는 입문 과정입니다. 올바른 호흡법과 자세를 단계별로 익혀, 근력과 유연성을 동시에 향상시킬 수 있습니다.',
-    highlights: ['6가지 필라테스 기본 원리 습득', '횡격막·측흉식 호흡법 마스터', '매트 필라테스 기본 동작 20가지', '체형 교정에 효과적인 루틴'],
+    description: '바레톤의 기본 원리와 동작을 배우는 입문 과정입니다. 올바른 호흡법과 자세를 단계별로 익혀, 근력과 유연성을 동시에 향상시킬 수 있습니다.',
+    highlights: ['6가지 바레톤 기본 원리 습득', '횡격막·측흉식 호흡법 마스터', '매트 바레톤 기본 동작 20가지', '체형 교정에 효과적인 루틴'],
     chapters: [
       {
-        title: '필라테스 이해하기',
+        title: '바레톤 이해하기',
         lessons: [
-          { title: '필라테스란?', duration: '12:00', preview: true, thumb: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=120&h=68&fit=crop' },
+          { title: '바레톤란?', duration: '12:00', preview: true, thumb: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=120&h=68&fit=crop' },
           { title: '6가지 기본 원리', duration: '10:00', thumb: 'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=120&h=68&fit=crop' },
         ],
       },
@@ -148,7 +148,7 @@ const classesData: Record<string, ClassInfo> = {
       },
     ],
     reviews: [
-      { name: '바레톤러버', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.20', text: '호흡법 설명이 정말 자세해서 좋았어요. 필라테스 처음인데 잘 따라갈 수 있었습니다.' },
+      { name: '바레톤러버', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.20', text: '호흡법 설명이 정말 자세해서 좋았어요. 바레톤 처음인데 잘 따라갈 수 있었습니다.' },
       { name: '체형교정중', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.01', text: '거북목이 심했는데 2주 만에 확실히 나아진 느낌이에요!' },
       { name: '필라입문', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face', rating: 4, date: '2025.11.15', text: '동작 하나하나 천천히 알려주셔서 초보자한테 딱이에요.' },
     ],

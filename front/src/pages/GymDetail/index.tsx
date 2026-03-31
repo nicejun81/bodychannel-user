@@ -88,7 +88,7 @@ export const gymsData: Record<string, GymInfo> = {
     trainers: [
       { id: 1, name: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop&crop=face', specialty: 'PT · 체형교정', rating: 4.9, reviewCount: 127, perSession: '70,000' },
       { id: 2, name: '김민수', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face', specialty: 'PT · 다이어트', rating: 4.8, reviewCount: 89, perSession: '60,000' },
-      { id: 3, name: '박지영', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face', specialty: '필라테스 · 바레톤', rating: 4.7, reviewCount: 64, perSession: '65,000' },
+      { id: 3, name: '박지영', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face', specialty: '바레톤', rating: 4.7, reviewCount: 64, perSession: '65,000' },
     ],
     schedule: {
       '월': [
@@ -98,13 +98,13 @@ export const gymsData: Record<string, GymInfo> = {
       ],
       '화': [
         { time: '07:00', name: '모닝 바레톤', instructor: '이수진', avatar: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=200&h=200&fit=crop&crop=face', category: '바레톤', categoryColor: 'gymground' as const, hasTicket: false },
-        { time: '12:00', name: '점심 필라테스', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face', category: '바레톤', categoryColor: 'bareton' as const, hasTicket: true },
+        { time: '12:00', name: '점심 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face', category: '바레톤', categoryColor: 'bareton' as const, hasTicket: true },
         { time: '18:30', name: 'HIIT 클래스', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop&crop=face', category: 'PT', categoryColor: 'pt' as const, hasTicket: true },
         { time: '20:00', name: '스피닝', instructor: '김민수', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face', category: '짐그라운드', categoryColor: 'gymground' as const, hasTicket: false },
       ],
       '수': [
         { time: '09:00', name: '바디펌프', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop&crop=face', category: '히트35', categoryColor: 'hit35' as const, hasTicket: false },
-        { time: '12:00', name: '점심 필라테스', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face', category: '바레톤', categoryColor: 'bareton' as const, hasTicket: true },
+        { time: '12:00', name: '점심 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face', category: '바레톤', categoryColor: 'bareton' as const, hasTicket: true },
         { time: '20:00', name: '스피닝', instructor: '김민수', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face', category: '짐그라운드', categoryColor: 'gymground' as const, hasTicket: false },
       ],
       '목': [
@@ -113,7 +113,7 @@ export const gymsData: Record<string, GymInfo> = {
         { time: '18:30', name: 'HIIT 클래스', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop&crop=face', category: 'PT', categoryColor: 'pt' as const, hasTicket: true },
       ],
       '금': [
-        { time: '12:00', name: '점심 필라테스', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face', category: '바레톤', categoryColor: 'bareton' as const, hasTicket: true },
+        { time: '12:00', name: '점심 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face', category: '바레톤', categoryColor: 'bareton' as const, hasTicket: true },
         { time: '18:30', name: 'HIIT 클래스', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop&crop=face', category: 'PT', categoryColor: 'pt' as const, hasTicket: true },
         { time: '20:00', name: '스피닝', instructor: '김민수', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop&crop=face', category: '짐그라운드', categoryColor: 'gymground' as const, hasTicket: false },
       ],
@@ -189,7 +189,7 @@ export const gymsData: Record<string, GymInfo> = {
     ],
     galleryImages: [],
     description: '역삼역 1번 출구 바로 앞, 접근성이 뛰어난 피트니스 센터입니다.', tags: ['24시간', 'PT', 'GX'], badge: '50% OFF', badgeType: 'sale',
-    facilities: [{ icon: '🏋️', label: '프리웨이트' }, { icon: '🚿', label: '샤워실' }, { icon: '💪', label: 'GX룸' }, { icon: '🧘', label: '필라테스룸' }],
+    facilities: [{ icon: '🏋️', label: '프리웨이트' }, { icon: '🚿', label: '샤워실' }, { icon: '💪', label: 'GX룸' }, { icon: '🧘', label: '바레톤룸' }],
     trainers: [
       { id: 2, name: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop&crop=face', specialty: 'PT · HIIT', rating: 4.9, reviewCount: 93, perSession: '65,000' },
     ],
@@ -648,7 +648,7 @@ export const GymDetailPage = () => {
         <div className="grid grid-cols-2 gap-3">
           {[
             { id: 1, imageUrl: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop', authorImageUrl: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=100&h=100&fit=crop&crop=face', authorName: '김민수', text: '오늘도 열심히 운동 완료! 💪', likeCount: 128, commentCount: 24, isLiked: true },
-            { id: 2, imageUrl: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=400&fit=crop', authorImageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop&crop=face', authorName: '박지영', text: '필라테스 수업 후기 🧘‍♀️', likeCount: 89, commentCount: 12, isLiked: false },
+            { id: 2, imageUrl: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=400&fit=crop', authorImageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop&crop=face', authorName: '박지영', text: '바레톤 수업 후기 🧘‍♀️', likeCount: 89, commentCount: 12, isLiked: false },
             { id: 3, imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=400&fit=crop', authorImageUrl: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=100&h=100&fit=crop&crop=face', authorName: '한동훈', text: '벌크업 3개월 결과 🎉', likeCount: 256, commentCount: 48, isLiked: true },
             { id: 4, imageUrl: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&h=400&fit=crop', authorImageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face', authorName: '윤미래', text: '다이어트 -5kg 달성! 🔥', likeCount: 312, commentCount: 56, isLiked: true },
           ].map((feed) => (

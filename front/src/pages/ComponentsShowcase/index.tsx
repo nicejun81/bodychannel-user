@@ -143,7 +143,7 @@ export const ComponentsShowcasePage = () => {
               />
               <OnlineClassCard
                 imageUrl="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=300&h=200&fit=crop"
-                title="필라테스 입문"
+                title="바레톤 입문"
                 lessonCount={8}
                 level="초급"
               />
@@ -251,7 +251,7 @@ export const ComponentsShowcasePage = () => {
                 imageUrl="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=400&fit=crop"
                 authorImageUrl="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop&crop=face"
                 authorName="박지영"
-                text="필라테스 수업 후기 정말 시원하네요"
+                text="바레톤 수업 후기 정말 시원하네요"
                 likeCount={89}
                 commentCount={12}
                 isLiked={false}

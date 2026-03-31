@@ -15,7 +15,7 @@ const classes = [
   {
     id: 2,
     imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop',
-    title: '필라테스 입문',
+    title: '바레톤 입문',
     instructor: '박지영 강사',
     lessonCount: 8,
     level: '초급',

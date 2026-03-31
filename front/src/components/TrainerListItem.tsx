@@ -5,7 +5,7 @@ interface TrainerListItemProps {
   imageUrl: string
   name: string
   category: string
-  categoryColor: 'bareton' | 'hit35' | 'gymground' | 'pt'
+  categoryColor: 'bareton' | 'hit35' | 'gymground' | 'pt' | 'group-pt'
   description: string
   todayTime?: string
   rating: number
@@ -20,6 +20,7 @@ const categoryStyles: Record<string, string> = {
   hit35: 'bg-category-hit35-bg text-category-hit35-text',
   gymground: 'bg-category-gymground-bg text-category-gymground-text',
   pt: 'bg-primary-50 text-primary',
+  'group-pt': 'bg-accent-purple/10 text-accent-purple',
 }
 
 export const TrainerListItem = ({

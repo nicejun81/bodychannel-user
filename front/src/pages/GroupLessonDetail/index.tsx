@@ -41,7 +41,7 @@ const lessonsData: Record<string, GroupLessonData> = {
     categoryColor: 'gymground',
     instructor: '이수진',
     instructorAvatar: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=200&h=200&fit=crop&crop=face',
-    instructorBio: '바레톤 전문 강사 5년 경력. 발레와 필라테스를 결합한 체형 교정 전문가입니다. 아침 시간대 활력 넘치는 수업으로 하루를 시작해보세요.',
+    instructorBio: '바레톤 전문 강사 5년 경력. 발레와 바레톤를 결합한 체형 교정 전문가입니다. 아침 시간대 활력 넘치는 수업으로 하루를 시작해보세요.',
     gym: '바디채널 강남점',
     gymId: 'gym1',
     rating: 4.8,
@@ -59,9 +59,12 @@ const lessonsData: Record<string, GroupLessonData> = {
     difficulty: '초급',
     location: 'GX룸 A',
     schedule: [
-      { day: '월', time: '07:00' },
-      { day: '화', time: '07:00' },
-      { day: '목', time: '07:00' },
+      { day: '월', time: '07:00' }, { day: '월', time: '10:00' }, { day: '월', time: '19:00' },
+      { day: '화', time: '07:00' }, { day: '화', time: '10:00' },
+      { day: '수', time: '07:00' }, { day: '수', time: '19:00' },
+      { day: '목', time: '07:00' }, { day: '목', time: '10:00' }, { day: '목', time: '19:00' },
+      { day: '금', time: '07:00' },
+      { day: '토', time: '10:00' },
     ],
     reviews: [
       { name: '아침형인간', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.18', text: '아침에 바레톤 하고 출근하면 하루가 달라져요! 이수진 선생님 수업이 정말 좋습니다. 초보자도 따라하기 쉽게 알려주세요.', program: '그룹 레슨권' },
@@ -94,9 +97,11 @@ const lessonsData: Record<string, GroupLessonData> = {
     difficulty: '중급',
     location: 'GX룸 B',
     schedule: [
-      { day: '월', time: '09:00' },
-      { day: '수', time: '09:00' },
-      { day: '목', time: '09:00' },
+      { day: '월', time: '09:00' }, { day: '월', time: '18:00' },
+      { day: '수', time: '09:00' }, { day: '수', time: '18:00' },
+      { day: '목', time: '09:00' }, { day: '목', time: '18:00' },
+      { day: '금', time: '09:00' },
+      { day: '토', time: '11:00' },
     ],
     reviews: [
       { name: '근육맨', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.15', text: '바디펌프 최고! 한동훈 선생님 수업은 강도 조절을 잘 해주셔서 초보부터 상급자까지 다 만족할 수 있어요.', program: '그룹 레슨권' },
@@ -128,10 +133,12 @@ const lessonsData: Record<string, GroupLessonData> = {
     difficulty: '상급',
     location: 'GX룸 A',
     schedule: [
-      { day: '월', time: '18:30' },
-      { day: '화', time: '18:30' },
-      { day: '목', time: '18:30' },
+      { day: '월', time: '18:30' }, { day: '월', time: '20:00' },
+      { day: '화', time: '18:30' }, { day: '화', time: '20:00' },
+      { day: '수', time: '18:30' },
+      { day: '목', time: '18:30' }, { day: '목', time: '20:00' },
       { day: '금', time: '18:30' },
+      { day: '토', time: '14:00' },
     ],
     reviews: [
       { name: '헬스왕', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.20', text: 'HIIT 수업 강도가 장난 아닌데 최강민 트레이너가 잘 이끌어줍니다. 한 달 만에 체지방 3% 빠졌어요!', program: '그룹 레슨권' },
@@ -140,36 +147,39 @@ const lessonsData: Record<string, GroupLessonData> = {
     hasTicket: true,
   },
   'lunch-pilates': {
-    name: '점심 필라테스',
+    name: '점심 바레톤',
     category: '바레톤',
     categoryColor: 'bareton',
     instructor: '박지영',
     instructorAvatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face',
-    instructorBio: '필라테스 & 바레톤 전문 강사. 섬세한 동작 교정과 호흡 지도로 정확한 운동 효과를 이끌어냅니다.',
+    instructorBio: '바레톤 & 바레톤 전문 강사. 섬세한 동작 교정과 호흡 지도로 정확한 운동 효과를 이끌어냅니다.',
     gym: '바디채널 강남점',
     gymId: 'gym1',
     rating: 4.7,
     reviewCount: 58,
     imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=450&fit=crop',
     heroImages: [
-      { url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=450&fit=crop', label: '필라테스 수업' },
-      { url: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=800&h=450&fit=crop', label: '매트 필라테스' },
+      { url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=450&fit=crop', label: '바레톤 수업' },
+      { url: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=800&h=450&fit=crop', label: '매트 바레톤' },
       { url: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=450&fit=crop', label: '코어 강화' },
     ],
-    description: '점심 시간을 활용한 필라테스 수업입니다. 매트 위에서 진행되는 코어 중심 운동으로, 자세 교정과 유연성 향상에 탁월합니다. 직장인들의 점심 시간 활용에 최적화된 프로그램입니다.',
+    description: '점심 시간을 활용한 바레톤 수업입니다. 매트 위에서 진행되는 코어 중심 운동으로, 자세 교정과 유연성 향상에 탁월합니다. 직장인들의 점심 시간 활용에 최적화된 프로그램입니다.',
     highlights: ['코어 강화', '자세 교정', '유연성 향상', '허리 통증 개선', '점심 시간 활용'],
     duration: '50분',
     capacity: 12,
     difficulty: '초급',
     location: 'GX룸 A',
     schedule: [
-      { day: '화', time: '12:00' },
+      { day: '월', time: '12:00' },
+      { day: '화', time: '12:00' }, { day: '화', time: '19:00' },
       { day: '수', time: '12:00' },
+      { day: '목', time: '12:00' }, { day: '목', time: '19:00' },
       { day: '금', time: '12:00' },
+      { day: '토', time: '10:00' },
     ],
     reviews: [
-      { name: '점심러너', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.16', text: '점심 시간에 필라테스하고 오후 업무하면 집중력이 확 올라가요. 박지영 선생님 수업 강추합니다!', program: '그룹 레슨권' },
-      { name: '허리아파', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.05', text: '오래 앉아있어서 허리가 아팠는데 필라테스 시작하고 많이 나아졌어요.', program: '그룹 레슨권' },
+      { name: '점심러너', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.16', text: '점심 시간에 바레톤하고 오후 업무하면 집중력이 확 올라가요. 박지영 선생님 수업 강추합니다!', program: '그룹 레슨권' },
+      { name: '허리아파', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.05', text: '오래 앉아있어서 허리가 아팠는데 바레톤 시작하고 많이 나아졌어요.', program: '그룹 레슨권' },
     ],
     hasTicket: true,
   },
@@ -197,9 +207,12 @@ const lessonsData: Record<string, GroupLessonData> = {
     difficulty: '중급',
     location: '스피닝룸',
     schedule: [
-      { day: '화', time: '20:00' },
+      { day: '월', time: '20:00' },
+      { day: '화', time: '20:00' }, { day: '화', time: '21:30' },
       { day: '수', time: '20:00' },
+      { day: '목', time: '20:00' }, { day: '목', time: '21:30' },
       { day: '금', time: '20:00' },
+      { day: '토', time: '15:00' },
     ],
     reviews: [
       { name: '사이클러', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.14', text: '스피닝 진짜 재밌어요! 김민수 선생님이 분위기를 너무 잘 이끌어주셔서 시간 가는 줄 모르고 운동합니다.', program: '그룹 레슨권' },
@@ -212,7 +225,7 @@ const lessonsData: Record<string, GroupLessonData> = {
     categoryColor: 'gymground',
     instructor: '이수진',
     instructorAvatar: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=200&h=200&fit=crop&crop=face',
-    instructorBio: '바레톤 전문 강사 5년 경력. 발레와 필라테스를 결합한 체형 교정 전문가입니다.',
+    instructorBio: '바레톤 전문 강사 5년 경력. 발레와 바레톤를 결합한 체형 교정 전문가입니다.',
     gym: '바디채널 강남점',
     gymId: 'gym1',
     rating: 4.8,
@@ -230,8 +243,8 @@ const lessonsData: Record<string, GroupLessonData> = {
     difficulty: '초급',
     location: 'GX룸 A',
     schedule: [
-      { day: '토', time: '10:00' },
-      { day: '일', time: '10:00' },
+      { day: '토', time: '10:00' }, { day: '토', time: '14:00' },
+      { day: '일', time: '10:00' }, { day: '일', time: '14:00' },
     ],
     reviews: [
       { name: '주말운동러', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.08', text: '평일에 못 오는데 주말 수업이 있어서 너무 좋아요. 이수진 선생님 수업은 항상 만족입니다!', program: '그룹 레슨권' },
@@ -244,7 +257,7 @@ const lessonsData: Record<string, GroupLessonData> = {
     categoryColor: 'bareton',
     instructor: '박지영',
     instructorAvatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=face',
-    instructorBio: '필라테스 & 바레톤 전문 강사. 섬세한 동작 교정과 호흡 지도로 정확한 운동 효과를 이끌어냅니다.',
+    instructorBio: '바레톤 & 바레톤 전문 강사. 섬세한 동작 교정과 호흡 지도로 정확한 운동 효과를 이끌어냅니다.',
     gym: '바디채널 강남점',
     gymId: 'gym1',
     rating: 4.7,
@@ -255,14 +268,16 @@ const lessonsData: Record<string, GroupLessonData> = {
       { url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=450&fit=crop', label: '밸런스 운동' },
       { url: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=800&h=450&fit=crop', label: '전신 토닝' },
     ],
-    description: '발레의 우아한 동작과 필라테스의 코어 운동을 결합한 바레톤 수업입니다. 근력, 유연성, 밸런스를 동시에 향상시킬 수 있는 종합 운동 프로그램입니다.',
+    description: '발레의 우아한 동작과 바레톤의 코어 운동을 결합한 바레톤 수업입니다. 근력, 유연성, 밸런스를 동시에 향상시킬 수 있는 종합 운동 프로그램입니다.',
     highlights: ['발레 기반 동작', '코어 강화', '밸런스 향상', '체형 교정', '전신 토닝'],
     duration: '50분',
     capacity: 12,
     difficulty: '초급 ~ 중급',
     location: 'GX룸 A',
     schedule: [
-      { day: '토', time: '14:00' },
+      { day: '화', time: '14:00' },
+      { day: '목', time: '14:00' },
+      { day: '토', time: '14:00' }, { day: '토', time: '16:00' },
     ],
     reviews: [
       { name: '바레톤매니아', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.11', text: '박지영 선생님 바레톤 수업은 동작 하나하나 꼼꼼하게 잡아주셔서 정말 효과가 좋아요.', program: '그룹 레슨권' },
@@ -276,7 +291,7 @@ export const lessonIdMap: Record<string, string> = {
   '모닝 바레톤': 'morning-bareton',
   '바디펌프': 'bodypump',
   'HIIT 클래스': 'hiit',
-  '점심 필라테스': 'lunch-pilates',
+  '점심 바레톤': 'lunch-pilates',
   '스피닝': 'spinning',
   '주말 바레톤': 'weekend-bareton',
   '바레톤': 'bareton',
@@ -395,52 +410,52 @@ export const GroupLessonDetailPage = () => {
       </div>
 
       {/* ── 커리큘럼 소개 ── */}
-      <div className="px-page py-section">
+      <div className="px-page pt-4 pb-3">
         <div className="flex items-center gap-3">
-          <img src={data.instructorAvatar} alt={data.instructor} className="w-12 h-12 rounded-full object-cover flex-shrink-0" />
+          <img src={data.instructorAvatar} alt={data.instructor} className="w-11 h-11 rounded-full object-cover flex-shrink-0" />
           <div className="flex items-center gap-2">
-            <span className="text-title text-ink">{data.instructor} 강사</span>
+            <span className="text-body font-bold text-ink">{data.instructor} 강사</span>
             <span className={`px-2 py-0.5 text-caption font-bold rounded ${categoryBadgeClass(data.categoryColor)}`}>{data.category}</span>
           </div>
-          <div className="ml-auto flex items-center gap-1 text-ink-secondary">
-            <IconMapPin className="w-4 h-4" />
-            <span className="text-label">{data.gym}</span>
+          <div className="ml-auto flex items-center gap-1 text-ink-tertiary">
+            <IconMapPin className="w-3.5 h-3.5" />
+            <span className="text-caption">{data.gym}</span>
           </div>
         </div>
       </div>
 
-      {/* ── 수업 정보 ── */}
-      <div className="px-page py-section">
-        <p className="text-body text-ink-secondary leading-relaxed">{data.description}</p>
+      {/* ── 수업 설명 + 정보 ── */}
+      <div className="px-page pb-section">
+        <p className="text-body text-ink-secondary leading-relaxed mb-5">{data.description}</p>
 
-        <div className="mt-6 grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 gap-2">
           <div className="flex flex-col items-center text-center">
-            <div className="w-10 h-10 bg-surface-muted rounded-full flex items-center justify-center mb-1.5">
-              <IconClock className="w-5 h-5 text-primary" />
+            <div className="w-9 h-9 bg-surface-muted rounded-full flex items-center justify-center mb-1">
+              <IconClock className="w-[18px] h-[18px] text-primary" />
             </div>
-            <p className="text-label text-ink-tertiary">수업 시간</p>
-            <p className="text-body font-bold text-ink">{data.duration}</p>
+            <p className="text-caption text-ink-tertiary">수업 시간</p>
+            <p className="text-label font-bold text-ink">{data.duration}</p>
           </div>
           <div className="flex flex-col items-center text-center">
-            <div className="w-10 h-10 bg-surface-muted rounded-full flex items-center justify-center mb-1.5">
-              <svg viewBox="0 0 24 24" className="w-5 h-5 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" /></svg>
+            <div className="w-9 h-9 bg-surface-muted rounded-full flex items-center justify-center mb-1">
+              <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] text-primary" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" /></svg>
             </div>
-            <p className="text-label text-ink-tertiary">정원</p>
-            <p className="text-body font-bold text-ink">{data.capacity}명</p>
+            <p className="text-caption text-ink-tertiary">정원</p>
+            <p className="text-label font-bold text-ink">{data.capacity}명</p>
           </div>
           <div className="flex flex-col items-center text-center">
-            <div className="w-10 h-10 bg-surface-muted rounded-full flex items-center justify-center mb-1.5">
-              <svg viewBox="0 0 24 24" className="w-5 h-5 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <div className="w-9 h-9 bg-surface-muted rounded-full flex items-center justify-center mb-1">
+              <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] text-primary" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             </div>
-            <p className="text-label text-ink-tertiary">난이도</p>
-            <p className="text-body font-bold text-ink">{data.difficulty}</p>
+            <p className="text-caption text-ink-tertiary">난이도</p>
+            <p className="text-label font-bold text-ink">{data.difficulty}</p>
           </div>
           <div className="flex flex-col items-center text-center">
-            <div className="w-10 h-10 bg-surface-muted rounded-full flex items-center justify-center mb-1.5">
-              <IconMapPin className="w-5 h-5 text-primary" />
+            <div className="w-9 h-9 bg-surface-muted rounded-full flex items-center justify-center mb-1">
+              <IconMapPin className="w-[18px] h-[18px] text-primary" />
             </div>
-            <p className="text-label text-ink-tertiary">장소</p>
-            <p className="text-body font-bold text-ink">{data.location}</p>
+            <p className="text-caption text-ink-tertiary">장소</p>
+            <p className="text-label font-bold text-ink">{data.location}</p>
           </div>
         </div>
       </div>
@@ -449,15 +464,13 @@ export const GroupLessonDetailPage = () => {
 
       {/* ── 운동 효과 ── */}
       <div className="px-page py-section">
-        <h2 className="text-heading font-bold text-ink mb-4">운동 효과</h2>
-        <div className="flex flex-col gap-3">
+        <h2 className="text-title font-bold text-ink mb-3">운동 효과</h2>
+        <div className="flex flex-wrap gap-2">
           {data.highlights.map((h, i) => (
-            <div key={i} className="flex items-center gap-3">
-              <div className="w-7 h-7 bg-primary-50 rounded-full flex items-center justify-center flex-shrink-0">
-                <svg viewBox="0 0 24 24" className="w-4 h-4 text-primary" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 13l4 4L19 7" /></svg>
-              </div>
-              <span className="text-body text-ink">{h}</span>
-            </div>
+            <span key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-50 rounded-pill text-label text-primary font-medium">
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 text-primary" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 13l4 4L19 7" /></svg>
+              {h}
+            </span>
           ))}
         </div>
       </div>
@@ -466,8 +479,8 @@ export const GroupLessonDetailPage = () => {
 
       {/* ── 수업 일정 ── */}
       <div className="px-page py-section">
-        <h2 className="text-heading font-bold text-ink mb-4">수업 일정</h2>
-        <div className="flex gap-2 overflow-x-auto hide-scrollbar mb-4">
+        <h2 className="text-title font-bold text-ink mb-3">수업 일정</h2>
+        <div className="flex gap-2 overflow-x-auto hide-scrollbar mb-3">
           {scheduleDays.map((d, i) => (
             <button key={i} onClick={() => setSelectedDateIdx(i)} className={`flex-shrink-0 w-[52px] py-2 rounded-xl text-center transition-colors ${selectedDateIdx === i ? 'bg-primary text-white' : 'bg-surface-muted text-ink-secondary hover:bg-surface-subtle'}`}>
               <span className="text-label block">{d.isToday ? '오늘' : d.label}</span>
@@ -475,26 +488,30 @@ export const GroupLessonDetailPage = () => {
             </button>
           ))}
         </div>
-        <div>
-          {filteredSchedule.length > 0 ? filteredSchedule.map((s, i) => (
-            <TrainerListItem
-              key={i}
-              imageUrl={s.avatar}
-              name={`${s.instructor} 강사`}
-              category={s.category}
-              categoryColor={s.categoryColor}
-              description={s.name}
-              todayTime={`${scheduleDays[selectedDateIdx].isToday ? '오늘' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')'} ${s.time}`}
-              rating={0}
-              reviewCount={0}
-              rightAction={s.hasTicket
-                ? <span onClick={(e) => { e.stopPropagation(); navigate('/reservation') }} className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
-                : <span onClick={(e) => { e.stopPropagation(); navigate(`/gym/${data.gymId}/products`) }} className="px-3 py-1 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
-              }
-            />
-          )) : (
-            <EmptyState message={`${scheduleDays[selectedDateIdx].isToday ? '오늘은' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')은'} ${data.instructor} 강사의 수업이 없습니다`} />
-          )}
+        <div className="flex flex-wrap gap-2">
+          {(() => {
+            const daySchedule = data.schedule.filter(s => s.day === selectedDay)
+            return daySchedule.length > 0 ? daySchedule.map((s, i) => {
+              const gymSlot = filteredSchedule.find(fs => fs.time === s.time)
+              const hasTicket = gymSlot?.hasTicket ?? false
+              return (
+                <button
+                  key={i}
+                  onClick={() => hasTicket ? navigate('/reservation') : navigate(`/gym/${data.gymId}/products`)}
+                  className="flex items-center gap-2 px-4 py-2.5 bg-surface-muted rounded-card hover:bg-surface-subtle transition-colors"
+                >
+                  <IconClock className="w-4 h-4 text-primary" />
+                  <span className="text-body font-bold text-ink">{s.time}</span>
+                  {hasTicket
+                    ? <span className="px-2 py-0.5 bg-primary text-white text-caption font-bold rounded">예약</span>
+                    : <span className="px-2 py-0.5 border border-primary text-primary text-caption font-bold rounded">구매</span>
+                  }
+                </button>
+              )
+            }) : (
+              <EmptyState message={`${scheduleDays[selectedDateIdx].isToday ? '오늘은' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')은'} 수업이 없습니다`} />
+            )
+          })()}
         </div>
       </div>
 
@@ -504,7 +521,7 @@ export const GroupLessonDetailPage = () => {
           <div className="h-2 bg-surface-muted" />
           <div className="py-section">
             <div className="flex items-center justify-between mb-4 px-page">
-              <h2 className="text-heading font-bold text-ink">Before & After</h2>
+              <h2 className="text-title font-bold text-ink">Before & After</h2>
               <button onClick={() => navigate(`/gym/${data.gymId}/before-after`)} className="text-label text-primary font-medium">전체보기</button>
             </div>
             <div className="flex gap-3 overflow-x-auto hide-scrollbar px-page">
@@ -539,7 +556,7 @@ export const GroupLessonDetailPage = () => {
       {/* ── 후기 ── */}
       <div className="px-page py-section">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-heading font-bold text-ink">수강 후기</h2>
+          <h2 className="text-title font-bold text-ink">수강 후기</h2>
           <span className="text-label text-ink-tertiary">{data.reviewCount}개</span>
         </div>
         <div className="mb-4">
@@ -569,7 +586,7 @@ export const GroupLessonDetailPage = () => {
       </div>
 
       {/* ── 하단 CTA ── */}
-      <BottomCTA>
+      <BottomCTA hideBottomNav>
         {data.hasTicket ? (
           <button
             onClick={() => navigate('/reservation')}

@@ -31,7 +31,7 @@ const feedsData: Record<string, {
     authorName: '박지영',
     authorImageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop&crop=face',
     imageUrl: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=800&fit=crop',
-    text: '필라테스 수업 후기 🧘‍♀️ 정말 시원하네요. 박지영 강사님 수업 추천해요!',
+    text: '바레톤 수업 후기 🧘‍♀️ 정말 시원하네요. 박지영 강사님 수업 추천해요!',
     likeCount: 89,
     commentCount: 12,
     isLiked: false,

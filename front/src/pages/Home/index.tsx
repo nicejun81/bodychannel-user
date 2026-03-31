@@ -27,7 +27,7 @@ const onlineClasses = [
   {
     id: 2,
     imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=300&h=200&fit=crop',
-    title: '필라테스 입문',
+    title: '바레톤 입문',
     lessonCount: 8,
     level: '초급',
   },
@@ -57,6 +57,7 @@ const onlineClasses = [
 const groupTrainers = [
   {
     id: 1,
+    lessonId: 'lunch-pilates',
     imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop',
     name: '박지영 강사',
     category: '바레톤',
@@ -70,6 +71,7 @@ const groupTrainers = [
   },
   {
     id: 2,
+    lessonId: 'bodypump',
     imageUrl: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop',
     name: '한동훈 강사',
     category: '히트35',
@@ -83,6 +85,7 @@ const groupTrainers = [
   },
   {
     id: 3,
+    lessonId: 'spinning',
     imageUrl: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop',
     name: '이준혁 강사',
     category: '짐그라운드',
@@ -111,7 +114,7 @@ const ptTrainers = [
     id: 2,
     imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=240&fit=crop',
     name: '정서연 강사',
-    description: '필라테스 · 바레톤',
+    description: '바레톤',
     todayTime: '오늘 13:00, 17:00',
     rating: 4.8,
     reviewCount: 89,
@@ -180,7 +183,7 @@ const feeds = [
     imageUrl: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=400&fit=crop',
     authorImageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop&crop=face',
     authorName: '박지영',
-    text: '필라테스 수업 후기 🧘‍♀️ 정말 시원하네요',
+    text: '바레톤 수업 후기 🧘‍♀️ 정말 시원하네요',
     likeCount: 89,
     commentCount: 12,
     isLiked: false,
@@ -280,7 +283,7 @@ export const HomePage = () => {
               ? <span className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg">예약</span>
               : <span className="px-3 py-1 border border-primary text-primary text-label font-bold rounded-lg">구매</span>
             }
-            onClick={() => navigate(`/trainer/${trainer.id}`)}
+            onClick={() => navigate(`/group-lesson/${trainer.lessonId}`)}
           />
         ))}
       </section>
