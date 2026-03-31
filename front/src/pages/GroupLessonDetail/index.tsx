@@ -262,6 +262,8 @@ export const GroupLessonDetailPage = () => {
   const data = lessonsData[id || '']
   const [showAllReviews, setShowAllReviews] = useState(false)
   const [showFullImage, setShowFullImage] = useState(false)
+  const [heroIdx, setHeroIdx] = useState(0)
+  const [zoomedImage, setZoomedImage] = useState<{ url: string; label: string; type?: string; videoUrl?: string } | null>(null)
   const [selectedDateIdx, setSelectedDateIdx] = useState(0)
   const [reviewSort, setReviewSort] = useState<'latest' | 'high' | 'low'>('latest')
   const [showReviewForm, setShowReviewForm] = useState(false)
@@ -327,10 +329,23 @@ export const GroupLessonDetailPage = () => {
 
   return (
     <PageLayout header={header} hideBottomNav noPadding>
-      {/* ── 히어로 이미지 ── */}
-      <div className="relative w-full aspect-video cursor-pointer" onClick={() => setShowFullImage(true)}>
-        <img src={data.imageUrl} alt={data.name} className="w-full h-full object-cover" />
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-page pt-12">
+      {/* ── Hero Carousel ── */}
+      <div className="relative">
+        <div className="overflow-hidden">
+          <div className="flex transition-transform duration-300" style={{ transform: `translateX(-${heroIdx * 100}%)` }}>
+            {(gymData?.heroImages || [{ url: data.imageUrl, label: data.name }]).map((img, i) => (
+              <img key={i} src={img.url} alt={img.label} className="w-full aspect-video object-cover flex-shrink-0 cursor-pointer" onClick={() => setShowFullImage(true)} />
+            ))}
+          </div>
+        </div>
+        {gymData && gymData.heroImages.length > 1 && (
+          <>
+            <div className="absolute bottom-14 right-3 px-2.5 py-1 bg-black/50 rounded-full text-white text-label font-medium">{heroIdx + 1} / {gymData.heroImages.length}</div>
+            {heroIdx > 0 && <button onClick={() => setHeroIdx(heroIdx - 1)} className="absolute left-2 top-1/3 -translate-y-1/2 w-8 h-8 bg-white/70 rounded-full flex items-center justify-center"><svg viewBox="0 0 24 24" className="w-4 h-4 stroke-ink stroke-2 fill-none"><path d="M19 12H5M12 19l-7-7 7-7" /></svg></button>}
+            {heroIdx < gymData.heroImages.length - 1 && <button onClick={() => setHeroIdx(heroIdx + 1)} className="absolute right-2 top-1/3 -translate-y-1/2 w-8 h-8 bg-white/70 rounded-full flex items-center justify-center rotate-180"><svg viewBox="0 0 24 24" className="w-4 h-4 stroke-ink stroke-2 fill-none"><path d="M19 12H5M12 19l-7-7 7-7" /></svg></button>}
+          </>
+        )}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-page pt-12 cursor-pointer" onClick={() => setShowFullImage(true)}>
           <span className={`inline-block px-2 py-0.5 text-caption font-bold rounded mb-2 ${categoryBadgeClass(data.categoryColor)}`}>{data.category}</span>
           <h1 className="text-display text-white">{data.name}</h1>
           <div className="flex items-center gap-2 mt-1">
@@ -698,13 +713,47 @@ export const GroupLessonDetailPage = () => {
         </div>
       )}
 
-      {/* ── 전체 이미지 뷰어 ── */}
-      {showFullImage && (
-        <div className="fixed inset-0 z-[60] bg-black flex items-center justify-center" onClick={() => setShowFullImage(false)}>
+      {/* ── 전체 이미지 갤러리 ── */}
+      {showFullImage && gymData && (
+        <div className="fixed inset-0 z-[60] bg-black/95 flex flex-col">
+          <div className="flex items-center justify-between px-page py-3 flex-shrink-0">
+            <span className="text-body font-bold text-white">사진 {gymData.galleryImages.filter(g => g.type !== 'video').length}장{gymData.galleryImages.some(g => g.type === 'video') ? ` · 동영상 ${gymData.galleryImages.filter(g => g.type === 'video').length}개` : ''}</span>
+            <button onClick={() => setShowFullImage(false)} className="w-10 h-10 flex items-center justify-center text-white/80 hover:text-white">
+              <svg viewBox="0 0 24 24" className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
+            </button>
+          </div>
+          <div className="flex-1 overflow-y-auto px-1 pb-6">
+            <div className="grid grid-cols-2 gap-1">
+              {gymData.galleryImages.map((img, i) => (
+                <div key={i} className="relative aspect-square cursor-pointer" onClick={() => setZoomedImage(img)}>
+                  <img src={img.url.replace('w=400&h=400', 'w=600&h=600')} alt={img.label} className="w-full h-full object-cover" />
+                  {img.type === 'video' && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-12 h-12 bg-black/50 rounded-full flex items-center justify-center">
+                        <svg viewBox="0 0 24 24" className="w-6 h-6 text-white ml-0.5" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+                      </div>
+                    </div>
+                  )}
+                  <span className="absolute bottom-2 left-2 px-2 py-0.5 bg-black/50 rounded text-caption text-white">{img.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── 개별 이미지/동영상 확대 ── */}
+      {zoomedImage && (
+        <div className="fixed inset-0 z-[70] bg-black flex items-center justify-center" onClick={() => setZoomedImage(null)}>
           <button className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center text-white/80 hover:text-white z-10">
             <svg viewBox="0 0 24 24" className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
           </button>
-          <img src={data.imageUrl.replace('w=800&h=450', 'w=1200&h=900')} alt={data.name} className="w-full h-auto max-h-full object-contain" onClick={(e) => e.stopPropagation()} />
+          {zoomedImage.type === 'video' && zoomedImage.videoUrl ? (
+            <video src={zoomedImage.videoUrl} controls autoPlay className="w-full max-h-full object-contain" onClick={(e) => e.stopPropagation()} />
+          ) : (
+            <img src={zoomedImage.url.replace(/w=\d+&h=\d+/, 'w=1200&h=1200')} alt={zoomedImage.label} className="w-full h-auto max-h-full object-contain" onClick={(e) => e.stopPropagation()} />
+          )}
+          <span className="absolute bottom-6 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-black/50 rounded-full text-body text-white">{zoomedImage.label}</span>
         </div>
       )}
     </PageLayout>
