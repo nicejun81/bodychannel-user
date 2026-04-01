@@ -417,6 +417,56 @@ export const GymDetailPage = () => {
 
       <div className="h-2 bg-surface-muted" />
 
+      {/* ── 혼잡도 ── */}
+      {data.congestion.length > 0 && (
+        <div className="px-page py-section">
+          <div className="p-card bg-surface-subtle rounded-xl">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <span className="text-body font-bold text-ink">혼잡도</span>
+                {congestionDayOffset === 0 && (() => {
+                  const ac = data.congestion.find(c => parseInt(c.time) === currentHour)
+                  return ac ? (
+                    <span className={`px-1.5 py-0.5 text-caption font-bold rounded ${ac.level >= 7 ? 'bg-semantic-like/15 text-semantic-like' : ac.level >= 4 ? 'bg-semantic-star/15 text-semantic-star' : 'bg-semantic-online/15 text-semantic-online'}`}>
+                      {ac.level >= 7 ? '혼잡' : ac.level >= 4 ? '보통' : '여유'}
+                    </span>
+                  ) : null
+                })()}
+              </div>
+              <div className="flex items-center gap-2">
+                <button onClick={() => setCongestionDayOffset(Math.max(-6, congestionDayOffset - 1))} className={`w-6 h-6 rounded-full flex items-center justify-center ${congestionDayOffset === -6 ? 'text-ink-disabled' : 'text-ink hover:bg-surface-muted'}`} disabled={congestionDayOffset === -6}>
+                  <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 stroke-current stroke-2 fill-none"><path d="M15 18l-6-6 6-6" /></svg>
+                </button>
+                <span className="text-label font-medium text-ink min-w-[60px] text-center">
+                  {congestionDayOffset === 0 ? '오늘' : (() => { const d = new Date(); d.setDate(d.getDate() + congestionDayOffset); return `${d.getMonth() + 1}/${d.getDate()}(${'일월화수목금토'[d.getDay()]})`; })()}
+                </span>
+                <button onClick={() => setCongestionDayOffset(Math.min(0, congestionDayOffset + 1))} className={`w-6 h-6 rounded-full flex items-center justify-center ${congestionDayOffset === 0 ? 'text-ink-disabled' : 'text-ink hover:bg-surface-muted'}`} disabled={congestionDayOffset === 0}>
+                  <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 stroke-current stroke-2 fill-none"><path d="M9 18l6-6-6-6" /></svg>
+                </button>
+              </div>
+            </div>
+            <div className="flex items-end gap-[3px] h-[40px]">
+              {data.congestion.map((c, i) => (
+                <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
+                  <div
+                    className={`w-full rounded-sm transition-colors ${congestionDayOffset === 0 && parseInt(c.time) === currentHour ? 'bg-primary' : c.level >= 7 ? 'bg-semantic-like/40' : c.level >= 4 ? 'bg-semantic-star/40' : 'bg-semantic-online/40'}`}
+                    style={{ height: `${(c.level / 10) * 36}px` }}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="flex justify-between mt-1">
+              <span className="text-caption text-ink-tertiary">6시</span>
+              <span className="text-caption text-ink-tertiary">12시</span>
+              <span className="text-caption text-ink-tertiary">18시</span>
+              <span className="text-caption text-ink-tertiary">23시</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="h-2 bg-surface-muted" />
+
       {/* ── 3. 회원권 ── */}
       {data.plans.length > 0 && (
         <div className="px-page py-section">
@@ -572,70 +622,6 @@ export const GymDetailPage = () => {
           ))}
         </div>
         {data.reviews.length > 0 && <button onClick={() => navigate(`/gym/${id}/reviews`)} className="w-full py-3 mt-4 border border-border rounded-card text-body font-semibold text-ink hover:bg-surface-subtle transition-colors">후기 더보기</button>}
-      </div>
-
-      <div className="h-2 bg-surface-muted" />
-
-      {/* ── 7. 혼잡도 + 지도 ── */}
-      <div className="px-page py-section">
-        {data.congestion.length > 0 && (() => {
-          const congestionDate = new Date()
-          congestionDate.setDate(congestionDate.getDate() + congestionDayOffset)
-          const dayName = ['일', '월', '화', '수', '목', '금', '토'][congestionDate.getDay()]
-          const dateLabel = congestionDayOffset === 0 ? '오늘' : `${congestionDate.getMonth() + 1}/${congestionDate.getDate()}(${dayName})`
-          const isToday = congestionDayOffset === 0
-          const activeCongestion = isToday ? data.congestion.find(c => parseInt(c.time) === currentHour) : null
-          return (
-            <div className="mb-section p-card bg-surface-subtle rounded-xl">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2">
-                  <span className="text-body font-bold text-ink">혼잡도</span>
-                  {isToday && activeCongestion && (
-                    <span className={`px-1.5 py-0.5 text-caption font-bold rounded ${activeCongestion.level >= 7 ? 'bg-semantic-like/15 text-semantic-like' : activeCongestion.level >= 4 ? 'bg-semantic-star/15 text-semantic-star' : 'bg-semantic-online/15 text-semantic-online'}`}>
-                      {activeCongestion.level >= 7 ? '혼잡' : activeCongestion.level >= 4 ? '보통' : '여유'}
-                    </span>
-                  )}
-                </div>
-                <div className="flex items-center gap-2">
-                  <button onClick={() => setCongestionDayOffset(Math.max(-6, congestionDayOffset - 1))} className={`w-6 h-6 rounded-full flex items-center justify-center ${congestionDayOffset === -6 ? 'text-ink-disabled' : 'text-ink hover:bg-surface-muted'}`} disabled={congestionDayOffset === -6}>
-                    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 stroke-current stroke-2 fill-none"><path d="M15 18l-6-6 6-6" /></svg>
-                  </button>
-                  <span className="text-label font-medium text-ink min-w-[60px] text-center">{dateLabel}</span>
-                  <button onClick={() => setCongestionDayOffset(Math.min(0, congestionDayOffset + 1))} className={`w-6 h-6 rounded-full flex items-center justify-center ${congestionDayOffset === 0 ? 'text-ink-disabled' : 'text-ink hover:bg-surface-muted'}`} disabled={congestionDayOffset === 0}>
-                    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 stroke-current stroke-2 fill-none"><path d="M9 18l6-6-6-6" /></svg>
-                  </button>
-                </div>
-              </div>
-              <div className="flex items-end gap-[3px] h-[40px]">
-                {data.congestion.map((c, i) => (
-                  <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
-                    <div
-                      className={`w-full rounded-sm transition-colors ${isToday && parseInt(c.time) === currentHour ? 'bg-primary' : c.level >= 7 ? 'bg-semantic-like/40' : c.level >= 4 ? 'bg-semantic-star/40' : 'bg-semantic-online/40'}`}
-                      style={{ height: `${(c.level / 10) * 36}px` }}
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="flex justify-between mt-1">
-                <span className="text-caption text-ink-tertiary">6시</span>
-                <span className="text-caption text-ink-tertiary">12시</span>
-                <span className="text-caption text-ink-tertiary">18시</span>
-                <span className="text-caption text-ink-tertiary">23시</span>
-              </div>
-            </div>
-          )
-        })()}
-        <h3 className="text-heading font-bold text-ink mb-3">위치</h3>
-        <div className="w-full h-[180px] bg-surface-muted rounded-xl overflow-hidden">
-          <iframe
-            title="지도"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            loading="lazy"
-            src={`https://www.openstreetmap.org/export/embed.html?bbox=${data.lng - 0.005}%2C${data.lat - 0.003}%2C${data.lng + 0.005}%2C${data.lat + 0.003}&layer=mapnik&marker=${data.lat}%2C${data.lng}`}
-          />
-        </div>
       </div>
 
       <div className="h-2 bg-surface-muted" />
