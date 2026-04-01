@@ -32,7 +32,7 @@ export const PTTrainerCard = ({
   description,
   todayTime,
   rating,
-  reviewCount,
+  reviewCount: _reviewCount,
   trialInfo,
   action,
   onClick,

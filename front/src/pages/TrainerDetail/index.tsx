@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { PageLayout, SubPageHeader, ReviewItem, ReviewSort, RatingSummary } from '../../components'
-import { IconShare, IconStarFilled, IconMapPin, IconClock } from '../../components/Icons'
+import { IconShare } from '../../components/Icons'
 import { lessonsData } from '../GroupLessonDetail'
 
 /* ── Radar Chart ── */
@@ -27,8 +27,6 @@ const RadarChart = ({ stats }: { stats: RadarStats }) => {
 
   const gridLevels = [0.2, 0.4, 0.6, 0.8, 1.0]
   const dataPoints = values.map((v, i) => getPoint(i, v / 5))
-  const dataPath = dataPoints.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x},${p.y}`).join(' ') + 'Z'
-
   return (
     <svg viewBox="0 0 200 200" className="w-[180px] h-[180px]">
       {gridLevels.map(level => {
@@ -335,7 +333,7 @@ export const TrainerDetailPage = () => {
   const navigate = useNavigate()
   const data = trainersData[id || ''] || defaultTrainer
   const [reviewSort, setReviewSort] = useState<'latest' | 'high' | 'low'>('latest')
-  const [showAllReviews, setShowAllReviews] = useState(false)
+  const [showAllReviews] = useState(false)
   const [selectedDateIdx, setSelectedDateIdx] = useState(0) // 오늘 = index 0
 
   // 오늘 + 미래 13일 = 14일 (Lesson 페이지와 동일)
@@ -547,7 +545,7 @@ export const TrainerDetailPage = () => {
         <div className="mb-4">
           <RatingSummary rating={data.rating} reviewCount={data.reviewCount} />
         </div>
-        <ReviewSort current={reviewSort} onSelect={setReviewSort} reviewCount={data.reviews.length} />
+        <ReviewSort value={reviewSort} onChange={(v) => setReviewSort(v as 'latest' | 'high' | 'low')} />
         <div className="space-y-4">
           {displayReviews.map((r, i) => (
             <ReviewItem key={i} {...r} />

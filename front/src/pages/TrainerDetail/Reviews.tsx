@@ -31,7 +31,7 @@ export const TrainerReviewsPage = () => {
 
       {/* 정렬 + 리스트 */}
       <div className="px-page py-section">
-        <ReviewSort current={sort} onSelect={setSort} reviewCount={sorted.length} />
+        <ReviewSort value={sort} onChange={(v) => setSort(v as 'latest' | 'high' | 'low')} />
         <div className="space-y-6">
           {sorted.map((review, i) => (
             <ReviewItem
@@ -42,7 +42,7 @@ export const TrainerReviewsPage = () => {
               date={review.date}
               text={review.text}
               photos={review.photos}
-              program={review.program}
+              badge={review.program}
             />
           ))}
         </div>

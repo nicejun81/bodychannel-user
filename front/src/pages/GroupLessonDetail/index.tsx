@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { PageLayout, SubPageHeader, RatingSummary, ReviewItem, ReviewSort, BottomCTA, TrainerListItem, EmptyState } from '../../components'
+import { PageLayout, SubPageHeader, RatingSummary, ReviewItem, ReviewSort, BottomCTA, EmptyState } from '../../components'
 import { IconShare, IconStarFilled, IconClock, IconMapPin } from '../../components/Icons'
 import { gymsData } from '../GymDetail'
 import { baItems } from '../GymDetail/BeforeAfter'
@@ -495,19 +495,6 @@ const instructorTrainerId: Record<string, string> = {
   '오지훈': '1', '장하은': '1',
 }
 
-const instructorLessons: Record<string, string[]> = {
-  '최강민': ['pt-kangmin', 'hiit'],
-  '박지영': ['lunch-pilates', 'bareton'],
-  '한동훈': ['bodypump', 'pt-donghun'],
-  '이수진': ['morning-bareton', 'weekend-bareton'],
-  '김민수': ['spinning'],
-  '이준혁': ['spinning'],
-  '정서연': ['bareton', 'pt-seoyeon'],
-  '김태현': ['pt-taehyun'],
-  '오지훈': ['pt-jihoon'],
-  '장하은': ['pt-haeun'],
-}
-
 /* ── category color helper ── */
 const categoryBadgeClass = (color: string) => {
   switch (color) {
@@ -566,13 +553,7 @@ export const GroupLessonDetailPage = () => {
     : []
   const trainerBaItems = baItems.filter(item => item.trainer.name === data.instructor)
 
-  const ratingDist = [
-    { stars: 5, pct: 72 },
-    { stars: 4, pct: 18 },
-    { stars: 3, pct: 7 },
-    { stars: 2, pct: 2 },
-    { stars: 1, pct: 1 },
-  ]
+  const ratingDist = [72, 18, 7, 2, 1]
   const sortedReviews = [...data.reviews].sort((a, b) => {
     if (reviewSort === 'high') return b.rating - a.rating
     if (reviewSort === 'low') return a.rating - b.rating
@@ -583,7 +564,7 @@ export const GroupLessonDetailPage = () => {
   const header = (
     <SubPageHeader
       title={data.name}
-      rightAction={
+      right={
         <button className="w-9 h-9 flex items-center justify-center"><IconShare className="w-5 h-5 text-ink-secondary" /></button>
       }
     />

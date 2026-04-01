@@ -281,7 +281,7 @@ export const GymDetailPage = () => {
   const [_liked, _setLiked] = useState(false)
   const [heroIdx, setHeroIdx] = useState(0)
   const [showFullImage, setShowFullImage] = useState(false)
-  const [zoomedImage, setZoomedImage] = useState<{ url: string; label: string } | null>(null)
+  const [zoomedImage, setZoomedImage] = useState<GymPhoto | null>(null)
   const [congestionDayOffset, setCongestionDayOffset] = useState(0) // -6 ~ 0 (과거 1주일 ~ 오늘)
   void _liked; void _setLiked
   const scheduleDays = (() => {
