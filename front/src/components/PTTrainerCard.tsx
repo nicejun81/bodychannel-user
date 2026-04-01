@@ -39,40 +39,40 @@ export const PTTrainerCard = ({
   return (
     <button
       onClick={onClick}
-      className="flex-shrink-0 w-[160px] border border-border rounded-card overflow-hidden
+      className="flex-shrink-0 min-w-[160px] border border-border rounded-card overflow-hidden
                  hover:border-ink-disabled transition-colors text-left"
     >
       <img src={imageUrl} alt={name} className="w-full h-[120px] object-cover" />
       <div className="p-card">
         {/* Name + Rating */}
-        <div className="flex items-center gap-1 mb-0.5">
-          <p className="text-body font-bold text-ink truncate">{name}</p>
+        <div className="flex items-center gap-1.5 mb-0.5">
+          <p className="text-title font-bold text-ink truncate">{name}</p>
           {rating > 0 && (
-            <div className="flex items-center gap-px flex-shrink-0">
-              <IconStarFilled className="w-2.5 h-2.5 text-semantic-star" />
-              <span className="text-caption font-semibold text-ink-secondary">{rating}</span>
+            <div className="flex items-center gap-0.5 flex-shrink-0">
+              <IconStarFilled className="w-3 h-3 text-semantic-star" />
+              <span className="text-label font-semibold text-ink-secondary">{rating}</span>
             </div>
           )}
         </div>
 
         {/* Category badge + Description */}
-        <div className="flex items-center gap-1 mb-2">
+        <div className="flex items-center gap-1.5 mb-2">
           {category && (
-            <span className={`px-1.5 py-px text-caption font-semibold rounded flex-shrink-0 ${categoryStyles[categoryColor] || categoryStyles.pt}`}>
+            <span className={`badge whitespace-nowrap flex-shrink-0 ${categoryStyles[categoryColor] || categoryStyles.pt}`}>
               {category}
             </span>
           )}
-          <p className="text-label text-ink-tertiary truncate">{description}</p>
+          <p className="text-label text-ink-secondary truncate">{description}</p>
         </div>
 
         {/* Today time */}
         {todayTime && (
-          <div className="flex items-center gap-1 mb-2">
-            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 stroke-primary stroke-[1.5] fill-none flex-shrink-0">
+          <div className="flex items-center gap-1.5 mb-2">
+            <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-primary stroke-[1.5] fill-none flex-shrink-0">
               <circle cx="12" cy="12" r="10" />
               <path d="M12 6v6l4 2" />
             </svg>
-            <span className="text-label font-medium text-primary truncate">{todayTime}</span>
+            <span className="text-body font-medium text-primary truncate">{todayTime}</span>
           </div>
         )}
 

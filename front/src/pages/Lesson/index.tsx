@@ -297,7 +297,7 @@ export const LessonPage = () => {
             }
             if (activeTab === 'pt') {
               return (
-                <ScrollRow>
+                <div className="grid grid-cols-2 gap-3">
                   {filtered.map((s, i) => (
                     <PTTrainerCard
                       key={i}
@@ -316,7 +316,7 @@ export const LessonPage = () => {
                       onClick={() => navigate(`/trainer/${instructorLessonMap[s.instructor] || '1'}`)}
                     />
                   ))}
-                </ScrollRow>
+                </div>
               )
             }
             return filtered.map((s, i) => (
