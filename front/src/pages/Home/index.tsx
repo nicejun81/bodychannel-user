@@ -102,33 +102,39 @@ const groupTrainers = [
 const ptTrainers = [
   {
     id: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=240&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop',
     name: '최강민 강사',
-    description: 'PT · 체형교정',
+    category: 'PT',
+    categoryColor: 'pt' as const,
+    description: '체형교정 · 웨이트',
     todayTime: '오늘 09:00, 15:00',
     rating: 4.9,
     reviewCount: 127,
-    trialInfo: '1회 70,000원',
+    hasTicket: true,
   },
   {
     id: 2,
-    imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=240&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop',
     name: '정서연 강사',
-    description: '바레톤',
+    category: 'PT',
+    categoryColor: 'pt' as const,
+    description: '코어 강화 · 바디라인',
     todayTime: '오늘 13:00, 17:00',
     rating: 4.8,
     reviewCount: 89,
-    trialInfo: '1회 65,000원',
+    hasTicket: false,
   },
   {
     id: 3,
-    imageUrl: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&h=240&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop',
     name: '한동훈 강사',
-    description: 'PT · 다이어트',
+    category: 'PT',
+    categoryColor: 'pt' as const,
+    description: '다이어트 · HIIT',
     todayTime: '오늘 10:00, 18:00',
     rating: 4.9,
     reviewCount: 156,
-    trialInfo: '1회 60,000원',
+    hasTicket: false,
   },
 ]
 
@@ -299,11 +305,13 @@ export const HomePage = () => {
                 key={trainer.id}
                 imageUrl={trainer.imageUrl}
                 name={trainer.name}
+                category={trainer.category}
+                categoryColor={trainer.categoryColor}
                 description={trainer.description}
+                todayTime={trainer.todayTime}
                 rating={trainer.rating}
                 reviewCount={trainer.reviewCount}
-                trialInfo={trainer.trialInfo}
-                action={trainer.id === 1
+                action={trainer.hasTicket
                   ? <span onClick={() => navigate('/reservation')} className="w-full block text-center px-3 py-1.5 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
                   : <span onClick={() => navigate('/gym/gym1/products')} className="w-full block text-center px-3 py-1.5 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
                 }

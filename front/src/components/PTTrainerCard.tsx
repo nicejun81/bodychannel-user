@@ -4,19 +4,32 @@ import { IconStarFilled } from './Icons'
 interface PTTrainerCardProps {
   imageUrl: string
   name: string
+  category?: string
+  categoryColor?: 'bareton' | 'hit35' | 'gymground' | 'pt' | 'group-pt'
   description: string
   todayTime?: string
   rating: number
   reviewCount: number
-  trialInfo: string
+  trialInfo?: string
   action?: ReactNode
   onClick?: () => void
+}
+
+const categoryStyles: Record<string, string> = {
+  bareton: 'bg-category-bareton-bg text-category-bareton-text',
+  hit35: 'bg-category-hit35-bg text-category-hit35-text',
+  gymground: 'bg-category-gymground-bg text-category-gymground-text',
+  pt: 'bg-primary-50 text-primary',
+  'group-pt': 'bg-accent-purple/10 text-accent-purple',
 }
 
 export const PTTrainerCard = ({
   imageUrl,
   name,
+  category,
+  categoryColor = 'pt',
   description,
+  todayTime,
   rating,
   reviewCount,
   trialInfo,
@@ -31,14 +44,43 @@ export const PTTrainerCard = ({
     >
       <img src={imageUrl} alt={name} className="w-full h-[120px] object-cover" />
       <div className="p-card">
-        <p className="text-body font-bold text-ink mb-0.5 truncate">{name}</p>
-        <p className="text-label text-ink-tertiary mb-2 truncate">{description}</p>
-        <div className="flex items-center gap-1 mb-2">
-          <IconStarFilled className="w-3 h-3 text-semantic-star" />
-          <span className="text-label font-semibold">{rating}</span>
-          <span className="text-label text-ink-tertiary">({reviewCount})</span>
+        {/* Name + Rating */}
+        <div className="flex items-center gap-1 mb-0.5">
+          <p className="text-body font-bold text-ink truncate">{name}</p>
+          {rating > 0 && (
+            <div className="flex items-center gap-px flex-shrink-0">
+              <IconStarFilled className="w-2.5 h-2.5 text-semantic-star" />
+              <span className="text-caption font-semibold text-ink-secondary">{rating}</span>
+            </div>
+          )}
         </div>
-        <span className="text-body font-bold text-primary mb-2 block">{trialInfo}</span>
+
+        {/* Category badge + Description */}
+        <div className="flex items-center gap-1 mb-2">
+          {category && (
+            <span className={`px-1.5 py-px text-caption font-semibold rounded flex-shrink-0 ${categoryStyles[categoryColor] || categoryStyles.pt}`}>
+              {category}
+            </span>
+          )}
+          <p className="text-label text-ink-tertiary truncate">{description}</p>
+        </div>
+
+        {/* Today time */}
+        {todayTime && (
+          <div className="flex items-center gap-1 mb-2">
+            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 stroke-primary stroke-[1.5] fill-none flex-shrink-0">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg>
+            <span className="text-label font-medium text-primary truncate">{todayTime}</span>
+          </div>
+        )}
+
+        {/* Price fallback (if no todayTime) */}
+        {!todayTime && trialInfo && (
+          <span className="text-body font-bold text-primary mb-2 block">{trialInfo}</span>
+        )}
+
         {action && <div onClick={(e) => e.stopPropagation()}>{action}</div>}
       </div>
     </button>

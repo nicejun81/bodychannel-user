@@ -52,18 +52,20 @@ export const TrainerListItem = ({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-title text-ink leading-tight">{name}</span>
-              <span className={`badge whitespace-nowrap ${categoryStyles[categoryColor] || categoryStyles.pt}`}>{category}</span>
+              {rating > 0 && (
+                <div className="flex items-center gap-0.5">
+                  <IconStarFilled className="w-3 h-3 text-semantic-star" />
+                  <span className="text-label font-semibold text-ink-secondary">{rating}</span>
+                  <span className="text-label text-ink-placeholder">({reviewCount})</span>
+                </div>
+              )}
             </div>
-            {rightAction || (
-              <div className="flex items-center gap-1">
-                <IconStarFilled className="w-3.5 h-3.5 text-semantic-star" />
-                <span className="text-body font-semibold text-ink-tertiary">
-                  {rating} ({reviewCount})
-                </span>
-              </div>
-            )}
+            {rightAction}
           </div>
-          <p className="text-label text-ink-secondary truncate mt-1">{description}</p>
+          <div className="flex items-center gap-1.5 mt-0.5">
+            <span className={`badge whitespace-nowrap ${categoryStyles[categoryColor] || categoryStyles.pt}`}>{category}</span>
+            <p className="text-label text-ink-secondary truncate">{description}</p>
+          </div>
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5">

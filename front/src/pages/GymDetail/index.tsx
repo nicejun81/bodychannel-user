@@ -462,8 +462,8 @@ export const GymDetailPage = () => {
                 categoryColor={s.categoryColor}
                 description={s.name}
                 todayTime={`${scheduleDays[selectedDateIdx].isToday ? '오늘' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')'} ${s.time}`}
-                rating={0}
-                reviewCount={0}
+                rating={({ '최강민': 4.9, '박지영': 4.8, '한동훈': 4.7, '정서연': 4.8, '이수진': 4.7, '이준혁': 4.6 } as Record<string, number>)[s.instructor] || 4.5}
+                reviewCount={({ '최강민': 128, '박지영': 95, '한동훈': 82, '정서연': 67, '이수진': 48, '이준혁': 54 } as Record<string, number>)[s.instructor] || 30}
                 rightAction={s.hasTicket
                   ? <span onClick={(e) => { e.stopPropagation(); navigate('/reservation') }} className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
                   : <span onClick={(e) => { e.stopPropagation(); navigate(`/gym/${id}/products`) }} className="px-3 py-1 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
@@ -492,10 +492,11 @@ export const GymDetailPage = () => {
                 key={t.id}
                 imageUrl={t.avatar}
                 name={t.name}
-                description={t.specialty}
+                category="PT"
+                categoryColor="pt"
+                description={t.specialty.replace(/^PT\s*·?\s*/, '') || t.specialty}
                 rating={t.rating}
                 reviewCount={t.reviewCount}
-                trialInfo={`1회 ${t.perSession}원`}
                 action={t.id === 1
                   ? <span onClick={() => navigate('/reservation')} className="w-full block text-center px-3 py-1.5 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
                   : <span onClick={() => navigate(`/gym/${id}/products`)} className="w-full block text-center px-3 py-1.5 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>

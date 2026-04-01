@@ -297,6 +297,11 @@ export const lessonIdMap: Record<string, string> = {
   '바레톤': 'bareton',
 }
 
+const trainerIdMap: Record<string, string> = {
+  '최강민': '1', '박지영': '2', '한동훈': '3', '이준혁': '4',
+  '정서연': '5', '김태현': '6', '이수진': '5', '김민수': '4',
+}
+
 /* ── category color helper ── */
 const categoryBadgeClass = (color: string) => {
   switch (color) {
@@ -412,12 +417,20 @@ export const GroupLessonDetailPage = () => {
       {/* ── 커리큘럼 소개 ── */}
       <div className="px-page pt-4 pb-3">
         <div className="flex items-center gap-3">
-          <img src={data.instructorAvatar} alt={data.instructor} className="w-11 h-11 rounded-full object-cover flex-shrink-0" />
-          <div className="flex items-center gap-2">
-            <span className="text-body font-bold text-ink">{data.instructor} 강사</span>
-            <span className={`px-2 py-0.5 text-caption font-bold rounded ${categoryBadgeClass(data.categoryColor)}`}>{data.category}</span>
+          <div
+            className="flex items-center gap-3 cursor-pointer flex-1 min-w-0"
+            onClick={() => {
+              const tid = trainerIdMap[data.instructor]
+              if (tid) navigate(`/trainer/${tid}`)
+            }}
+          >
+            <img src={data.instructorAvatar} alt={data.instructor} className="w-11 h-11 rounded-full object-cover flex-shrink-0" />
+            <div className="flex items-center gap-2">
+              <span className="text-body font-bold text-ink">{data.instructor} 강사</span>
+              <span className={`px-2 py-0.5 text-caption font-bold rounded ${categoryBadgeClass(data.categoryColor)}`}>{data.category}</span>
+            </div>
           </div>
-          <div className="ml-auto flex items-center gap-1 text-ink-tertiary">
+          <div className="ml-auto flex items-center gap-1 text-ink-tertiary flex-shrink-0">
             <IconMapPin className="w-3.5 h-3.5" />
             <span className="text-caption">{data.gym}</span>
           </div>
