@@ -99,14 +99,14 @@ function buildReservations(): Reservation[] {
 
 const allReservations = buildReservations()
 
-const trainerIdMap: Record<string, string> = {
-  '최강민': '1',
-  '박지영': '2',
-  '한동훈': '3',
-  '이준혁': '4',
-  '정서연': '5',
-  '김태현': '6',
-  '오지훈': '1',
+const trainerLessonMap: Record<string, string> = {
+  '최강민': 'pt-kangmin',
+  '박지영': 'lunch-pilates',
+  '한동훈': 'bodypump',
+  '이준혁': 'spinning',
+  '정서연': 'bareton',
+  '김태현': 'pt-taehyun',
+  '오지훈': 'pt-jihoon',
 }
 
 const statusMap = {
@@ -225,8 +225,8 @@ export const ReservationPage = () => {
           <div
             className="flex items-center gap-2.5 flex-1 min-w-0 cursor-pointer"
             onClick={() => {
-              const tid = trainerIdMap[res.trainer]
-              if (tid) navigate(`/trainer/${tid}`)
+              const lessonId = trainerLessonMap[res.trainer]
+              if (lessonId) navigate(`/group-lesson/${lessonId}`)
             }}
           >
             <img src={res.avatar} alt={res.trainer} className="w-10 h-10 rounded-full object-cover flex-shrink-0" />

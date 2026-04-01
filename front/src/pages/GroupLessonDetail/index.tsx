@@ -284,6 +284,134 @@ const lessonsData: Record<string, GroupLessonData> = {
     ],
     hasTicket: true,
   },
+  'pt-kangmin': {
+    name: '1:1 웨이트 트레이닝',
+    category: 'PT',
+    categoryColor: 'pt',
+    instructor: '최강민',
+    instructorAvatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop&crop=face',
+    instructorBio: '10년 경력의 체형교정 및 웨이트 전문 PT 트레이너. 개인 맞춤형 프로그램으로 확실한 변화를 만들어드립니다.',
+    gym: '바디채널 강남점',
+    gymId: 'gym1',
+    rating: 4.9,
+    reviewCount: 128,
+    imageUrl: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=450&fit=crop',
+    heroImages: [
+      { url: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=450&fit=crop', label: '웨이트 트레이닝' },
+      { url: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&h=450&fit=crop', label: '체형 교정' },
+      { url: 'https://images.unsplash.com/photo-1550345332-09e3ac987658?w=800&h=450&fit=crop', label: '맞춤 프로그램' },
+    ],
+    description: '체형 분석을 기반으로 한 1:1 맞춤 웨이트 트레이닝입니다. 근력 강화, 체형 교정, 다이어트 등 개인 목표에 맞춘 프로그램을 제공합니다.',
+    highlights: ['1:1 맞춤 프로그램', '체형 분석', '근력 강화', '자세 교정', '식단 코칭'],
+    duration: '50분',
+    capacity: 1,
+    difficulty: '맞춤',
+    location: 'PT룸',
+    schedule: [
+      { day: '월', time: '09:00' }, { day: '월', time: '15:00' },
+      { day: '수', time: '11:00' }, { day: '금', time: '10:00' },
+    ],
+    reviews: [
+      { name: '웨이트러버', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.20', text: '최강민 트레이너님 체형교정 PT 3개월 받고 어깨가 확 펴졌어요. 맞춤 프로그램이라 효과가 확실합니다.', program: 'PT 10회권' },
+    ],
+    hasTicket: true,
+  },
+  'pt-taehyun': {
+    name: '다이어트 PT',
+    category: 'PT',
+    categoryColor: 'pt',
+    instructor: '김태현',
+    instructorAvatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop&crop=face',
+    instructorBio: '다이어트 및 체지방 관리 전문 PT 트레이너. 유산소와 근력 운동을 조합한 효율적 감량 프로그램을 제공합니다.',
+    gym: '바디채널 강남점',
+    gymId: 'gym1',
+    rating: 4.5,
+    reviewCount: 43,
+    imageUrl: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=800&h=450&fit=crop',
+    heroImages: [
+      { url: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=800&h=450&fit=crop', label: '다이어트 PT' },
+      { url: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=450&fit=crop', label: '유산소 운동' },
+      { url: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=800&h=450&fit=crop', label: '서킷 트레이닝' },
+    ],
+    description: '체지방 감량에 특화된 1:1 PT 프로그램입니다. 유산소와 근력 운동을 과학적으로 조합하여 효율적인 다이어트를 도와드립니다.',
+    highlights: ['체지방 감량', '식단 관리', '유산소+근력 조합', '체성분 분석', '주간 피드백'],
+    duration: '50분',
+    capacity: 1,
+    difficulty: '맞춤',
+    location: 'PT룸',
+    schedule: [
+      { day: '화', time: '10:00' }, { day: '목', time: '10:00' },
+      { day: '금', time: '16:00' }, { day: '토', time: '15:00' },
+    ],
+    reviews: [
+      { name: '다이어터', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.15', text: '3개월 만에 8kg 감량 성공! 식단 코칭까지 해주셔서 요요 없이 유지 중입니다.', program: 'PT 20회권' },
+    ],
+    hasTicket: false,
+  },
+  'pt-jihoon': {
+    name: '얼리버드 PT',
+    category: 'PT',
+    categoryColor: 'pt',
+    instructor: '오지훈',
+    instructorAvatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop&crop=face',
+    instructorBio: '새벽·아침 전문 PT 트레이너. 출근 전 효율적인 운동으로 하루를 활기차게 시작할 수 있도록 도와드립니다.',
+    gym: '바디채널 강남점',
+    gymId: 'gym1',
+    rating: 4.7,
+    reviewCount: 61,
+    imageUrl: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=450&fit=crop',
+    heroImages: [
+      { url: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=450&fit=crop', label: '모닝 PT' },
+      { url: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=450&fit=crop', label: '웨이트 트레이닝' },
+      { url: 'https://images.unsplash.com/photo-1583454155184-870a1f63aebc?w=800&h=450&fit=crop', label: '코어 운동' },
+    ],
+    description: '아침 시간대에 집중적으로 운동할 수 있는 1:1 PT 프로그램입니다. 짧은 시간 내 최대 효과를 낼 수 있는 고효율 프로그램을 제공합니다.',
+    highlights: ['06:30 조기 수업', '고효율 프로그램', '전신 운동', '근력 강화', '컨디션 관리'],
+    duration: '50분',
+    capacity: 1,
+    difficulty: '맞춤',
+    location: 'PT룸',
+    schedule: [
+      { day: '월', time: '06:30' }, { day: '수', time: '06:30' },
+      { day: '금', time: '06:30' }, { day: '토', time: '09:00' },
+    ],
+    reviews: [
+      { name: '아침형인간', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.18', text: '출근 전 운동이 가능해서 너무 좋아요. 오지훈 트레이너님 덕분에 아침 운동 습관이 잡혔습니다.', program: 'PT 10회권' },
+    ],
+    hasTicket: true,
+  },
+  'pt-haeun': {
+    name: '점심 PT 익스프레스',
+    category: 'PT',
+    categoryColor: 'pt',
+    instructor: '장하은',
+    instructorAvatar: 'https://images.unsplash.com/photo-1609899464926-209cb05bfc9c?w=200&h=200&fit=crop&crop=face',
+    instructorBio: '점심시간 활용 전문 PT 트레이너. 40분 집중 프로그램으로 바쁜 직장인도 효율적으로 운동할 수 있습니다.',
+    gym: '바디채널 강남점',
+    gymId: 'gym1',
+    rating: 4.4,
+    reviewCount: 29,
+    imageUrl: 'https://images.unsplash.com/photo-1609899464926-209cb05bfc9c?w=800&h=450&fit=crop',
+    heroImages: [
+      { url: 'https://images.unsplash.com/photo-1609899464926-209cb05bfc9c?w=800&h=450&fit=crop', label: '점심 PT' },
+      { url: 'https://images.unsplash.com/photo-1550345332-09e3ac987658?w=800&h=450&fit=crop', label: '집중 트레이닝' },
+      { url: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&h=450&fit=crop', label: '전신 운동' },
+    ],
+    description: '점심시간을 활용한 40분 집중 PT 프로그램입니다. 짧지만 알차게 구성된 운동으로 바쁜 일상 속에서도 체력을 관리할 수 있습니다.',
+    highlights: ['40분 집중 프로그램', '점심시간 활용', '전신 운동', '스트레스 해소', '체력 관리'],
+    duration: '40분',
+    capacity: 1,
+    difficulty: '맞춤',
+    location: 'PT룸',
+    schedule: [
+      { day: '월', time: '12:00' }, { day: '목', time: '12:00' },
+      { day: '금', time: '12:00' },
+    ],
+    reviews: [
+      { name: '직장인', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face', rating: 4, date: '2025.12.10', text: '점심시간에 운동하니까 오후 업무 집중력이 확 올라가요. 시간 대비 효율 최고!', program: 'PT 10회권' },
+    ],
+    hasTicket: true,
+  },
 }
 
 /* ── lesson ID mapping (name → id) ── */
@@ -297,9 +425,9 @@ export const lessonIdMap: Record<string, string> = {
   '바레톤': 'bareton',
 }
 
-const trainerIdMap: Record<string, string> = {
-  '최강민': '1', '박지영': '2', '한동훈': '3', '이준혁': '4',
-  '정서연': '5', '김태현': '6', '이수진': '5', '김민수': '4',
+const instructorLessonMap: Record<string, string> = {
+  '최강민': 'pt-kangmin', '박지영': 'lunch-pilates', '한동훈': 'bodypump', '이준혁': 'spinning',
+  '정서연': 'bareton', '김태현': 'pt-taehyun', '이수진': 'morning-bareton', '김민수': 'spinning',
 }
 
 /* ── category color helper ── */
@@ -420,8 +548,8 @@ export const GroupLessonDetailPage = () => {
           <div
             className="flex items-center gap-3 cursor-pointer flex-1 min-w-0"
             onClick={() => {
-              const tid = trainerIdMap[data.instructor]
-              if (tid) navigate(`/trainer/${tid}`)
+              const lessonId = instructorLessonMap[data.instructor]
+              if (lessonId) navigate(`/group-lesson/${lessonId}`)
             }}
           >
             <img src={data.instructorAvatar} alt={data.instructor} className="w-11 h-11 rounded-full object-cover flex-shrink-0" />

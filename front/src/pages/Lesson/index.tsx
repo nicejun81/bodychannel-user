@@ -3,18 +3,20 @@ import { useNavigate } from 'react-router-dom'
 import { PageLayout, SubPageHeader, ScrollRow, TrainerListItem, PTTrainerCard, FilterTabs, EmptyState } from '../../components'
 import { IconSearch, IconChevronRight } from '../../components/Icons'
 const instructorLessonMap: Record<string, string> = {
+  // PT 강사 → PT 레슨
+  '최강민': 'pt-kangmin',
+  '김태현': 'pt-taehyun',
+  '오지훈': 'pt-jihoon',
+  '장하은': 'pt-haeun',
+  // 그룹 수업 강사
   '박지영': 'lunch-pilates',
   '한동훈': 'bodypump',
-  '최강민': 'hiit',
   '이수진': 'morning-bareton',
   '김민수': 'spinning',
   '이준혁': 'spinning',
   '정서연': 'bareton',
-  '김태현': 'hiit',
-  '오지훈': 'bodypump',
   '송미래': 'morning-bareton',
   '윤서준': 'hiit',
-  '장하은': 'lunch-pilates',
   '임도현': 'spinning',
   '배수아': 'bareton',
   '권재민': 'bodypump',
@@ -313,7 +315,7 @@ export const LessonPage = () => {
                         ? <span onClick={(e) => e.stopPropagation()} className="w-full block text-center px-3 py-1.5 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
                         : <span onClick={(e) => e.stopPropagation()} className="w-full block text-center px-3 py-1.5 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
                       }
-                      onClick={() => navigate(`/trainer/${instructorLessonMap[s.instructor] || '1'}`)}
+                      onClick={() => navigate(`/group-lesson/${instructorLessonMap[s.instructor] || 'morning-bareton'}`)}
                     />
                   ))}
                 </div>

@@ -107,7 +107,10 @@ export const GymBeforeAfterDetailPage = () => {
         {/* 담당 강사 */}
         <div
           className="flex items-center gap-3 p-card-lg bg-surface-muted rounded-card cursor-pointer hover:bg-border transition-colors"
-          onClick={() => navigate(`/trainer/${item.trainer.id}`)}
+          onClick={() => {
+            const baTrainerLessonMap: Record<number, string> = { 1: 'pt-kangmin', 3: 'bodypump', 4: 'bareton', 5: 'lunch-pilates', 6: 'morning-bareton' }
+            navigate(`/group-lesson/${baTrainerLessonMap[item.trainer.id] ?? 'pt-kangmin'}`)
+          }}
         >
           <img src={item.trainer.avatar} alt={item.trainer.name} className="w-10 h-10 rounded-full object-cover flex-shrink-0" />
           <div className="flex-1 min-w-0">

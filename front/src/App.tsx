@@ -20,7 +20,7 @@ import {
   InvitePage,
   ReviewEventPage,
   AmbassadorPage,
-  TrainerDetailPage,
+
   ClassDetailPage,
   MeetupDetailPage,
   ProductDetailPage,
@@ -57,7 +57,7 @@ export const App = () => {
         <Route path="/invite" element={<InvitePage />} />
         <Route path="/review-event" element={<ReviewEventPage />} />
         <Route path="/ambassador" element={<AmbassadorPage />} />
-        <Route path="/trainer/:id" element={<TrainerDetailPage />} />
+
         <Route path="/class/:id" element={<ClassDetailPage />} />
         <Route path="/meetup/:id" element={<MeetupDetailPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
