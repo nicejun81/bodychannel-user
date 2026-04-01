@@ -34,7 +34,7 @@ interface GroupLessonData {
 }
 
 /* ── mock data ── */
-const lessonsData: Record<string, GroupLessonData> = {
+export const lessonsData: Record<string, GroupLessonData> = {
   'morning-bareton': {
     name: '모닝 바레톤',
     category: '바레톤',
@@ -380,6 +380,70 @@ const lessonsData: Record<string, GroupLessonData> = {
     ],
     hasTicket: true,
   },
+  'pt-seoyeon': {
+    name: '코어 강화 PT',
+    category: 'PT',
+    categoryColor: 'pt',
+    instructor: '정서연',
+    instructorAvatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop&crop=face',
+    instructorBio: '코어 및 바디라인 전문 PT 트레이너. 필라테스 기반의 체형 교정과 코어 강화 프로그램을 제공합니다.',
+    gym: '바디채널 강남점',
+    gymId: 'gym1',
+    rating: 4.8,
+    reviewCount: 89,
+    imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=450&fit=crop',
+    heroImages: [
+      { url: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=450&fit=crop', label: '코어 강화' },
+      { url: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=450&fit=crop', label: '바디라인' },
+      { url: 'https://images.unsplash.com/photo-1583454155184-870a1f63aebc?w=800&h=450&fit=crop', label: '필라테스' },
+    ],
+    description: '필라테스 기반의 1:1 코어 강화 PT 프로그램입니다. 깊은 코어 근육을 활성화하고 바디라인을 정리하여 균형 잡힌 체형을 만들어드립니다.',
+    highlights: ['코어 강화', '바디라인 정리', '필라테스 기반', '체형 교정', '유연성 향상'],
+    duration: '50분',
+    capacity: 1,
+    difficulty: '맞춤',
+    location: 'PT룸',
+    schedule: [
+      { day: '월', time: '13:00' }, { day: '수', time: '17:00' },
+      { day: '목', time: '13:00' }, { day: '금', time: '17:00' },
+    ],
+    reviews: [
+      { name: '코어퀸', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.22', text: '정서연 트레이너님 코어 수업 듣고 허리 통증이 사라졌어요. 바디라인도 예뻐졌다고 주변에서 얘기해줘요!', program: 'PT 20회권' },
+    ],
+    hasTicket: false,
+  },
+  'pt-donghun': {
+    name: 'HIIT 다이어트 PT',
+    category: 'PT',
+    categoryColor: 'pt',
+    instructor: '한동훈',
+    instructorAvatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop&crop=face',
+    instructorBio: 'HIIT 및 다이어트 전문 PT 트레이너. 고강도 인터벌 트레이닝으로 단기간 체지방 감량을 도와드립니다.',
+    gym: '바디채널 강남점',
+    gymId: 'gym1',
+    rating: 4.9,
+    reviewCount: 156,
+    imageUrl: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800&h=450&fit=crop',
+    heroImages: [
+      { url: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800&h=450&fit=crop', label: 'HIIT 트레이닝' },
+      { url: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=800&h=450&fit=crop', label: '다이어트' },
+      { url: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=800&h=450&fit=crop', label: '서킷 운동' },
+    ],
+    description: '고강도 인터벌 트레이닝 기반의 1:1 다이어트 PT입니다. 짧은 시간 내 최대 칼로리를 소모하고 체지방을 효과적으로 감량합니다.',
+    highlights: ['고강도 인터벌', '체지방 감량', '칼로리 폭발', '근력 유지', '식단 관리'],
+    duration: '50분',
+    capacity: 1,
+    difficulty: '맞춤',
+    location: 'PT룸',
+    schedule: [
+      { day: '화', time: '10:00' }, { day: '화', time: '18:00' },
+      { day: '목', time: '10:00' }, { day: '토', time: '11:00' },
+    ],
+    reviews: [
+      { name: 'HIIT매니아', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face', rating: 5, date: '2025.12.25', text: '한동훈 트레이너님 HIIT PT 2개월 받고 체지방 5% 감량했어요. 힘들지만 확실히 효과 있습니다!', program: 'PT 20회권' },
+    ],
+    hasTicket: false,
+  },
   'pt-haeun': {
     name: '점심 PT 익스프레스',
     category: 'PT',
@@ -425,9 +489,23 @@ export const lessonIdMap: Record<string, string> = {
   '바레톤': 'bareton',
 }
 
-const instructorLessonMap: Record<string, string> = {
-  '최강민': 'pt-kangmin', '박지영': 'lunch-pilates', '한동훈': 'bodypump', '이준혁': 'spinning',
-  '정서연': 'bareton', '김태현': 'pt-taehyun', '이수진': 'morning-bareton', '김민수': 'spinning',
+const instructorTrainerId: Record<string, string> = {
+  '최강민': '1', '박지영': '2', '한동훈': '3', '이준혁': '4',
+  '정서연': '5', '김태현': '6', '이수진': '5', '김민수': '4',
+  '오지훈': '1', '장하은': '1',
+}
+
+const instructorLessons: Record<string, string[]> = {
+  '최강민': ['pt-kangmin', 'hiit'],
+  '박지영': ['lunch-pilates', 'bareton'],
+  '한동훈': ['bodypump', 'pt-donghun'],
+  '이수진': ['morning-bareton', 'weekend-bareton'],
+  '김민수': ['spinning'],
+  '이준혁': ['spinning'],
+  '정서연': ['bareton', 'pt-seoyeon'],
+  '김태현': ['pt-taehyun'],
+  '오지훈': ['pt-jihoon'],
+  '장하은': ['pt-haeun'],
 }
 
 /* ── category color helper ── */
@@ -514,30 +592,31 @@ export const GroupLessonDetailPage = () => {
   return (
     <PageLayout header={header} hideBottomNav noPadding>
       {/* ── Hero Carousel ── */}
-      <div className="relative">
-        <div className="overflow-hidden">
+      <div className="relative -mt-1">
+        <div className="relative overflow-hidden">
           <div className="flex transition-transform duration-300" style={{ transform: `translateX(-${heroIdx * 100}%)` }}>
             {(data.heroImages).map((img, i) => (
               <img key={i} src={img.url} alt={img.label} className="w-full aspect-video object-cover flex-shrink-0 cursor-pointer" onClick={() => setShowFullImage(true)} />
             ))}
           </div>
-        </div>
-        {data.heroImages.length > 1 && (
-          <>
-            <div className="absolute bottom-14 right-3 px-2.5 py-1 bg-black/50 rounded-full text-white text-label font-medium">{heroIdx + 1} / {data.heroImages.length}</div>
-            {heroIdx > 0 && <button onClick={() => setHeroIdx(heroIdx - 1)} className="absolute left-2 top-1/3 -translate-y-1/2 w-8 h-8 bg-white/70 rounded-full flex items-center justify-center"><svg viewBox="0 0 24 24" className="w-4 h-4 stroke-ink stroke-2 fill-none"><path d="M19 12H5M12 19l-7-7 7-7" /></svg></button>}
-            {heroIdx < data.heroImages.length - 1 && <button onClick={() => setHeroIdx(heroIdx + 1)} className="absolute right-2 top-1/3 -translate-y-1/2 w-8 h-8 bg-white/70 rounded-full flex items-center justify-center rotate-180"><svg viewBox="0 0 24 24" className="w-4 h-4 stroke-ink stroke-2 fill-none"><path d="M19 12H5M12 19l-7-7 7-7" /></svg></button>}
-          </>
-        )}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-page pt-12 cursor-pointer" onClick={() => setShowFullImage(true)}>
-          <span className={`inline-block px-2 py-0.5 text-caption font-bold rounded mb-2 ${categoryBadgeClass(data.categoryColor)}`}>{data.category}</span>
-          <h1 className="text-display text-white">{data.name}</h1>
-          <div className="flex items-center gap-2 mt-1">
-            <div className="flex items-center gap-1">
-              <IconStarFilled className="w-4 h-4 text-semantic-star" />
-              <span className="text-body font-bold text-white">{data.rating}</span>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none" />
+          {data.heroImages.length > 1 && (
+            <>
+              <div className="absolute bottom-14 right-3 px-2.5 py-1 bg-black/50 rounded-full text-white text-label font-medium">{heroIdx + 1} / {data.heroImages.length}</div>
+              {heroIdx > 0 && <button onClick={() => setHeroIdx(heroIdx - 1)} className="absolute left-2 top-1/3 -translate-y-1/2 w-8 h-8 bg-white/70 rounded-full flex items-center justify-center"><svg viewBox="0 0 24 24" className="w-4 h-4 stroke-ink stroke-2 fill-none"><path d="M19 12H5M12 19l-7-7 7-7" /></svg></button>}
+              {heroIdx < data.heroImages.length - 1 && <button onClick={() => setHeroIdx(heroIdx + 1)} className="absolute right-2 top-1/3 -translate-y-1/2 w-8 h-8 bg-white/70 rounded-full flex items-center justify-center rotate-180"><svg viewBox="0 0 24 24" className="w-4 h-4 stroke-ink stroke-2 fill-none"><path d="M19 12H5M12 19l-7-7 7-7" /></svg></button>}
+            </>
+          )}
+          <div className="absolute bottom-0 left-0 right-0 p-page pb-4 cursor-pointer" onClick={() => setShowFullImage(true)}>
+            <span className={`inline-block px-2 py-0.5 text-caption font-bold rounded mb-2 ${categoryBadgeClass(data.categoryColor)}`}>{data.category}</span>
+            <h1 className="text-display text-white">{data.name}</h1>
+            <div className="flex items-center gap-2 mt-1">
+              <div className="flex items-center gap-1">
+                <IconStarFilled className="w-4 h-4 text-semantic-star" />
+                <span className="text-body font-bold text-white">{data.rating}</span>
+              </div>
+              <span className="text-label text-white/70">리뷰 {data.reviewCount}개</span>
             </div>
-            <span className="text-label text-white/70">리뷰 {data.reviewCount}개</span>
           </div>
         </div>
       </div>
@@ -546,10 +625,10 @@ export const GroupLessonDetailPage = () => {
       <div className="px-page pt-4 pb-3">
         <div className="flex items-center gap-3">
           <div
-            className="flex items-center gap-3 cursor-pointer flex-1 min-w-0"
+            className="flex items-center gap-3 flex-1 min-w-0 cursor-pointer"
             onClick={() => {
-              const lessonId = instructorLessonMap[data.instructor]
-              if (lessonId) navigate(`/group-lesson/${lessonId}`)
+              const tid = instructorTrainerId[data.instructor]
+              if (tid) navigate(`/trainer/${tid}`)
             }}
           >
             <img src={data.instructorAvatar} alt={data.instructor} className="w-11 h-11 rounded-full object-cover flex-shrink-0" />

@@ -20,17 +20,17 @@ export const MeetupCard = ({
   return (
     <button
       onClick={onClick}
-      className="flex-shrink-0 w-[200px] bg-surface border border-border rounded-card-lg overflow-hidden
-                 hover:border-ink hover:-translate-y-1 hover:shadow-card-hover transition-all text-left"
+      className="flex-shrink-0 w-[160px] bg-surface border border-border rounded-card overflow-hidden
+                 hover:border-ink-disabled transition-colors text-left"
     >
       <img
         src={imageUrl}
         alt={title}
-        className="w-full h-[100px] object-cover"
+        className="w-full h-[120px] object-cover"
       />
       <div className="p-card">
-        <span className="badge bg-primary text-white mb-2">{category}</span>
-        <h3 className="text-body font-bold text-ink mb-1 leading-tight">{title}</h3>
+        <span className="badge bg-primary text-white mb-1.5">{category}</span>
+        <h3 className="text-title font-bold text-ink mb-0.5 leading-tight truncate">{title}</h3>
         <p className="text-label text-ink-secondary mb-2">{schedule}</p>
         <div className="flex items-center gap-1.5 text-label text-ink-placeholder">
           <IconUsers className="w-3.5 h-3.5 stroke-current stroke-2" />

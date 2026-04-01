@@ -13,6 +13,7 @@ interface PTTrainerCardProps {
   trialInfo?: string
   action?: ReactNode
   onClick?: () => void
+  fluid?: boolean
 }
 
 const categoryStyles: Record<string, string> = {
@@ -35,12 +36,13 @@ export const PTTrainerCard = ({
   trialInfo,
   action,
   onClick,
+  fluid = false,
 }: PTTrainerCardProps) => {
   return (
     <button
       onClick={onClick}
-      className="flex-shrink-0 min-w-[160px] border border-border rounded-card overflow-hidden
-                 hover:border-ink-disabled transition-colors text-left"
+      className={`flex-shrink-0 border border-border rounded-card overflow-hidden
+                 hover:border-ink-disabled transition-colors text-left ${fluid ? 'w-full' : 'w-[160px]'}`}
     >
       <img src={imageUrl} alt={name} className="w-full h-[120px] object-cover" />
       <div className="p-card">

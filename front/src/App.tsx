@@ -12,7 +12,6 @@ import {
   MyPage,
   MembershipPage,
   LessonPage,
-  ReservationPage,
   OnlineClassPage,
   ActivityPage,
   ShopPage,
@@ -20,7 +19,8 @@ import {
   InvitePage,
   ReviewEventPage,
   AmbassadorPage,
-
+  TrainerDetailPage,
+  TrainerReviewsPage,
   ClassDetailPage,
   MeetupDetailPage,
   ProductDetailPage,
@@ -49,7 +49,6 @@ export const App = () => {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/membership" element={<MembershipPage />} />
         <Route path="/lesson" element={<LessonPage />} />
-        <Route path="/reservation" element={<ReservationPage />} />
         <Route path="/online-class" element={<OnlineClassPage />} />
         <Route path="/activity" element={<ActivityPage />} />
         <Route path="/shop" element={<ShopPage />} />
@@ -57,7 +56,8 @@ export const App = () => {
         <Route path="/invite" element={<InvitePage />} />
         <Route path="/review-event" element={<ReviewEventPage />} />
         <Route path="/ambassador" element={<AmbassadorPage />} />
-
+        <Route path="/trainer/:id" element={<TrainerDetailPage />} />
+        <Route path="/trainer/:id/reviews" element={<TrainerReviewsPage />} />
         <Route path="/class/:id" element={<ClassDetailPage />} />
         <Route path="/meetup/:id" element={<MeetupDetailPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />

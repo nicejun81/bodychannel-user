@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { IconHome, IconLocation, IconBriefcase, IconCalendar, IconUser } from './Icons'
+import { IconHome, IconLocation, IconBriefcase, IconUsers, IconUser } from './Icons'
 
 interface NavItem {
   path: string
@@ -11,7 +11,7 @@ const navItems: NavItem[] = [
   { path: '/', label: '홈', icon: IconHome },
   { path: '/membership', label: '지점소개', icon: IconLocation },
   { path: '/lesson', label: '레슨권', icon: IconBriefcase },
-  { path: '/reservation', label: '예약', icon: IconCalendar },
+  { path: '/activity', label: '커뮤니티', icon: IconUsers },
   { path: '/mypage', label: '마이', icon: IconUser },
 ]
 

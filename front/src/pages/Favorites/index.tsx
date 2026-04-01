@@ -65,9 +65,6 @@ const favoriteTrainers = [
   },
 ]
 
-const trainerLessonMap: Record<number, string> = {
-  1: 'pt-kangmin', 2: 'lunch-pilates', 3: 'bodypump', 4: 'spinning', 5: 'bareton', 6: 'pt-taehyun',
-}
 
 export const FavoritesPage = () => {
   const navigate = useNavigate()
@@ -134,7 +131,7 @@ export const FavoritesPage = () => {
           {favoriteTrainers.map((trainer) => (
             <button
               key={trainer.id}
-              onClick={() => navigate(`/group-lesson/${trainerLessonMap[trainer.id] ?? 'pt-kangmin'}`)}
+              onClick={() => navigate(`/trainer/${trainer.id}`)}
               className="flex gap-4 px-page py-4 border-b border-border-light text-left hover:bg-surface-subtle transition-colors"
             >
               {/* Thumbnail */}

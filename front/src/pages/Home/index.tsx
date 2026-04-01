@@ -102,6 +102,7 @@ const groupTrainers = [
 const ptTrainers = [
   {
     id: 1,
+    lessonId: 'pt-kangmin',
     imageUrl: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop',
     name: '최강민 강사',
     category: 'PT',
@@ -114,6 +115,7 @@ const ptTrainers = [
   },
   {
     id: 2,
+    lessonId: 'pt-seoyeon',
     imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop',
     name: '정서연 강사',
     category: 'PT',
@@ -126,6 +128,7 @@ const ptTrainers = [
   },
   {
     id: 3,
+    lessonId: 'pt-donghun',
     imageUrl: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop',
     name: '한동훈 강사',
     category: 'PT',
@@ -315,10 +318,7 @@ export const HomePage = () => {
                   ? <span onClick={() => navigate('/reservation')} className="w-full block text-center px-3 py-1.5 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
                   : <span onClick={() => navigate('/gym/gym1/products')} className="w-full block text-center px-3 py-1.5 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
                 }
-                onClick={() => {
-                  const homePtLessonMap: Record<number, string> = { 1: 'pt-kangmin', 2: 'bareton', 3: 'bodypump' }
-                  navigate(`/group-lesson/${homePtLessonMap[trainer.id] ?? 'pt-kangmin'}`)
-                }}
+                onClick={() => navigate(`/group-lesson/${trainer.lessonId}`)}
               />
             ))}
           </ScrollRow>
