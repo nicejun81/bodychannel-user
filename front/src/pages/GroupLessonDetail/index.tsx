@@ -698,7 +698,7 @@ export const GroupLessonDetailPage = () => {
               return (
                 <button
                   key={i}
-                  onClick={() => hasTicket ? navigate('/reservation') : navigate(`/gym/${data.gymId}/products`)}
+                  onClick={() => hasTicket ? navigate(`/reservation?trainer=${encodeURIComponent(data.instructor + ' 강사')}&lesson=${encodeURIComponent(data.category)}&time=${encodeURIComponent(s.time)}`) : navigate(`/gym/${data.gymId}/products`)}
                   className="flex items-center gap-2 px-4 py-2.5 bg-surface-muted rounded-card hover:bg-surface-subtle transition-colors"
                 >
                   <IconClock className="w-4 h-4 text-primary" />
@@ -790,7 +790,7 @@ export const GroupLessonDetailPage = () => {
       <BottomCTA hideBottomNav>
         {data.hasTicket ? (
           <button
-            onClick={() => navigate('/reservation')}
+            onClick={() => navigate(`/reservation?trainer=${encodeURIComponent(data.instructor + ' 강사')}&lesson=${encodeURIComponent(data.category)}&time=${encodeURIComponent(data.schedule?.[0] || '10:00')}`)}
             className="flex-1 py-3.5 bg-primary text-white text-body font-bold rounded-card hover:bg-primary-dark transition-colors"
           >
             예약하기

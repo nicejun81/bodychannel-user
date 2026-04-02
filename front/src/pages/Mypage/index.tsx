@@ -32,11 +32,7 @@ const profilePosts = [
 ]
 
 /* ── 마이 탭 데이터 ── */
-const walletStats = [
-  { value: '15,000', label: '캐시' },
-  { value: '2,500', label: '포인트' },
-  { value: '3', label: '쿠폰' },
-]
+/* walletStats → 각 페이지로 이동 (/wallet/cash, /wallet/point, /wallet/coupon) */
 
 const memberships = [
   {
@@ -103,9 +99,12 @@ export const MyPage = () => {
   const [showPurchase, setShowPurchase] = useState(searchParams.get('tab') === 'purchase')
   const [activeTab, setActiveTab] = useState<'profile' | 'my'>('my')
   const [profileGrid, setProfileGrid] = useState<'grid' | 'tagged'>('grid')
+  void searchParams // used for tab query
   const [reservations, setReservations] = useState<{ id: number; trainer: string; lesson: string; time: string; date: string; dateKey?: string; gym: string }[]>(() => {
-    const saved = JSON.parse(localStorage.getItem('reservations') || '[]')
-    if (saved.length > 0) return saved
+    const saved: { id: number; trainer: string; lesson: string; time: string; date: string; gym: string }[] = JSON.parse(localStorage.getItem('reservations') || '[]')
+    // mock 데이터가 아닌 실제 예약이 여러 날짜에 걸쳐 있으면 그대로 사용
+    const uniqueDates = new Set(saved.map(r => r.date))
+    if (uniqueDates.size > 1) return saved
     const dn = ['일','월','화','수','목','금','토']
     const mock = [
       { offset: -5, trainer: '한동훈 강사', lesson: '히트35', time: '18:00', gym: '바디채널 강남점' },
@@ -126,7 +125,7 @@ export const MyPage = () => {
     localStorage.setItem('reservations', JSON.stringify(mock))
     return mock
   })
-  const [reserveDateIdx, setReserveDateIdx] = useState(0)
+  const [reserveDateIdx, setReserveDateIdx] = useState(-1) // -1 = 아직 초기화 안됨, 오늘로 자동 설정
 
   const header = (
     <SubPageHeader
@@ -256,8 +255,12 @@ export const MyPage = () => {
 
           {/* 캐시/포인트/쿠폰 */}
           <div className="grid grid-cols-3 gap-2 mb-section">
-            {walletStats.map((stat) => (
-              <button key={stat.label} className="bg-surface-muted rounded-card p-3 text-center hover:bg-border-light transition-colors">
+            {[
+              { value: '15,000', label: '캐시', href: '/wallet/cash' },
+              { value: '2,500', label: '포인트', href: '/wallet/point' },
+              { value: '3', label: '쿠폰', href: '/wallet/coupon' },
+            ].map((stat) => (
+              <button key={stat.label} onClick={() => navigate(stat.href)} className="bg-surface-muted rounded-card p-3 text-center hover:bg-border-light transition-colors">
                 <div className="text-title font-bold text-primary">{stat.value}</div>
                 <div className="text-caption text-ink-secondary">{stat.label}</div>
               </button>
@@ -305,15 +308,26 @@ export const MyPage = () => {
             }
 
             // 기본 선택: 오늘 또는 가장 가까운 미래
-            const todayIdx = dateTabs.findIndex(d => !d.isPast)
-            const safeIdx = Math.min(reserveDateIdx, dateTabs.length - 1)
+            const todayIdx = dateTabs.findIndex(d => d.isToday) >= 0 ? dateTabs.findIndex(d => d.isToday) : dateTabs.findIndex(d => !d.isPast)
+            const safeIdx = reserveDateIdx === -1 ? (todayIdx >= 0 ? todayIdx : 0) : Math.min(reserveDateIdx, dateTabs.length - 1)
             const selectedDateKey = dateTabs[safeIdx >= 0 ? safeIdx : 0].key
             const filtered = reservations.filter(r => r.date === selectedDateKey)
             const selectedTab = dateTabs[safeIdx >= 0 ? safeIdx : 0]
 
             return (
               <div className="py-section">
-                <h3 className="text-body font-bold text-ink mb-3">내 예약</h3>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-body font-bold text-ink">내 예약</h3>
+                  {todayIdx >= 0 && safeIdx !== todayIdx && (
+                    <button
+                      onClick={() => setReserveDateIdx(todayIdx)}
+                      className="flex items-center gap-1 px-2.5 py-1 text-caption font-bold text-primary border border-primary rounded-pill hover:bg-primary-50 transition-colors"
+                    >
+                      <svg viewBox="0 0 24 24" className="w-3 h-3 stroke-primary stroke-[1.5] fill-none"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
+                      오늘
+                    </button>
+                  )}
+                </div>
                 <div className="flex gap-2 overflow-x-auto hide-scrollbar mb-4">
                   {dateTabs.map((d, i) => (
                     <button

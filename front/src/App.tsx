@@ -39,6 +39,7 @@ import {
   GroupLessonDetailPage,
   BranchSelectPage,
   ReservationPage,
+  WalletPage,
 } from './pages'
 
 export const App = () => {
@@ -78,6 +79,7 @@ export const App = () => {
         <Route path="/purchase/docs" element={<PurchaseDocsPage />} />
         <Route path="/branch" element={<BranchSelectPage />} />
         <Route path="/reservation" element={<ReservationPage />} />
+        <Route path="/wallet/:type" element={<WalletPage />} />
       </Routes>
     </BrowserRouter>
   )

@@ -332,8 +332,8 @@ export const LessonPage = () => {
                       rating={trainerRatings[s.instructor]?.rating || 4.5}
                       reviewCount={trainerRatings[s.instructor]?.reviews || 30}
                       action={s.hasTicket
-                        ? <span onClick={(e) => e.stopPropagation()} className="w-full block text-center px-3 py-1.5 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
-                        : <span onClick={(e) => e.stopPropagation()} className="w-full block text-center px-3 py-1.5 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
+                        ? <span onClick={(e) => { e.stopPropagation(); navigate(`/reservation?trainer=${encodeURIComponent(s.instructor + ' 강사')}&lesson=${encodeURIComponent(s.category)}&time=${encodeURIComponent(s.time)}`) }} className="w-full block text-center px-3 py-1.5 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
+                        : <span onClick={(e) => { e.stopPropagation(); navigate('/gym/gym1/products') }} className="w-full block text-center px-3 py-1.5 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
                       }
                       onClick={() => navigate(`/group-lesson/${instructorLessonMap[s.instructor] || 'morning-bareton'}`)}
                     />
@@ -353,8 +353,8 @@ export const LessonPage = () => {
                 rating={trainerRatings[s.instructor]?.rating || 4.5}
                 reviewCount={trainerRatings[s.instructor]?.reviews || 30}
                 rightAction={s.hasTicket
-                  ? <span className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg">예약</span>
-                  : <span className="px-3 py-1 border border-primary text-primary text-label font-bold rounded-lg">구매</span>
+                  ? <span onClick={(e) => { e.stopPropagation(); navigate(`/reservation?trainer=${encodeURIComponent(s.instructor + ' 강사')}&lesson=${encodeURIComponent(s.category)}&time=${encodeURIComponent(s.time)}`) }} className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
+                  : <span onClick={(e) => { e.stopPropagation(); navigate('/gym/gym1/products') }} className="px-3 py-1 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
                 }
                 onClick={() => navigate(`/group-lesson/${instructorLessonMap[s.instructor] || 'morning-bareton'}`)}
               />
