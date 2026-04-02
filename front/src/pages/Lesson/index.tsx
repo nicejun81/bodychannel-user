@@ -35,6 +35,14 @@ const filterTabs = [
   { id: 'hit35', label: '히트35' },
 ]
 
+const categoryDescriptions: Record<string, { title: string; desc: string; icon: string }> = {
+  pt: { title: '1:1 퍼스널 트레이닝', desc: '전문 트레이너와 함께하는 맞춤형 1:1 운동 프로그램. 체형 분석부터 식단 관리까지 개인 목표에 최적화된 트레이닝을 제공합니다.', icon: '💪' },
+  'group-pt': { title: '소규모 그룹 트레이닝', desc: '2~6명의 소그룹으로 진행되는 서킷 트레이닝. 1:1보다 합리적인 가격으로 전문 지도를 받으며 함께 운동하는 에너지를 느껴보세요.', icon: '👥' },
+  bareton: { title: '발레 + 필라테스 퓨전', desc: '발레 동작과 필라테스를 결합한 바디 컨디셔닝 프로그램. 코어 강화, 유연성 향상, 체형 교정에 효과적입니다.', icon: '🩰' },
+  gymground: { title: '전신 기능성 트레이닝', desc: '다양한 기구와 맨몸 운동을 활용한 전신 서킷 프로그램. 근력, 심폐지구력, 민첩성을 동시에 향상시킵니다.', icon: '🏋️' },
+  hit35: { title: '35분 고강도 인터벌', desc: '35분간 집중적으로 진행되는 HIIT 프로그램. 짧은 시간 안에 최대 칼로리를 소모하며 심폐 기능을 끌어올립니다.', icon: '⚡' },
+}
+
 const myLessons = [
   { id: 1, status: '이용중', trainer: '최강민 강사', remain: '8회 남음', variant: 'primary' },
   { id: 2, status: '이용중', trainer: '박지영 강사', remain: '3회 남음', variant: 'secondary' },
@@ -245,6 +253,17 @@ export const LessonPage = () => {
 
   return (
     <PageLayout header={header}>
+      {/* Category Description */}
+      {categoryDescriptions[activeTab] && (
+        <div className="flex items-start gap-3 p-card-lg bg-surface-muted rounded-card mb-section">
+          <span className="text-heading flex-shrink-0">{categoryDescriptions[activeTab].icon}</span>
+          <div>
+            <p className="text-body font-bold text-ink mb-0.5">{categoryDescriptions[activeTab].title}</p>
+            <p className="text-caption text-ink-secondary leading-relaxed">{categoryDescriptions[activeTab].desc}</p>
+          </div>
+        </div>
+      )}
+
       {/* My Lessons Banner */}
       <ScrollRow className="mb-section">
         {myLessons.map((lesson) => (
