@@ -40,8 +40,8 @@ export const FeedCard = ({
           />
           <span className="text-body font-bold text-ink">{authorName}</span>
         </div>
-        <p className="text-body text-ink-secondary leading-snug line-clamp-2 flex-1">{text}</p>
-        <div className="flex items-center gap-3 text-label text-ink-placeholder mt-2">
+        <p className="text-label text-ink-secondary leading-snug line-clamp-2 flex-1">{text}</p>
+        <div className="flex items-center gap-3 text-caption text-ink-placeholder mt-2">
           <span className={`flex items-center gap-1 ${isLiked ? 'text-semantic-like' : ''}`}>
             <IconHeart className={`w-3.5 h-3.5 ${isLiked ? 'fill-semantic-like stroke-semantic-like' : 'stroke-current'} stroke-2`} />
             {likeCount}

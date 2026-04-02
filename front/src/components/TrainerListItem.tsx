@@ -51,12 +51,12 @@ export const TrainerListItem = ({
         <div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-title text-ink leading-tight">{name}</span>
+              <span className="text-body font-bold text-ink leading-tight">{name}</span>
               {rating > 0 && (
                 <div className="flex items-center gap-0.5">
                   <IconStarFilled className="w-3 h-3 text-semantic-star" />
-                  <span className="text-label font-semibold text-ink-secondary">{rating}</span>
-                  <span className="text-label text-ink-placeholder">({reviewCount})</span>
+                  <span className="text-caption font-semibold text-ink-secondary">{rating}</span>
+                  <span className="text-caption text-ink-placeholder">({reviewCount})</span>
                 </div>
               )}
             </div>
@@ -64,7 +64,7 @@ export const TrainerListItem = ({
           </div>
           <div className="flex items-center gap-1.5 mt-0.5">
             <span className={`badge whitespace-nowrap ${categoryStyles[categoryColor] || categoryStyles.pt}`}>{category}</span>
-            <p className="text-label text-ink-secondary truncate">{description}</p>
+            <p className="text-caption text-ink-secondary truncate">{description}</p>
           </div>
         </div>
         <div className="flex items-center justify-between">
@@ -73,9 +73,9 @@ export const TrainerListItem = ({
               <circle cx="12" cy="12" r="10" />
               <path d="M12 6v6l4 2" />
             </svg>
-            <span className="text-body font-medium text-primary">{todayTime}</span>
+            <span className="text-label font-medium text-primary">{todayTime}</span>
           </div>
-          {trialInfo && <span className="text-body font-bold text-ink">{trialInfo}</span>}
+          {trialInfo && <span className="text-label font-bold text-ink">{trialInfo}</span>}
         </div>
       </div>
     </button>
