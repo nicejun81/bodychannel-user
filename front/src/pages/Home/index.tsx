@@ -289,8 +289,8 @@ export const HomePage = () => {
             rating={trainer.rating}
             reviewCount={trainer.reviewCount}
             rightAction={trainer.hasTicket
-              ? <span className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg">예약</span>
-              : <span className="px-3 py-1 border border-primary text-primary text-label font-bold rounded-lg">구매</span>
+              ? <span onClick={(e) => { e.stopPropagation(); navigate(`/reservation?trainer=${encodeURIComponent(trainer.name)}&lesson=${encodeURIComponent(trainer.category)}&time=${encodeURIComponent(trainer.todayTime?.replace('오늘 ', '').split(',')[0] || '')}`) }} className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
+              : <span onClick={(e) => { e.stopPropagation(); navigate('/gym/gym1/products') }} className="px-3 py-1 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
             }
             onClick={() => navigate(`/group-lesson/${trainer.lessonId}`)}
           />
@@ -315,7 +315,7 @@ export const HomePage = () => {
                 rating={trainer.rating}
                 reviewCount={trainer.reviewCount}
                 action={trainer.hasTicket
-                  ? <span onClick={() => navigate('/reservation')} className="w-full block text-center px-3 py-1.5 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
+                  ? <span onClick={() => navigate(`/reservation?trainer=${encodeURIComponent(trainer.name)}&lesson=${encodeURIComponent(trainer.category)}&time=${encodeURIComponent(trainer.todayTime?.replace('오늘 ', '').split(',')[0] || '')}`)} className="w-full block text-center px-3 py-1.5 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
                   : <span onClick={() => navigate('/gym/gym1/products')} className="w-full block text-center px-3 py-1.5 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
                 }
                 onClick={() => navigate(`/group-lesson/${trainer.lessonId}`)}

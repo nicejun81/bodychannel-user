@@ -80,12 +80,16 @@ export const CheckoutPage = () => {
   const [selectedCoupon, setSelectedCoupon] = useState<number | null>(null)
   const [showCouponSheet, setShowCouponSheet] = useState(false)
   const [pointInput, setPointInput] = useState(0)
+  const [cashInput, setCashInput] = useState(0)
 
+  const CASH_BALANCE = 15000
   const POINT_BALANCE = 2500
   const couponDiscount = selectedCoupon !== null ? coupons.find(c => c.id === selectedCoupon)?.discount || 0 : 0
-  const maxPoint = Math.min(POINT_BALANCE, priceNum - couponDiscount)
+  const maxCash = Math.min(CASH_BALANCE, priceNum - couponDiscount)
+  const cashUsed = Math.min(cashInput, maxCash)
+  const maxPoint = Math.min(POINT_BALANCE, priceNum - couponDiscount - cashUsed)
   const pointUsed = Math.min(pointInput, maxPoint)
-  const totalDiscount = couponDiscount + pointUsed
+  const totalDiscount = couponDiscount + cashUsed + pointUsed
   const finalPrice = Math.max(0, priceNum - totalDiscount)
 
   const toggleAll = () => {
@@ -144,6 +148,41 @@ export const CheckoutPage = () => {
         {/* ━━ 할인 ━━ */}
         <div className="bg-surface px-page pt-4 pb-3">
           <SectionTitle>할인</SectionTitle>
+          {/* 캐시 */}
+          <div className="py-3 border-b border-border-light">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <svg viewBox="0 0 20 20" className="w-[18px] h-[18px] fill-primary flex-shrink-0"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-1h2v1zm0-3H9V6h2v4z" /></svg>
+                <div>
+                  <span className="text-body font-semibold text-ink">캐시</span>
+                  <span className="text-label text-ink-tertiary ml-1.5">{CASH_BALANCE.toLocaleString()}원 보유</span>
+                </div>
+              </div>
+              <button
+                onClick={() => setCashInput(cashInput > 0 ? 0 : maxCash)}
+                className={`text-label font-bold px-3.5 py-2 rounded-pill transition-colors ${
+                  cashUsed > 0 ? 'bg-primary text-white' : 'bg-surface-muted text-ink-secondary hover:bg-ink hover:text-surface'
+                }`}
+              >
+                {cashUsed > 0 ? '취소' : '전액 사용'}
+              </button>
+            </div>
+            <div className="flex items-center gap-2 mt-2">
+              <div className="flex-1 relative">
+                <input
+                  type="number"
+                  value={cashInput || ''}
+                  onChange={e => setCashInput(Math.min(maxCash, Math.max(0, parseInt(e.target.value) || 0)))}
+                  placeholder="사용할 캐시 입력"
+                  className="w-full border border-border rounded-card px-3.5 py-2.5 text-body text-ink text-right pr-9 focus:outline-none focus:border-primary transition-colors [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                />
+                <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-body text-ink-tertiary">원</span>
+              </div>
+            </div>
+            {cashUsed > 0 && (
+              <p className="text-label text-primary font-semibold mt-1.5 text-right">-{cashUsed.toLocaleString()}원 적용</p>
+            )}
+          </div>
           {/* 쿠폰 */}
           <div className="py-3 border-b border-border-light">
             <div className="flex items-center justify-between">
@@ -284,6 +323,12 @@ export const CheckoutPage = () => {
             <span className="text-body text-ink-tertiary">상품 금액</span>
             <span className="text-body text-ink">{priceNum.toLocaleString()}원</span>
           </div>
+          {cashUsed > 0 && (
+            <div className="flex justify-between py-1.5">
+              <span className="text-body text-ink-tertiary">캐시 사용</span>
+              <span className="text-body text-primary font-semibold">-{cashUsed.toLocaleString()}원</span>
+            </div>
+          )}
           {couponDiscount > 0 && (
             <div className="flex justify-between py-1.5">
               <span className="text-body text-ink-tertiary">쿠폰 할인</span>
