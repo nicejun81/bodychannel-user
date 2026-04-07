@@ -80,28 +80,29 @@ const chatRooms = [
   },
 ]
 
+const friends = [
+  { id: 'f1', name: '최강민', avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face', isOnline: true, status: '오늘 운동 완료 💪' },
+  { id: 'f2', name: '한동훈', avatarUrl: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=100&h=100&fit=crop&crop=face', isOnline: true, status: '바디채널 강남점' },
+  { id: 'f3', name: '서지수', avatarUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop&crop=face', isOnline: false, status: '주 5회 운동 중' },
+  { id: 'f4', name: '장하은', avatarUrl: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop&crop=face', isOnline: false, status: '바레톤 입문' },
+  { id: 'f5', name: '오태준', avatarUrl: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop&crop=face', isOnline: true, status: '러닝 300km 달성!' },
+  { id: 'f6', name: '김다은', avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face', isOnline: false, status: '' },
+]
+
 const tabs = [
-  { key: 'all', label: '전체' },
-  { key: 'trainer', label: '트레이너' },
-  { key: 'friend', label: '친구' },
-  { key: 'group', label: '모임' },
+  { key: 'chats', label: '채팅' },
+  { key: 'friends', label: '친구' },
 ] as const
 
 export const ChatPage = () => {
   const navigate = useNavigate()
-  const [activeTab, setActiveTab] = useState<typeof tabs[number]['key']>('all')
+  const [activeTab, setActiveTab] = useState<typeof tabs[number]['key']>('chats')
   const [searchQuery, setSearchQuery] = useState('')
 
-  const filtered = chatRooms
-    .filter((room) => {
-      if (activeTab === 'trainer') return room.type === 'trainer'
-      if (activeTab === 'friend') return room.type === 'friend'
-      if (activeTab === 'group') return room.type === 'group'
-      return true
-    })
-    .filter((room) =>
-      searchQuery ? room.name.includes(searchQuery) || room.lastMessage.includes(searchQuery) : true
-    )
+  const filtered = chatRooms.filter((room) =>
+    searchQuery ? room.name.includes(searchQuery) || room.lastMessage.includes(searchQuery) : true
+  )
+  const filteredFriends = friends.filter((f) => !searchQuery || f.name.includes(searchQuery))
 
   const totalUnread = chatRooms.reduce((s, r) => s + r.unreadCount, 0)
   const onlineFriends = chatRooms.filter((r) => r.isOnline)
@@ -184,26 +185,64 @@ export const ChatPage = () => {
 
       {/* List */}
       <div className="flex flex-col">
-        {filtered.length === 0 ? (
+        {activeTab === 'chats' ? (
+          filtered.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-20 text-ink-tertiary">
+              <svg viewBox="0 0 24 24" className="w-14 h-14 stroke-ink-disabled stroke-[1.5] fill-none mb-3">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+              <p className="text-body">대화 중인 채팅이 없어요</p>
+            </div>
+          ) : (
+            <>
+              {pinned.length > 0 && (
+                <div className="px-page pt-3 pb-1 text-caption font-bold text-ink-tertiary uppercase tracking-wide">
+                  고정됨
+                </div>
+              )}
+              {pinned.map((room) => (
+                <ChatRow key={room.id} room={room} pinned onClick={() => navigate(`/chat/${room.id}`)} />
+              ))}
+              {pinned.length > 0 && unpinned.length > 0 && <div className="h-px bg-border-light my-1" />}
+              {unpinned.map((room) => (
+                <ChatRow key={room.id} room={room} onClick={() => navigate(`/chat/${room.id}`)} />
+              ))}
+            </>
+          )
+        ) : filteredFriends.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-ink-tertiary">
-            <svg viewBox="0 0 24 24" className="w-14 h-14 stroke-ink-disabled stroke-[1.5] fill-none mb-3">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
-            <p className="text-body">검색 결과가 없어요</p>
+            <p className="text-body">친구가 없어요</p>
           </div>
         ) : (
           <>
-            {pinned.length > 0 && (
-              <div className="px-page pt-3 pb-1 text-caption font-bold text-ink-tertiary uppercase tracking-wide">
-                고정됨
-              </div>
-            )}
-            {pinned.map((room) => (
-              <ChatRow key={room.id} room={room} pinned onClick={() => navigate(`/chat/${room.id}`)} />
-            ))}
-            {pinned.length > 0 && unpinned.length > 0 && <div className="h-px bg-border-light my-1" />}
-            {unpinned.map((room) => (
-              <ChatRow key={room.id} room={room} onClick={() => navigate(`/chat/${room.id}`)} />
+            <div className="px-page pt-3 pb-1 text-caption font-bold text-ink-tertiary uppercase tracking-wide">
+              친구 {filteredFriends.length}
+            </div>
+            {filteredFriends.map((f) => (
+              <button
+                key={f.id}
+                onClick={() => navigate(`/profile/${encodeURIComponent(f.name)}`)}
+                className="flex items-center gap-3 px-page py-3 text-left hover:bg-surface-subtle transition-colors"
+              >
+                <div className="relative flex-shrink-0">
+                  <img src={f.avatarUrl} alt={f.name} className="w-[52px] h-[52px] rounded-full object-cover" />
+                  {f.isOnline && (
+                    <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-semantic-online border-2 border-white rounded-full" />
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-body font-semibold text-ink truncate">{f.name}</div>
+                  {f.status && <div className="text-label text-ink-secondary truncate">{f.status}</div>}
+                </div>
+                <button
+                  onClick={(e) => { e.stopPropagation(); navigate(`/chat/${f.id}`) }}
+                  className="flex-shrink-0 w-9 h-9 rounded-full bg-primary-50 flex items-center justify-center"
+                >
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 stroke-primary stroke-2 fill-none">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </button>
             ))}
           </>
         )}
