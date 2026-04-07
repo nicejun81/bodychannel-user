@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { PageLayout, SubPageHeader, FilterTabs } from '../../components'
+import { PageLayout, SubPageHeader } from '../../components'
 import { IconSearch } from '../../components/Icons'
 
 const chatRooms = [
@@ -13,6 +13,7 @@ const chatRooms = [
     time: '오후 2:30',
     unreadCount: 1,
     isOnline: true,
+    pinned: true,
     gym: '바디채널 강남점',
   },
   {
@@ -79,117 +80,196 @@ const chatRooms = [
   },
 ]
 
+const tabs = [
+  { key: 'all', label: '전체' },
+  { key: 'trainer', label: '트레이너' },
+  { key: 'friend', label: '친구' },
+  { key: 'group', label: '모임' },
+] as const
+
 export const ChatPage = () => {
   const navigate = useNavigate()
-  const [activeTab, setActiveTab] = useState<'all' | 'trainer' | 'friend'>('all')
+  const [activeTab, setActiveTab] = useState<typeof tabs[number]['key']>('all')
   const [searchQuery, setSearchQuery] = useState('')
-  const [showSearch, setShowSearch] = useState(false)
 
   const filtered = chatRooms
-    .filter(room => {
+    .filter((room) => {
       if (activeTab === 'trainer') return room.type === 'trainer'
-      if (activeTab === 'friend') return room.type === 'friend' || room.type === 'group'
+      if (activeTab === 'friend') return room.type === 'friend'
+      if (activeTab === 'group') return room.type === 'group'
       return true
     })
-    .filter(room =>
+    .filter((room) =>
       searchQuery ? room.name.includes(searchQuery) || room.lastMessage.includes(searchQuery) : true
     )
 
+  const totalUnread = chatRooms.reduce((s, r) => s + r.unreadCount, 0)
+  const onlineFriends = chatRooms.filter((r) => r.isOnline)
+  const pinned = filtered.filter((r) => r.pinned)
+  const unpinned = filtered.filter((r) => !r.pinned)
+
   const header = (
     <SubPageHeader
-      title="채팅"
+      title={`채팅${totalUnread > 0 ? ` ${totalUnread}` : ''}`}
       right={
-        <button className="icon-btn" onClick={() => setShowSearch(!showSearch)}>
-          <IconSearch className="w-[22px] h-[22px] stroke-ink stroke-2" />
+        <button className="icon-btn" onClick={() => navigate('/chat/new')}>
+          <svg viewBox="0 0 24 24" className="w-[22px] h-[22px] stroke-ink stroke-2 fill-none">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </button>
       }
-    >
-      {/* Search Bar */}
-      {showSearch && (
-        <div className="px-page py-2 border-b border-border-light">
+    />
+  )
+
+  return (
+    <PageLayout header={header} noPadding>
+      {/* Search bar */}
+      <div className="px-page py-3">
+        <div className="flex items-center gap-2 px-4 py-2.5 bg-surface-muted rounded-pill">
+          <IconSearch className="w-4 h-4 stroke-ink-tertiary stroke-2" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="이름 또는 메시지 검색"
-            className="w-full px-4 py-3 border border-border rounded-[12px] text-body outline-none focus:border-ink transition-colors"
-            autoFocus
+            className="flex-1 bg-transparent text-body text-ink placeholder:text-ink-placeholder focus:outline-none"
           />
+          {searchQuery && (
+            <button onClick={() => setSearchQuery('')}>
+              <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-ink-tertiary stroke-2 fill-none">
+                <path d="M6 6l12 12M6 18L18 6" strokeLinecap="round" />
+              </svg>
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Online friends row */}
+      {onlineFriends.length > 0 && !searchQuery && (
+        <div className="px-page pb-3">
+          <div className="flex gap-4 overflow-x-auto hide-scrollbar">
+            {onlineFriends.map((f) => (
+              <button
+                key={f.id}
+                onClick={() => navigate(`/chat/${f.id}`)}
+                className="flex flex-col items-center gap-1 flex-shrink-0"
+              >
+                <div className="relative">
+                  <img src={f.avatarUrl} alt={f.name} className="w-14 h-14 rounded-full object-cover" />
+                  <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-semantic-online border-2 border-white rounded-full" />
+                </div>
+                <span className="text-caption text-ink-secondary w-14 text-center truncate">{f.name.split(' ')[0]}</span>
+              </button>
+            ))}
+          </div>
         </div>
       )}
 
-      {/* Filter Tabs */}
-      <FilterTabs
-        tabs={[
-          { key: 'all', label: '전체' },
-          { key: 'trainer', label: '트레이너' },
-          { key: 'friend', label: '친구' },
-        ]}
-        active={activeTab}
-        onSelect={(key) => setActiveTab(key as 'all' | 'trainer' | 'friend')}
-      />
-    </SubPageHeader>
-  )
+      {/* Tabs */}
+      <div className="flex gap-2 px-page pb-2 border-b border-border-light">
+        {tabs.map((tab) => (
+          <button
+            key={tab.key}
+            onClick={() => setActiveTab(tab.key)}
+            className={`px-4 py-2 rounded-pill text-label font-semibold transition-colors ${
+              activeTab === tab.key
+                ? 'bg-ink text-white'
+                : 'bg-surface-muted text-ink-secondary hover:bg-surface-subtle'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
 
-  return (
-    <PageLayout header={header}>
+      {/* List */}
       <div className="flex flex-col">
         {filtered.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-ink-placeholder">
-            <svg viewBox="0 0 24 24" className="w-12 h-12 stroke-current stroke-[1.5] fill-none mb-4">
+          <div className="flex flex-col items-center justify-center py-20 text-ink-tertiary">
+            <svg viewBox="0 0 24 24" className="w-14 h-14 stroke-ink-disabled stroke-[1.5] fill-none mb-3">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
             </svg>
-            <p className="text-body">채팅 내역이 없습니다</p>
+            <p className="text-body">검색 결과가 없어요</p>
           </div>
         ) : (
-          filtered.map((room) => (
-            <button
-              key={room.id}
-              onClick={() => navigate(`/chat/${room.id}`)}
-              className="flex items-center gap-3 px-page py-3 border-b border-border-light text-left hover:bg-surface-subtle transition-colors"
-            >
-              {/* Avatar */}
-              <div className="relative flex-shrink-0">
-                <img
-                  src={room.avatarUrl}
-                  alt={room.name}
-                  className="w-[52px] h-[52px] rounded-full object-cover"
-                />
-                {room.isOnline && (
-                  <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-semantic-online border-2 border-white rounded-full" />
-                )}
+          <>
+            {pinned.length > 0 && (
+              <div className="px-page pt-3 pb-1 text-caption font-bold text-ink-tertiary uppercase tracking-wide">
+                고정됨
               </div>
-
-              {/* Content */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between mb-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-title font-semibold text-ink">{room.name}</span>
-                    {room.type === 'trainer' && (
-                      <span className="text-label font-semibold text-primary bg-primary-50 px-1.5 py-0.5 rounded">트레이너</span>
-                    )}
-                    {room.type === 'group' && (
-                      <span className="text-label font-semibold text-ink-secondary bg-surface-muted px-1.5 py-0.5 rounded">모임</span>
-                    )}
-                  </div>
-                  <span className="text-label text-ink-placeholder flex-shrink-0">{room.time}</span>
-                </div>
-                {'gym' in room && room.gym && (
-                  <p className="text-label text-ink-placeholder mb-0.5">{room.gym}</p>
-                )}
-                <p className="text-body text-ink-secondary truncate">{room.lastMessage}</p>
-              </div>
-
-              {/* Unread Badge */}
-              {room.unreadCount > 0 && (
-                <span className="flex-shrink-0 min-w-[22px] h-[22px] bg-primary text-white text-label font-bold rounded-full flex items-center justify-center px-1.5">
-                  {room.unreadCount}
-                </span>
-              )}
-            </button>
-          ))
+            )}
+            {pinned.map((room) => (
+              <ChatRow key={room.id} room={room} pinned onClick={() => navigate(`/chat/${room.id}`)} />
+            ))}
+            {pinned.length > 0 && unpinned.length > 0 && <div className="h-px bg-border-light my-1" />}
+            {unpinned.map((room) => (
+              <ChatRow key={room.id} room={room} onClick={() => navigate(`/chat/${room.id}`)} />
+            ))}
+          </>
         )}
       </div>
     </PageLayout>
+  )
+}
+
+const ChatRow = ({
+  room,
+  pinned,
+  onClick,
+}: {
+  room: typeof chatRooms[number]
+  pinned?: boolean
+  onClick: () => void
+}) => {
+  const unread = room.unreadCount > 0
+  return (
+    <button
+      onClick={onClick}
+      className="flex items-center gap-3 px-page py-3 text-left hover:bg-surface-subtle transition-colors"
+    >
+      <div className="relative flex-shrink-0">
+        <img src={room.avatarUrl} alt={room.name} className="w-[52px] h-[52px] rounded-full object-cover" />
+        {room.isOnline && (
+          <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-semantic-online border-2 border-white rounded-full" />
+        )}
+      </div>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-1.5 mb-0.5">
+          <span className={`text-body truncate ${unread ? 'font-bold text-ink' : 'font-semibold text-ink'}`}>
+            {room.name}
+          </span>
+          {room.type === 'trainer' && (
+            <span className="text-caption font-semibold text-primary bg-primary-50 px-1.5 py-0.5 rounded flex-shrink-0">
+              트레이너
+            </span>
+          )}
+          {room.type === 'group' && (
+            <span className="text-caption font-semibold text-accent-purple bg-surface-muted px-1.5 py-0.5 rounded flex-shrink-0">
+              모임
+            </span>
+          )}
+          {pinned && (
+            <svg viewBox="0 0 24 24" className="w-3 h-3 fill-ink-tertiary flex-shrink-0">
+              <path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z" />
+            </svg>
+          )}
+        </div>
+        <p className={`text-label truncate ${unread ? 'text-ink font-semibold' : 'text-ink-secondary'}`}>
+          {room.lastMessage}
+        </p>
+      </div>
+      <div className="flex flex-col items-end gap-1 flex-shrink-0">
+        <span className={`text-caption ${unread ? 'text-primary font-bold' : 'text-ink-tertiary'}`}>
+          {room.time}
+        </span>
+        {unread ? (
+          <span className="min-w-[20px] h-5 bg-primary text-white text-caption font-bold rounded-full flex items-center justify-center px-1.5">
+            {room.unreadCount > 99 ? '99+' : room.unreadCount}
+          </span>
+        ) : (
+          <span className="h-5" />
+        )}
+      </div>
+    </button>
   )
 }
