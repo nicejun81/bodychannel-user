@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { PageLayout, SubPageHeader, BottomCTA, Badge, InfoRow } from '../../components'
 import { IconHeart, IconShare, IconUsers, IconMapPin, IconCalendar } from '../../components/Icons'
@@ -64,6 +65,16 @@ export const MeetupDetailPage = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const meetup = meetupsData[id || ''] || defaultMeetup
+  const [liked, setLiked] = useState(false)
+  const handleShare = () => {
+    const url = window.location.href
+    if (navigator.share) {
+      navigator.share({ title: meetup.title, url }).catch(() => {})
+    } else {
+      navigator.clipboard?.writeText(url)
+      alert('링크가 복사되었어요')
+    }
+  }
   const fillRate = Math.min(100, Math.round((meetup.memberCount / meetup.maxMembers) * 100))
   const remaining = Math.max(0, meetup.maxMembers - meetup.memberCount)
   const isFull = remaining === 0
@@ -73,11 +84,11 @@ export const MeetupDetailPage = () => {
       title={meetup.title}
       right={
         <div className="flex gap-2">
-          <button className="icon-btn">
+          <button className="icon-btn" onClick={handleShare}>
             <IconShare className="w-5 h-5 stroke-ink stroke-2" />
           </button>
-          <button className="icon-btn">
-            <IconHeart className="w-5 h-5 stroke-ink stroke-2" />
+          <button className="icon-btn" onClick={() => setLiked(v => !v)}>
+            <IconHeart className={`w-5 h-5 stroke-2 ${liked ? 'fill-semantic-like stroke-semantic-like' : 'stroke-ink fill-none'}`} />
           </button>
         </div>
       }

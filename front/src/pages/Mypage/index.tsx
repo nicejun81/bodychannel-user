@@ -72,6 +72,25 @@ const purchaseHistory = [
   },
 ]
 
+const myMeetups = [
+  {
+    id: 1,
+    title: '강남 러닝크루',
+    category: '러닝',
+    schedule: '매주 토요일 오전 7시',
+    imageUrl: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=300&fit=crop',
+    role: '멤버',
+  },
+  {
+    id: 2,
+    title: '모닝 바레톤 클럽',
+    category: '바레톤',
+    schedule: '매주 수/금 오전 6시',
+    imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop',
+    role: '모임장',
+  },
+]
+
 const menuItems = [
   { icon: IconHeart, label: '내 찜 목록', href: '/favorites' },
   { icon: IconShield, label: '차단한 사용자', href: '/blocked' },
@@ -421,6 +440,37 @@ export const MyPage = () => {
                     ))}
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="h-2 bg-surface-muted -mx-page" />
+
+          {/* 내가 참여한 모임 */}
+          <div className="py-section">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-body font-bold text-ink">내가 참여한 모임</h3>
+              <button onClick={() => navigate('/activity')} className="text-label text-ink-tertiary">전체보기</button>
+            </div>
+            <div className="flex gap-3 overflow-x-auto pb-1 hide-scrollbar">
+              {myMeetups.map((m) => (
+                <button
+                  key={m.id}
+                  onClick={() => navigate(`/meetup/${m.id}`)}
+                  className="min-w-[220px] flex-shrink-0 text-left bg-surface rounded-card-lg shadow-card overflow-hidden"
+                >
+                  <div className="relative">
+                    <img src={m.imageUrl} alt={m.title} className="w-full h-[110px] object-cover" />
+                    <span className="absolute top-2 left-2 px-2 py-0.5 bg-primary text-white text-caption font-bold rounded">
+                      {m.role}
+                    </span>
+                  </div>
+                  <div className="p-card">
+                    <div className="text-caption text-ink-tertiary mb-0.5">{m.category}</div>
+                    <div className="text-body font-bold text-ink truncate">{m.title}</div>
+                    <div className="text-label text-ink-secondary mt-1">{m.schedule}</div>
+                  </div>
+                </button>
               ))}
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { PageLayout, SubPageHeader } from '../../components'
+import { PageLayout, SubPageHeader, BottomCTA } from '../../components'
 import { IconMapPin, IconUser, IconX } from '../../components/Icons'
 
 const presetImages = [
@@ -50,23 +50,10 @@ export const FeedCreatePage = () => {
     navigate('/activity')
   }
 
-  const header = (
-    <SubPageHeader
-      title={isEdit ? '게시물 수정' : '새 게시물'}
-      right={
-        <button
-          disabled={!canSubmit}
-          onClick={handleSubmit}
-          className="px-3 py-1.5 text-label font-bold text-primary disabled:text-ink-disabled"
-        >
-          {isEdit ? '완료' : '공유'}
-        </button>
-      }
-    />
-  )
+  const header = <SubPageHeader title={isEdit ? '게시물 수정' : '새 게시물'} />
 
   return (
-    <PageLayout header={header} className="!px-0">
+    <PageLayout header={header} hideBottomNav className="!px-0">
       {/* Author row */}
       <div className="flex items-center gap-3 px-page py-3 border-b border-border-light">
         <div className="w-10 h-10 rounded-full bg-surface-muted flex items-center justify-center">
@@ -192,6 +179,16 @@ export const FeedCreatePage = () => {
           })}
         </div>
       </div>
+
+      <BottomCTA hideBottomNav>
+        <button
+          disabled={!canSubmit}
+          onClick={handleSubmit}
+          className="w-full py-4 bg-primary text-white font-semibold rounded-card hover:bg-primary-dark transition-colors disabled:bg-ink-disabled disabled:cursor-not-allowed"
+        >
+          {isEdit ? '수정하기' : '등록하기'}
+        </button>
+      </BottomCTA>
     </PageLayout>
   )
 }

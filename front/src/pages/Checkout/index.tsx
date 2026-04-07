@@ -273,7 +273,7 @@ export const CheckoutPage = () => {
         {showCouponSheet && (
           <div className="fixed inset-0 z-[60] flex items-end" onClick={() => setShowCouponSheet(false)}>
             <div className="absolute inset-0 bg-ink/40" />
-            <div className="relative w-full bg-surface rounded-t-[20px] px-page pt-5 pb-8" onClick={e => e.stopPropagation()}>
+            <div className="relative w-full bg-surface rounded-t-[20px] px-page pt-5 pb-8 animate-sheet-up" onClick={e => e.stopPropagation()}>
               <div className="w-10 h-1 bg-ink-disabled rounded-pill mx-auto mb-4" />
               <p className="text-title mb-4">쿠폰 선택</p>
               <div className="flex flex-col gap-2.5">

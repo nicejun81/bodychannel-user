@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PageLayout, SubPageHeader, FilterTabs } from '../../components'
-import { IconSearch, IconHeart, IconMessage, IconCalendar, IconMapPin } from '../../components/Icons'
+import { IconSearch, IconHeart, IconMessage, IconCalendar, IconMapPin, IconShare } from '../../components/Icons'
 
 /* ── Stories ── */
 const stories = [
@@ -154,6 +154,41 @@ export const ActivityPage = () => {
   const [menuFeedId, setMenuFeedId] = useState<number | null>(null)
   const [blockTarget, setBlockTarget] = useState<string | null>(null)
   const [deleteTarget, setDeleteTarget] = useState<number | null>(null)
+  const [commentFeedId, setCommentFeedId] = useState<number | null>(null)
+  const [commentInput, setCommentInput] = useState('')
+  const [commentsMap, setCommentsMap] = useState<Record<number, { author: string; text: string }[]>>({
+    1: [
+      { author: '박지영', text: '대단해요! 저도 열심히 해야겠어요 👏' },
+      { author: '이준혁', text: '꾸준함이 최고죠!' },
+    ],
+    2: [{ author: '김민수', text: '저도 들어보고 싶어요!' }],
+    3: [],
+    4: [],
+  })
+  const submitComment = () => {
+    if (!commentInput.trim() || commentFeedId === null) return
+    setCommentsMap(m => ({
+      ...m,
+      [commentFeedId]: [...(m[commentFeedId] || []), { author: '나', text: commentInput.trim() }],
+    }))
+    setCommentInput('')
+  }
+  const [likedMap, setLikedMap] = useState<Record<number, { liked: boolean; count: number }>>(
+    () => Object.fromEntries(feeds.map(f => [f.id, { liked: f.isLiked, count: f.likeCount }]))
+  )
+  const toggleLike = (id: number) => setLikedMap(m => {
+    const cur = m[id]
+    return { ...m, [id]: { liked: !cur.liked, count: cur.liked ? cur.count - 1 : cur.count + 1 } }
+  })
+  const shareFeed = (id: number) => {
+    const url = `${window.location.origin}/feed/${id}`
+    if (navigator.share) {
+      navigator.share({ title: '바디채널 피드', url }).catch(() => {})
+    } else {
+      navigator.clipboard?.writeText(url)
+      alert('링크가 복사되었어요')
+    }
+  }
 
   const filteredMeetups = selectedCategory === '전체'
     ? meetups
@@ -194,7 +229,11 @@ export const ActivityPage = () => {
           <div className="px-page py-4 border-b border-border-light">
             <div className="flex gap-4 overflow-x-auto hide-scrollbar">
               {stories.map((story) => (
-                <button key={story.id} className="flex flex-col items-center gap-1.5 flex-shrink-0">
+                <button
+                  key={story.id}
+                  onClick={() => navigate(story.isAdd ? '/feed/new' : `/profile/${encodeURIComponent(story.name)}`)}
+                  className="flex flex-col items-center gap-1.5 flex-shrink-0"
+                >
                   {story.isAdd ? (
                     <div className="w-[60px] h-[60px] rounded-full border-2 border-dashed border-ink-placeholder flex items-center justify-center">
                       <svg viewBox="0 0 24 24" className="w-6 h-6 stroke-ink-placeholder stroke-2 fill-none">
@@ -260,21 +299,23 @@ export const ActivityPage = () => {
                 {/* Actions + Text */}
                 <div className="px-page py-3">
                   <div className="flex items-center gap-4 mb-2.5">
-                    <button className="flex items-center gap-1.5">
-                      <IconHeart className={`w-[22px] h-[22px] ${feed.isLiked ? 'fill-semantic-like stroke-semantic-like' : 'fill-none stroke-ink'} stroke-2`} />
+                    <button onClick={() => toggleLike(feed.id)} className="flex items-center gap-1.5">
+                      <IconHeart className={`w-[22px] h-[22px] ${likedMap[feed.id].liked ? 'fill-semantic-like stroke-semantic-like' : 'fill-none stroke-ink'} stroke-2`} />
+                      <span className="text-label font-semibold text-ink">{likedMap[feed.id].count}</span>
                     </button>
-                    <button className="flex items-center gap-1.5">
+                    <button onClick={() => setCommentFeedId(feed.id)} className="flex items-center gap-1.5">
                       <IconMessage className="w-[22px] h-[22px] fill-none stroke-ink stroke-2" />
+                      <span className="text-label font-semibold text-ink">{(commentsMap[feed.id] || []).length || feed.commentCount}</span>
+                    </button>
+                    <button onClick={() => shareFeed(feed.id)} className="flex items-center gap-1.5">
+                      <IconShare className="w-[22px] h-[22px] fill-none stroke-ink stroke-2" />
+                      <span className="text-label font-semibold text-ink">공유</span>
                     </button>
                   </div>
-                  <div className="text-body font-semibold text-ink mb-1.5">좋아요 {feed.likeCount}개</div>
                   <div className="text-body text-ink leading-relaxed mb-1">
                     <span className="font-semibold">{feed.authorName}</span>{' '}
                     <span className="text-ink-secondary">{feed.text}</span>
                   </div>
-                  <button className="text-label text-ink-placeholder mt-1">
-                    댓글 {feed.commentCount}개 모두 보기
-                  </button>
                   <div className="text-label text-ink-placeholder mt-1">{feed.timeAgo}</div>
                 </div>
               </div>
@@ -458,7 +499,7 @@ export const ActivityPage = () => {
         <div className="fixed inset-0 z-[60] flex items-end" onClick={() => setMenuFeedId(null)}>
           <div className="absolute inset-0 bg-black/40" />
           <div
-            className="relative w-full bg-surface rounded-t-2xl pb-6 pt-2"
+            className="relative w-full bg-surface rounded-t-2xl pb-6 pt-2 animate-sheet-up"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="w-10 h-1 bg-ink-disabled rounded-full mx-auto mb-2" />
@@ -482,6 +523,52 @@ export const ActivityPage = () => {
         </div>
         )
       })()}
+
+      {/* Comment bottom sheet */}
+      {commentFeedId !== null && (
+        <div className="fixed inset-0 z-[65] flex items-end" onClick={() => setCommentFeedId(null)}>
+          <div className="absolute inset-0 bg-black/50" />
+          <div
+            className="relative w-full bg-surface rounded-t-2xl max-h-[80vh] flex flex-col animate-sheet-up"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="w-10 h-1 bg-ink-disabled rounded-full mx-auto mt-2" />
+            <h3 className="text-title font-bold text-ink text-center py-3 border-b border-border-light">댓글</h3>
+            <div className="flex-1 overflow-y-auto px-page py-3 space-y-4">
+              {(commentsMap[commentFeedId] || []).length === 0 ? (
+                <div className="text-center py-12 text-ink-tertiary text-body">아직 댓글이 없어요</div>
+              ) : (
+                (commentsMap[commentFeedId] || []).map((c, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-full bg-ink-disabled flex-shrink-0 flex items-center justify-center text-ink-secondary font-semibold">
+                      {c.author.slice(0, 1)}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-body text-ink leading-relaxed">
+                        <span className="font-semibold">{c.author}</span> <span>{c.text}</span>
+                      </p>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+            <div className="flex items-center gap-3 px-page py-3 border-t border-border-light bg-surface">
+              <input
+                type="text"
+                value={commentInput}
+                onChange={(e) => setCommentInput(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter') submitComment() }}
+                placeholder="댓글 달기..."
+                autoFocus
+                className="flex-1 text-body text-ink placeholder:text-ink-placeholder bg-transparent focus:outline-none"
+              />
+              {commentInput.trim().length > 0 && (
+                <button onClick={submitComment} className="text-label font-bold text-primary">게시</button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Delete confirmation modal */}
       {deleteTarget !== null && (

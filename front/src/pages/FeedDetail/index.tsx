@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { PageLayout, SubPageHeader } from '../../components'
 import { IconHeart, IconMessage, IconShare } from '../../components/Icons'
@@ -73,6 +73,16 @@ export const FeedDetailPage = () => {
   const [saved, setSaved] = useState(false)
   const [expanded, setExpanded] = useState(false)
   const [comment, setComment] = useState('')
+  const commentInputRef = useRef<HTMLInputElement>(null)
+  const handleShare = () => {
+    const url = window.location.href
+    if (navigator.share) {
+      navigator.share({ title: '바디채널 피드', url }).catch(() => {})
+    } else {
+      navigator.clipboard?.writeText(url)
+      alert('링크가 복사되었어요')
+    }
+  }
 
   const toggleLike = () => {
     setLiked((v) => !v)
@@ -113,10 +123,10 @@ export const FeedDetailPage = () => {
           <button onClick={toggleLike}>
             <IconHeart className={`w-7 h-7 stroke-2 ${liked ? 'fill-semantic-like stroke-semantic-like' : 'fill-none stroke-ink'}`} />
           </button>
-          <button>
+          <button onClick={() => commentInputRef.current?.focus()}>
             <IconMessage className="w-7 h-7 fill-none stroke-ink stroke-2" />
           </button>
-          <button>
+          <button onClick={handleShare}>
             <IconShare className="w-7 h-7 fill-none stroke-ink stroke-2" />
           </button>
         </div>
@@ -188,6 +198,7 @@ export const FeedDetailPage = () => {
         <div className="flex items-center gap-3 px-page py-2.5">
           <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="me" className="w-8 h-8 rounded-full object-cover" />
           <input
+            ref={commentInputRef}
             type="text"
             value={comment}
             onChange={(e) => setComment(e.target.value)}

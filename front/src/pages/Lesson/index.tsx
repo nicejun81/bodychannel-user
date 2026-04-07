@@ -75,6 +75,38 @@ const lessonSchedule: Record<string, LessonScheduleItem[]> = {
     { time: '20:00', name: '전신 서킷', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
     { time: '20:30', name: '나이트 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
     { time: '21:00', name: '릴렉스 바레톤', instructor: '홍서윤', avatar: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '14:30', name: '체형교정 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '08:30', name: '플로우 바레톤', instructor: '송미래', avatar: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '16:30', name: '이브닝 바레톤', instructor: '송미래', avatar: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '10:30', name: 'HIIT 서킷', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '15:30', name: '히트35 파워', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '13:30', name: '런치 PT', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '17:30', name: '이브닝 PT', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '11:30', name: '그룹 PT 파워', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '16:30', name: '그룹 PT 코어플러스', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '13:30', name: '런치 바레톤', instructor: '배수아', avatar: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '18:30', name: '이브닝 바레톤', instructor: '배수아', avatar: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '14:30', name: '짐그라운드 스태미나', instructor: '류건호', avatar: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '17:30', name: '짐그라운드 코어', instructor: '류건호', avatar: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '08:30', name: '모닝 PT', instructor: '장하은', avatar: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '16:30', name: '이브닝 PT', instructor: '장하은', avatar: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '15:30', name: '그룹 PT 파워', instructor: '권재민', avatar: 'https://images.unsplash.com/photo-1583454155184-870a1f63aebc?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '18:30', name: '그룹 PT 스트렝스', instructor: '권재민', avatar: 'https://images.unsplash.com/photo-1583454155184-870a1f63aebc?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '11:30', name: '코어 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '17:30', name: '이브닝 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '09:30', name: '짐그라운드 스태미나', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '11:30', name: '체형교정 PT', instructor: '김태현', avatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '20:00', name: '나이트 PT', instructor: '김태현', avatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '13:30', name: '히트35 서킷', instructor: '조현우', avatar: 'https://images.unsplash.com/photo-1550345332-09e3ac987658?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '19:30', name: '히트35 파이널', instructor: '조현우', avatar: 'https://images.unsplash.com/photo-1550345332-09e3ac987658?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '09:30', name: '히트35 부스터', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '14:30', name: '히트35 스태미나', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '11:30', name: '그룹 PT 서킷플러스', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '15:30', name: '그룹 PT 엔듀런스', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '11:30', name: '코어 바레톤', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '16:30', name: '이브닝 바레톤', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '13:30', name: '플로우 바레톤', instructor: '홍서윤', avatar: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '17:30', name: '파워 바레톤', instructor: '홍서윤', avatar: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
   ],
   '화': [
     { time: '06:30', name: '모닝 HIIT', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
@@ -95,6 +127,42 @@ const lessonSchedule: Record<string, LessonScheduleItem[]> = {
     { time: '19:30', name: '바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
     { time: '20:00', name: '짐그라운드 엔듀런스', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
     { time: '21:00', name: '나이트 PT 슬림', instructor: '장하은', avatar: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '09:30', name: 'HIIT 서킷', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '16:30', name: '히트35 파워', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '13:30', name: '얼리버드 바레톤', instructor: '신예린', avatar: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '18:30', name: '이브닝 바레톤', instructor: '신예린', avatar: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '13:30', name: '런치 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '17:30', name: '이브닝 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '14:30', name: '짐그라운드 코어', instructor: '임도현', avatar: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '18:30', name: '짐그라운드 스태미나', instructor: '임도현', avatar: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '13:30', name: '체형교정 PT', instructor: '김태현', avatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '20:30', name: '나이트 PT', instructor: '김태현', avatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '14:30', name: '그룹 PT 파워', instructor: '권재민', avatar: 'https://images.unsplash.com/photo-1583454155184-870a1f63aebc?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '17:30', name: '그룹 PT 코어플러스', instructor: '권재민', avatar: 'https://images.unsplash.com/photo-1583454155184-870a1f63aebc?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '08:30', name: '그룹 PT 서킷', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '15:30', name: '그룹 PT 엔듀런스', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '09:30', name: '플로우 바레톤', instructor: '문채원', avatar: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '15:30', name: '코어 바레톤', instructor: '문채원', avatar: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '08:30', name: '모닝 바레톤', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '16:30', name: '이브닝 바레톤', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '09:30', name: '히트35 서킷', instructor: '조현우', avatar: 'https://images.unsplash.com/photo-1550345332-09e3ac987658?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '16:30', name: '히트35 파이널', instructor: '조현우', avatar: 'https://images.unsplash.com/photo-1550345332-09e3ac987658?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '11:30', name: '런치 PT', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '20:30', name: '나이트 PT', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '09:30', name: '짐그라운드 파워', instructor: '류건호', avatar: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '14:30', name: '짐그라운드 스태미나', instructor: '류건호', avatar: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '09:30', name: '코어 바레톤', instructor: '배수아', avatar: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '15:30', name: '이브닝 바레톤', instructor: '배수아', avatar: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '09:30', name: '그룹 PT 파워', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '16:30', name: '그룹 PT 코어플러스', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '10:30', name: '히트35 부스터', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '15:30', name: '히트35 스태미나', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '08:30', name: '코어 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '15:30', name: '파워 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '11:30', name: '짐그라운드 코어', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '15:30', name: '짐그라운드 스태미나', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '08:30', name: '모닝 PT', instructor: '장하은', avatar: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '16:30', name: '이브닝 PT', instructor: '장하은', avatar: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
   ],
   '수': [
     { time: '06:30', name: '얼리버드 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
@@ -115,6 +183,39 @@ const lessonSchedule: Record<string, LessonScheduleItem[]> = {
     { time: '19:30', name: 'HIIT 다이어트 PT', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
     { time: '20:00', name: '전신 서킷', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
     { time: '21:00', name: '릴렉스 바레톤', instructor: '신예린', avatar: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '13:30', name: '런치 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '17:30', name: '이브닝 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '09:30', name: '짐그라운드 코어', instructor: '류건호', avatar: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '14:30', name: '짐그라운드 스태미나', instructor: '류건호', avatar: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '13:30', name: '파워 바레톤', instructor: '홍서윤', avatar: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '17:30', name: '이브닝 바레톤', instructor: '홍서윤', avatar: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '11:30', name: '히트35 부스터', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '15:30', name: '히트35 스태미나', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '13:30', name: '그룹 PT 파워', instructor: '권재민', avatar: 'https://images.unsplash.com/photo-1583454155184-870a1f63aebc?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '17:30', name: '그룹 PT 코어플러스', instructor: '권재민', avatar: 'https://images.unsplash.com/photo-1583454155184-870a1f63aebc?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '08:30', name: '플로우 바레톤', instructor: '송미래', avatar: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '15:30', name: '이브닝 바레톤', instructor: '송미래', avatar: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '09:30', name: '코어 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '15:30', name: '파워 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '08:30', name: '히트35 서킷', instructor: '조현우', avatar: 'https://images.unsplash.com/photo-1550345332-09e3ac987658?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '15:30', name: '히트35 파이널', instructor: '조현우', avatar: 'https://images.unsplash.com/photo-1550345332-09e3ac987658?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '08:30', name: '그룹 PT 서킷', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '17:30', name: '그룹 PT 엔듀런스', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '09:30', name: '짐그라운드 파워', instructor: '임도현', avatar: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '17:30', name: '짐그라운드 스태미나', instructor: '임도현', avatar: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '08:30', name: '체형교정 PT', instructor: '김태현', avatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '20:30', name: '나이트 PT', instructor: '김태현', avatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '09:30', name: '모닝 바레톤', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '14:30', name: '이브닝 바레톤', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '11:30', name: '짐그라운드 코어', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '08:30', name: 'HIIT 서킷', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '14:30', name: '히트35 파워', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '08:30', name: '그룹 PT 서킷플러스', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '14:30', name: '그룹 PT 엔듀런스', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454155184-870a1f63aebc?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '13:30', name: '런치 PT', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '20:30', name: '나이트 PT', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '09:30', name: '플로우 바레톤', instructor: '신예린', avatar: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '15:30', name: '코어 바레톤', instructor: '신예린', avatar: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
   ],
   '목': [
     { time: '06:30', name: '모닝 HIIT', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
@@ -135,6 +236,42 @@ const lessonSchedule: Record<string, LessonScheduleItem[]> = {
     { time: '20:00', name: '나이트 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
     { time: '20:30', name: '짐그라운드 엔듀런스', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
     { time: '21:00', name: '런치 바레톤', instructor: '문채원', avatar: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '09:30', name: 'HIIT 서킷', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '15:30', name: '히트35 파워', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '13:30', name: '파워 바레톤', instructor: '홍서윤', avatar: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '17:30', name: '이브닝 바레톤', instructor: '홍서윤', avatar: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '11:30', name: '짐그라운드 코어', instructor: '임도현', avatar: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '15:30', name: '짐그라운드 스태미나', instructor: '임도현', avatar: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '13:30', name: '런치 PT', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '17:30', name: '이브닝 PT', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '08:30', name: '체형교정 PT', instructor: '김태현', avatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '15:30', name: '나이트 PT', instructor: '김태현', avatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '09:30', name: '코어 바레톤', instructor: '배수아', avatar: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '16:30', name: '이브닝 바레톤', instructor: '배수아', avatar: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '13:30', name: '그룹 PT 파워', instructor: '권재민', avatar: 'https://images.unsplash.com/photo-1583454155184-870a1f63aebc?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '16:30', name: '그룹 PT 코어플러스', instructor: '권재민', avatar: 'https://images.unsplash.com/photo-1583454155184-870a1f63aebc?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '08:30', name: '모닝 PT', instructor: '장하은', avatar: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '16:30', name: '이브닝 PT', instructor: '장하은', avatar: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '09:30', name: '코어 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '16:30', name: '파워 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '08:30', name: '히트35 서킷', instructor: '조현우', avatar: 'https://images.unsplash.com/photo-1550345332-09e3ac987658?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '16:30', name: '히트35 파이널', instructor: '조현우', avatar: 'https://images.unsplash.com/photo-1550345332-09e3ac987658?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '09:30', name: '짐그라운드 파워', instructor: '류건호', avatar: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '17:30', name: '짐그라운드 스태미나', instructor: '류건호', avatar: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '09:30', name: '모닝 바레톤', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '17:30', name: '이브닝 바레톤', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '09:30', name: '그룹 PT 서킷', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '16:30', name: '그룹 PT 엔듀런스', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '09:30', name: '히트35 부스터', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '15:30', name: '히트35 스태미나', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '08:30', name: '그룹 PT 서킷플러스', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '13:30', name: '그룹 PT 엔듀런스', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '13:30', name: '런치 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '17:30', name: '이브닝 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '09:30', name: '짐그라운드 코어', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '16:30', name: '짐그라운드 스태미나', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '09:30', name: '플로우 바레톤', instructor: '문채원', avatar: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '15:30', name: '코어 바레톤', instructor: '문채원', avatar: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
   ],
   '금': [
     { time: '06:30', name: '얼리버드 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
@@ -155,6 +292,39 @@ const lessonSchedule: Record<string, LessonScheduleItem[]> = {
     { time: '19:30', name: '바디펌프', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
     { time: '20:00', name: '1:1 웨이트 트레이닝', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
     { time: '21:00', name: '릴렉스 바레톤', instructor: '홍서윤', avatar: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '13:30', name: '런치 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '17:30', name: '이브닝 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '08:30', name: '플로우 바레톤', instructor: '송미래', avatar: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '13:30', name: '이브닝 바레톤', instructor: '송미래', avatar: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '09:30', name: '짐그라운드 코어', instructor: '류건호', avatar: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '14:30', name: '짐그라운드 스태미나', instructor: '류건호', avatar: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '08:30', name: '히트35 서킷', instructor: '조현우', avatar: 'https://images.unsplash.com/photo-1550345332-09e3ac987658?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '14:30', name: '히트35 파이널', instructor: '조현우', avatar: 'https://images.unsplash.com/photo-1550345332-09e3ac987658?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '11:30', name: '체형교정 PT', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '09:30', name: '그룹 PT 파워', instructor: '권재민', avatar: 'https://images.unsplash.com/photo-1583454155184-870a1f63aebc?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '14:30', name: '그룹 PT 코어플러스', instructor: '권재민', avatar: 'https://images.unsplash.com/photo-1583454155184-870a1f63aebc?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '09:30', name: '코어 바레톤', instructor: '배수아', avatar: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '15:30', name: '이브닝 바레톤', instructor: '배수아', avatar: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '08:30', name: '모닝 PT', instructor: '장하은', avatar: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '15:30', name: '이브닝 PT', instructor: '장하은', avatar: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '11:30', name: '짐그라운드 코어', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '16:30', name: '짐그라운드 스태미나', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '09:30', name: '코어 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '16:30', name: '파워 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '09:30', name: 'HIIT 서킷', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '17:30', name: '히트35 파워', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '08:30', name: '체형교정 PT', instructor: '김태현', avatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '20:30', name: '나이트 PT', instructor: '김태현', avatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '09:30', name: '모닝 바레톤', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '15:30', name: '이브닝 바레톤', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '09:30', name: '그룹 PT 서킷', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '15:30', name: '그룹 PT 엔듀런스', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '09:30', name: '짐그라운드 파워', instructor: '임도현', avatar: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '15:30', name: '짐그라운드 스태미나', instructor: '임도현', avatar: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '09:30', name: '히트35 부스터', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '14:30', name: '히트35 스태미나', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '13:30', name: '파워 바레톤', instructor: '홍서윤', avatar: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '17:30', name: '플로우 바레톤', instructor: '홍서윤', avatar: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
   ],
   '토': [
     { time: '08:00', name: '모닝 HIIT', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
@@ -171,6 +341,34 @@ const lessonSchedule: Record<string, LessonScheduleItem[]> = {
     { time: '15:00', name: '다이어트 PT', instructor: '김태현', avatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
     { time: '16:00', name: '플로우 바레톤', instructor: '배수아', avatar: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
     { time: '17:00', name: '바디펌프', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '10:30', name: 'HIIT 서킷', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '15:30', name: '히트35 파워', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '13:30', name: '런치 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '16:30', name: '이브닝 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '13:30', name: '플로우 바레톤', instructor: '송미래', avatar: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '16:30', name: '이브닝 바레톤', instructor: '송미래', avatar: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '13:30', name: '짐그라운드 코어', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '16:30', name: '짐그라운드 스태미나', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '13:30', name: '그룹 PT 파워', instructor: '권재민', avatar: 'https://images.unsplash.com/photo-1583454155184-870a1f63aebc?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '15:30', name: '그룹 PT 코어플러스', instructor: '권재민', avatar: 'https://images.unsplash.com/photo-1583454155184-870a1f63aebc?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '08:30', name: '그룹 PT 서킷', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '14:30', name: '그룹 PT 엔듀런스', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '10:30', name: '코어 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '15:30', name: '파워 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '10:30', name: '체형교정 PT', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '16:30', name: '이브닝 PT', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '10:30', name: '히트35 서킷', instructor: '조현우', avatar: 'https://images.unsplash.com/photo-1550345332-09e3ac987658?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '15:30', name: '히트35 파이널', instructor: '조현우', avatar: 'https://images.unsplash.com/photo-1550345332-09e3ac987658?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '10:30', name: '모닝 바레톤', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '15:30', name: '이브닝 바레톤', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '10:30', name: '짐그라운드 파워', instructor: '류건호', avatar: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '16:30', name: '짐그라운드 스태미나', instructor: '류건호', avatar: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '10:30', name: '체형교정 PT', instructor: '김태현', avatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '16:30', name: '나이트 PT', instructor: '김태현', avatar: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '10:30', name: '코어 바레톤', instructor: '배수아', avatar: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '15:30', name: '이브닝 바레톤', instructor: '배수아', avatar: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '10:30', name: '히트35 부스터', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '14:30', name: '히트35 스태미나', instructor: '한동훈', avatar: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
   ],
   '일': [
     { time: '09:00', name: '모닝 바레톤', instructor: '송미래', avatar: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
@@ -183,6 +381,26 @@ const lessonSchedule: Record<string, LessonScheduleItem[]> = {
     { time: '14:00', name: '점심 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
     { time: '15:00', name: '전신 서킷 B', instructor: '류건호', avatar: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
     { time: '16:00', name: '릴렉스 바레톤', instructor: '홍서윤', avatar: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '08:30', name: '플로우 바레톤', instructor: '송미래', avatar: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '15:30', name: '이브닝 바레톤', instructor: '송미래', avatar: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '13:30', name: '런치 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '16:30', name: '이브닝 PT', instructor: '오지훈', avatar: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '13:30', name: '짐그라운드 코어', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '16:30', name: '짐그라운드 스태미나', instructor: '이준혁', avatar: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '13:30', name: '런치 PT', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: true },
+    { time: '17:30', name: '이브닝 PT', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: 'PT', categoryColor: 'pt', hasTicket: false },
+    { time: '08:30', name: '코어 바레톤', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '15:30', name: '이브닝 바레톤', instructor: '정서연', avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '08:30', name: '그룹 PT 파워', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: false },
+    { time: '15:30', name: '그룹 PT 엔듀런스', instructor: '최강민', avatar: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop', category: '그룹 PT', categoryColor: 'group-pt', hasTicket: true },
+    { time: '08:30', name: 'HIIT 서킷', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: true },
+    { time: '15:30', name: '히트35 파워', instructor: '윤서준', avatar: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=200&h=200&fit=crop', category: '히트35', categoryColor: 'hit35', hasTicket: false },
+    { time: '08:30', name: '코어 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
+    { time: '16:30', name: '파워 바레톤', instructor: '박지영', avatar: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '08:30', name: '짐그라운드 파워', instructor: '류건호', avatar: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: true },
+    { time: '16:30', name: '짐그라운드 스태미나', instructor: '류건호', avatar: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=200&h=200&fit=crop', category: '짐그라운드', categoryColor: 'gymground', hasTicket: false },
+    { time: '13:30', name: '파워 바레톤', instructor: '홍서윤', avatar: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: true },
+    { time: '17:30', name: '플로우 바레톤', instructor: '홍서윤', avatar: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=200&h=200&fit=crop', category: '바레톤', categoryColor: 'bareton', hasTicket: false },
   ],
 }
 
@@ -316,49 +534,67 @@ export const LessonPage = () => {
             if (filtered.length === 0) {
               return <EmptyState message={`${scheduleDays[selectedDateIdx].isToday ? '오늘은' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')은'} 레슨이 없습니다`} />
             }
+            const dateLabel = scheduleDays[selectedDateIdx].isToday ? '오늘' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')'
+            // 강사별 그룹핑
+            const grouped: { instructor: string; items: typeof filtered }[] = []
+            for (const s of filtered) {
+              const existing = grouped.find(g => g.instructor === s.instructor)
+              if (existing) existing.items.push(s)
+              else grouped.push({ instructor: s.instructor, items: [s] })
+            }
             if (activeTab === 'pt') {
               return (
                 <div className="grid grid-cols-2 gap-3">
-                  {filtered.map((s, i) => (
-                    <PTTrainerCard
-                      key={i}
-                      fluid
-                      imageUrl={s.avatar}
-                      name={`${s.instructor} 강사`}
-                      category="PT"
-                      categoryColor="pt"
-                      description={s.name}
-                      todayTime={`${scheduleDays[selectedDateIdx].isToday ? '오늘' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')'} ${s.time}`}
-                      rating={trainerRatings[s.instructor]?.rating || 4.5}
-                      reviewCount={trainerRatings[s.instructor]?.reviews || 30}
-                      action={s.hasTicket
-                        ? <span onClick={(e) => { e.stopPropagation(); navigate(`/reservation?trainer=${encodeURIComponent(s.instructor + ' 강사')}&lesson=${encodeURIComponent(s.category)}&time=${encodeURIComponent(s.time)}`) }} className="w-full block text-center px-3 py-1.5 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
-                        : <span onClick={(e) => { e.stopPropagation(); navigate('/gym/gym1/products') }} className="w-full block text-center px-3 py-1.5 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
-                      }
-                      onClick={() => navigate(`/group-lesson/${instructorLessonMap[s.instructor] || 'morning-bareton'}`)}
-                    />
-                  ))}
+                  {grouped.map((g, i) => {
+                    const first = g.items[0]
+                    const times = g.items.map(s => s.time).join(', ')
+                    const hasAnyTicket = g.items.some(s => s.hasTicket)
+                    return (
+                      <PTTrainerCard
+                        key={i}
+                        fluid
+                        imageUrl={first.avatar}
+                        name={`${g.instructor} 강사`}
+                        category="PT"
+                        categoryColor="pt"
+                        description={first.name}
+                        todayTime={`${dateLabel} ${times}`}
+                        rating={trainerRatings[g.instructor]?.rating || 4.5}
+                        reviewCount={trainerRatings[g.instructor]?.reviews || 30}
+                        action={hasAnyTicket
+                          ? <span onClick={(e) => { e.stopPropagation(); navigate(`/reservation?trainer=${encodeURIComponent(g.instructor + ' 강사')}&lesson=${encodeURIComponent(first.category)}&time=${encodeURIComponent(g.items[0].time)}`) }} className="w-full block text-center px-3 py-1.5 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
+                          : <span onClick={(e) => { e.stopPropagation(); navigate('/gym/gym1/products') }} className="w-full block text-center px-3 py-1.5 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
+                        }
+                        onClick={() => navigate(`/group-lesson/${instructorLessonMap[g.instructor] || 'morning-bareton'}`)}
+                      />
+                    )
+                  })}
                 </div>
               )
             }
-            return filtered.map((s, i) => (
-              <TrainerListItem
-                key={i}
-                imageUrl={s.avatar}
-                name={`${s.instructor} 강사`}
-                category={s.category}
-                categoryColor={s.categoryColor}
-                description={s.name}
-                todayTime={`${scheduleDays[selectedDateIdx].isToday ? '오늘' : scheduleDays[selectedDateIdx].label + '(' + selectedDay + ')'} ${s.time}`}
-                rating={trainerRatings[s.instructor]?.rating || 4.5}
-                reviewCount={trainerRatings[s.instructor]?.reviews || 30}
-                rightAction={s.hasTicket
-                  ? <span onClick={(e) => { e.stopPropagation(); navigate(`/reservation?trainer=${encodeURIComponent(s.instructor + ' 강사')}&lesson=${encodeURIComponent(s.category)}&time=${encodeURIComponent(s.time)}`) }} className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
-                  : <span onClick={(e) => { e.stopPropagation(); navigate('/gym/gym1/products') }} className="px-3 py-1 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
-                }
-                onClick={() => navigate(`/group-lesson/${instructorLessonMap[s.instructor] || 'morning-bareton'}`)}
-              />
-            ))
+            return grouped.map((g, i) => {
+              const first = g.items[0]
+              const times = g.items.map(s => s.time).join(', ')
+              const hasAnyTicket = g.items.some(s => s.hasTicket)
+              return (
+                <TrainerListItem
+                  key={i}
+                  imageUrl={first.avatar}
+                  name={`${g.instructor} 강사`}
+                  category={first.category}
+                  categoryColor={first.categoryColor}
+                  description={first.name}
+                  todayTime={`${dateLabel} ${times}`}
+                  rating={trainerRatings[g.instructor]?.rating || 4.5}
+                  reviewCount={trainerRatings[g.instructor]?.reviews || 30}
+                  rightAction={hasAnyTicket
+                    ? <span onClick={(e) => { e.stopPropagation(); navigate(`/reservation?trainer=${encodeURIComponent(g.instructor + ' 강사')}&lesson=${encodeURIComponent(first.category)}&time=${encodeURIComponent(g.items[0].time)}`) }} className="px-3 py-1 bg-primary text-white text-label font-bold rounded-lg cursor-pointer">예약</span>
+                    : <span onClick={(e) => { e.stopPropagation(); navigate('/gym/gym1/products') }} className="px-3 py-1 border border-primary text-primary text-label font-bold rounded-lg cursor-pointer">구매</span>
+                  }
+                  onClick={() => navigate(`/group-lesson/${instructorLessonMap[g.instructor] || 'morning-bareton'}`)}
+                />
+              )
+            })
           })()}
         </div>
       </section>

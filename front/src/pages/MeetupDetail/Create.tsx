@@ -29,25 +29,42 @@ export const MeetupCreatePage = () => {
   }
 
   return (
-    <PageLayout header={<SubPageHeader title="모임 만들기" />} className="!pb-[120px]">
+    <PageLayout header={<SubPageHeader title="모임 만들기" />} hideBottomNav className="!pb-[120px]">
       <div className="py-section space-y-section">
         {/* Cover */}
         <div>
           <label className="block text-title font-bold text-ink mb-2">대표 이미지</label>
-          <div className="aspect-[16/9] w-full bg-surface-muted rounded-card overflow-hidden flex items-center justify-center">
+          <label className="block aspect-[16/9] w-full bg-surface-muted rounded-card overflow-hidden flex items-center justify-center cursor-pointer relative group">
             {coverUrl ? (
-              <img src={coverUrl} alt="cover" className="w-full h-full object-cover" />
+              <>
+                <img src={coverUrl} alt="cover" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                  <span className="text-white font-semibold opacity-0 group-hover:opacity-100">사진 변경</span>
+                </div>
+              </>
             ) : (
-              <div className="text-ink-tertiary text-label">이미지 URL을 입력하면 미리보기가 나타나요</div>
+              <div className="flex flex-col items-center gap-2 text-ink-tertiary">
+                <svg viewBox="0 0 24 24" className="w-10 h-10 stroke-ink-tertiary stroke-[1.5] fill-none">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <circle cx="8.5" cy="8.5" r="1.5" />
+                  <path d="M21 15l-5-5L5 21" strokeLinejoin="round" />
+                </svg>
+                <span className="text-label">사진 선택</span>
+              </div>
             )}
-          </div>
-          <input
-            type="text"
-            value={coverUrl}
-            onChange={(e) => setCoverUrl(e.target.value)}
-            placeholder="https://..."
-            className="mt-2 w-full px-4 py-3 bg-surface-subtle border border-border rounded-card text-body text-ink placeholder:text-ink-placeholder focus:outline-none focus:border-primary"
-          />
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0]
+                if (!file) return
+                const reader = new FileReader()
+                reader.onload = () => setCoverUrl(reader.result as string)
+                reader.readAsDataURL(file)
+              }}
+            />
+          </label>
         </div>
 
         {/* Category */}
@@ -145,7 +162,7 @@ export const MeetupCreatePage = () => {
         </div>
       </div>
 
-      <BottomCTA>
+      <BottomCTA hideBottomNav>
         <button
           disabled={!canSubmit}
           onClick={handleSubmit}

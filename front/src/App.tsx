@@ -28,6 +28,7 @@ import {
   ReportPage,
   BlockedPage,
   FeedCreatePage,
+  UserProfilePage,
   ProductDetailPage,
   FeedDetailPage,
   GymDetailPage,
@@ -91,6 +92,7 @@ export const App = () => {
         <Route path="/wallet/:type" element={<WalletPage />} />
         <Route path="/report" element={<ReportPage />} />
         <Route path="/blocked" element={<BlockedPage />} />
+        <Route path="/profile/:name" element={<UserProfilePage />} />
       </Routes>
     </BrowserRouter>
   )
