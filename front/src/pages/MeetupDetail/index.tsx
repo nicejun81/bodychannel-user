@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom'
-import { PageLayout, SubPageHeader, BottomCTA } from '../../components'
+import { useParams, useNavigate } from 'react-router-dom'
+import { PageLayout, SubPageHeader, BottomCTA, Badge, InfoRow } from '../../components'
 import { IconHeart, IconShare, IconUsers, IconMapPin, IconCalendar } from '../../components/Icons'
 
 const meetupsData: Record<string, {
@@ -62,7 +62,11 @@ const defaultMeetup = {
 
 export const MeetupDetailPage = () => {
   const { id } = useParams()
+  const navigate = useNavigate()
   const meetup = meetupsData[id || ''] || defaultMeetup
+  const fillRate = Math.min(100, Math.round((meetup.memberCount / meetup.maxMembers) * 100))
+  const remaining = Math.max(0, meetup.maxMembers - meetup.memberCount)
+  const isFull = remaining === 0
 
   const header = (
     <SubPageHeader
@@ -83,31 +87,46 @@ export const MeetupDetailPage = () => {
   return (
     <PageLayout header={header} className="!px-0 !py-0 !pb-[180px]">
       {/* Hero Image */}
-      <div className="relative h-[220px]">
+      <div className="relative h-[280px]">
         <img src={meetup.imageUrl} alt={meetup.title} className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
         <div className="absolute bottom-5 left-5 right-5 text-white">
-          <span className="inline-block px-2.5 py-1 bg-primary text-white text-caption font-bold rounded mb-2">
-            {meetup.category}
-          </span>
-          <h1 className="text-display font-bold">{meetup.title}</h1>
+          <div className="flex items-center gap-2 mb-2">
+            <Badge variant="primary" size="sm">{meetup.category}</Badge>
+            {isFull ? (
+              <Badge variant="muted" size="sm">모집마감</Badge>
+            ) : (
+              <Badge variant="success" size="sm">모집중</Badge>
+            )}
+          </div>
+          <h1 className="text-display font-bold leading-tight">{meetup.title}</h1>
         </div>
       </div>
 
       {/* Info */}
       <div className="px-page py-section">
         <div className="space-y-3">
-          <div className="flex items-center gap-3 text-body text-ink-secondary">
-            <IconCalendar className="w-5 h-5 stroke-ink-tertiary stroke-2" />
-            <span>{meetup.schedule}</span>
-          </div>
-          <div className="flex items-center gap-3 text-body text-ink-secondary">
-            <IconMapPin className="w-5 h-5 stroke-ink-tertiary stroke-2" />
-            <span>{meetup.location}</span>
-          </div>
-          <div className="flex items-center gap-3 text-body text-ink-secondary">
-            <IconUsers className="w-5 h-5 stroke-ink-tertiary stroke-2" />
-            <span>{meetup.memberCount}/{meetup.maxMembers}명</span>
+          <InfoRow icon={<IconCalendar className="w-5 h-5 stroke-ink-tertiary stroke-2" />}>
+            {meetup.schedule}
+          </InfoRow>
+          <InfoRow icon={<IconMapPin className="w-5 h-5 stroke-ink-tertiary stroke-2" />}>
+            {meetup.location}
+          </InfoRow>
+          <InfoRow icon={<IconUsers className="w-5 h-5 stroke-ink-tertiary stroke-2" />}>
+            <span>
+              {meetup.memberCount}/{meetup.maxMembers}명
+              <span className="ml-2 text-ink-tertiary text-label">· {remaining > 0 ? `${remaining}자리 남음` : '마감'}</span>
+            </span>
+          </InfoRow>
+        </div>
+
+        {/* Capacity bar */}
+        <div className="mt-4">
+          <div className="h-1.5 w-full bg-surface-muted rounded-full overflow-hidden">
+            <div
+              className="h-full bg-primary rounded-full transition-all"
+              style={{ width: `${fillRate}%` }}
+            />
           </div>
         </div>
       </div>
@@ -158,8 +177,12 @@ export const MeetupDetailPage = () => {
 
       {/* Bottom CTA */}
       <BottomCTA>
-        <button className="w-full py-4 bg-primary text-white font-semibold rounded-xl hover:opacity-90 transition-opacity">
-          모임 참여하기
+        <button
+          disabled={isFull}
+          onClick={() => navigate(`/meetup/${id}/join`)}
+          className="w-full py-4 bg-primary text-white font-semibold rounded-card hover:bg-primary-dark transition-colors disabled:bg-ink-disabled disabled:cursor-not-allowed"
+        >
+          {isFull ? '모집이 마감되었어요' : '모임 참여하기'}
         </button>
       </BottomCTA>
     </PageLayout>

@@ -74,6 +74,7 @@ const purchaseHistory = [
 
 const menuItems = [
   { icon: IconHeart, label: '내 찜 목록', href: '/favorites' },
+  { icon: IconShield, label: '차단한 사용자', href: '/blocked' },
   { icon: IconShield, label: '개인정보 보호', href: '/privacy' },
   { icon: IconMessage, label: '고객센터', href: '/support' },
   { icon: IconInfo, label: '앱 정보', href: '/about' },
@@ -97,7 +98,7 @@ export const MyPage = () => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const [showPurchase, setShowPurchase] = useState(searchParams.get('tab') === 'purchase')
-  const [activeTab, setActiveTab] = useState<'profile' | 'my'>('my')
+  const [activeTab, setActiveTab] = useState<'profile' | 'my'>(searchParams.get('tab') === 'profile' ? 'profile' : 'my')
   const [profileGrid, setProfileGrid] = useState<'grid' | 'tagged'>('grid')
   void searchParams // used for tab query
   const [reservations, setReservations] = useState<{ id: number; trainer: string; lesson: string; time: string; date: string; dateKey?: string; gym: string }[]>(() => {

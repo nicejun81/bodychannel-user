@@ -23,6 +23,11 @@ import {
   TrainerReviewsPage,
   ClassDetailPage,
   MeetupDetailPage,
+  MeetupJoinPage,
+  MeetupCreatePage,
+  ReportPage,
+  BlockedPage,
+  FeedCreatePage,
   ProductDetailPage,
   FeedDetailPage,
   GymDetailPage,
@@ -62,8 +67,12 @@ export const App = () => {
         <Route path="/trainer/:id" element={<TrainerDetailPage />} />
         <Route path="/trainer/:id/reviews" element={<TrainerReviewsPage />} />
         <Route path="/class/:id" element={<ClassDetailPage />} />
+        <Route path="/meetup/new" element={<MeetupCreatePage />} />
         <Route path="/meetup/:id" element={<MeetupDetailPage />} />
+        <Route path="/meetup/:id/join" element={<MeetupJoinPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
+        <Route path="/feed/new" element={<FeedCreatePage />} />
+        <Route path="/feed/:id/edit" element={<FeedCreatePage />} />
         <Route path="/feed/:id" element={<FeedDetailPage />} />
         <Route path="/gym/:id" element={<GymDetailPage />} />
         <Route path="/gym/:id/products" element={<GymProductsPage />} />
@@ -80,6 +89,8 @@ export const App = () => {
         <Route path="/branch" element={<BranchSelectPage />} />
         <Route path="/reservation" element={<ReservationPage />} />
         <Route path="/wallet/:type" element={<WalletPage />} />
+        <Route path="/report" element={<ReportPage />} />
+        <Route path="/blocked" element={<BlockedPage />} />
       </Routes>
     </BrowserRouter>
   )
