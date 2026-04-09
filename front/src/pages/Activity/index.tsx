@@ -18,7 +18,11 @@ const stories = [
 const feeds = [
   {
     id: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=800&fit=crop',
+    imageUrls: [
+      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=800&fit=crop',
+    ],
     authorImageUrl: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=100&h=100&fit=crop&crop=face',
     authorName: '김트레이너',
     location: '바디채널 강남점',
@@ -28,10 +32,30 @@ const feeds = [
     isLiked: true,
     timeAgo: '2시간 전',
     isMine: true,
+    workout: {
+      title: '가슴 · 삼두',
+      duration: '1시간 20분',
+      totalVolume: 8420, // kg
+      totalSets: 18,
+      exercises: [
+        { name: '벤치프레스', sets: [{ weight: 60, reps: 12 }, { weight: 80, reps: 10 }, { weight: 80, reps: 10 }, { weight: 80, reps: 8 }] },
+        { name: '인클라인 덤벨프레스', sets: [{ weight: 22, reps: 12 }, { weight: 22, reps: 12 }, { weight: 24, reps: 10 }, { weight: 24, reps: 10 }] },
+        { name: '체스트 플라이 머신', sets: [{ weight: 45, reps: 15 }, { weight: 45, reps: 15 }, { weight: 50, reps: 12 }] },
+        { name: '딥스', sets: [{ weight: 0, reps: 15 }, { weight: 0, reps: 12 }, { weight: 10, reps: 10 }, { weight: 10, reps: 8 }] },
+        { name: '케이블 푸시다운', sets: [{ weight: 25, reps: 15 }, { weight: 30, reps: 12 }, { weight: 30, reps: 12 }] },
+      ],
+      wearable: {
+        device: 'Apple Watch',
+        activeKcal: 412,
+        avgHr: 132,
+        maxHr: 168,
+        zoneMinutes: { warmup: 12, fatBurn: 28, cardio: 32, peak: 8 },
+      },
+    },
   },
   {
     id: 2,
-    imageUrl: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=800&fit=crop',
+    imageUrls: ['https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=800&fit=crop'],
     authorImageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop&crop=face',
     authorName: '헬스왕',
     location: '바디채널 서초점',
@@ -40,10 +64,33 @@ const feeds = [
     commentCount: 12,
     isLiked: false,
     timeAgo: '4시간 전',
+    workout: {
+      title: '바레톤 그룹수업',
+      duration: '55분',
+      totalVolume: 0,
+      totalSets: 12,
+      exercises: [
+        { name: '플리에 스쿼트', sets: [{ weight: 0, reps: 20 }, { weight: 0, reps: 20 }, { weight: 0, reps: 16 }] },
+        { name: '레그 리프트', sets: [{ weight: 0, reps: 15 }, { weight: 0, reps: 15 }, { weight: 0, reps: 12 }] },
+        { name: '플랭크 홀드', sets: [{ weight: 0, reps: 60 }, { weight: 0, reps: 45 }] },
+        { name: '바 워크', sets: [{ weight: 0, reps: 24 }, { weight: 0, reps: 24 }] },
+        { name: '브릿지', sets: [{ weight: 0, reps: 20 }, { weight: 0, reps: 20 }] },
+      ],
+      wearable: {
+        device: 'Galaxy Watch',
+        activeKcal: 285,
+        avgHr: 118,
+        maxHr: 152,
+        zoneMinutes: { warmup: 8, fatBurn: 30, cardio: 15, peak: 2 },
+      },
+    },
   },
   {
     id: 3,
-    imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=800&fit=crop',
+    imageUrls: [
+      'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&h=800&fit=crop',
+    ],
     authorImageUrl: 'https://images.unsplash.com/photo-1597347316205-36f6c451902a?w=100&h=100&fit=crop&crop=face',
     authorName: '운동하는직장인',
     location: '바디채널 역삼점',
@@ -52,10 +99,31 @@ const feeds = [
     commentCount: 48,
     isLiked: true,
     timeAgo: '6시간 전',
+    workout: {
+      title: '하체 · 등',
+      duration: '1시간 45분',
+      totalVolume: 12680,
+      totalSets: 22,
+      exercises: [
+        { name: '바벨 스쿼트', sets: [{ weight: 60, reps: 12 }, { weight: 100, reps: 8 }, { weight: 120, reps: 6 }, { weight: 120, reps: 6 }, { weight: 100, reps: 8 }] },
+        { name: '루마니안 데드리프트', sets: [{ weight: 80, reps: 10 }, { weight: 100, reps: 8 }, { weight: 100, reps: 8 }, { weight: 100, reps: 8 }] },
+        { name: '레그프레스', sets: [{ weight: 160, reps: 12 }, { weight: 180, reps: 10 }, { weight: 200, reps: 8 }] },
+        { name: '랫 풀다운', sets: [{ weight: 55, reps: 12 }, { weight: 65, reps: 10 }, { weight: 70, reps: 8 }, { weight: 70, reps: 8 }] },
+        { name: '시티드 로우', sets: [{ weight: 50, reps: 12 }, { weight: 60, reps: 10 }, { weight: 60, reps: 10 }] },
+        { name: '레그 컬', sets: [{ weight: 40, reps: 15 }, { weight: 45, reps: 12 }, { weight: 45, reps: 12 }] },
+      ],
+      wearable: {
+        device: 'Garmin Forerunner',
+        activeKcal: 612,
+        avgHr: 142,
+        maxHr: 178,
+        zoneMinutes: { warmup: 10, fatBurn: 32, cardio: 48, peak: 15 },
+      },
+    },
   },
   {
     id: 4,
-    imageUrl: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&h=800&fit=crop',
+    imageUrls: ['https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&h=800&fit=crop'],
     authorImageUrl: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=100&h=100&fit=crop&crop=face',
     authorName: '바레톤요정',
     location: '바디채널 판교점',
@@ -64,6 +132,26 @@ const feeds = [
     commentCount: 8,
     isLiked: false,
     timeAgo: '8시간 전',
+    workout: {
+      title: '어깨 · 코어',
+      duration: '50분',
+      totalVolume: 3240,
+      totalSets: 14,
+      exercises: [
+        { name: '오버헤드 프레스', sets: [{ weight: 30, reps: 12 }, { weight: 35, reps: 10 }, { weight: 35, reps: 10 }] },
+        { name: '사이드 레터럴 레이즈', sets: [{ weight: 8, reps: 15 }, { weight: 10, reps: 12 }, { weight: 10, reps: 12 }] },
+        { name: '페이스 풀', sets: [{ weight: 20, reps: 15 }, { weight: 25, reps: 12 }, { weight: 25, reps: 12 }] },
+        { name: '행잉 레그레이즈', sets: [{ weight: 0, reps: 15 }, { weight: 0, reps: 12 }, { weight: 0, reps: 10 }] },
+        { name: '러시안 트위스트', sets: [{ weight: 5, reps: 30 }, { weight: 5, reps: 30 }] },
+      ],
+      wearable: {
+        device: 'Apple Watch',
+        activeKcal: 320,
+        avgHr: 124,
+        maxHr: 158,
+        zoneMinutes: { warmup: 8, fatBurn: 22, cardio: 16, peak: 4 },
+      },
+    },
   },
 ]
 
@@ -156,6 +244,8 @@ export const ActivityPage = () => {
   const [deleteTarget, setDeleteTarget] = useState<number | null>(null)
   const [commentFeedId, setCommentFeedId] = useState<number | null>(null)
   const [commentInput, setCommentInput] = useState('')
+  const [imageIdxMap, setImageIdxMap] = useState<Record<number, number>>({})
+  const [expandedWorkout, setExpandedWorkout] = useState<number | null>(null)
   const [commentsMap, setCommentsMap] = useState<Record<number, { author: string; text: string }[]>>({
     1: [
       { author: '박지영', text: '대단해요! 저도 열심히 해야겠어요 👏' },
@@ -284,17 +374,171 @@ export const ActivityPage = () => {
                   </button>
                 </div>
 
-                {/* Post Image */}
-                <button
-                  onClick={() => navigate(`/feed/${feed.id}`)}
-                  className="w-full"
-                >
-                  <img
-                    src={feed.imageUrl}
-                    alt="피드"
-                    className="w-full aspect-square object-cover"
-                  />
-                </button>
+                {/* Post Images */}
+                <div className="relative">
+                  <div
+                    className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar"
+                    onScroll={(e) => {
+                      const el = e.currentTarget
+                      const idx = Math.round(el.scrollLeft / el.clientWidth)
+                      setImageIdxMap(m => (m[feed.id] === idx ? m : { ...m, [feed.id]: idx }))
+                    }}
+                  >
+                    {feed.imageUrls.map((url, i) => (
+                      <img
+                        key={i}
+                        src={url}
+                        alt="피드"
+                        className="w-full flex-shrink-0 aspect-square object-cover snap-center"
+                      />
+                    ))}
+                  </div>
+                  {feed.workout && (() => {
+                    const w = feed.workout
+                    const isOpen = expandedWorkout === feed.id
+                    const zoneTotal = w.wearable.zoneMinutes.warmup + w.wearable.zoneMinutes.fatBurn + w.wearable.zoneMinutes.cardio + w.wearable.zoneMinutes.peak
+                    const zones = [
+                      { key: 'warmup', label: '워밍업', min: w.wearable.zoneMinutes.warmup, color: 'bg-ink-disabled' },
+                      { key: 'fatBurn', label: '지방연소', min: w.wearable.zoneMinutes.fatBurn, color: 'bg-accent-green' },
+                      { key: 'cardio', label: '유산소', min: w.wearable.zoneMinutes.cardio, color: 'bg-primary' },
+                      { key: 'peak', label: '최대', min: w.wearable.zoneMinutes.peak, color: 'bg-semantic-like' },
+                    ]
+                    return isOpen ? (
+                      <div className="absolute inset-0 bg-black/85 backdrop-blur-md text-white overflow-y-auto">
+                        <button
+                          onClick={() => setExpandedWorkout(null)}
+                          aria-label="닫기"
+                          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-base z-10"
+                        >
+                          ✕
+                        </button>
+                        <div className="px-5 py-6 flex flex-col">
+                          {/* Header */}
+                          <div className="text-caption uppercase tracking-widest text-white/50 mb-1">Workout</div>
+                          <div className="text-display font-extrabold leading-tight mb-0.5">{w.title}</div>
+                          <div className="text-label text-white/60">{w.duration}</div>
+
+                          {/* Hero stats */}
+                          <div className="grid grid-cols-3 gap-4 my-5 py-4 border-y border-white/10">
+                            <div>
+                              <div className="text-display font-extrabold leading-none tabular-nums">
+                                {w.totalVolume.toLocaleString()}
+                                <span className="text-label font-semibold text-white/50 ml-1">kg</span>
+                              </div>
+                              <div className="text-caption text-white/50 mt-1.5">총 볼륨</div>
+                            </div>
+                            <div>
+                              <div className="text-display font-extrabold leading-none tabular-nums">{w.totalSets}</div>
+                              <div className="text-caption text-white/50 mt-1.5">세트</div>
+                            </div>
+                            <div>
+                              <div className="text-display font-extrabold leading-none tabular-nums">
+                                {w.wearable.activeKcal}
+                                <span className="text-label font-semibold text-white/50 ml-1">kcal</span>
+                              </div>
+                              <div className="text-caption text-white/50 mt-1.5">활동 칼로리</div>
+                            </div>
+                          </div>
+
+                          {/* Exercises */}
+                          <div className="text-caption uppercase tracking-widest text-white/50 mb-2.5">종목</div>
+                          <div className="flex flex-col">
+                            {w.exercises.map((ex, i) => {
+                              const minW = Math.min(...ex.sets.map(s => s.weight))
+                              const maxW = Math.max(...ex.sets.map(s => s.weight))
+                              const range = maxW === 0 ? '맨몸' : minW === maxW ? `${maxW}kg` : `${minW === 0 ? '맨몸' : minW + 'kg'} → ${maxW}kg`
+                              const totalReps = ex.sets.reduce((a, s) => a + s.reps, 0)
+                              return (
+                                <div key={i} className="flex items-baseline justify-between py-2.5 border-b border-white/10 last:border-b-0">
+                                  <div className="text-body font-semibold truncate pr-3">{ex.name}</div>
+                                  <div className="flex items-baseline gap-2 shrink-0 tabular-nums">
+                                    <span className="text-caption text-white/50">{ex.sets.length}세트 · {totalReps}회</span>
+                                    <span className="text-label font-bold text-white">{range}</span>
+                                  </div>
+                                </div>
+                              )
+                            })}
+                          </div>
+
+                          {/* Wearable */}
+                          <div className="mt-6">
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-accent-green animate-pulse" />
+                                <span className="text-caption uppercase tracking-widest text-white/50">{w.wearable.device}</span>
+                              </div>
+                            </div>
+                            <div className="flex items-baseline gap-5 mb-4">
+                              <div>
+                                <div className="text-display font-extrabold leading-none tabular-nums">
+                                  {w.wearable.avgHr}
+                                  <span className="text-label font-semibold text-white/50 ml-1">bpm</span>
+                                </div>
+                                <div className="text-caption text-white/50 mt-1.5">평균 심박</div>
+                              </div>
+                              <div className="w-px h-10 bg-white/15" />
+                              <div>
+                                <div className="text-display font-extrabold leading-none text-semantic-like tabular-nums">
+                                  {w.wearable.maxHr}
+                                  <span className="text-label font-semibold text-white/50 ml-1">bpm</span>
+                                </div>
+                                <div className="text-caption text-white/50 mt-1.5">최대 심박</div>
+                              </div>
+                            </div>
+                            <div className="flex h-1.5 rounded-pill overflow-hidden mb-2">
+                              {zones.map(z => (
+                                <div key={z.key} className={z.color} style={{ width: `${(z.min / zoneTotal) * 100}%` }} />
+                              ))}
+                            </div>
+                            <div className="grid grid-cols-4 gap-1 text-caption text-white/60">
+                              {zones.map(z => (
+                                <div key={z.key} className="flex items-center gap-1.5">
+                                  <span className={`w-1 h-1 rounded-full ${z.color}`} />
+                                  <span className="truncate">{z.label}</span>
+                                  <span className="text-white/40 tabular-nums">{z.min}m</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => setExpandedWorkout(feed.id)}
+                        className="absolute inset-x-0 bottom-0 text-left bg-gradient-to-t from-black/80 via-black/40 to-transparent pt-10 pb-3 px-4"
+                      >
+                        <div className="flex items-center gap-2 mb-1.5">
+                          <span className="px-2 py-0.5 rounded-pill bg-primary text-white text-caption font-bold">운동기록</span>
+                          <span className="text-white text-label font-semibold drop-shadow">{w.title}</span>
+                        </div>
+                        <div className="flex items-end justify-between">
+                          <div className="flex items-end gap-4 text-white">
+                            <div>
+                              <div className="text-caption text-white/70 leading-none mb-0.5">시간</div>
+                              <div className="text-body font-extrabold leading-none">{w.duration}</div>
+                            </div>
+                            <div className="w-px h-6 bg-white/30" />
+                            <div>
+                              <div className="text-caption text-white/70 leading-none mb-0.5">볼륨</div>
+                              <div className="text-body font-extrabold leading-none">{w.totalVolume.toLocaleString()}<span className="text-caption font-semibold ml-0.5">kg</span></div>
+                            </div>
+                            <div className="w-px h-6 bg-white/30" />
+                            <div>
+                              <div className="text-caption text-white/70 leading-none mb-0.5">평균 심박</div>
+                              <div className="text-body font-extrabold leading-none">{w.wearable.avgHr}<span className="text-caption font-semibold ml-0.5">bpm</span></div>
+                            </div>
+                          </div>
+                          <span className="text-caption text-white/80 px-2 py-1 rounded-pill bg-white/15">자세히 ↗</span>
+                        </div>
+                      </button>
+                    )
+                  })()}
+                  {feed.imageUrls.length > 1 && expandedWorkout !== feed.id && (
+                    <div className="absolute top-3 right-3 px-2 py-0.5 rounded-pill bg-black/60 text-white text-label font-semibold tabular-nums">
+                      {(imageIdxMap[feed.id] ?? 0) + 1}/{feed.imageUrls.length}
+                    </div>
+                  )}
+                </div>
 
                 {/* Actions + Text */}
                 <div className="px-page py-3">

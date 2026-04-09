@@ -171,14 +171,18 @@ export const UserProfilePage = () => {
           />
           <div className="flex-1 grid grid-cols-3 text-center">
             {[
-              { v: profile.posts, l: '게시물' },
-              { v: profile.followers.toLocaleString(), l: '팔로워' },
-              { v: profile.following, l: '팔로잉' },
+              { v: profile.posts, l: '게시물', to: 'posts' },
+              { v: profile.followers.toLocaleString(), l: '팔로워', to: 'followers' },
+              { v: profile.following, l: '팔로잉', to: 'following' },
             ].map((s) => (
-              <div key={s.l}>
+              <button
+                key={s.l}
+                onClick={() => navigate(`/profile/${encodeURIComponent(profile.name)}/${s.to}`)}
+                className="hover:opacity-70 transition-opacity"
+              >
                 <div className="text-title font-bold text-ink">{s.v}</div>
                 <div className="text-label text-ink-secondary">{s.l}</div>
-              </div>
+              </button>
             ))}
           </div>
         </div>

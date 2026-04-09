@@ -29,8 +29,10 @@ import {
   BlockedPage,
   FeedCreatePage,
   UserProfilePage,
+  UserPostsPage,
+  UserFollowersPage,
+  UserFollowingPage,
   ProductDetailPage,
-  FeedDetailPage,
   GymDetailPage,
   GymProductsPage,
   GymBeforeAfterPage,
@@ -74,7 +76,6 @@ export const App = () => {
         <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/feed/new" element={<FeedCreatePage />} />
         <Route path="/feed/:id/edit" element={<FeedCreatePage />} />
-        <Route path="/feed/:id" element={<FeedDetailPage />} />
         <Route path="/gym/:id" element={<GymDetailPage />} />
         <Route path="/gym/:id/products" element={<GymProductsPage />} />
         <Route path="/gym/:id/before-after" element={<GymBeforeAfterPage />} />
@@ -93,6 +94,9 @@ export const App = () => {
         <Route path="/report" element={<ReportPage />} />
         <Route path="/blocked" element={<BlockedPage />} />
         <Route path="/profile/:name" element={<UserProfilePage />} />
+        <Route path="/profile/:name/posts" element={<UserPostsPage />} />
+        <Route path="/profile/:name/followers" element={<UserFollowersPage />} />
+        <Route path="/profile/:name/following" element={<UserFollowingPage />} />
       </Routes>
     </BrowserRouter>
   )
